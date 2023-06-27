@@ -1,0 +1,15 @@
+public class Practice 
+
+public static void main(String[] args)
+
+System.out.println("Hello, World!")
+}
+
+}
+
+자바 첫 수업에 모두가 한 번은 따라 적게 되는 구문이자 반드시 선언하는 메서드. 각 뜻은 다음과 같다.
+public : 외부 접근성 여부로 public은 제약이 매우 낮은 편. 반대로는 private가 존재한다. 일반적으로 main은 실행 프로그램의 기본이 되므로 어디서나 접근이 되는 public 사용. 
+static : 자바의 변수를 메모리에 할당하는 영역. 프로그램이 실행되는 순간 변수가 메모리에 할당됨
+void : 없다는 의미. 함수가 끝날 때, 리턴값이 존재하지 않음. 다른 메소드와 달리 main의 함수가 종료되면 프로그램이 꺼지므로 리턴값이 필요가 없음.]
+String[] args : String은 문자 변수를 만드는 과정. args는 변수명으로, arguments(인수)의 약자.
+psvm: 메인 메소드를 불러오는 과정.
