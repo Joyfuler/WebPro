@@ -2,5 +2,25 @@
 fori 구문에서 for(int i=1; i<=9; i++){ // y축
 		for(int j=2; j<=9, j++{ // x축..?
 
-}
-}
+(배열)
+한 변수에 관련 데이터를 여러개 넣고 싶을 때 (단, 타입은 동일해야함)
+int a, b, c, d...
+-> int []
+int [] arr = {1,2,3}{ 식으로 만들거나
+int [] arr = new int [3];
+arr[0] = 1;  
+arr[1] = 2;  ... 식으로도 만들수 잇음
+
+psvm(String[] args){ 뜻은?
+(String 배열이라는 의미.. )
+
+본래 컴파일 과정 -
+Hello.java라는 파일을 완성 -- 컴파일 (javac Hello.java) --> hello.class -- 실행 (java Hello) --> Hello 출력
+** java 실행은 반드시 bin에서 할 것... (java com.lec.ex.Ex01)
+만일 Hello 장동건 박보검 고소영으로 입력하면? --> (장동건, 박보검, 고소영)은 String배열로 잡힘.
+이후 fori 구문 (args.length;) 사용하고 sout (args[i]) 입력시 hello만 뜸.
+
+..자동으로 컴파일해주는 JVM에게 감사하자
+
+cf) cmd 혹은 linux에서 파일 리스트 보고 싶다면 -> dir / ls
+cd 디렉터리 이름 // 해당 디렉으로 이동. // cd.. 앞 디렉터리로 이동
