@@ -36,16 +36,20 @@ public class Quiz_4 {
 			break;
 		}
 		if ((result + 2) % 3 == computer) {
-			System.out.println("컴퓨터가 이겼습니다.");
+			System.out.println("당신이 이겼습니다!");
+			
 
 		}
 		if ((result + 1) % 3 == computer) {
-			System.out.println("당신이 이겼습니다!");
-
+			System.out.println("컴퓨터가 이겼습니다!");
+			
+				
 		}
 		if (result % 3 == computer) {
 			System.out.println("비겼습니다.");
-		}
+			
+			
+		} 
 
 		scanner.close();
 
