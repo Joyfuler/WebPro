@@ -1,0 +1,32 @@
+getset 및 생성자 자동생성
+먼저 private String name; 등 인스턴스 변수를 생성.
+이후 우클릭 -> Source ->  Generate constructer using fields를 선택.
+이후 해당 변수들에 대응하는 생성자가 자동으로 생성됨.
+(아무것도 선택하지 않는 경우, 기본 생성자가 생성됨)
+
+해당 메소드에는 자동으로 this.name= name; 등으로 명령어가 생성되며,
+메인 메소드에서 준 name 데이터를 받아 인턴스 변수에 대입시켜줌.
+
+이후 public String infoString()을 생성하고,
+return값을 설정해 메인 메소드에 반납해준다.
+ex) return String.format ("이름 = %s\n);
+
+메인 메소드에서는 새로 변수를 만들고, set할 데이터를 설정해준다.
+Member m1 = new Member ("홍길동")
+sysout (m1.infoString()); 사용시
+'이름 = 홍길동' 으로 출력되는 것을 확인할 수 있음.
+
+변수를 배열로 만들고 싶다면 기존 배열과 동일하게 []를 넣어준다.
+ex)기존 배열을  int [] arr = {10,20,30,40,50} 식으로 만들었다면
+Member [] m1 = {new Member ("홍길동"), new Member ("신길동")};
+과 같은 형태로 만들어줄 수 있음.
+
+이후 for 구문을 통해 연속으로 출력이 가능하다.
+
+for (int idx =0, idx < m1.length, idx++){
+sysout (m1[idx].infoString()); 으로 출력이 가능함.
+
+확장 for문을 이용한다면,
+
+for (Member member : m1){
+member.infoString(); 을 통해서 출력이 가능하다.
