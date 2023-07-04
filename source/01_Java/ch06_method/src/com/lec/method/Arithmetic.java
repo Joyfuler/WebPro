@@ -23,7 +23,7 @@ public class Arithmetic {
 		return result;
 	}
 	
-	public static int abs (int value) { // static이 들어간 것과 안 들어간 것의 차이는?
+	public static int abs (int value) { // static이 들어간 것과 안 들어간 것의 차이는? --> 객체를 만들지 않아도 바로 사용가능.
 		int result = value > 0 ? value : value * (-1); // 절대값
 		return result;
 	}

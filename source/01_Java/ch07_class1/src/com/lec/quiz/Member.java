@@ -21,6 +21,8 @@ public class Member {
 		System.out.println("林家 = " + address);
 		System.out.println("积老 = " + birth);
 		System.out.println("己喊= " + gender);
+		
+		//System.out.printf("酒捞叼 = %s\n 捞抚= %s\n 捞皋老 = %s\n, 林家=%s\n 积老=%s\n 己喊=%\n", id, name, email, address,birth,gender);
 
 		// return String.format (" 酒捞叼 = %s\n 捞抚 = %s\n 捞皋老 = %s\n 林家 = %s\n 积老 = %s\n
 		// 己喊 = %c", id, name, email, address, birth, gender);
