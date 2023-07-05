@@ -10,7 +10,7 @@ public class Prac {
 	private int tot;
 	private int avg;
 	public Prac(String name, int kor, int eng, int mat) {
-		super();
+		
 		no = count++;
 		this.name = name;
 		this.kor = kor;
