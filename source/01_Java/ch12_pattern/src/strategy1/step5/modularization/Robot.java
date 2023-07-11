@@ -10,7 +10,7 @@ public abstract class Robot {
 	
 	private FlyImpl fly;
 	private MissileImpl missile;
-	private KnifeImpl knife; //각 로봇에 있던 공통된 변수 설정. 아예 상위 클래스로 올리면 더욱 타이핑이 줄어듬!
+	private KnifeImpl knife; //각 로봇에 있던 공통된 변수(부품) 설정. 아예 상위 클래스로 올리면 더욱 타이핑이 줄어듬!
 	
 	public void actionWalk() {
 		System.out.println("걸을 수 있습니다.");

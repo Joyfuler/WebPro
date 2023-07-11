@@ -1,0 +1,24 @@
+집에가서 유니코드 설정 꼭 확인할것 (한글문자짤림...)
+-----
+API중 중요하게 봐야하는 것.
+★★ java.lang(import하지 않아도 사용가능) / ★ java.util / java.io
+java.awt 는 java 내에서 gui를 구현하기 위한 패키지이므로 ↓
+
+★★ 1) 항상 무심코 사용하던 String, 그리고 텍스트를 특정 부분에서 자르는 방법은?
+★ 2) 날짜 데이터를 입력할 때 사용하는 date에 대해서
+3) (int) ~ + 0.5등으로 반올림을 했는데, 반올림을 할 수 있는 방법이 따로 있다면? (math)
+★★ 4) 상속 없이 무심코 끌어 쓰던 메소드에 대해서. (object)
+5) 생각 없이 입력했던 scanner 객체는?
+6) 외부의 데이터를 입력할 때 사용하는 wrapper
+7) 옥션 사이트 등, 1초마다 줄어드는 시간을 표시해주는 기능은? timer
+
+주로 쓰이는 명령어
+substring, length, uppercase, indexof, equals...
+concat = 앞뒷문자 합치기.
+indexof = 해당 문자가 처음 나오는 순서. 해당 문자가 없는 경우 -1을 반환. --> 차후 유효성 검사하는 데에 사용. (이메일 주소 입력시 @ 없을 순 없으므로)
+equals = 값이 같은지를 비교. (ignorecase의 경우 대소문자를 구분x)
+
+만일 입력받은 String값 (예: 전화번호 010-2222-3333) 의 특정 부분을 숫자로 바꾸고 싶다면?
+int temp = Integer.Parseint(juminNo.substring(7,8); 사용.
+혹은 genderStr=juminNo.substring(7,8) 을 입력하고
+int temp = Integer.Parseint(genderStr); 입력하면 정수로 변경이 가능함.
