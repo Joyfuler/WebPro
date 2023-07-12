@@ -1,0 +1,18 @@
+String의 약점을 보완할 수 있는 것이 Stringbuffer.
+변수.append를 통해 뒤에 글자를 변경해도 해당 주소(해쉬코드)는 바뀌지 않음.
+
+기존 str += "a"; 와 stringBuffer.append("a") 의 속도 차이는 큼.
+* 각 메소드가 걸리는 시간 측정을 위해 for 구문으로 10만회 반복 - System.currentTimeMillis() 사용. (약 100배차..) StringBuffer의 진화형인 Stringbuilder는 10배 더빠름.
+(현실적으로 DB에서 Str에 수를 한 번 넣은 후 추후 변경하지 않으므로, 실무에서 사용할 일은 거의 없음)
+
+Carendar는 현재 시간을 표시할 수 있으나 불편. (private이므로 new 대신 Calendar.getInstance(); 사용 필요.
+GregorianCalender는 new를 사용 가능. 매개변수에 날짜를 넣거나, 매개변수가 없는 경우 현재 시간에 맞춰 표시됨.
+ex) GregorianCalendar now = new GregorianCalendar();
+--------------------- 자바스크립트에서 주로 사용됨. 자바의 경우는 ★★ date를 주로 사용 ---------------------------
+
+* Date로 출력한다면, Date day = new Date(new GregorianCalendar(년,월,일,~).getTimeInMillis(); 를 사용해 출력이 가능함.
+사용자 입맛에 형식을 변경해 주고 싶다면, SimpleDateFormat() 사용. ~ sdf = new ~ ("yyyy년 MM월 dd일~")
+이후 sdf.format(날짜) 식으로 출력이 가능함.
+
+(메소드 오버로드 잊지 말고! 같은 메소드 이름이라도 오류 x, 생성자 갯수를 다르게 해서 받으면 됨! 배웠는데 까먹지마..)
+
