@@ -1,0 +1,14 @@
+항상 자연스레 쓰는 Scanner지만, 띄어쓰기가 먹히지 않는 문제가 있음. (white-space)
+따라서 되도록 scanner.nextLine(); 을 사용해 출력의 텍스트가 짤리는 문제를 방지하자. (숫자 입력은 물론 nextInt(); 필요)
+정수를 문자열로.
+String.valueof(10);
+문자열을 정수로.
+Integer.parseInt("10");
+
+--exception--
+예외가 발생할 것 같은 부분을 try로 감쌈.
+ex) try{ sout (0/0) 
+} catch (Exception e) {     * 본래 에러 이름은 ArithmeticException이나 Exception으로부터 상속받았으므로, Exception으로 모두 커버할 수 있음.
+sout e.getMessage()); 으로 에러 메시지를 출력.
+본래 프로그램은 에러가 나는 순간 동작을 정지하나, try 속 예외의 경우 해당 에러 메시지를 대신 출력하고, 이후 프로그램을 모두 진행하게 됨.
+단, 예외가 발생하지 않은 부분을 모두 try에 넣으면, 에러가 발생한 부분 이후의 명령어가 모두 스킵되므로 주의할 것.
