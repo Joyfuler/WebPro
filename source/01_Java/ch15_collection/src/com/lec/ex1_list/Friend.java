@@ -24,10 +24,10 @@ public class Friend {
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-		if (date == new Date()) {
-		return "[name]" + name + "\t[tel]" + tel + "\t[date]" + sdf.format(date);
-		}
-		return "[name]" + name + "\t[tel]" + tel;
+		if (date != null) { // 날짜가 있다면 날짜출력. 
+			return "[name]" + name + "\t[tel]" + tel + "\t[date]" + sdf.format(date);
+		} // 없으면 날짜출력x
+		return "[name]" + name + "\t[tel]" + tel + "\t[date] 미입력";
 	}
 	
 	public Date getDate(){

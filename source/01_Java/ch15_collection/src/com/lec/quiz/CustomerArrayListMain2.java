@@ -5,7 +5,7 @@ import java.util.ArrayList;
 // N을 입력하면 arraylist for문을 출력함. arraylist.size(); == 0 이라면 출력 ㄴㄴ
 import java.util.Scanner;
 
-public class CustomerArrayListMain {
+public class CustomerArrayListMain2 {
 	public static void main(String[] args) {
 		String name, tel, address;
 		ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -20,14 +20,14 @@ public class CustomerArrayListMain {
 				System.out.println("가입 한번 이라도 안 하면 안 끝나");
 			}
 
-			System.out.println("당신의 이름을 입력해주세요. : ");
-			name = scanner.nextLine();
-			System.out.println("당신의 전화번호를 입력해주세요. : ");
-			tel = scanner.nextLine();
-			System.out.println("당신의 주소를 입력해주세요 : ");
-			address = scanner.nextLine();
-			customers.add(new Customer(name, tel, address)); // Customer 객체로 만들어야 하므로, new customer() 를 사용해 감싸자.
-
+		Customer customer = new Customer(); // customer.name = null tel= null address = null. 매개변수 x
+		System.out.println("당신의 이름은?");
+		customer.setName(scanner.nextLine()); // name이라는 변수 없이 받은 이름을 바로 매개변수로 set함.
+		System.out.println("당신의 이름은?");
+		customer.setTel(scanner.nextLine()); // name이라는 변수 없이 받은 이름을 바로 매개변수로 set함.
+		System.out.println("당신의 주소는?");
+		customer.setAddress(scanner.nextLine()); 
+		customers.add(customer); // 각 값을 customers라는 배열에 하나씩 추가
 		}
 		if (customers.size() == 0) {
 			System.out.println("가입한 회원이 없습니다.");
