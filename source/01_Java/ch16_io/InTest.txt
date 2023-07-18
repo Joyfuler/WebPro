@@ -1,3 +1,0 @@
-Hi, Java
-1234567
-Hello

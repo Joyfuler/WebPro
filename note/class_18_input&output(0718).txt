@@ -1,0 +1,15 @@
+InputStream - read()는 파일 읽기의 기본이 되지만 1바이트씩만을 읽으므로 읽어들이는 속도가 매우 느림.
+느린 속도를 개선하기 위해서는 byte[] 를 사용할 수 있음.
+기존 방식 : int i = is.read(); / 
+이번 방식 : byte [] bs = new byte[10]; 새롭게 선언 (10바이트씩 읽어들일 떄 사용하는 배열식 메소드)
+	  int count = is.read(bs);
+outputStream - write() 역시 파일 쓰기의 기본. 단 1바이트씩만 쓰므로 절차가 매우 복잡.
+byte [] bs = { 'H', 'e', 'l','l','o'};
+foreach -> os.write(b) 형식으로 출력하면 해당 텍스트 파일이 생성됨.
+reader / writer는 2바이트씩 읽고 출력이 가능. 일반적으로 게시판 내용 등 한글이나 특수문자가 필요한 경우는 Reader/Writer를 활용.
+단, 2바이트 역시 메가 이상 단위의 자료를 출력하는 데 매우 오랜 시간이 걸리므로 BufferedReader / BufferedWriter를 사용함.
+이는 보조 기능이므로 항상 앞에는 Reader가 필요함.
+ex) reader = new FileReader ("파일경로)"
+br = new BufferedReader(reader) -- 보조 스트림을 앞서 파일 불러온 reader를 다시 한번 불러온다.
+이후 줄 단위로 출력하기 위해 br.readLine()을 사용.
+printWriter를 이용하는 경우는 기존 sout.println과 똑같이 사용할 수 있음. (입력시는 편리, 단 예외처리가 발생하지 않는다는 불안점이 존재함)

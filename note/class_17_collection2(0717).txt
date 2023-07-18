@@ -9,3 +9,8 @@ sout (hashmap.get(key)); 를 통해 출력이 가능.
 따라서 이를 파일, 네트워크 등에 저장해 두고, 데이터를 마치 빨대로 빨아들이는 것처럼 꺼내오는 기능이 필요한데 이를 Stream이라 함.
 InputStream은 일반적으로 1바이트를 이용 (데이터나 이미지 등은 1바이트, 한글과 같은 문자열의 2바이트 필요)
 주로 사용되는 게시판 생성에서 이미지, 파일 첨부 등을 사용할 때 InputStream & OutputStream을 사용해야 한다.
+ex) InputStream is = new FileInputStream("파일위치/파일명");
+while(true){
+int i = is.read();
+if (i == -1) {
+break; // 파일이 끝나면 break를 거는 방식.

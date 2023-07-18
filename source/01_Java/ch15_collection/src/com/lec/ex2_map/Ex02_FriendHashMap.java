@@ -11,6 +11,7 @@ public class Ex02_FriendHashMap {
 	public static void main(String[] args) {
 		HashMap<String, Friend> friends = new HashMap<String, Friend>();  // friend 데이터를 입력.. 전화번호나 이름 등을 key값으로 활용할 것이므로 String을 입력함.
 		// 데이터 입력...
+		
 		friends.put("010-9999-9999", new Friend("홍길동", "010-9999-9999")); // 데이터 중 전화번호를 key값으로 사용함.
 		friends.put("010-8888-8888", new Friend("김길동", "010-8888-8888", new Date(new GregorianCalendar(98,6,14).getTimeInMillis()))); // 일반적으로 key값은 해당 배열의 대표값을 사용함. ex 이름...
 		friends.put("010-7777-7777", new Friend("마길동", "010-7777-7777", new Date(98, 6, 17)));
