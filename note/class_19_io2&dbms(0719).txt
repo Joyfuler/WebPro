@@ -1,0 +1,24 @@
+scanner.nextLine(); 등을 통해 날짜를 2020-01-20 (문자열) 형태로 전달받았다면,
+stringtokenizer를 이용하고, 구분자 단위로 잘라서 date 형태로 변환이 가능함.
+예)
+StringTokenizer tokenizer = new StringTokenizer(String, "-"); 
+int year = Integer.parseInt(tokenizer.nextToken());
+.
+.
+Date date = new Date(year,month,day);
+토큰인 -을 단위로 자르고, int 형태로 변환하여 Date에 넣어 사용할 수 있음.
+앞으로도 Integer.parseInt는 매우 많이 사용하니 꼭 기억해 둘 것
+
+-----DB-----
+데이터 공유 및 무결성 유지에 용이. 데이터 중복이 적은 것이 장점.. 단 높은 유지비용 필요
+엑셀의 경우 들어가는 데이터에 한계가 있고 로딩 속도가 느리므로 일반적으로 오라클을 주로 사용.
+오라클의 테이블 형태는 액셀의 시트와 매우 흡사
+...
+cmd를 통해 접속하는 경우 경로가 하드에서 SQL로 변경됨.
+접속: sqlplus 아이디/비밀번호
+해제: exit;
+--
+SELECT = 출력
+* = 모든
+FROM EMP = EMP라는 테이블에서.
+대소문자는 구분하지 않으나 대부분은 대문자를 사용. java에 넣는 경우가 많으므로, 자바언어와 구분을 위함
