@@ -1,4 +1,3 @@
 # full stack 개발자 영상과정 훈련생을 위한 저장소
 
-(임시설명)
-
+on training...
