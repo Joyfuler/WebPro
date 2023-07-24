@@ -1,0 +1,20 @@
+날짜관련 함수 정리
+SYSDATE - 현재시각. 
+ALTER SESSION SET NLS_DATE_FORMAT = 'RR-MM-DD HH24:MI:SS'; - 출력되는 날짜 형식을 다음과 같이 변경함.
+자바에 비해 날짜 계산이 매우 수월한 편. SYSDATE +14 를 통해 14일 후의 날짜를 바로 출력이 가능함.
+MONTH_BETWEEN(A,B) - A와 B 사이가 몇 달인지를 출력. A가 B보다 나중이어야 함. (혹은 ABS 사용)
+ADD_MONTHS (HIREDATE,3) - 입사일에 3개월 후를 더한 값을 출력.
+날짜는 숫자 데이터이므로 반올림, 혹은 내림이 가능함.
+ROUND(HIREDATE, 'YEAR') FROM EMP; -- 7월 이후는 내년 1월 1일, 6월 이전은 올해 1월 1일로
+NEXT_DAY (특정시점, '토') : 특정 시점에서 처음 맞이하는 토요일을 출력. (오라클의 언어 버전에 따라 다르며, 한글 버전이므로 일월화수목금토를 사용)
+TO_CHAR는 출력형식에 따라 다양하게 출력이 가능.
+SELECT TO_CHAR (1200, 'L9,999') FROM DUAL; -- 해당 국가의 통화를 9,999 형식으로 출력 가능 (쉼표추가)
+EXTRACT (YEAR,MONTH,DAY FROM HIREDATE) -- 날짜를 숫자로 추출함. TO_CHAR(HIREDATE, RR // MM // DD) 등으로도 대체 가능.
+
+---- 그룹함수
+기본 그룹함수 - SUM, AVG, MAX, MIN, COUNT, STDDEV(표준편차), VARIANCE(분산)
+다만, 결과가 한 줄만 나오는 것과 여러줄이 나오는 것을 동시에 출력할 수는 없음. 이 경우 GROUP BY를 추가하여 해당 값별로 출력하도록 조정함.
+EX) SELECT DEPTNO, MAX(SAL) FROM EMP GROUP BY DEPTNO;
+GROUP BY를 사용시에는 정렬할 특정 값의 필드를 그대로 써 줄것.
+SELECT DEPTNO, MAX(SAL), TRUNC(AVG(SAL),1) FROM EMP GROUP BY DEPTNO ORDER BY DEPTNO;
+※ GROUP BY에는 별칭을 사용할 수 없음. (해석이 ALIAS보다 먼저이기 때문), 다만 ORDER BY에는 사용이 가능. (해석이 ALIAS보다 나중이기 때문)
