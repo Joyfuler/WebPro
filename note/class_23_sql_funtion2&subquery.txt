@@ -1,0 +1,36 @@
+-- GROUP BY
+해석 순서는 SELECT보다 GROUP BY가 우선. 따라서 ALIAS를 사용할 수 없음.
+ORDER BY는 SELECT보다 해석이 나중이므로 ALIAS가 사용 가능.
+
+-- HAVING
+WHERE의 경우는 SELECT 속 그룹함수를 조건으로 사용할 수 없음.
+그러나 GROUP BY로 묶은 뒤 HAVING을 사용하면 그룹함수를 조건으로 걸 수 있음.
+EX) SELECT DETPNO, AVG(SAL) FROM EMP GROUP BY DEPTNO HAVING AVG(SAL) >= 2000;
+
+-- ROLLUP
+테이블의 가장 아랫줄에 GROUP BY로 묶은 각 테이블의 총합을 출력해줌.
+(NULL)이 나오는 경우는 NULL이 나오는 부위에 NVL을 씌울 것. 다만 NVL의 앞,뒤의 타입을 통합해야 하므로,
+만일 다른 경우에는 TO_CHAR등을 활용하자.
+
+-------- 서브쿼리 ----------
+쿼리 조건에 단일행과 그룹함수의 조건을 함께 추리면 출력하기 어려움.
+직원 중 가장 높은 월급을 출력하려면?
+SELECT EMPNO, MAX(SAL) FROM EMP GROUP BY EMPNO (X) -- 사번별로 그룹화되어 전원이 출력.
+이 경우 서브쿼리를 사용하여 해결이 가능. 서브쿼리는 메인쿼리와 동일하게 SELECT절을 쓰고 괄호로 덮음.
+SELECT * FROM EMP WHERE SAL = (SELECT MAX(SAL) FROM EMP);
+먼저 괄호 안에 있는 SELECT MAX(SAL) FROM EMP에서 5000이라는 값이 적용됨.
+** 쿼리의 실행 순서는 항상 서브쿼리가 우선이라는 점을 주의할 것
+단일행 서브쿼리는 서브쿼리의 실행 결과가 5000 등 값이 1개일 때, 그 값을 비교하는 용도로 쓰임. (=, >, <, != 등)
+즉 서브쿼리의 실행결과가 단일행이 아니라면 이를 사용 불가.
+
+만일 서브쿼리의 실행 결과가 둘 이상이라면?
+IN, ALL, ANY, EXITSTS 등을 사용할 것.
+EX. SCOTT이나 KING과 동일한 부서에서 근무하는 사원 출력?
+SELECT ENAME, SAL FROM EMP WHERE DEPTNO IN (SELECT DEPTNO FROM EMP WHERE ENAME IN ('SCOTT',KING'));
+메인 쿼리에도 IN, 서브 쿼리에도 IN이 들어가니 주의
+ROLLBACK의 반대로는 COMMIT이 존재. 실제 ORACLE 테이블에 해당 데이터를 추가하고 저장하는 명령어 (추후사용..)
+물론 AND로도 할 수 있지만, 그만큼 쿼리의 길이가 길어진다는 점에는 주의할 것
+EX2. 다중행, 다중열인 경우.
+SELECT * FROM EMP
+WHERE DEPTNO IN (SELECT DETPNO FROM EMP WHERE SAL >= 3000);
+위의 경우 서브쿼리 결과값이 20,10,20이 나오므로 IN을 사용해주었음.

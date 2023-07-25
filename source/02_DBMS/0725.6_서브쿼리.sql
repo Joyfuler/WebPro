@@ -1,0 +1,194 @@
+-- [VI] Sub Query: 메인 Query (SQL) 안에 QUERY (SQL문)이 내포되어 있는 것.
+-- ★ 1. 서브 쿼리 개념
+-- 서브쿼리가 필요한 이유?
+-- ex. 급여를 제일 많이 받는 사람의 모든 정보
+SELECT EMPNO, ENAME FROM EMP WHERE SAL= (SELECT MAX(SAL) FROM EMP); -- 서브쿼리로 둠
+SELECT * FROM EMP WHERE SAL = (SELECT MAX(SAL) FROM EMP); -- 메인쿼리, 서브쿼리
+-- 실행 순서는 서브 쿼리 우선, 이후 메인쿼리 실행됨.
+
+-- 서브 쿼리의 종류 (1) 단일행 서브쿼리 (서브쿼리의 실행결과가 단일행인 경우) 연산자를 사용. =
+-- SELECT MAX(SAL) FROM EMP가 5천으로 값이 1개라면 즉시 =, >=, <=, != 등으로 값을 비교할 수 있음.
+-- EX. SCOTT과 동일한 부서에서 근무하는 사원의 일므, 급여
+SELECT ENAME, SAL FROM EMP WHERE DEPTNO =
+(SELECT DEPTNO FROM EMP WHERE ENAME = 'SCOTT')
+AND ENAME != 'SCOTT';
+     
+-- 서브 쿼리의 종류 (2) 다중행 서브쿼리 (서브쿼리의 실행 결과가 2행이상) IN, ALL, >ANY(SOME), EXISTS
+-- EX. SCOTT이나 KING과 동일한 부서에서 근무하는 사원의 이름, 급여
+-- 우선 서브쿼리를 작성..SCOTT과 KING의 부서번호를 출력
+SELECT DEPTNO FROM EMP WHERE ENAME IN ('SCOTT', 'KING'); -- 다중형 서브쿼리. 10과 20값을 각각 가짐
+SELECT ENAME, SAL
+FROM EMP
+WHERE DEPTNO = 
+(SELECT DEPTNO FROM EMP WHERE ENAME IN ('SCOTT', 'KING')); -- 오류. = 연산자를 사용 불가
+-- 이 경우는 = 대신 IN을 사용하여 해결
+SELECT ENAME, SAL
+FROM EMP
+WHERE DEPTNO IN 
+(SELECT DEPTNO FROM EMP WHERE ENAME IN ('SCOTT','KING'));
+
+-- ★ 2. 다중 쿼리 개념
+-- SCOTT과 동일한 근무지에서 근무하는 사원의 모든 정보
+-- DALLAS, 50번부서 근무지에 일하는 사람을 추가하려면? -- 우선 DEPT에 값을 추가해야 함... LOC은 DEPT에 있으므로..
+INSERT INTO DEPT VALUES  (50, 'IT', 'DALLAS');
+INSERT INTO EMP (EMPNO, ENAME, DEPTNO) VALUES (8000,'홍길동',50); -- EMPNO, ENAME, DEPTNO만 값을 넣어 생성
+SELECT EMP.*, ENAME, LOC FROM EMP,DEPT 
+WHERE EMP.DEPTNO = DEPT.DEPTNO 
+AND LOC = (SELECT LOC FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO AND ENAME = 'SCOTT');
+ROLLBACK; -- 데이터 추가, 삭제, 수정, 검색 등을 취소..
+-- COMMIT; 데이터를 실제로 오라클에 INSERT하여 저장하는 것.
+-- EX2. 최초 입사 직원 이름과 최초 입사일 출력.. 먼저 최초 입사일을 출력
+SELECT ENAME, HIREDATE FROM EMP 
+WHERE HIREDATE = (SELECT MIN(HIREDATE) FROM EMP);
+-- EX3. 최근 입사 직원 이름과 최근 입사일
+SELECT ENAME, HIREDATE FROM EMP 
+WHERE HIREDATE = (SELECT MAX(HIREDATE) FROM EMP);
+-- EX4. 최초 입사 직원 이름과 최초 입사일, 최근 입사 직원 이름과 최근 입사일
+SELECT E1.ENAME, E1.HIREDATE, E2.ENAME, E2.HIREDATE
+FROM EMP E1, EMP E2
+WHERE E1.HIREDATE = (SELECT MIN(HIREDATE) FROM EMP) 
+AND E2.HIREDATE = (SELECT MAX(HIREDATE) FROM EMP);
+-- SELECT에도 서브쿼리를 추가할 수 있음. 최초입사자를 구하는 SELECT문을 SELECT 안에 넣음
+SELECT
+    (SELECT ENAME FROM EMP WHERE HIREDATE = (SELECT MIN(HIREDATE) FROM EMP)) 최초입사자,
+    (SELECT MIN(HIREDATE) FROM EMP) 최초입사일,
+    (SELECT ENAME FROM EMP WHERE HIREDATE = (SELECT MAX(HIREDATE) FROM EMP )) 최근입사자,
+    (SELECT MAX (HIREDATE) FROM EMP) 최근입사일
+    FROM DUAL;
+    
+-- EX5. SCOTT과 같은 부서에 근무하는 사람들의 급여합
+SELECT SUM(SAL) FROM EMP 
+WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME = 'SCOTT');
+
+-- EX6. SCOTT과 동일한 JOB을 가진 사원의 모든 필드
+SELECT JOB FROM EMP WHERE ENAME = 'SCOTT'; --서브쿼리
+SELECT * FROM EMP WHERE JOB = (SELECT JOB FROM EMP WHERE ENAME = 'SCOTT'); -- 메인쿼리
+
+-- EX7. 서브쿼리OR JOIN 모두 가능.. 달라스에 근무하는 사원의 이름과 부서번호를 출력
+SELECT DEPTNO FROM DEPT WHERE LOC = 'DALLAS';
+SELECT ENAME, DEPTNO FROM EMP 
+WHERE DEPTNO = (SELECT DEPTNO FROM DEPT WHERE LOC = 'DALLAS');
+SELECT ENAME, E.DEPTNO FROM EMP E, DEPT D 
+WHERE E.DEPTNO = D.DEPTNO AND LOC = 'DALLAS';
+
+-- EX8. 'KING'이 직속상사인 사원의 이름과 급여 (서브쿼리, SELFJOIN)
+SELECT EMPNO FROM EMP WHERE ENAME = 'KING';
+SELECT ENAME, SAL FROM EMP WHERE MGR = (SELECT EMPNO FROM EMP WHERE ENAME = 'KING');
+SELECT W.EMPNO, W.ENAME, W.SAL FROM EMP W, EMP M
+WHERE W.MGR = M.EMPNO AND M.ENAME = 'KING';
+
+-- EX9. 평균급여 이하로 받는 사원의 이름과 급여를 출력
+SELECT ROUND(AVG(SAL),1) FROM EMP; -- 서브쿼리
+SELECT ENAME, SAL FROM EMP 
+WHERE SAL <= (SELECT ROUND(AVG(SAL),1) FROM EMP);
+
+-- EX10. 평균급여 이하로 받는 사원의 이름과 급여와 평균급여를 출력 (소숫점1자리)
+SELECT ROUND(AVG(SAL),1) FROM EMP;
+SELECT ENAME, SAL, ROUND((SELECT AVG(SAL) FROM EMP),1) 
+FROM EMP WHERE SAL <= (SELECT ROUND(AVG(SAL),1) FROM EMP);
+
+-- EX11. 평균급여 이하로 받는 사원의 이름, 급여, 평균급여와의 차이를 출력
+SELECT AVG(SAL) FROM EMP; -- 서브
+SELECT ENAME, SAL, ROUND(ABS(SAL - (SELECT AVG(SAL) FROM EMP))) CHAYI
+FROM EMP WHERE SAL <= (SELECT AVG(SAL) FROM EMP);
+
+
+-- 단일행 다중열 서브쿼리
+-- SCOTT의 JOB과 부서번호가 같은 직원의 모든 필드를 출력.. 
+SELECT * FROM EMP WHERE JOB = (SELECT JOB FROM EMP WHERE ENAME = 'SCOTT') AND 
+DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME = 'SCOTT'); 
+-- 으로도 할 수는 있으나 매우 복잡.. 이런 경우는 다중열 서브쿼리를 사용함.
+SELECT * FROM EMP
+WHERE (JOB, DEPTNO) = (SELECT JOB, DEPTNO FROM EMP WHERE ENAME = 'SCOTT');
+-- WHERE절에 (JOB,DEPTNO를 넣고, SELECT 절에 JOB,DEPTNO를 한번에 넣어줌). 단, 순서를 반드시 지켜줘야 할 것.
+
+-- ★ 3. 다중행서브쿼리 (IN, ALL, ANY(=SOME), EXITSTS 등을 사용...
+-- (1) IN 연산자 - 서브쿼리의 결과 중 하나라도 일치하면 참
+-- EX. 부서별 입사일이 가장 늦은 사람의 이름, 입사일, 부서번호
+SELECT DEPTNO, MAX(HIREDATE) FROM EMP GROUP BY DEPTNO; -- 다중행 다중열 서브쿼리.. 여기서 이름을 출력하고 싶어서?
+SELECT DEPTNO, MAX(HIREDATE), ENAME FROM EMP GROUP BY DEPTNO, ENAME; -- 이렇게 하는 경우 14명이 모두 출력되므로 의미가 없음.
+SELECT ENAME, HIREDATE, DEPTNO
+FROM EMP
+WHERE (DEPTNO, HIREDATE) IN (SELECT DEPTNO, MAX(HIREDATE) FROM EMP GROUP BY DEPTNO); -- 둘 중 하나라도 같으면 출력됨.
+-- 이렇게 다중행 다중열인 경우는 = 대신에 IN을 사용할 것.
+
+-- EX. 급여가 3000 이상 받는 사원이 소속된 부서의 사원들의 모든 필드
+SELECT DEPTNO FROM EMP WHERE SAL >= 3000; -- 서브쿼리
+SELECT * FROM EMP
+WHERE DEPTNO IN (SELECT DEPTNO FROM EMP WHERE SAL >= 3000 GROUP BY DEPTNO);
+
+-- ★ 총 연습문제 
+
+--1. 사원테이블에서 가장 먼저 입사한 사람의 이름, 급여, 입사일
+SELECT ENAME, SAL, HIREDATE FROM EMP 
+WHERE HIREDATE = (SELECT MIN(HIREDATE) FROM EMP);
+
+-- 2. 회사에서 가장 급여가 적은 사람의 이름, 급여
+SELECT ENAME, SAL FROM EMP 
+WHERE SAL = (SELECT MIN(SAL) FROM EMP);
+
+-- 3. 회사 평균보다 급여를 많이 받는 사람의 이름, 급여, 부서코드
+SELECT ENAME, SAL, DEPTNO FROM EMP 
+WHERE SAL > (SELECT AVG(SAL) FROM EMP);
+
+--4. 회사 평균 이하의 급여를 받는 사람의 이름, 급여, 부서명
+SELECT ENAME, SAL, DNAME FROM EMP, DEPT 
+WHERE EMP.DEPTNO = DEPT.DEPTNO AND SAL <=(SELECT AVG(SAL) FROM EMP);
+
+--5. SCOTT보다 먼저 입사한 사람의 이름, 급여, 입사일, 급여 등급
+SELECT ENAME, SAL, HIREDATE, GRADE 
+FROM EMP, SALGRADE 
+WHERE SAL BETWEEN LOSAL AND HISAL 
+AND HIREDATE < (SELECT HIREDATE FROM EMP WHERE ENAME = 'SCOTT');
+
+--6. 5번(SCOTT보다 먼저 입사한 사람의 이름, 급여, 입사일, 급여 등급)에 부서명 추가하고 급여가 큰 순 정렬
+SELECT ENAME, SAL, HIREDATE, GRADE, DNAME
+FROM EMP, SALGRADE, DEPT
+WHERE SAL BETWEEN LOSAL AND HISAL AND EMP.DEPTNO = DEPT.DEPTNO
+AND HIREDATE < (SELECT HIREDATE FROM EMP WHERE ENAME = 'SCOTT')
+ORDER BY SAL DESC;
+
+--7. BLAKE 보다 급여가 많은 사원들의 사번, 이름, 급여
+SELECT EMPNO, ENAME, SAL
+FROM EMP
+WHERE SAL > (SELECT SAL FROM EMP WHERE ENAME = 'BLAKE');
+
+--8. MILLER보다 늦게 입사한 사원의 사번, 이름, 입사일
+SELECT EMPNO, ENAME, HIREDATE
+FROM EMP
+WHERE HIREDATE > (SELECT HIREDATE FROM EMP WHERE ENAME = 'MILLER');
+
+--9. 사원전체 평균 급여보다 급여가 많은 사원들의 사번, 이름, 급여
+SELECT EMPNO, ENAME, SAL 
+FROM EMP
+WHERE SAL > (SELECT AVG(SAL) FROM EMP);
+
+--10. CLARK와 같은 부서번호이며, 사번이 7698인 직원의 급여보다 많은 급여를 받는 사원의 사번, 이름, 급여
+SELECT EMPNO, ENAME, SAL
+FROM EMP
+WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME = 'CLARK')
+AND SAL > (SELECT SAL FROM EMP WHERE EMPNO = 7698);
+
+--11.  응용심화. CLARK와 같은 부서명이며, 사번이 7698인 직원의 급여보다 많은 급여를 받는 사원의 사번, 이름, 급여
+SELECT EMPNO, ENAME, SAL
+FROM EMP,DEPT
+WHERE EMP.DEPTNO = DEPT.DEPTNO 
+AND DNAME = 
+(SELECT DNAME FROM DEPT,EMP 
+WHERE DEPT.DEPTNO = EMP.DEPTNO 
+AND ENAME = 'CLARK')
+AND SAL > (SELECT SAL FROM EMP WHERE EMPNO = 7698);
+
+--12. BLAKE와 같은 부서에 있는 모든 사원의 이름과 입사일자
+SELECT ENAME, HIREDATE
+FROM EMP
+WHERE DEPTNO = 
+(SELECT DEPTNO FROM EMP WHERE ENAME = 'BLAKE');
+
+--13. 평균 급여 이상을 받는 모든 종업원에 대해서 사원번호와 이름 단 급여가 많은 순으로 출력)
+SELECT EMPNO, ENAME, SAL
+FROM EMP
+WHERE SAL >= (SELECT AVG(SAL) FROM EMP)
+ORDER BY SAL DESC;
+
+
