@@ -1,0 +1,31 @@
+문법)
+수정시:  UPDATE 테이블명 SET 필드명 = 값 WHERE ~
+삭제시:  DELETE FROM 테이블명 WHERE ~ 
+삭제시 DELETE 뒤에는 FROM이 있으니 헷갈리지 말 것
+
+(EXERD 활용 - 다운로드).. 테이블 관계를 맺을 경우엔 빨간 줄 (식별관계) 사용.
+한 테이블에 있던 PK는 다른 테이블로 옮길때 FK로 변경됨.
+
+오라클의 제약조건 5개
+1. PRIMARY KEY : 테이블의 각 행을 유일한 값으로 식별하기 위한 필드
+2. FOREIGN KEY (외래키) : DEPT의 DEPTNO가 EMP의 DEPTNO와 연결된 것처럼,
+테이블의 열이 다른 테이블의 열을 참조한 것. 일반적으로 테이블 생성 시 가장 밑에 적음. FOREIGN KEY (필드) REFERENCES 테이블 (필드); 형식
+3. NOT NULL : 해당 필드가 절대 NULL이 들어가지 못하도록 함. 
+4. UNIQUE : 유일한 값을 가지지만, NULL은 넣을 수 있으며 여러 개 사용 가능. PRIMARY보다 더 넓은 범위
+5. CHECK (조건) : 해당 조건을 만족하는 값만 INSERT, UPDATE가 가능. NULL 허용.
+-- DEFAULT (기본값) : 
+
+DROP TABLE BOOKCATEGORY CASCADE CONSTRAINTS;
+참조하는 테이블과 상관없이 테이블을 삭제함. 매우 위험하니 실습 중에만 사용하자
+TABLE은 부모 테이블과 자식 테이블로 구성된 경우 (FOREIGN KEY) 생성은 부모-자식 순, 삭제는 자식-부모 순으로 삭제해야함.
+
+-----  계정 생성, 권한관리, 삭제 등 -----
+CREATE USER 계정명 IDENTIFIED BY 비밀번호; (계정생성)
+GRANT CREATE SESSION TO SCOTT2; (세션권한 = 로그인 가능하게 하는 권한 부여)
+GRANT CREATE TABLE TO SCOTT2; (테이블을 만들 수 있도록 권한 부여)
+GRANT ALL ON EMP TO SCOTT2; (EMP 테이블에 대한 모든 권한 부여)
+
+-- 시퀀스 (순차번호생성기. idx...?)
+CREATE SEQUENCE FRIEND_SEQ;
+(시퀀스명은 일반적으로 테이블_SEQ 형식으로 주로 제작함)
+반드시 들어가야 할 것은 MAXVALUE, NOCACHE, NOCYCLE

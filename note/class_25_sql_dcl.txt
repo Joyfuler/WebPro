@@ -1,0 +1,4 @@
+문법)
+수정시:  UPDATE 테이블명 SET 필드명 = 값 WHERE ~
+삭제시:  DELETE FROM 테이블명 WHERE ~ 
+삭제시 DELETE 뒤에는 FROM이 있으니 헷갈리지 말 것
