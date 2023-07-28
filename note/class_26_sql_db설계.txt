@@ -1,0 +1,9 @@
+테이블 구조도를 우선 exerd로 먼저 구상할 것.
+각 테이블에는 기본적으로 pk를 1개씩 구성. 필요한 경우 not null, 가격의 경우에는 check price >0 등을 고려.
+쇼핑몰 주문서의 경우 주문번호는 날짜 + idx 구성인 경우가 많으므로 varchar2(20) 등으로 구성.
+SELECT CONCAT(TO_CHAR(SYSDATE,'RRMMDD'),TRIM(TO_CHAR(NO_SEQ.NEXTVAL,'000'))) NO FROM DUAL 방식으로 날짜+시퀀스번호를 합쳐서 생성하자.
+관계도를 잘 파악하고, 부모 데이터에서 가져올 코드를 fk로 설정. 주문상세, 장바구니 등에 상품코드를 넣고, 해당 상품코드를 이용해 부모 테이블의 데이터를 가져올 수 있음.
+데이터 생성시 조건을 not null로 건 경우에도 values 앞에 시트 설정은 해 주어야 함.
+
+insert into를 order(주문)와 orderdetail(주문상세)에 나눠서...? (좀더 생각해보자)
+cart에 있는 데이터를 orderdetail에 이식 + 재고를 설정하고, 구매시의 수량만큼 -하도록 작성.
