@@ -16,7 +16,8 @@ public class Ex02_FriendHashMap {
 		friends.put("010-8888-8888", new Friend("김길동", "010-8888-8888", new Date(new GregorianCalendar(98,6,14).getTimeInMillis()))); // 일반적으로 key값은 해당 배열의 대표값을 사용함. ex 이름...
 		friends.put("010-7777-7777", new Friend("마길동", "010-7777-7777", new Date(98, 6, 17)));
 		// 인덱스가 없으므로 for문을 이용한 출력이 불가능.
-		Iterator<String> iterator = friends.keySet().iterator(); // iterator는 인터페이스로 추상메소드 존재. 따라서 new가 불가능.
+		Iterator<String> iterator = friends.keySet().iterator();
+		//Iterator<String> iterator = friends.keySet().iterator(); // iterator는 인터페이스로 추상메소드 존재. 따라서 new가 불가능.
 		// 출력에 필요한 반복자...
 		while (iterator.hasNext()) {
 			String key = iterator.next(); // 다음번째 배열이 있따면? (ex 2번)

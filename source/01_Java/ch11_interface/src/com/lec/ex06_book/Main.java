@@ -11,7 +11,7 @@ public class Main {
 
 		Scanner scanner = new Scanner(System.in);
 		int fn; // 기능번호(1은 대출, 2는 반납, 3은 책 list 출력, 0은 종료)
-		int idx; // 대출, 반납할 때 조회된 책의 index를 가져옴
+		int idx; // 대출, 반납j할 때 조회된 책의 index를 가져옴
 		String bTitle, borrower, checkOutDate; // 사용자에게 입력받을 책 이름, 대출인, 대출일이 들어감. (모두 변수설정...)
 		do { // do- while 문구. 기능번호를 0누른 경우 무한반복
 			System.out.println("원하는 기능을 선택하세요. 1:대출 | 2:반납 | 3:책 list 출력 | 0: 종료");

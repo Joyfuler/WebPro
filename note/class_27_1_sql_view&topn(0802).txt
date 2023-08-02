@@ -1,0 +1,34 @@
+view - 사용자별로 권한을 다르게 줌. ex) 회계는 모두 열람, 
+인사는 월급,상여금 등의 회계 데이터를 제외하고 열람할 수 있도록 조정
+및 mgr,empno등 인사정보를 수정가능 하도록 하는 방식.
+
+인라인 뷰 - FROM 절에 서브쿼리를 넣는 것. FROM절 안의 서브쿼리가 일시적인 가상테이블로 작용함.
+SELECT AVG(SAL) FROM (SELECT SAL FROM EMP WHERE SAL>2000) A;
+이 경우 괄호 안에 있는 SAL>2000인 급여의 값이 일시적인 테이블로 작동함.
+
+topn - 수많은 데이터에서 상위 일부 인원수를 추출하여 열람이 가능.
+기본적으로 ROWNUM을 사용할 수 있으나, ROWNUM은 등록되는 순서대로 항상 1번부터 시작한다는 점에 주의.
+예를 들면 급여 순서로 정렬하고 싶을 때,
+SELECT ROWNUM, ENAME, SAL FROM (SELECT ENAME, SAL FROM EMP ORDER BY SAL) WHERE ROWNUM BETWEEN 6 AND 10);
+으로 설정시 아무런 값도 나오지 않음.
+따라서 ROWNUM에 ALIAS를 지정하고 전체를 감싸서 새롭게 랭킹을 생성해 주어야 함.
+SELECT RN, ENAME, SAL FROM (SELECT ROWNUM RN, ENAME, SAL FROM (SELECT ENAME, SAL FROM EMP ORDER BY SALL))
+WHERE RN BETWEEN 6 AND 10;
+SELECT를 3번 써야 하므로 헷갈린다면 서브쿼리가 되는 앞 단계 구문을 하나씩 만들자.
+
+
+--- 인덱스 ---
+데이터베이스 내 수많은 데이터를 빠르게 조회하기 위해 사용.
+데이터베이스 양이 많다면 검색에 시간이 걸리므로 B-TREE를 사용해 검색 단계를 단축시키는 방법. 
+(찾는 값과 해당 키가 더 큰지 작은지 비교하며 내려가는 식)
+주로 WHERE문으로 해당 컬럼을 많이 사용하고, 검색 결과가 매우 적을 (2~4%정도) 일 때 주로 사용.
+단, UPDATE나 DELETE를 자주 사용하면 B-TREE를 매번 다시 생성하므로 인덱스 사용을 비추천.
+
+
+--- 트랜젝션 복습 ---
+일반적인 트랜젝션 명령어는 COMMIT, ROLLBACK, SAVEPOINT 등. 
+또한 데이터 조작 명령어인 DML (INSERT,DELETE,UPDATE)에만 가능.
+COMMIT: 변경 내용을 영구조작. ROLLBACK: 변경 내용 취소. COMMIT한 이후부터의 내용이 취소됨 (트랜젝션 단위)
+(정처기 응시시엔 DML, DCL, DDL 개념 구분하여 알아두기)
+SAVEPOINT C1 : ROLLBACK시 COMMIT이 아닌 SAVEPOINT로 돌아갈 수 있음. 
+ROLLBACK TO C1 등으로 사용. (일반 ROLLBACK시에는 COMMIT한 곳으로 돌아감)

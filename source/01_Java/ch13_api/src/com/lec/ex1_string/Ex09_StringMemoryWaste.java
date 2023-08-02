@@ -11,3 +11,4 @@ public class Ex09_StringMemoryWaste {
 		System.out.println(str.hashCode()); // String의 값을 바꿀 때마다 객체가 새롭게 나옴.
 	}
 }
+

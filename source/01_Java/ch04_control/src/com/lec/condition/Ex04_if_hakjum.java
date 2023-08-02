@@ -9,7 +9,7 @@ public class Ex04_if_hakjum {
 		System.out.print
 		("점수? ( 0 ~ 100) : ");
 		int score = sc.nextInt();
-		if ((score >= 90) && (score < 100)) { // 2개를 만족. 괄호로 우선순위 설정가능. (안해도 되긴함)
+		if ((score >= 90) && (score <= 100)) { // 2개를 만족. 괄호로 우선순위 설정가능. (안해도 되긴함)
 			System.out.println("A학점");
 		} else if (score >= 80 && score < 90) { // 100보다 높은거 쓸 경우 오류남. score < 90을 넣어줘야
 			System.out.println("B학점");

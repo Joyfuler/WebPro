@@ -46,7 +46,7 @@ public class Ex04_void {
 		System.out.println("Hello, Oracle DB");
 		printLine(15); // int 변수를 만들지 않으면 본래 오류가 나므로 새로 메소드를 생성해줌. 위에 int cnt가 있는 메소드를 새로 생성.
 		System.out.println("Hello, Void");
-		printLine(21, '#'); // 21줄, #으로 되어 있는 라인을 출력하려면 2개 변수여서 또 오류가 나므로 위에 변수가 2개 있는 메소드를 또 만들어줌.
+		printLine(20, '#'); // 21줄, #으로 되어 있는 라인을 출력하려면 2개 변수여서 또 오류가 나므로 위에 변수가 2개 있는 메소드를 또 만들어줌.
 		
 	}
 }

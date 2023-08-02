@@ -20,11 +20,11 @@ public class Person {
 	}
 	
 	public void job() {
-		job.job();
+		this.job.job();
 	}
 
 	public void get() {
-		get.get();
+		this.get.get();
 	}
 
 	public JobImpl getJob() {

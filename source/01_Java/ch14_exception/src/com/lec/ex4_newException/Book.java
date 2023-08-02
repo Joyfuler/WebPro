@@ -79,8 +79,9 @@ public class Book implements ILendable {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("YY년MM월DD일");
 		String msg = bookNo + "\t" + bookTitle + " (" + writer + " 저) ";
-		msg += state == STATE_BORROWED ? ("대출중 (대출일: " + (checkOutDate) + ")") : "대출가능";
+		msg += state == STATE_BORROWED ? ("대출중 (대출일: " + (sdf.format(checkOutDate)) + ")") : "대출가능";
 		return msg;
 	}
 

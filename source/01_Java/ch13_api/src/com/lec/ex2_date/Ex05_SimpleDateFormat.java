@@ -19,6 +19,7 @@ public class Ex05_SimpleDateFormat {
 		String nowCalStr = sdf.format(nowCal.getTime()); 
 		System.out.println(nowCalStr);
 		String nowGcStr = sdf.format(nowGc.getTime());
-		System.out.println(nowGcStr);
+		System.out.println(nowGcStr);	
+		
 	}
 }

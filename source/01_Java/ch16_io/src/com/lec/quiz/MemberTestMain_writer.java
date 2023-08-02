@@ -75,7 +75,7 @@ public class MemberTestMain_writer {
 			if (sdf.format(new Date()).equals(sdf.format(result))) {
 				System.out.println(name + " 님, 생일을 축하드립니다!");
 			} else {
-				System.out.println("잘못된 생일 입력입니다.");
+				System.out.println("오늘은 생일이 아니시네요.");
 			} 
 		}
 		return result;

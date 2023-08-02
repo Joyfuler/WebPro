@@ -12,7 +12,7 @@ public class Ex02_round {
 		System.out.println("8.15를 버림 : " + (int)Math.floor(8.15));
 		// 소숫점 두번쨰에서 올림, 반올림, 내림하려면?
 		System.out.println("소숫점 두번째 자리에서 반올림");
-		System.out.println("8.15를 올려서 8.2로 나오는 방법 : " + Math.ceil(8.15 * 10) /10);
+		System.out.println("8.15를 올려서 8.2로 나오는 방법 : " + Math.ceil(8.15 * 10) /10);		
 		// 8.15를 10 곱하면 81.5가 나오고, 올리면 82가 됨. 여기서 다시 10으로 나누면 최종적으로 8.2가 됨.
 		System.out.println("8.15를 반올림 " + Math.round(8.15 * 10) / 10.0); // java의 나눗셈 주의! 10이 아닌 10.0으로 나눠야
 		System.out.println("8.15를 내림 " + Math.floor(8.15 * 10) / 10);

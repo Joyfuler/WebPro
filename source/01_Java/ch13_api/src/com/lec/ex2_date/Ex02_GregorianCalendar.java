@@ -20,8 +20,7 @@ public class Ex02_GregorianCalendar {
 		int ampm = now.get(Calendar.AM_PM); // 오전인지, 오후인지. 0: 오전 / 1: 오후
 		int minute = now.get(Calendar.MINUTE); // 분
 		int second = now.get(Calendar.SECOND); // 초
-		
-		
+				
 		System.out.printf("%d시(%s %d시) %d분 %d초\n", hour24, ampm == 0? "오전":"오후", hour, minute, second);
 		// %d 정수 , %f 실수, %s 문자열, %c 문자, %b boolean
 		// %tY(년도), %tm(월), %td(일) %ta(요일) %tH(24시) %tp(오전/오후)  %tl (12시간단위), %tM(분) %tS(초)

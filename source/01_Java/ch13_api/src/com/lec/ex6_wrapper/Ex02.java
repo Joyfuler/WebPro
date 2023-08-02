@@ -7,7 +7,7 @@ public class Ex02 {
 		System.out.println("i = " + i);
 		
 		System.out.println("정수를 스트링으로 전환");
-		String monthStr = String.valueOf(12);
+		String monthStr = String.valueOf(30);
 		System.out.println(monthStr);
 		
 

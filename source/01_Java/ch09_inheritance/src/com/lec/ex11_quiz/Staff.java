@@ -9,10 +9,11 @@ public class Staff extends Person {
 		super(id, name, department);
 	++cntStaff;
 	this.department = department;
+	setNo("staff"+ cntStaff);
 	}
 	
 	public String infoString() {
-		return String.format("(번호)staff%d\t(ID)%s\t (이름)%s\t (부서)%s\n", cntStaff, getId(), getName(), department); 
+		return String.format("(번호)%s\t(ID)%s\t (이름)%s\t (부서)%s\n", getNo(), getId(), getName(), department); 
 	}
 		
 }

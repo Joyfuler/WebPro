@@ -14,7 +14,7 @@ public class Ex03 {
 		String fileName = scanner.next(); // 파일이름은 정확해야하므로 nextline 대신 next를 사용함. abc => txtFile/abc.txt
 		scanner.nextLine(); // scanner.next에서 받았던 \n을 지워주는 작업.
 		try {
-			writer = new FileWriter("txtFile" + fileName + ".txt",true); // 사용자에게 받은 이름을 파일이름으로 사용.
+			writer = new FileWriter("txtFile/" + fileName + ".txt",true); // 사용자에게 받은 이름을 파일이름으로 사용.
 			while (true) {
 				System.out.print("파일 출력할 내용은? (종료를 원하면 x를 눌러주세요.");
 				String msg = scanner.nextLine();

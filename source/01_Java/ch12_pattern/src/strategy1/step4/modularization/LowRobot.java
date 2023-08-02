@@ -21,7 +21,7 @@ public class LowRobot extends Robot {
 
 	@Override
 	public void actionFly() {
-		fly.fly(); // fly.fly; 아님!! fly는 flyimpl에 있는 fly 메소드를 부른 것임.
+		this.fly.fly(); // fly.fly; 아님!! fly는 flyimpl에 있는 fly 메소드를 부른 것임.
 	}
 
 	@Override

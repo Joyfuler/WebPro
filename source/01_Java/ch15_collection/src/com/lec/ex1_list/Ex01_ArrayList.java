@@ -14,6 +14,8 @@ public class Ex01_ArrayList {
 		System.out.println(Arrays.toString(array)); // 배열을 바로 출력하는 방법. Arrays.tostring() 이용.. 혹은
 		for (String arrs : array) {
 			System.out.println(arrs); // 값만을 모두 가져옴. 배열 숫자와 함꼐 가져오려면 for문사용.
+			
+			
 		}
 		for (int i = 0; i < array.length; i++) {
 			System.out.println(i + " 번 인덱스 값 : " + array[i]); // 그러나 배열의 숫자를 늘리거나 줄일 수 없다는 단점
@@ -37,7 +39,7 @@ public class Ex01_ArrayList {
 			System.out.print(strings + "\t");			
 		}
 		for (int i =0; i < arrayList.size(); i++) {
-			System.out.println(i + "번째 인덱스 값 : + " + arrayList.get(i)); // 일반 배열과는 달리, get(int i) 로 입력함. 
+			System.out.println(i + "번째 인덱스 값 : " + arrayList.get(i)); 
 		}
 		//arrayList.remove(2);
 		arrayList.remove("str2222");

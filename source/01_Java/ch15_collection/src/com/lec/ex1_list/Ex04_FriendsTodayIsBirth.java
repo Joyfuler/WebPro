@@ -8,7 +8,7 @@ public class Ex04_FriendsTodayIsBirth {
 	public static void main(String[] args) {
 		ArrayList<Friend> friends = new ArrayList<>(); // ArrayList로 데이터를 새롭게 넣으려면?
 		friends.add(new Friend("홍길동", "010-9999-9999")); // friends.add() 형식으로 추가.
-		friends.add(new Friend("김길동", "010-7676-7777", new Date(98, 6, 14)));
+		friends.add(new Friend("김길동", "010-7676-7777", new Date(98, 7, 1)));
 		friends.add(new Friend("마길동", "010-6565-6464", new Date(98, 6, 14)));
 		friends.add(new Friend("박길동", "010-3535-6363", new Date(98, 5, 14)));
 		friends.add(new Friend("윤길동", "010-2424-7565", new Date(98, 11, 4)));

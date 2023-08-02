@@ -36,7 +36,8 @@ public class CarMain {
 
 		System.out.println("--------------");
 		yourPorsche.setColor("그레이");
-		yourPorsche.drive(); // color를 null -> 그레이로, drive로 넣었으니 속도는 0 -> 60으로.
+		yourPorsche.setCc(5000); // color를 null -> 그레이로, drive로 넣었으니 속도는 0 -> 60으로.
+		System.out.println("너의 후진 포르쉐의 cc는 ㅋㅋ : " + yourPorsche.getCc());
 		// 단, 이 과정에서 yourPorche에 들어간 값은 myPorche에 영향을 주지 않음. 위처럼 바꿔도 myPorche 값은 그대로
 		// myPorsche.drive(); 라 적으면 색상은 원래 설정했던 빨간색이 나옴. 이를 인스턴스 변수라고 함.
 

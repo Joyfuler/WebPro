@@ -15,5 +15,6 @@ public class Ex03 {
 		tot = ar.sum (10,100);
 		System.out.println("10부터 100까지의 합은" + tot);
 		System.out.println(ar.evenOdd(tot));
+		
 }
 }

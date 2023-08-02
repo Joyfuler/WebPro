@@ -40,13 +40,13 @@ public class StudentMain {
 		
 
 		// ÃÑÁ¡À» À§ÇÑ ¹è¿­ ¸¸µé±â
-		System.out.print("\t ÃÑÁ¡\t");
+		System.out.print("*\t ÃÑÁ¡\t");
 		for (int i = 0; i < total.length; i++) {
 			System.out.print(total[i] + "\t");
 		}
 
 		System.out.println();
-		System.out.print("\t Æò±Õ\t");
+		System.out.print("*\t Æò±Õ\t");
 		for (int tot : total) {
 			System.out.print(tot / students.length + "\t");
 		} 

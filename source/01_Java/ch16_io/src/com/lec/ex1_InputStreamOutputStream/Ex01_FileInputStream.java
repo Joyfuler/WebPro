@@ -10,7 +10,7 @@ public class Ex01_FileInputStream {
 	public static void main(String[] args) {
 		InputStream is = null;
 		try { // 파일을 불렀는데 만약 파일 이름을 잘못 쳐서 에러가 난다면? --> 예외가 기본적으로 발생하므로 try-catch를 꼭 넣어줘야함.
-			is = new FileInputStream("txtFile/inTest");
+			is = new FileInputStream("txtFile/inTest.txt");
 			// 2. 데이터를 읽는다 (파일 끝까지 반복적으로 읽는다)
 			while (true) {
 				int i = is.read(); // 1바이트 읽음. read가 int를 받기 때문.

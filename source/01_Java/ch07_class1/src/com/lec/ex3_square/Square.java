@@ -5,6 +5,8 @@ package com.lec.ex3_square;
 
 public class Square {
 		private int side;
+		private int height;
+		private int weight;
 		public Square() { // 매개변수가 없을 때 디폴트 생성자. (클래스 이름과 동일하게 만들어야함)
 			System.out.println("(매개 변수가 없는 생성자 함수 호출)");
 		}
@@ -13,9 +15,17 @@ public class Square {
 		System.out.println("매개변수가 있는 생성자 함수 호출");
 		}
 		
+		public Square (int height, int weight) {
+		this.height = height;
+		this.weight = weight;
+		
+		}
+		
 		public int area() {
 		return side * side; // 정사각형의 넓이를 구하는 메소드 area	
 		}
+		
+		
 		
 		public void setSide (int side) {
 			this.side = side;

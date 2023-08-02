@@ -17,7 +17,7 @@ public class Ex3_CardMain2 {
 		int i;
 		for (i = 0; i < cards.length; i++) {
 			if (randomCard.equals(cards[i])) {
-				System.out.println(i + "번째 카드와 일치합니다!" + cards[i]);
+				System.out.println((i+1) + "번째 카드와 일치합니다!" + cards[i]);
 				break;
 			} // if
 		} // for

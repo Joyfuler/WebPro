@@ -5,5 +5,9 @@ SELECT CONCAT(TO_CHAR(SYSDATE,'RRMMDD'),TRIM(TO_CHAR(NO_SEQ.NEXTVAL,'000'))) NO 
 관계도를 잘 파악하고, 부모 데이터에서 가져올 코드를 fk로 설정. 주문상세, 장바구니 등에 상품코드를 넣고, 해당 상품코드를 이용해 부모 테이블의 데이터를 가져올 수 있음.
 데이터 생성시 조건을 not null로 건 경우에도 values 앞에 시트 설정은 해 주어야 함.
 
-insert into를 order(주문)와 orderdetail(주문상세)에 나눠서...? (좀더 생각해보자)
-cart에 있는 데이터를 orderdetail에 이식 + 재고를 설정하고, 구매시의 수량만큼 -하도록 작성.
+insert into를 order(주문)와 orderdetail(주문상세)에 하나씩 번갈아가며 입력. (좀더 생각해보자)
+cart에 있는 데이터를 orderdetail에 이식. 
+product에는 재고를 설정하고, 구매시의 수량만큼 -하도록 작성.
+update product set stock = stock -2 where pcode = 'a1'; 와 같은 식.
+주문하면 장바구니에 있던 데이터를 삭제.
+delete from cart where mid = 'abc';

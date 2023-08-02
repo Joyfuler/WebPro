@@ -19,8 +19,8 @@ public class HumanTestMain {
 	   	Man sin = new Man("신길동");
 	   	Man kim2 = kim;
 	   	System.out.println("kim과 kim2가 같은지 여부 : " + kim2.equals(kim)); // 같은 주소이므로 true가 됨.
-	   	sin.setHeight(165);
-	   	sin.setWeight(57);
+	   	sin.setHeight(177);
+	   	sin.setWeight(61);
 	   	System.out.println("kim의 BMI 지수 :" + kim.calculateBMI());
 	   	
 }

@@ -12,12 +12,15 @@ public class RobotTestMain {
 			robotarray.shape();
 			robotarray.actionRun();
 			robotarray.actionWalk();
-			if (robotarray instanceof SuperRobot) { // ★ 이 배열 속에 있는 것중 Superrobot의 객체가 있다면?
-				SuperRobot temp = (SuperRobot) robotarray; // temp라는 임시 변수를 생성하여 형변환.
-														// 각 로봇마다 형변환을 진행한 후 기능을 출력.
-				temp.actionFly();
-				temp.actionMissile();
-				temp.actionKnife();
+//			if (robotarray instanceof SuperRobot) { // ★ 이 배열 속에 있는 것중 Superrobot의 객체가 있다면?
+//				SuperRobot temp = (SuperRobot) robotarray; // temp라는 임시 변수를 생성하여 형변환.
+//														// 각 로봇마다 형변환을 진행한 후 기능을 출력.
+			if (robotarray instanceof SuperRobot) {
+				SuperRobot superRoboto = (SuperRobot)robotarray;			
+				superRoboto.actionFly();
+				superRoboto.actionMissile();
+				superRoboto.actionKnife();
+				
 			} else if (robotarray instanceof StandardRobot) {
 				StandardRobot temp = (StandardRobot) robotarray;
 				temp.actionFly();
