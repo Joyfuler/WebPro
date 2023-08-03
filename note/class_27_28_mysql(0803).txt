@@ -1,0 +1,18 @@
+oracle DBMS와 mysql의 차이.
+계정별 영역이 존재하지 않음. database에 만들 영역을 우선 지정해야 함.
+show databases; use jangdb; select database();
+show tables; (오라클의 select * from tab;과 동일)
+varchar2대신 varchar 사용. 숫자는 대부분 numeric 사용
+foreign키는 테이블 생성시 반드시 밑에 넣을 것. 또한 sequence가 존재하지 않음.
+테이블을 생성할 때 번호를 붙일 pk에 auto_increment를 사용. (int 필수)
+ex) mcode int primary key auto_increment
+outer join의 경우 오라클은 (+)를 사용하여 부족한 곳의 데이터를 보충하지만 mysql은 데이터가 더 큰 방향으로 'outer join' 사용.
+또한 where 대신 on을 사용해야함.
+select * from student right outer join major on student.mcode=major.mcode
+nvl(~,0) 대신 ifnull사용. ex) ifnull (ename,'-')
+
+현재시간은 sysdate대신 sysdate(). extract 대신 select year(sysdate()); 형식으로 출력 가능.
+to_char(date,'aa~') 는 date_format으로 대체. select date_format(sysdate(), '%y년 %c월 %d일 %h시 %i분 %초') 따위로 표시.
+format (숫자데이터,0) 으로 천자리 수마다 쉼표 형식 출력이 가능.
+top-n구분은 limit을 이용. 구문 마지막에 limit a,b를 통해 a+1번째부터 b만큼 추출함.
+select * from personal order by pay limit 4,5 (5번쨰부터 5개...)

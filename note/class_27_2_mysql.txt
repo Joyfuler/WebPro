@@ -1,6 +1,0 @@
-oracle DBMS와 mysql의 차이.
-계정별 영역이 존재하지 않음. database에 만들 영역을 우선 지정해야 함.
-show databases; use jangdb; select database();
-show tables; (오라클의 select * from tab;과 동일)
-varchar2대신 varchar 사용. 숫자는 대부분 numeric 사용
-foreign키는 테이블 생성시 반드시 밑에 넣을 것. 또한 sequence가 존재하지 않음.

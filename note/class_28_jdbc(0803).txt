@@ -1,0 +1,6 @@
+java에서 sql문을 쏘기 위해서 연결이 필요. (ojdbc6.jar / mysql-connector~.jar)
+각종 연결 자바문은 외우지 말고 대신 언제든 찾을 수 있도록 저장해두자.
+자바에서 sql문을 전달하고 그 결과를 받는 방법은? --> String sql 객체를 만든 뒤 쿼리를 넣어주자.
+단, 연결할 변수를 미리 지정해야 함. Connection conn = null; (차후 close 신경쓸 것)
+연결하고, sql 객체를 만들고, 전달하는 객체는 만든 순서의 반대 순서로 닫을 것.
+각자 .close(); 를 마친 다음 try,catch 확인하고, 괄호를 신경쓰자.
