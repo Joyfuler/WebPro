@@ -1,0 +1,14 @@
+dao를 만든 후 main을 바로 넣기보단 test를 거치는 것이 좋음.
+사용자에게 값을 입력받지 않고, 수를 직접 넣어보는 식으로 진행.
+CustomerDao dao = CustomerDao.getInstance(); 로 해당 클래스의 메소드를 받아오고,
+insert,update,delete등은 결과값이 1 or 0 (추가됨/안됨) 이므로 result로 받아옴.
+
+만일 select 등 결과가 여러 줄인 경우엔 해당 클래스 타입의 배열을 만듬.
+ArrayList<CustomerDto> customers;
+이후 해당 메소드와 매개변수를 대입하여 출력
+customers = dao.GetCustomers();
+foreach ~
+sysout(customerDto) 
+
+SQL문은 반드시 오라클에서 제대로 실행되는지 확인할 것.
+sql문에 ?가 있으면 해당 ?에 값을 제대로 대입하였는지를 다시 한번 체크하자.
