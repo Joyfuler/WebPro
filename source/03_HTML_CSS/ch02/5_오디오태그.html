@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+<p>스티브잡스 스탠포드 연설 전반부</p><br />
+    <audio controls="controls"
+    src = "sound/stevejobs1.mp3"></audio>
+           <!--플레이버튼 출력을 위해 controls 필요-->
+    <!-- 용량이 큰 경우라면?-->
+    <audio controls="controls"
+           src="sound/stevejobs1.mp3" preload="auto"
+           loop="loop"></audio>
+    <!--preload를 통해 버퍼링을 없앨 수 있음.-->
+    <!--loop는 반복재생-->
+<p>스티브잡스 스탠포드 연설 후반부</p>
+    <audio controls="controls" loop="loop"
+           preload="auto">
+        <source src="sound/stevejobs2.mp3" />
+    </audio>
+
+   <!--비디오라면? audio를 video로 바꾸기만 하면 됨--> 
+    <video controls ="controls" loop="loop"
+           preload="auto" src="sound/sonatina.mp4"></video>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        span {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 제목태그 -->
+    <h1 id="top"> h태그는 제목태그입니다. 자동개행</h1>
+    <!--h1은 태그이름, id는 속성, top는 값. 숫자가 커질수록 점점 작아짐-->
+    <h2> h2태그도 제목태그입니다.</h2>
+    <h3> h3태그도 제목태그입니다.</h3>
+    <h4>h4태그도 제목태그입니다.</h4>
+    <h5>h5태그도 제목태그입니다.</h5>
+    <h5>h5태그도 제목태그입니다.</h5>
+    <h6>h6태그도 제목태그입니다.</h6>
+    <h7>h7태그는 없습니다.<br /></h7> <!-- h7태그는 없으므로, 아무 태그와 없는 것과 동일하게 출력-->
+    &lt;Hello,HTML&gt;
+
+    <!-- 2. 단락태그: p태그가 닫히면 자동개행되고, 다음 단락까지 약간의 여백(margin)이 생김.-->
+    <p>
+        p태그는 단락태그로, p태그가 닫히면 자동개행되며 다음 단락까지 여백이 생깁니다.
+    </p>
+    <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </p>
+    <p>
+        가을로 오면 라이너 쉬이 노루, 시인의 이름자 속의 계십니다. 멀듯이, 지나고 동경과 까닭이요, 파란 벌레는 다하지 하나에 있습니다. 그리고 별 너무나 패, 아무 이국 봅니다. 토끼, 딴은 부끄러운 하나에 있습니다. 이름과, 이런 아직 이런 파란 나는 벌레는 별 잠, 있습니다. 별 어머니, 무엇인지 별을 있습니다. 이웃 어머니, 사람들의 슬퍼하는 까닭입니다. 언덕 그리워 헤는 하나에 나의 봅니다. 아름다운 토끼, 하늘에는 봅니다. 다 이네들은 당신은 위에 벌써 나의 벌레는 그리고 봅니다.
+    </p>
+    <p>
+        <a href="글자관련태그.html">
+            첫번째 예제
+        </a> <br />
+        <a href="http://www.google.com" target="_blank"> 구글(새창)</a><br />
+        <a href="https://www.daum.net" target="_self">다음(현재창)</a>
+        <!-- 기본은 현재창 이동, 새창 이동의 경우엔 따로 target="_blank"를 넣어줌-->
+    </p>
+    <p> KOREA<i>이탤린체</i></p>
+    <p> KOREA<b> 진하게 </b></p>
+    <p> KOREA<strong> 진하게</strong></p>
+    <p> KOREA<sup>윗첨자태그</sup></p>
+    <p> KOREA<sub>아랫첨자태그</sub></p>
+    <p> KOREA<ins>언더라인(일반적으로 css로 구현)</ins></p>
+    <p><del>20,000원</del> -> 10,000원(<span><b>50% 할인</b></span>)</p>
+    <pre>
+    브라우저 그대로 출력하고자 합니다.
+    화면에 그대로 표현하고자 합니다.
+    확인해 보세요. 
+&lt;Hello&gt; 
+<!-- 꺾쇠괄호는 예외(태그인식), 나머지는 pre 태그 안의 값을 그대로-->
+</pre>
+    <a href="#top"><b>페이지 맨 위로</b></a><br />
+    <!-- #은 h1에 붙힌 id를 표기. a href="#top" 입력 시 top 입력한 위치로 이동-->
+</body>
+</html>
+html 밖에 넣어도 브라우저 화면에 보이기는 하나, html코드는 html안에 넣는 게 일반적.
+단, 예외 존재 - javaScript 코드는 html 밖에 넣기도

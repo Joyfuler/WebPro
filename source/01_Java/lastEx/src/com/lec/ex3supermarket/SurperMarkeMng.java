@@ -11,7 +11,7 @@ public class SurperMarkeMng {
 		ArrayList<CustomerDto> customers; // 해당 클래스의 각종 배열객체들을 소환가능
 
 		do {
-			System.out.println("1:회원가입 2:폰검색 3:물품구입 4:레벨별출력 5:전체출력 6:회원탈퇴 기타:종료");
+			System.out.print("1:회원가입 2:폰검색 3:물품구입 4:레벨별출력 5:전체출력 6:회원탈퇴 기타:종료 :");
 			fn = scanner.next();
 			switch (fn) {
 			case "1":
@@ -79,7 +79,7 @@ public class SurperMarkeMng {
 				}
 				
 
-				break;
+				break; 
 			case "6":
 				System.out.println("탈퇴할 전화번호는?");
 				ctel = scanner.next();

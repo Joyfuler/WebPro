@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--페이지 설정관련 = 디자인, 동적부분 (DB제외)-->
+
+    <meta charset="utf-8" /><!--utf8(조합형. 초중종성 조합해서저장), euc-kr(완성형) 2350자만 표현-->
+    <title>첫예제</title>
+    <style> 
+        /* 디자인영역 (CSS/CSS3) */
+     body {
+        background-color: lightyellow;
+        font-size : 30pt;
+     }
+
+    </style>
+    <script> /* 동적인 부분을 기록(DB연결은 안됨), 자바스크립트(jQuery,react) 문법으로 작성 */
+        let name = prompt("이름은?", "홍길동"); // 취소클릭시 null리턴, 확인시 입력한것 name들어감        
+        if (name != "null" && name != "") { //빈칸ornull이 아닌경우
+            document.write(name + "님 반갑습니다<br>")
+        }
+
+    </script>
+
+
+</head>
+<body>
+<!--body 부분에는 웹문서에 출력되는 정보. 웹페이지에 표시할 것은 반드시 body에 적을 것 -->
+안녕하세요<br />
+오늘부터 웹표준&nbsp;&nbsp;&nbsp; 수업시작합니다
+
+</body>
+</html>

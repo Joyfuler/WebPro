@@ -1,0 +1,16 @@
+﻿/* ex.css(3_표태그2.html)*/
+table {
+    background-color: red;
+}
+
+tr {
+    background-color: yellow;
+}
+
+    tr:hover {
+        background-color: lightgreen;
+    }
+
+caption {
+    background-color: lightyellow;
+}
