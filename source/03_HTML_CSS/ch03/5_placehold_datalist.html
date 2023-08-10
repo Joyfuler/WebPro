@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form action="" method="get">
+        <p> 전화 <input type="tel" name="tel" placeholder="000-0000-0000" 
+                      required="required"/> </p>
+        <!--해당 이름으로 넣는 것을 추천해주는 도움말. 강제성x -->
+        <!-- required 넣을 경우 반드시 입력 필요 -->
+        <p> 업무 <select name=" job">
+              <option>분석</option>
+              <option>설계</option>
+              <option>구현</option>
+              <option>테스트</option>
+              <option>유지보수</option>
+              </select></p>
+        <p> 업무2
+        <input type="text" name="job2" list="joblist" />
+        <!-- list는 우선 임의로 만들고, 아래에서 datalist id를 지정함.-->
+        <datalist id="joblist">
+            <option>분석</option>
+            <option>설계</option>
+            <option>구현</option>
+            <option>테스트</option>
+            <option>유지보수</option>
+        </datalist>        
+        </p>
+        <input type="submit" value="전송합니다" />
+
+    </form>
+</body>
+</html>

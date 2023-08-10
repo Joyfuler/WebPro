@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        table {
+            border-collapse: collapse; /*tr border 주기 위해*/
+            /* 한줄로 표기됨.*/
+        }
+
+        tr {
+            border-top: 1px solid green;
+            border-bottom: 1px solid green;
+        }
+
+        td {
+            padding: 5px 10px; /*위 오 아래 좌 12 3 6 9*/
+        }
+    </style>
+    <script>
+        function chk() {
+            //submit을 막는 조건: frm.title.value=='' (form속 title의 값이 null이면)
+            // (혹은 title에 스페이스만 들어가지 않도록 --> trim 필요)
+            // frm.name.value== (form속 name 값이 2글자 미만인 경우)
+            //if (frm.title.value.trim() == '')
+            if (!frm.title.value.trim()) { // "",0은 false
+                alert("제목은 필수 입력 사항입니다..");
+                frm.title.value = "(입력.)"; // 빈칸으로 밸류값을 바꿈                
+                frm.title.focus(); //frm.title에 커서가 깜빡임
+                return false; //submit을 막기 위해 false를 return하였음.
+            } else if (frm.title.value.length < 2) { //제목의 길이가 2글자는 넘어야 한다면?
+                alert("제목은 2글자 이상으로 입력해야 합니다.")
+                frm.title.focus(); //커서깜빡
+                return false;
+            } else if (frm.writer.value.length < 2) {
+                alert("작성자명은 2글자 이상으로 입력하세요.")
+                frm.writer.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 대부분 form 안에 table-->
+    <form action="" name="frm" onsubmit="return chk()">
+        <!-- onsubmit == sutmit을 할 때 해당 값이 조건을 만족하는지를 확인
+            chk라는 함수의 자바스크립트 필요-->
+        <table>
+            <caption><h3>게시판</h3></caption>
+            <tr>
+                <td> 제 목</td>
+                <td><input type="text" name="title" size="30" /></td>                
+            </tr>
+            <tr>
+                <td> 작 성 자</td>
+                <td><input type="text" name="writer" size="30" /></td>
+            </tr>
+            <tr>
+                <td> 작 성 내 용</td>
+                <td><textarea name="content" cols="30" rows="5"></textarea></td>
+                <!-- input의 30size와 맞추기 위해, textarea 역시 cols를 30으로 조정-->
+            </tr>
+            <tr>
+                <td> 첨부파일 </td>
+                <td><input type="file" name="filename" /></td>
+            </tr>
+            <tr>                
+                <th colspan="2">
+                <input type="submit" value="작성" />
+                <input type="reset" value="초기화" />                    
+                                       </th>
+            </tr>
+
+        </table>
+
+
+    </form>
+</body>
+</html>

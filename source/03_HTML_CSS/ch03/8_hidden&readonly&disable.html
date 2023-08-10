@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <!-- hidden, readOnly(전송) vs disable(전송불가)-->
+    <form action="">
+        <input type="hidden" name="replyNo" value="4"/>
+        <!-- 보이지않는 데이터. 답변글 등 순서대로 달리는 글이 아니라면 사실은 숨은값이 있음-->
+        <!-- submit 사용시 replyNo의 4값이 잘 넘어가는 것을 확인가능-->
+        disable data <input type="text" disabled="disabled" name="disableParam"
+                            value="전송안됨" /><br />
+        <!-- 눈에는 보이지만 실제로는 전송되지 않는 데이터가 disabled-->
+        readOnly data <input type="text" readonly="readonly" name="readParam"
+                             value="읽기전용" /><br />
+        <input type="submit" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+       b{
+            color:red
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>필수 입력 사항</legend>
+            <ul>
+                <li>
+                    <label for="name">이 &nbsp;&nbsp;&nbsp;&nbsp;름 <b>*</b></label>
+                    <!-- id 부분에 label이 영향미치는 범위까지 지정.
+                        이름 부분만 터치해도 아이디 입력 부분으로 갈 수 있음.-->
+                    <input type="text" name="name" id="name" required="required"
+                           autofocus="autofocus"/>
+                    <!--autofocus=해당 이름에 자동으로 커서가 감-->
+                </li>
+                <li>
+                    <label for="id"> 아 이 디&nbsp;<b>*</b></label>
+                    <input type="text" name="id" id="id" required="required" />                   
+                </li>
+                <li>
+                    <label for="pw">비밀번호<b>*</b></label>
+                    <input type="password" name="pw" id="pw" required="required" />
+                </li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>추가 입력 사항</legend>
+            <ul>
+                <li>
+                    <label for="tel">전화번호</label>
+                    <input type="text" name="tel" id="tel" />
+                </li>
+                <li>
+                <label for="email">이메일</label>
+                    <input type="email" name="email" id="email" />
+                </li>
+                <li>
+                    사용기술
+                    <input type="checkbox" name="check" value="java" id="java" checked="checked"/>
+                    <label for="java">JAVA</label>
+                    <input type="checkbox" name="check" value="DBMS" id="DBMS" checked="checked"/>
+                    <label for="DBMS">DBMS</label>
+                    <input type="checkbox" name="check" value="HTML" id="HTML" />
+                    <label for="HTML">HTML</label>
+
+                    <!-- java 글자를 클릭해도 체크박스에 클릭이 가능해짐.-->
+                </li>
+            </ul>
+        </fieldset>
+        <p>
+            <center><input type="submit" value="제출" /></center>
+        </p>
+
+    </form>
+</body>
+</html>

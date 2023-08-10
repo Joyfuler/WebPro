@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        td, th {
+            padding:3px; /*상하좌우 모두 안쪽여백이 3픽셀로 동일*/
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <form action="http://daum.net" method="post">
+            <!-- method에는 get과 post가 있으나 post의 경우는 해당 주소에서 실제로 처리해야 함.
+                아직 jsp가 없으므로 현재 수업에서는 get으로 진행-->
+
+        <tr>
+            <td>아 이 디</td>
+            <td><input type="text" name="uid"</td>
+        </tr>
+        <tr>
+            <td>비 밀 번 호</td>
+            <td><input type="password" name="upw"</td>
+            <!--password 타입으로 input하면 점으로 보여 보이지 않음-->
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="submit" value="login">
+            </th>
+        </tr>
+        </form>
+    </table>
+
+
+
+    <form action="http://www.naver.com" method="get">
+        아 이 디 <input type="text" name="uid" /><br />
+        <!--input 상자 생성, 텍스트 방식으로 입력, name이란 변수로 db전달하므로 필요-->
+        비 밀 번 호 <input type="text" name="upw" /><br />
+        <input type="submit" value="login" />
+        <!-- submit 타입의 인풋을 만들면 버튼을 생성-->
+        <!-- form 태그 밖의 input은 전달 불가-->
+        <!-- 해당 주소를 '가져와서' -->
+    </form>
+
+</body>
+</html>
