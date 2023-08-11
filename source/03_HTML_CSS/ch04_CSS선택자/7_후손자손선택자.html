@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #wrap{
+            width:600px; margin: 0 auto;
+            border:1px solid gray;
+        }
+
+        #wrap > #header { /* 자손선택자, 두 사이만 포함되며 그 후손은 포함x*/
+        overflow:hidden;
+        }
+
+        /* 로고와 타이틀을 서로 나란히 띄우고 싶다면? float left right...*/
+        #wrap .logo{ /* 후손선택자, 그 아래에 모두 적용됨*/
+            float:left;
+            padding: 10px 20px 0px 150px;
+        }
+        #wrap .title{
+            float:left;
+            padding: 15px 180px 10px 30px;
+        }
+        div p{
+            font-size:20px;
+        }
+        div >p{
+            color:red; /*바로 밑메뉴만 적용하도록 할 때 > 를 사용하자.*/
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <div class="logo">
+                <h1>로 고</h1>
+            </div>
+            <div class="title">
+                <h2>00 주식회사</h2>
+            </div>
+            <div id="content">
+                <p>
+                    한 소식통은 미 제재 준수 명목으로 인해 한국과 이라크 은행 계좌에 불법적으로 동결돼 있던 100억 달러(약 13조2천억원) 이상의 자금에 대한 접근권을 마침내 확보하게 됐다고 말했다고 IRNA통신이 전했다.
+                    이 소식통은 이 자금이 미국과의 협상이 타결됨에 따라 풀리게 됐으며, 여기에는 한국에 동결돼 있던 60억 달러(약 8조원)와 이라크 무역은행(Trade Bank)에 동결됐던 상당 액수가 포함된다고 전날 밝혔다.
+                    협상 타결에 따라 한국 내 이란 자금은 스위스에 있는 한 은행에 이체, 현재 유로화된 상태이며 카타르 중앙은행내 계좌로 송금될 준비가 돼 있다고 이 소식통은 설명했다.
+                    이 소식통은 미국인 수감자들이 수감자 맞교환을 위해 교도소 밖 제3의 장소로 이송됐다면서 해당 자금이 이란이 지정한 계좌로 이체될 때까지는 풀려나지 않을 것이라고 말했다.
+                </p>
+                <ul>
+                    <li><p>회식 중 캐디 볼 꼬집고 어깨·허벅지 만진 30대 마스터 징역형</p></li>
+                    <li><p>시속 120㎞로 보행자 2명 치어 숨지게 한 70대 운전자 구속영장</p></li>
+                    <li><p>시속 120㎞로 보행자 2명 치어 숨지게 한 70대 운전자 구속영장</p></li>                    
+                </ul>
+                <div id="footer">
+                    <p>서울시 서대문구 대현동</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

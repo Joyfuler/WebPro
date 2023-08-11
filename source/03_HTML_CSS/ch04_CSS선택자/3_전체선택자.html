@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{  /*전체선택자: 페이지 초기화 용도, 전체 페이지 디자인을 초기화하는 용도*/
+            margin:0px; /*밖여백 x, 순서는 12 3 6 9*/
+            padding:0px; /*안여백, 순서는 12 3 6 9*/
+            color : saddlebrown;
+        }
+        header,nav,section,footer{
+            border: 1px solid brown;
+            width: 500px; /*가로사이즈를 직접 지정. 지정하지 않는 경우 
+                부모의 width를 사용함 (현재 body의 width가 웹페이지 전체를 다 차지하여 가시성x) */
+            margin:2px auto; /*사용자의 현재 창의 크기에 따라 가운데로 오도록 하려면
+                직접 사이즈 지정보다는 auto를 사용*/
+        }
+        nav ul {
+            overflow: hidden;
+            /* 초과되어 다른 텍스트에 달라붙는 부분을 자동숨김*/
+        }
+
+        nav ul li{
+            float:left; /* float를 사용하여 메뉴가 좌~우 순서로 정렬되게 바뀜. */
+            /* 해당 속성이 있는 부모부터 차례로 작성..
+                block타입의 태그를 수평으로 작성하고 싶다면? */
+            list-style: none;
+            width: 25%;
+            padding: 10px 0;
+            text-align:center;
+            /* %지정시, 부모의 25%만큼 (500*0.25 = 125px)
+                메뉴가 4개이니, width를 4분할한 후 글자를 가운데로 맞추는 방식으로 정렬 가능.
+            */
+
+        }
+        section{ /* float:left 속성을 clear*/
+            clear:both; /* 좌측, 우측의 속성을 모두 없앰*/
+            /* float 사용 시에는 반드시 clear를 통해 없애주자.*/
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+    <header>
+        <h1>00 주식회사</h1>
+    </header>
+    <nav>
+        <ul>
+            <li>회사소개</li>
+            <li>서비스 소개</li>
+            <li>고객센터</li>
+            <li>공지사항</li>
+        </ul>
+    </nav>
+    <section>
+        <p>
+            가끔 김밥이 지겨울때 간편하게
+            포장해서 식사가능한 봉구스밥버거!!!
+            메뉴도 엄청 다양하고 밥으로 만든
+            버거라 1개 먹으면 든든합니다.
+            가격이 좀 올랐지만 그래도 계속 이용할것 같아요.
+        </p>
+    </section>
+    <footer>
+        <p>서울시 서대문구 신촌로 114, 2F (대현동, 은하빌딩)</p>
+
+    </footer>
+</body>
+</html>

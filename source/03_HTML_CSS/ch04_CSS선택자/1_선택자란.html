@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        /* 선택자 - html 문서의 특정 부분을 선택하여 디자인하려면?*/
+        div {
+            background-color:#FFD800;
+            border :5px solid red;
+
+        }
+        h1#id1 {
+            background-color: green;
+            /*h1중, id1인 것만 적용이 가능함.*/
+        }
+    </style>
+</head>
+<body>
+    <h1 id="id1">제목1</h1>
+    <p>
+        본문 p 
+    </p>
+    <div>
+        <h1> div 밑의 h1태그 </h1>
+        <p>div 밑의 p태그 </p>
+    </div>
+    <div>
+        여기도 div
+    </div>
+</body>
+</html>

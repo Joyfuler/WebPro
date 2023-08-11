@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        a{
+            color: saddlebrown;
+            text-decoration:none;
+            /*폰트컬러 지정시 링크를 눌렀든아니든 무조건 해당 색깔로 지정됨.*/
+            /* a href에 무조건 들어가는 밑줄 역시 text-decoration을 통해 없애줄 수 있음. */
+        }
+        a[target]{
+            color:red;
+            /* target이 붙어있는 a 태그만 빨간색으로 변경*/
+        }
+        a[href$='.html']{
+            background-color:yellow;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>객실소개</h1>
+    </header>
+    <div id="content">
+        <h3>객실안내</h3>
+        <ul>
+            <li>
+                <a href="1_선택자란.html" target="_blank"><b>2인실 (유채방, 독백방)</b></a>
+                동성 또는 가족 2인 공동취사실 및 욕실 이용
+            </li>
+            <li>
+                <a href="2_태그선택자.html"><strong>4인실(펜션)</strong></a>
+                취사완비, 실내 욕실
+            </li>
+        </ul>
+        <h3>객실요금</h3>
+        <ul>
+            <li>
+                1인: 40,000원
+            </li>
+            <li>
+                2인: 60,000원
+            </li>
+            <li>
+                3인: 80,000원
+            </li>
+        </ul>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        /* 상태선택자는 ( 태그 : 상태 ) 형식으로 입력! 잊지 말 것 */
+        input:focus{ /* input 창에 마우스를 가져다 대서 커서가 깜빡이는 상태일 때*/
+        background-color:lightyellow;
+        border: 2px solid green; outline:none;
+        /* 기본적인 outline이 border를 가릴 수 있으니 none으로 조정!*/
+        }
+        input:disabled{ /* input창이 disabled 상태인 경우*/
+        color:sandybrown;
+        }
+        input:enabled{ /* input창이 평범하게 입력 가능한 상태인 경우*/
+        font-size:0.7em;        
+        }
+    </style>
+</head>
+<body>
+    <form>
+        이름 <input type="text" name="name" /><br />
+        아뒤 <input type="text" name="id" /><br />
+        시급 <input type="number" name="pay" value="10000" disabled="disabled"/><br />
+        <!--화면에 기본적으로 10000이 표기됨. disabled 사용시 값이 전달되지 않음-->
+        생일 <input type="date" name="birth" value="1998-12-12" readonly="readonly"/><br />
+        <input type="submit" />
+
+    </form>
+</body>
+</html>

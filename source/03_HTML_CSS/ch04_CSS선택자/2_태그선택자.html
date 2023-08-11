@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>    
+
+    <style> /*위에서부터 아래로 차례대로 적용*/
+ header,footer{
+     color:tomato; /*글자색*/
+     border: 2px solid gray; /*테두리*/
+     text-align: center;
+ }
+ h1{
+     /* h1 태그는 기본적으로 margin을 확보함. 이를 없애기 위해선 따로 설정 필요*/
+     border:1px solid red;
+     margin:0px; /*밖 여백*/
+ }
+ li,p{
+     color:red;
+     background-color: pink;
+     font-weight:bold;
+ }
+ p{
+     color:gray;
+ } /*스타일 순서는 위에서 아래로. 위와 아래가 공통된 것이 있다면 위에서 함께 입력 후, 밑에서 재정의가 가능함.*/
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>00 주식회사</h1>
+    </header>
+    <nav>
+        <ul>
+            <li>회사소개</li>
+            <li>서비스 소개</li>
+            <li>고객센터</li>
+            <li>공지사항</li>
+        </ul>
+    </nav>
+    <section>
+        <p>
+            가끔 김밥이 지겨울때 간편하게
+            포장해서 식사가능한 봉구스밥버거!!!
+            메뉴도 엄청 다양하고 밥으로 만든
+            버거라 1개 먹으면 든든합니다.
+            가격이 좀 올랐지만 그래도 계속 이용할것 같아요.
+        </p>
+    </section>
+    <footer>
+        <p>서울시 서대문구 신촌로 114, 2F (대현동, 은하빌딩)</p>
+
+    </footer>
+</body>
+</html>

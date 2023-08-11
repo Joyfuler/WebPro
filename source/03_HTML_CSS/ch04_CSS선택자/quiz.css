@@ -1,0 +1,82 @@
+﻿#header, #content, #footer {
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    /* border는 없음. 각 div에 border-radius가 존재함.*/
+}
+
+a {text-decoration: none;
+   color: black;
+}
+
+.left, .right {
+    /* id 구분 없이 해당 클래스면 전체 적용하도록*/
+    float: left;
+    height: 150px;
+    width: 150px;
+    background-color: lightgray;
+    border: 1px solid gray;
+}
+
+.center {
+    float: left;
+    height: 150px;
+    width: 693px;
+    background-color: lightgray;
+    border: 1px solid gray;
+    text-align:center;
+}
+
+#content > div {
+    height: 300px;
+}
+
+.one {
+    border-radius: 40px 0;
+}
+
+.two {
+    border-radius: 0 40px;
+}
+
+#header .center {
+    border-radius: 0 0 40px 40px;
+}
+
+#content .left {
+    border-radius: 0 40px 40px 0;
+}
+
+#content .center {
+    border-radius: 40px;
+}
+
+    #content .center #nav ul {
+        overflow: hidden;
+    }
+
+        #content .center #nav ul li {
+            width: 30%;
+            float: left;            
+            list-style: none;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+    #content .center #academy h1 {        
+        padding:20px;
+    }
+    #content .center #academy p {
+        padding: 20px;
+    }
+#content .right {
+    border-radius: 40px 0 0 40px;
+    font-size: 0.9em;
+}
+    #content .right li:nth-child(9)~li {
+        color: red;
+    }
+#footer .center {
+    border-radius: 40px 40px 0 0;
+}
