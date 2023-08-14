@@ -1,0 +1,24 @@
+링크선택자- 앵커태그에 도메인이름-주소 추가하고 싶다면
+a::after{
+content : " - " attr(href)
+부정선택자- 여러 태그 중 특정 부분만 css를 적용하지 않으려면
+li:not(.class) a{
+background-color:yellow; (class라는 이름의 클래스를 제외한 곳에 적용됨)
+
+margin과 padding은 항상 총 넓이/높이를 보고 판단하여 계산할 것.
+padding을 10px 주면 좌,우 합쳐서 총 20px이 들어감!
+
+-- 그 외 css 속성자
+text-align:justify; (행 마지막 부분의 글자 길이를 일정하도록 정렬.
+display: block; (해당하는 부분을 block 속성처럼 보이게 함. span의 경우 줄바꿈이 없으므로, block으로 바꿔 줄바꿈으로 보이게 됨.
+display: inline; (block과 반대. 블록 속성 태그를 인라인으로 바꾸어 같은 줄에 출력하도록 함.)
+* 단, inline의 경우 margin 및 height 등이 적용되지 않으므로, inline-block 혼합속성을 사용하는 경우가 많음.
+display: none; 아예 보이지 않도록 만듬. (사용하는 이유는, 모바일 환경 등 반응형 웹에서만 가릴 수 있도록 하기 위함)
+font-family :글꼴을 지정. 시스템에 없는 폰트(로컬폰트)인 경우 url을 사용하여 가져올 수도 있음.
+ex]  font-family: '이름'; src: url('ttf주소')
+visibility: hidden; 해당 공간은 확보한 채로, 그 곳에 있던 내용을 보이지 않도록 조정.
+opacity: 투명도 조절. 0~1까지 존재하며, 0에 가까울 수록 투명 
+li:last-child{opacity: 0.2;}
+line-height: 수직 가운데 정렬을 할 때 사용. height와 동일하게 수치를 조정시킴.
+position: 1) absolute: 브라우저 왼쪽 상단 끝을 기준으로 위치를 조정.
+

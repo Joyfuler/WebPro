@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        /* 페이지 초기화 */
+        *{
+            padding:0; margin:0;
+        }
+        li{
+            list-style:none;
+
+        }
+        a {
+            text-decoration:none;
+            color:black;
+        }
+        div:first-child, div:nth-child(2), div:nth-child(3){
+            width:100px; height:100px;
+            border:5px solid black;
+            /* 이렇게 만드는 경우, 100 + (5 x2)로 총 110*110이 필요함.
+                정확히 100*100을 만들고, border도 보이도록 하는 방법은? */
+        }
+        div:first-child{
+            background-color:yellow;
+        }
+        div:nth-child(2){
+            background-color:green;
+            box-sizing:border-box;
+            /* border를 width에 포함시키는 명령어.
+                이 경우 width는 90, border 5와 동일함
+            */
+        }
+        div:last-child{
+            
+        }
+
+        div ul{
+            overflow:hidden;
+        }
+
+        div ul li { /* 수평으로 배치하고자 하는 태그*/
+            float:left;
+            width: 30%;
+            margin: 1.5%;
+            border:1px solid red;
+            box-sizing:border-box;
+            text-align:center;
+            /* 총 3개 메뉴. width 30% *3, margin (1.5%*2) * 3 = 99%.
+                여기에 border를 박스 안에 넣어서 수치를 더 고민할 필요가 없음. */
+
+        }
+            div ul li a {
+                display: block;
+                /* a href 부위를 block 타입으로 변경하여 해당 버튼 전체 영역을 링크로 바꿀 수 있음.
+                    (display block을 하지 않으면 글자 부분만 링크가 작동함)
+                */
+            }
+        
+    </style>
+</head>
+<body>
+    <!-- border를 설정하는 경우 외부에 margin을 사용하므로 화면을 넘어가는 경우가 발생..
+        box-sizing을 이용해 border를 안쪽에 그릴 수 있도록 설정 가능-->
+    <div>1111</div>
+    <div>2222</div>
+    <div>3333</div>
+    <div>
+        <ul>
+            <li><a href="#m1">menu1</a></li>
+            <li><a href="#m2">menu2</a></li>
+            <li><a href="#m3">menu3</a></li>
+        </ul>
+    </div>
+</body>
+</html>

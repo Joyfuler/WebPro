@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>       
+        #wrap{
+            width: 1000px;
+            margin: 0 auto;
+            border: 1px solid gray;
+            position: relative;
+        }
+       #header{
+           border: 1px solid gray;
+           margin: 5px;
+           height: 100px;
+           line-height: 100px;
+           background-color: antiquewhite;
+           text-align:center;
+           font-weight:bold;
+       }
+       #nav {
+           border: 1px solid gray;
+           margin:5px;
+           height:200px;
+           box-sizing:border-box;
+           overflow:hidden;
+
+       }
+       #nav p {
+           text-align:center;
+           font-weight:bold;
+       }
+       #nav>.menu>ul {
+           overflow:hidden;
+           
+       }
+       #nav>.menu>ul>li {
+           list-style:none;
+           float:left;
+           width:17%;           
+           margin:5px;
+           padding:5px;
+           text-align:center;
+           font-weight:bold;
+           background-color:plum;
+           color: purple;           
+       }
+       #nav>.menu>ul>li:first-child{
+           border-radius: 20px 0 0 20px;
+       }
+       #nav>.menu>ul>li:last-child{
+           border-radius: 0 20px 20px 0;
+       }
+        #nav>.menu> ul li a {                
+            text-decoration: none;
+            color: purple;
+        }       
+       #section{
+           border: 1px solid gray;
+           overflow: hidden;
+           height: 300px;
+           font-weight:bold;
+           text-align:center;
+           margin:5px;
+       }
+       #section #content {
+           border: 1px solid gray;
+           float:left;
+           height: 90%;           
+           width: 70%;
+           margin:5px;
+           padding: 5px;
+
+       }
+       #section #banner {
+           border: 1px solid gray;
+           float: left;
+           height: 90%;
+           width: 25%;
+           margin:5px;
+           padding:5px;
+       }
+        #footer {
+            border: 1px solid gray;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-weight: bold;
+            background-color: yellow;
+            margin:5px;
+            
+        }
+        #wrap #img {
+            width:100%;
+            height:100%;
+            position: absolute;
+            top:0;
+            right:0;
+            background: url('ch05/sulhyun.jpg');
+            background-size:100%;    
+            z-index:-1;
+            opacity:0.3;
+        }
+        /* 서브 메뉴 */
+        #nav .submenu {
+            background:blue;
+            display:none;
+            text-align: center;
+            z-index:999;
+            position:relative;
+        }
+        div.menu > ul > li:hover .submenu {
+            display: block;
+            background-color: white;
+        }      
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="img">            
+        </div>
+        <div id="header">
+            HEADER
+        </div>
+        <div id="nav">
+            <p>NAVIGATION</p>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a href="#menu1">menu1</a>
+                        <ul class="submenu">
+                            <li><a href="#submenu1">sub1</a></li>
+                            <li><a href="#submenu2">sub2</a></li>
+                            <li><a href="#submenu3">sub3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#menu2">menu2</a>  <ul class="submenu">
+                            <li><a href="#submenu1">submenu1</a></li>
+                            <li><a href="#submenu2">submenu2</a></li>
+                            <li><a href="#submenu3">submenu3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#menu3">menu3</a>  <ul class="submenu">
+                            <li><a href="#submenu1">submenu1</a></li>
+                            <li><a href="#submenu2">submenu2</a></li>
+                            <li><a href="#submenu3">submenu3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#menu4">menu4</a>  <ul class="submenu">
+                            <li><a href="#submenu1">submenu1</a></li>
+                            <li><a href="#submenu2">submenu2</a></li>
+                            <li><a href="#submenu3">submenu3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#menu5">menu5</a>  <ul class="submenu">
+                            <li><a href="#submenu1">submenu1</a></li>
+                            <li><a href="#submenu2">submenu2</a></li>
+                            <li><a href="#submenu3">submenu3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="section">
+            <div id="content">
+                CONTENT
+            </div>
+            <div id="banner">
+                BANNER
+            </div>
+        </div>
+        <div id="footer">
+            FOOTER
+        </div>
+
+    </div>
+</body>
+</html>

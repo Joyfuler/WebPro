@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        div{
+            width:100px;
+            height:100px;
+            /* 정의해주지 않으면 body의 넓이,높이를 가져옴*/
+            margin:5px;
+        }
+        div:first-child{
+            
+            /* 이렇게 작성하는 경우, border의 네 방향이 모두 같은 선으로 표시됨.
+                각 방향마다 따로 표시하고 싶다면? */
+            border-width: 2px;
+            border-top-width:5px;
+            border-style: double; /* double은 2실선*/
+            border-top-style:solid; /* 실선*/
+            border-left-style: dotted; /* . . . . 점선 */
+            border-right-style:dashed; /* - - - - - 점선 */
+            border-top-color:olive;
+            border-bottom-color:palevioletred;
+            border-right-color:turquoise;
+            border-left-color:yellowgreen;
+        }
+        div:nth-child(2){
+            border-top: 1px solid gray;
+            border-bottom:1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<div>1111</div>
+    <div>2222</div>
+</body>
+</html>

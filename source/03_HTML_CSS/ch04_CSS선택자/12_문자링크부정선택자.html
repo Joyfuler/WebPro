@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        /* * * 전체화면배치* * */
+        #wrap{
+            width:750px;
+            margin:0 auto;
+        }
+        #header{
+            border-bottom: 1px solid gray;
+            text-align:center;
+        }
+        #content {
+            text-align:justify;
+            padding: 0 10px;
+        }
+        #content p:nth-child(2)::first-line,
+        #content p:nth-child(3)::first-line{
+            color:blue;
+            font-size:1.25em;
+            font-weight:bold;
+        }
+            #content p:nth-child(2)::first-letter,
+            #content p:nth-child(3)::first-letter{
+                font-size:2em;
+            }
+            
+     span{
+            color:red;
+            font-weight:bold;
+            font-size:1.75em;
+        }
+     #content ul {
+         margin:30px 0;
+         list-style:none;
+     }
+     #content ul li a::after{
+     /* 네이버 뒤(after)에 무언가를 추가함*/
+     content : " - " attr(href);
+     }
+     #content ul li a{
+         color:blue;
+         text-decoration:none;
+         /*밑줄제거*/
+     }
+        #content ul li:not(.web) a {
+            /* 부정선택자- :not(주소) 를 하면 해당부분만 제외하고 css가 적용됨*/
+            /* li를 대상으로 하면 해당 줄 전체가 변경되므로, a로 바꿔서 해당 텍스트에만 css변경되도록함.*/
+            background-color:yellow;
+        }
+        #footer ul{
+            border-top:1px solid gray;
+            padding:1px;
+            overflow:hidden;
+        }
+        #footer ul li{
+            float:left;
+            padding:15px; 5px;
+            list-style:none;
+        }
+        #footer ul li img[src^='logo']{
+            margin:5px;
+        }
+        #footer ul li:first-child{
+            padding-top:16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <h1>제목이나 회사명</h1>
+        </div>
+        <div id="content">
+            <p><span>중국</span> 정부가 최근 자국민의 한국행 단체여행 금지 조치를 해제하면서 최근 인천국제공항 면세점 사업자에서 탈락한 롯데면세점의 '시내 면세점 집중 전략'에 힘이 실리고 있다.</p>
+            <p>중국 정부가 최근 자국민의 한국행 단체여행 금지 조치를 해제하면서 최근 인천국제공항 면세점 사업자에서 탈락한 롯데면세점의 '시내 면세점 집중 전략'에 힘이 실리고 있다.</p>
+            <p>중국 정부가 최근 자국민의 한국행 단체여행 금지 조치를 해제하면서 최근 인천국제공항 면세점 사업자에서 탈락한 롯데면세점의 '시내 면세점 집중 전략'에 힘이 실리고 있다.</p>
+            <ul>
+                <li><a href="http://www.naver.com" target="_blank">네이버</a></li>
+                <li class="web"><a href="http://www.daum.net" target="_blank">다음</a></li>
+                <li><a href="http://www.yahoo.com" target="_blank">야후</a></li>
+                <li><a href="http://www.google.com" target="_blank">구글</a></li>
+            </ul>
+        </div>
+        <div id="footer">
+            <ul>
+                <li><img src="logo.png" /></li>
+                <li><img src="address.png" /></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

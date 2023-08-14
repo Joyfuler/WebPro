@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #wrap{
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid gray;
+            padding: 10px;
+            text-align:justify;            
+        }
+        #wrap p:nth-child(2n){
+            background-color:lightcyan;
+        }
+        #wrap p:first-child{
+            font-size:0.7em;
+        }
+        #wrap p:nth-child(2){
+            font-size:100%;
+            /* 퍼센트는 만능이라 여기저기에 사용가능.. 부모의 값에 퍼센트를 곱한 값이 됨.*/
+        }
+        #wrap p:nth-child(3){
+            font-size:24px;
+        }
+        #wrap p:nth-child(4){
+            font-size:2em;
+        }
+        #wrap p:last-child{
+            font-size:250%;
+        }
+        #wrap p > span{
+            /* >는 p 바로 밑의 span한개*/
+            display:block; 
+            /* display 태그를 block 설정시 span태그가 inline에서 block으로 변경된 것처럼 표시됨.*/
+            color: gray;
+            font-size:0.5em;
+        }
+
+
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <p>
+            Actor Yoo Hae-jin, who took his first-ever romantic comedy lead in “Honey Sweet,” a delightful rom-com that tells the love story of a couple in midlife, called his film an adult version of Korea’s timeless classic short story “The Cloudburst” (“Sonagi”).
+
+            “Just like other actors, I prioritize the storyline of the film. I found the screenplay of ‘Honey Sweet’ very entertaining. I got the feeling that the story is like an adult version of ‘Sonagi,’ a pure and heartwarming love story,” Yoo told The Korea Herald in an interview in Seoul on Aug. 9.
+            <span> 입력 2023.08.14 10:47</span>
+        </p>
+        <p>
+            Actor Yoo Hae-jin, who took his first-ever romantic comedy lead in “Honey Sweet,” a delightful rom-com that tells the love story of a couple in midlife, called his film an adult version of Korea’s timeless classic short story “The Cloudburst” (“Sonagi”).
+
+            “Just like other actors, I prioritize the storyline of the film. I found the screenplay of ‘Honey Sweet’ very entertaining. I got the feeling that the story is like an adult version of ‘Sonagi,’ a pure and heartwarming love story,” Yoo told The Korea Herald in an interview in Seoul on Aug. 9.
+            <span> 입력 2023.08.14 10:47</span>
+        </p>
+        <p>
+            Actor Yoo Hae-jin, who took his first-ever romantic comedy lead in “Honey Sweet,” a delightful rom-com that tells the love story of a couple in midlife, called his film an adult version of Korea’s timeless classic short story “The Cloudburst” (“Sonagi”).
+
+            “Just like other actors, I prioritize the storyline of the film. I found the screenplay of ‘Honey Sweet’ very entertaining. I got the feeling that the story is like an adult version of ‘Sonagi,’ a pure and heartwarming love story,” Yoo told The Korea Herald in an interview in Seoul on Aug. 9.
+            <span> 입력 2023.08.14 10:47</span>
+        </p>
+        <p>
+            Actor Yoo Hae-jin, who took his first-ever romantic comedy lead in “Honey Sweet,” a delightful rom-com that tells the love story of a couple in midlife, called his film an adult version of Korea’s timeless classic short story “The Cloudburst” (“Sonagi”).
+
+            “Just like other actors, I prioritize the storyline of the film. I found the screenplay of ‘Honey Sweet’ very entertaining. I got the feeling that the story is like an adult version of ‘Sonagi,’ a pure and heartwarming love story,” Yoo told The Korea Herald in an interview in Seoul on Aug. 9.
+            <span> 입력 2023.08.14 10:47</span>
+        </p>
+    </div>
+</body>
+</html>

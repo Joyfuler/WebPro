@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        /* url()함수 용도: 로컬 폰트를 지정하는 용도.
+            혹은 백그라운드 이미지 지정시. */        
+        @font-face{ /* 로컬 폰트 설정*/
+        font-family: 'YeongDeok';
+        src: url('ch05/Yeongdeok_Blueroad.ttf');
+        
+        }
+
+        * {
+            font-family: 'YeongDeok';
+            font-size: 1.0em;
+        }
+        #wrap{
+            width:600px;
+            margin:10px auto;
+            border:1px solid gray;
+            height:400px;
+        }
+        #wrap #content{
+            /* 블록형 태그는 사이즈지정이 없으면 부모의 사이즈 갖다사용함*/
+            width: 80%;
+            height: 100%;
+            border: 1px solid red;
+            /*background-image: url('ch05/sulhyun.jpg');
+            background-repeat:no-repeat;
+            background-position: right 60%;*/ /* 오른쪽의 60퍼지점에서 뿌리고 싶은 경우*/
+            /*background-size:120%;*/
+            background: url('ch05/sulhyun.jpg') center no-repeat;
+            background-size:120%;
+            font-size:1.5em;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="content">
+            설현도 내일 쉴까?
+        </div>
+
+    </div>
+</body>
+</html>

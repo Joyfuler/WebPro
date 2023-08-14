@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dokdo&family=Gamja+Flower&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            /* @는 navia(css3문법)*/
+            font-family: 'hyejun';
+            src: url("ch05/나눔손글씨_금은보화.ttf");
+        }
+
+        p:first-child {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            /* 폰트명에 스페이스가 있는 경우는 작은따옴표 필요*/
+        }
+
+        p:nth-child(2) {
+            font-family: hyejun;
+        }
+
+        p:nth-child(3) {
+            font-family: 'Gamja Flower', cursive;
+        }
+
+        p:last-child {
+            font-family: 'Dokdo', cursive;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <p>Franklin gothic font(System font)</p>
+    <p>Local font(내 컴퓨터에 있는 ttf파일)</p>
+    <p>web font(fonts.google.com)</p>
+    <p>web font(fonts.google.com)</p>
+</body>
+</html>

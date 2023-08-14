@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        div{
+            width:200px; height:200px; opacity: 0.7; border:1px solid red;
+        }
+        #div1{
+            position:static; /* 기본값은 static. 차곡차곡 쌓아가는 스타일.*/
+            position:absolute; /* 절대좌표 - 좌표값을 적어야 함.*/
+            top:0; left:0; /* 위에서 0만큼 떨어짐*/
+            background-color:red;
+            opacity: 0.6;
+        }
+        #div2{
+            position:absolute;
+            top: 100px; left: 100px;
+            background-color:blue;
+        }
+        #div3{
+            position: absolute;
+            top: 350px; left: 350px;
+            width: 300px; height:300px;
+            background-color:gray;
+            opacity:1;
+        }
+        #div4{
+            position:absolute;
+            /* div4의 부모는 div3이므로, top등의 설정은 부모 기준으로 변경됨. (브라우저기준x) */
+            top:50px; left:50px;
+            background-color:yellow;
+            opacity:0.5;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">div1</div>
+    <div id="div2">div2</div>
+    <div id="div3">div3
+    <div id="div4" style="border:1px solid green">div4</div>
+    <!-- 서로 크기가 동일하므로, 겹치더라도 완전히 겹치지 않고, div4의 아랫부분이 튀어나오게 됨.-->
+    </div>
+
+</body>
+</html>

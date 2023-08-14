@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width:200px;
+            height:200px;
+            font-weight:bold;
+        }
+        div#content0{
+            background-color:red;
+        }
+            div#content1 {
+                background-color: green;
+                padding: 20px;
+            }
+            div#content2{
+                background-color: blue;
+                border: 5px solid black;
+            }
+            div#content3{
+                background-color:yellow;
+                margin:20px;
+            }
+            div#content4{ 
+                /* margin과 padding을 모두 적용하기 위해서는 총 280씩이 필요..*/
+                /* border 역시 2px있으니 총 284*284가 필요함.*/
+                margin:20px;
+                padding:20px;
+                background-color:mediumpurple;
+                border:2px solid red;
+
+            }
+    </style>
+
+
+</head>
+<body>
+    <div id="content0">
+        200*200
+    </div>
+    <div id="content1">
+        200*200<br />(padding만)
+    </div>
+    <div id="content2">
+        200*200 <br />(border만)
+    </div>
+    <div id="content3">
+        200*200 <br />(margin만)
+    </div>
+    <div id="content4">
+        200*200<br /> (padding+margin+border)
+    </div>
+</body>
+</html>
