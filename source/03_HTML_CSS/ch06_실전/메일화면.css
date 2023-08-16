@@ -1,0 +1,106 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+a { color: black;
+   text-decoration:none;
+   display: block;   
+}
+p {
+    margin: 10px;
+}
+li {
+    list-style:none;
+}
+
+#wrapper {
+    width: 1000px;    
+    margin: 0 auto;
+    border: 2px solid black;
+}
+ #header {
+     width: 1000px;
+     margin: 5px 10px 10px 10px;
+     overflow:hidden;
+     height: 50px;
+ }
+.logo {
+    height: 15px;
+    line-height:15px;
+    width: 50px;
+    text-align:center;
+    border: 1px solid gray;
+    margin: 5px 0 0 10px;
+    padding: 5px 10px 5px 10px;
+    background-color:#FDEADA;
+    float:left;
+}
+
+.menu ul {
+    overflow:hidden;
+    float: left;
+}
+    .menu ul li {
+        margin: 5px 20px 5px 20px;
+        width: 100px;
+        padding: 5px 10px 5px 10px;
+        height: 15px;
+        line-height:15px;
+        float: left;        
+    }
+        .menu ul li:first-child {
+            margin: 5px 20px 5px 40px;
+        }      
+
+    .account li {
+        float: right;
+        margin: 10px 20px 10px 10px;
+    }
+
+#content {
+    overflow: hidden;
+}
+
+#content #title {
+    clear: both;
+    width: 98%;
+    margin: 30px 20px 10px 5px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid gray;
+
+}
+
+    #content #lnb {        
+        padding: 10px 5px 10px 20px;
+        float: left;
+        margin: 0 30px 0 0;
+    }
+    #content #lnb ul li {
+        width: 150px;
+        border: 1px solid gray;
+        
+    }
+        #content #lnb ul li a {
+            padding: 5px 8px 5px 30px;
+        }
+    #content #lnb ul li:hover{
+        background-color:khaki;
+    }
+    #content #my_content {
+        margin: 10px;
+        float: left;
+        border: 1px solid gray;
+    }
+    #content #my_content #sub_title{
+        padding: 5px; 
+        border-bottom:1px solid gray;
+    }
+        #content #my_content ul li {
+            width: 700px;
+        }
+
+
+
+
+    

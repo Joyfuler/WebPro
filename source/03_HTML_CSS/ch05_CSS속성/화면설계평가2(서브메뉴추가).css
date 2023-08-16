@@ -1,0 +1,129 @@
+﻿* {
+    margin:0;
+    padding:0;
+}
+
+a {
+    text-decoration:none;
+    color:purple;
+    font-weight:bold;
+    display:block;
+}
+li{
+    list-style:none;
+}
+
+div{
+    margin: 5px; padding: 5px;
+    text-align: center;
+    border: 1px solid gray;
+}
+
+
+
+#wrap {
+    width: 800px;
+    margin: 0 auto;    
+    position: relative;
+}
+
+#header {    
+    height: 100px;
+    line-height: 100px;
+    background-color: yellow;
+}
+
+#nav {
+    width:788px;
+    height: 100px;    
+    position: relative;
+    z-index:5;
+}
+
+    #nav p {
+        height: 40px;
+        line-height:40px;
+    }
+
+    #nav ul {
+        overflow: hidden;
+        margin: 0 auto; /* margin을 0 auto를 하여 왼쪽과 오른쪽 여백을 똑같이 조정할 수 있음.*/
+        width: 720px;
+    }
+
+        #nav ul > li {          
+            /* 서브메뉴 사용시 ul li ul li 2번 있으므로 이렇게 적으면 서브메뉴에도
+                들어가버리게 됨. 수직 밑으로 내릴 예정이므로 float;left도 빼야함.
+                따라서 바로 밑에만 적용되도록 > 를 넣어주자.
+                또한 높이가 50px로 적용되어 있으므로 서브메뉴가 아예 노출되지 않음.
+                height 설정도 제거해야..
+            */
+            float: left;
+            width: 140px;            
+            line-height: 50px;
+            margin: 2px;                                    
+            background-color: pink;            
+        }
+
+            #nav ul li:first-child {
+                border-radius: 20px 0 0 20px;
+            }
+
+            #nav ul li:last-child {
+                border-radius: 0 20px 20px 0;
+            }            
+
+            /* nav와 section 이 겹쳤을 경우, nav를 위로 오게 하려면?
+                우선 position을 잡은 후 z-index를 해야한다.
+            */
+            #nav > ul > li .submenu {
+                display: none;
+            }
+            /* 마우스를 대면 전체 메뉴를 펼쳐지게 하려면? ul에 hover를 준다
+            #nav ul:hover .submenu{
+                display: block;
+            }
+            꺾쇠괄호주의! 안 하면 하위에도 적용되어 옵션이 꼬일 수 있음*/
+
+            #nav > ul li:hover .submenu{
+                display:block;
+            }
+            #section {    
+            overflow: hidden;
+            }
+
+            #section #content {
+            width: 600px;
+            height: 200px;        
+            float: left;        
+            }
+
+            #section #banner {
+            width: 134px;
+            height: 200px;
+            float: left;
+            }
+
+            #footer {            
+            height: 100px;
+            line-height: 100px;            
+            background-color: yellow;            
+            }
+
+            #wrap #img {
+            width: 100%;
+            height: 100%;
+            /* 부모인 wrap을 기준으로 꽉 채우도록 하기 위해,
+                부모인 wrap은 position을 relative, img는 absolute로 설정함. */
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url('back.jpg');
+            background-size: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            margin:0; padding:0;
+            }
+            .submenu{
+                background-color: cornsilk;
+            }

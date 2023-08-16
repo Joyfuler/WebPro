@@ -1,0 +1,241 @@
+﻿/* 현재 위치는 css/shoppingmall.css */
+/* * * * 페이지 전체 초기화 * * * */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Merriweather-Regular';
+    text-align:center;
+}
+/* 앵커태그의 밑줄, li의 앞 특수문자 제거는 기본*/
+a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    /* a태그의 공간이 확장되어 텍스트 바깥이라도 클릭이 가능 */
+}
+
+.logo a {
+    font-family: 'Handjet', cursive;
+    font-family: 'Tilt Prism', cursive;
+}
+li {
+    list-style:none;
+}
+@font-face {
+    font-family: 'Merriweather-Light';
+    src: url('../font/Merriweather-Light.ttf');
+    /* 전 폴더로 가는법? .. 사용*/
+}
+@font-face {
+    font-family: 'Merriweather-Regular';
+    src: url('../font/Merriweather-Regular.ttf');    
+}
+
+h1:first-child{
+    font-family:'Merriweather-Light';
+}
+h1:nth-child(2){
+    font-family:'Merriweather-Regular';
+}
+h1:nth-child(3) {
+    font-family: 'Handjet', cursive;
+}
+/* * * * * HEADER CSS * * * * * * (.gna, .logo .hitmenu .lnb) /
+
+/* * * * * CONTENT CSS * * * * * * (section1 , section2 ) */
+header {
+    border: 1px solid gray;
+    overflow:hidden;
+    border-bottom: 2px dotted black;
+}
+
+.gnb{    
+    background-color:black;   
+    height: 50px;
+    line-height:50px;
+    
+}
+.gnb ul{
+    width:1000px;
+    margin: 0 auto;
+    overflow:hidden;
+}
+    .gnb ul li {
+        width: 80px;
+        margin: 0 10px;
+        float: left;
+        text-align: center;            
+    }
+        .gnb ul li a {
+            color: white;
+            display: block;
+        }
+.logo {
+    font-size: 3.0em;
+    width: 300px;
+    height: 150px;
+    font-weight:500;
+    line-height: 150px;
+    margin: 20px auto;
+    border: 2px solid gray;
+    text-align: center;
+}
+.hitmenu {
+    float:right;
+    width: 1000px;
+    margin: 0 auto;
+}
+.hitmenu ul li {
+    width: 70px;
+    height:40px;
+    line-height:40px;
+    float: right;    
+    border: 1px solid gray;
+    margin: 0 0 5px 0;
+    text-align:center;    
+}
+    .hitmenu ul li:first-child {
+        border-radius: 0 10px 10px 0;
+        margin: 0 10px 0 0;
+    }
+.hitmenu ul li:last-child{
+    border-radius: 10px 0 0 10px;
+    
+}
+.lnb {
+    clear: both;
+    border-top: 2px dotted black;
+}
+    .lnb ul {
+        overflow: hidden;                
+        width: 1000px;
+        margin: 0 auto;
+
+    }
+    .lnb ul li{
+        overflow: hidden;        
+        float:left;
+    }
+    .lnb ul li a {        
+        height: 50px;
+        width: 125px;
+        line-height: 50px;  
+        text-align:center;
+        font-weight:bold;        
+    }
+
+    #content .section1{
+        overflow:hidden;
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    #content .section1 .slide_banner{
+        border : 1px solid gray;
+        width: 700px;
+        height: 400px;
+        line-height: 400px;
+        float: left;
+        box-sizing:border-box;
+    }
+        #content .section1 .side_banner {
+            border: 1px solid gray;
+            width: 300px;
+            height: 400px;
+            line-height: 400px;
+            box-sizing:border-box;
+            float: right;
+        }
+
+        #content > .section2 {
+            width: 1000px;
+            margin: 0 auto;
+            height: 650px;
+            line-height:300px;         
+            border: 1px solid gray;
+            overflow:hidden;
+        }
+        #content .section2 .hit_product ul li{
+            height: 300px;
+            line-height: 300px;
+            width: 225px;
+            margin: 10px;
+            border: 1px solid gray;
+            float: left;
+            box-sizing:border-box;
+        }
+        #content .section2 .hit_product ul li:first-child{
+            margin: 10px 10px 10px 20px;
+        }
+            #content .section2 .hit_product ul li:last-child {
+                margin: 10px 20px 10px 10px;
+            }
+
+        #content .section2 .md_pruduct {
+            clear:both;
+            overflow:hidden;
+        }
+#content .section2 .md_product ul li {
+    height: 300px;
+    line-height: 300px;
+    width: 225px;
+    margin: 10px;
+    border: 1px solid gray;
+    float: left;
+    box-sizing: border-box;
+}
+#content .section2 .md_product ul li:first-child {
+    margin: 10px 10px 10px 20px;
+}
+
+#content .section2 .md_product ul li:last-child {
+    margin: 10px 20px 10px 10px;
+}
+
+#footer {
+    overflow: hidden;
+    width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+    border: 1px solid gray;    
+}
+
+    #footer .office_logo {
+        width: 31.5%;
+        height: 100px;
+        line-height: 100px;
+        border: 1px solid gray;
+        margin: 0.5% 0.5% 0.5% 1.5%;
+        padding: 0.5%;
+        float: left;
+        text-align: left;
+        box-sizing:border-box;
+    }
+
+    #footer .office_address {
+        width: 31.5%;
+        height: 100px;
+        line-height: 100px;
+        border: 1px solid gray;
+        margin: 0.5% 0.5% 0.5% 0.5%;
+        padding: 5px;
+        float: left;
+        text-align: left;
+        box-sizing: border-box;
+    }
+    #footer .shopping_info {
+        width: 32%;
+        height: 100px;
+        line-height: 100px;
+        border: 1px solid gray;
+        margin: 0.5% 1.5% 0.5% 0.5%;
+        padding: 5px;
+        float: left;
+        text-align: left;
+        box-sizing: border-box;
+    }
+    #footer .copyright{
+        clear: both;
+        background-color: black;
+        color: white;
+    }

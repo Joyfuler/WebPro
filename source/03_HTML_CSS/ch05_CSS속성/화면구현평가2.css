@@ -1,0 +1,50 @@
+﻿
+#wrap {
+    width: 800px;
+    margin: 0 auto;
+    border: 1px solid gray;
+}
+
+#title {
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 2.0em;
+}
+
+#touser {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 5px;
+    height: 50px;
+}
+
+#text {
+    padding: 0 0 10px 10px;
+}
+
+#from {
+    text-align: right;
+    padding: 0 15px 15px 0;
+    font-size: 1.2em;
+}
+
+#footer {    
+    border-top: 1px solid gray;
+    width: 785px;
+    margin: 0 auto;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    font-size: 2.0em;
+}
+
+    #footer > a {
+        text-decoration: none;
+    }
+
+    #footer a::after {
+        content: " - " attr(href);
+    }
