@@ -1,3 +1,3 @@
-# full stack 개발자 영상과정 훈련생을 위한 저장소
+# full stack 개발자 양성과정 훈련생을 위한 저장소
 
-on training...
+No description

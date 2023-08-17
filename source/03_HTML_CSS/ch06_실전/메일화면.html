@@ -5,6 +5,32 @@
     <meta charset="utf-8" />
     <link href="메일화면.css" rel="stylesheet" type="text/css" />
     <title></title>
+
+    <script>
+        function chk() {
+            var patternMail = /^\w+@\w+(\.\w+){1,2}$/;
+            var patternPhone = /^\d{2,3}[\.\- ]?\d{3,4}[\.\-]?\d{4}$/;
+            var patternBirth = /^\d{4}[\.\-]?\d{2}[\.\-]?\d{2}$/;
+            var patternId = /^[0-9a-zA-z]+$/;
+            if (!frm.id.value.match(patternId)) {
+                alert('아이디는 영문+숫자 형식으로 입력해주세요.');
+                return false;
+            } else if (!frm.email.value.match(patternMail)) {
+                alert('메일 패턴이 올바르지 않습니다. (aa@bb.com 형식으로 입력)');
+                frm.email.focus();
+                return false;
+            } else if (!frm.phone.value.match(patternPhone)) {
+                alert('전화번호 패턴은 011-202-3333 형식으로 입력해주세요.');
+                frm.phone.focus();
+                return false;
+            } else if (!frm.birth.value.match(patternBirth)) {
+                alert('생일은 1999-01-01 형태로 입력해주세요.')
+                return false;
+            }
+            return true;
+        }
+        
+    </script>
 </head>
 <body>    
     <div id="wrapper">
@@ -43,21 +69,23 @@
             <div id="my_content">
                 <div id="sub_title">개인정보변경</div>
                 <div id="modify">
-                    <form action="#1">
-                        <ul>
-                            <li>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input id="name" type="text" /></li>
-                            <li>아이디&nbsp;&nbsp;&nbsp;<input id="id" type="text" /></li>
-                            <li>이메일&nbsp;&nbsp;&nbsp;<input id="email" type="text" /></li>
-                            <li>전화&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="tel" type="text" /></li>
-                            <li>생년월일<input id="birth" type="text" /></li>
-                            <li>주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="address" type="text" /></li>
-                        </ul>
-                        <input type="submit" value="저장" />
-                    </form>
-                    
+                    <form action="#1" name="frm" onsubmit="return chk()">
+                        <table>
+                            <tr><td>이름</td><td><input name="name" type="text"/></td></tr>
+                            <tr><td>아이디</td><td><input name="id" type="text"/></td></tr>                            
+                            <tr><td>이메일</td><td><input name="email" type="text" /></td></tr>
+                            <tr><td>전화</td><td><input name="phone" type="text" placeholder="000-0000-0000형식 입력"></td></tr>
+                            <tr><td>생년월일</td><td><input name="birth" type="text" placeholder="1911-01-01형식 입력"></td></tr>
+                            <tr><td>주소</td><td><input name="address" type="text"/></td></tr>
+                            <tr><td></td><td><input type="submit" value="저장"/></td></tr>
+                        </table>                        
+                    </form>                    
                 </div>
             </div>
                 
+        </div>
+        <div id="footer">
+            footer
         </div>
     </div>
     

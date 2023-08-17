@@ -1,0 +1,18 @@
+float가 여러 개 중복되는 경우는 꼭 바로 위의 태그를 선택하여 새로 overflow를 해주고,
+구분해야 하는 곳에 clear:both를 사용할 것.
+이미지와 글자를 겹치게 하고 싶다면 position: absolute를 활용하고, 이미지의 z-index를 마이너스 설정할 것.
+
+*) 유효성 검사를 alert로 만드는 방법 - 기존처럼 script에 function chk()를 넣고,
+input에  있는 pattern을 삭제한 후 chk에서 pattern을 넣고 if문에서 value를 비교하자.
+
+ex) 휴대폰 번호 검사법 - var 변수를 생성한 후 해당 값이 match하는지를 비교
+var patternPhone= /^\d{2,3}[\.\-]?\d{3,4}[\.\-]?\d{4}$/
+(.이나 -가 1번 등장하거나 한번도 등장하지 않음, 숫자는2~4회)
+if (!frm.email.value.match(patternPhone)){
+alert ('메일주소 패턴이 올바르지 않습니다.');
+frm.email.focus();   (틀린 후 해당 부분에 커서가 깜빡이도록 함)
+return false;
+} (일치하는 경우)
+return true;
+
+css를 짧게 하기 어렵다면, 주석을 통해 어떤 위치인지를 주기적으로 설명할 수 있도록 습관 들일 것
