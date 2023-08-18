@@ -1,0 +1,7 @@
+﻿/* 프린트용 css */
+#wrap #content {
+    background-color: none;
+    color: #415241;
+    padding: 30px 10px;
+    text-align:justify;
+}

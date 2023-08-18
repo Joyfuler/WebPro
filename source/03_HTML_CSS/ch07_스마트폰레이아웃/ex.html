@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0,
+          maximum scale=2.0, minimum scale=0.7, user-scalable=yes"/>    
+    <!-- 유니코드 설정을 바꿔도 되고, 추가하는 것도 가능.-->
+    <!-- width=device-width (넓이는 스마트폰의 넓이를 모두 사용한다는 의미)-->
+    <!-- 스마트폰 환경의 경우 name을 viewport(뷰포트정의), content에 뷰포트 속성을 넣는다. -->
+    <title></title>
+    <style>
+        * {
+            margin: 0; padding: 0;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+        li{
+            list-style:none;
+        }
+        a {
+            text-decoration:none;
+            color: black;
+            display: block;
+        }
+        /* 배경투명인 이미지들을 돋보기배경과 같은 색상으로 바꿔 보이도록 하는 작업*/
+        header{
+            /* width: 100% .. 스마트폰은 width를 전부 사용하므로 명기하지 않음*/
+            height: 100px; background-color:#ea8f00;
+        }
+        header #logo_wrap{
+            height: 50px;
+            line-height:50px; text-align:center;
+            position:relative;
+            /* 부모단에 position:relative를 넣고 이미지를 position할 예정 */
+        }
+        header #logo_wrap img.menu{
+            position: absolute; left:10px; top:0; /* 절대좌표: 왼쪽 10, 위 0 (부모기준)*/
+            /* 확대해도 비율이 그대로, 위치 유지.*/
+            
+        }
+        header #logo_wrap img.myinfo{
+            position: absolute; right: 10px; top:0;
+        }
+        header #logo_wrap a{
+            color:white;
+            font-weight:bold;
+            font-size:1.3em;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        /* 검색창 부분 */
+        header #search{
+            height: 50px; /* 돋보기 사이즈가 50px이므로 부모의 높이도 50px로 지정하였음.*/
+            position: relative; /* 자식단(돋보기)이 부모단을 벗어나지 못하도록 하기 위하여 relative를 설정*/
+        }
+        header #search input[type='text']{
+            width: 100%; height: 50px; /* 검색어 입력창을 100% 설정 / 돋보기 position */
+            border: 3px solid #ea8f00;
+            box-sizing: border-box;
+             /* 커서댔을때 아웃라인이 매우 눈에 띄므로 조절..*/
+            padding:5px; /* 검색창 안쪽 글씨가 너무 붙어있으므로 약간의간격을 준다.*/
+            padding-right: 55px;
+            /* 돋보기에 가려지지 않도록 오른쪽 패딩을 부여. 
+                마치 오른쪽에 돋보기 영역이 따로 있는 것 같은 느낌을 줌 */
+            font-size:1.3em;
+        }
+        header #search input[type='text']:focus{
+            outline:none;
+        }
+        header #search input[type='submit']{
+            height:50px; width:50px; /* 그림 사이즈는 50*50으로 고정이므로 어쩔 수 없이 명기함. */
+            background:url('ex/search.png') no-repeat; /* input의 배경화면으로 사용*/
+            border:0px; outline:none;
+            position:absolute; right:1px;
+            cursor:pointer;
+            /* float:left에는 기본적으로 사용 금지!*/
+        }
+        /* 상단메뉴영역*/
+        #lnb ul {
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        #lnb ul li {
+            float: left;
+            width: 16.666%; /* 100 나누기 메뉴 수 = 16.6666...%*/
+            text-align:center; /* 왼쪽 붙은 문제 해결을 위해 가운데 정렬*/
+            height: 40px; line-height: 40px;
+            border-right: 2px solid #ea8f00;
+            box-sizing:border-box;            
+        }
+        #lnb ul li:last-child{
+            border-right: 0;
+        }
+
+        /* 기사사진- 2열*/
+        #section1 {
+            margin: 5px 0;
+        }
+            /* section1 바로 밑 div = row1,row2,row3을 의미함.*/
+        #section1 > div {
+            overflow:hidden;
+        }
+        #section1 .row1 > div,        
+        #section1 .row2 > div,            
+        #section1 .row3 > div{
+            float: left;
+            width: 50%; height: 360px;                             
+
+            /* 이렇게만 사용시 그림이 잘리는 문제 발생..*/
+            border: 2px solid white;
+            box-sizing:border-box;
+            position: relative;
+            }
+        section #section1 img {
+            width: 100%;
+            height: 100%;       
+            position: absolute;
+            bottom: 0;
+       
+        }
+        /* 부모의 height와 width를 100% 활용하도록 이미지가 조정됨*/
+             
+        /* * * 기사제목 (말줄임태그사용)* * */
+        section #section2 {
+            margin:5px 0; 
+        }
+        section #section2 ul li {
+            border:1px solid gray;
+            padding: 5px;
+            
+        }
+            section #section2 ul li a {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                /* anchor 태그에 block 사용시에는 말줄임태그가 불가능. 따라서
+                p로 한번 더 감싸준 뒤 말줄임을 p에 적용하자.*/
+            }
+        
+            section #section3 {
+            margin:5px 0;
+            }
+        /* section3은 사진 왼쪽, 기사 오른쪽에 있는 것으로 보임.
+        하지만 위의 검색창처럼, 텍스트 공간을 100%로 주고, 이미지는 position으로 배치함.
+        (마찬가지로 이미지 손상을 방지하기 위함) */
+            section > #section3 > ul > li {
+                margin: 5px; padding: 10px; height: 100px;
+                position: relative;                
+            }
+            section #section3 ul li p.img {
+                position: absolute;
+                left: 10px; top:10px;
+                width: 100px; /* 혹시 모르니 100px로 고정시킴.*/
+            }
+            section #section3 ul li p.text{
+                margin-left: 120px;
+                /* 이미지 크기 100px, left 크기 10px이므로..*/
+            }
+            section #section3 ul li p.text span:first-child{
+                display: block;
+                white-space:nowrap;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                font-size: 1.3em;
+                font-weight:bold;
+                color: navy;
+            }         
+
+            footer{
+                background-color:#ea8f00;
+                text-align:center;
+                /* 이미지와 글씨 모두 가운데 정렬됨. (수평)*/
+            }
+            footer p:last-child{
+                font-size:0.8em;
+                margin-bottom: 3px;
+                padding-bottom: 3px;
+                color: #333333;
+            }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo_wrap">
+            <!-- 사이즈를 1:8:1 등으로 설정시 가로/세로 전환하면 이미지의 가로 사이즈가 뚱뚱해지는 문제
+                따라서 position을 따로 설정해 주어야 함-->
+            <img class="menu" src="ex/menu.png" alt="메뉴아이콘"/>
+            <a href="ex.html" class="logo">mobile logo</a>
+            <img class="myinfo" src="ex/myinfo.png" alt="내정보" />
+        </div>        
+        <div id="search">
+            <form>                
+                <input type="text" name="query_word" />
+                <input type="submit" value="" />
+                <!-- value를 아예 적지 않으면 default(제출)이 표시되므로, ""로 표시해야함.-->
+                <!-- text 타입의 input을 100% 차지하게 하고, 돋보기 이미지는 position으로 위치만 하도록 함. 
+                    (넓이를 px이나 %로 지정할 경우, 확대하면 돋보기 사이즈가 뚱뚱해질 수있으므로... )-->
+             </form>            
+        </div>
+    </header>
+    <div id="lnb">
+        <ul>
+            <li><a href="#l1">lnb1</a></li>
+            <li><a href="#l2">lnb2</a></li>
+            <li><a href="#l3">lnb3</a></li>
+            <li><a href="#l4">lnb4</a></li>
+            <li><a href="#l5">lnb5</a></li>
+            <li><a href="#l6">lnb6</a></li>
+        </ul>
+    </div>
+    <section>
+        <div id="section1">
+            <div class="row1">
+                <div>
+                    <a href="https://n.news.naver.com/article/024/0000083964?cds=news_media_pc&type=editn" alt="1행1열">
+                    <img src="https://imgnews.pstatic.net/image/024/2023/08/16/0000083964_001_20230816100001044.png?type=w647" /></a>
+                    <!-- 표시될 이미지 사이즈는 px이 아닌 %로 설정할 것. (스마트폰의 경우)-->
+                </div>
+                <div>
+                    <a href="https://n.news.naver.com/article/008/0004926687" alt="1행2열">
+                        <img src="https://imgnews.pstatic.net/image/008/2023/08/18/0004926687_001_20230818085404100.jpg?type=w647" />
+                    </a>
+                </div>
+            </div>
+            <div class="row2">
+                <div>
+                    <a href="https://n.news.naver.com/article/008/0004926819?sid=105" alt="2행1열">
+                        <img src="https://imgnews.pstatic.net/image/008/2023/08/18/0004926819_001_20230818105600997.jpg?type=w430" />
+                    </a>
+                    <!-- 표시될 이미지 사이즈는 px이 아닌 %로 설정할 것. (스마트폰의 경우)-->
+                </div>
+                <div>
+                    <a href="https://n.news.naver.com/article/008/0004926677?sid=105" alt="2행2열">
+                        <img src="https://imgnews.pstatic.net/image/008/2023/08/18/0004926677_001_20230818060103330.jpg?type=w647" />
+                    </a>
+                </div>
+            </div>
+            <div class="row3">
+                <div>
+                    <a href="https://n.news.naver.com/article/024/0000083964?cds=news_media_pc&type=editn" alt="3행1열">
+                        <img src="https://imgnews.pstatic.net/image/024/2023/08/16/0000083964_001_20230816100001044.png?type=w647" />
+                    </a>
+                    <!-- 표시될 이미지 사이즈는 px이 아닌 %로 설정할 것. (스마트폰의 경우)-->
+                </div>
+                <div>
+                    <a href="https://n.news.naver.com/article/008/0004926687" alt="3행2열">
+                        <img src="https://imgnews.pstatic.net/image/008/2023/08/18/0004926687_001_20230818085404100.jpg?type=w647" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="section2">
+            <ul>
+                <li> <a href="">LH, 분당·광명·하남 사옥부지 3곳 매각 나선다</a></li>
+                <li> <a href="">사우디 빈살만 왕세자, '카슈끄지 피살' 후 첫 영국 방문 코앞사우디 빈살만 왕세자, '카슈끄지 피살' 후 첫 영국 방문 코앞사우디 빈살만 왕세자, '카슈끄지 피살' 후 첫 영국 방문 코앞사우디 빈살만 왕세자, '카슈끄지 피살' 후 첫 영국 방문 코앞</a></li>
+                <li> <a href="">"예뻐서", "쌈 싸 먹게"…양귀비 1송이만 길러도 전과자 전락</a></li>
+                <li> <a href="">부동산 띄워놓고선, 대출 늘자 은행 탓</a></li>
+            </ul>
+        </div>
+        <div id="section3">
+            <ul>
+                <li>
+                    <p class="img">
+                        <img src="https://via.placeholder.com/100x100" alt="더미이미지 100*100" />
+                    </p>
+                    <p class="text">
+                        <span>첫번째 span은 말줄임태그를 사용할 예정입니다.(block형 태그로 전환)</span>
+                        <span>두번째 span은 말줌임 사용하지 않고, line형 태그 그대로 사용.</span>
+                    </p>
+                </li>
+                <li>
+                    <p class="img">
+                        <img src="https://via.placeholder.com/100x100" alt="더미이미지 100*100" />
+                    </p>
+                    <p class="text">
+                        <span>첫번째 span은 말줄임태그를 사용할 예정입니다.(block형 태그로 전환)</span>
+                        <span>두번째 span은 말줌임 사용하지 않고, line형 태그 그대로 사용.</span>
+                        </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <footer>
+        <p>
+            <img src="ex/logo.png" alt="로고이미지" />
+        </p>
+        <p>
+            서울시 서대문구 대현동 은하빌딩 2층 
+        </p>
+    </footer>
+</body>
+</html>

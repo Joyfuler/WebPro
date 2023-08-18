@@ -1,0 +1,24 @@
+1) 스마트폰은 디스플레이 해상도 조절이 없고, 기종마다 사이즈가 다르므로 픽셀 대신 퍼센트를 사용하여 크기 조절이 필요.
+가로로 늘어난 이미지 중 일부를 display:none; 으로 조정하거나, 메뉴 조절을 사용.
+예- <meta charset="유니코드" name="viewport" content="width=device-width, initial-scale=1.0, 
+maximum-scale=2.0, minimum-scale=0.7, user-scalable=yes"/>
+뷰포트를 정의한 후, content에 뷰포트 속성을 넣는다. (*user-scalable- 유저가 직접 손동작으로 확대 및 축소 가능)
+
+2) 검색창 우측의 돋보기(submit)는 실제로는 따로 영역을 지정하지 않음. 부모 단에 position:relative를 넣고,
+submit을 absolute를 주어 한줄로 만듬. + 검색어 입력창(input)의 오른쪽 padding을 주어 돋보기와 텍스트가 만나지 않도록 함.
+
+3) 길어져서 짤리는 텍스트의 경우 말줄임 태그를 사용해 ..으로 표시함. 방법은 3줄로 표시
+white-space: nowrap; (
+overflow: hidden;
+text-overflow: ellipsis; ( 점으로 표시)
+
+4) 스크롤을 해도 해당 장소에 해당 영역 (광고 등)이 남아있게 하려면?
+position: fixed를 한 뒤, 좌표를 정해준다. (왼쪽이라면 left:0, top: 100px ....)
+
+5) 반응형 웹(css) 
+디바이스 환경에 따라 @media를 통해 보이는 페이지를 다르게 만듬.
+@import를 통해 css를 가져옴 (@import url('css/title.css');
+@media print {
+color: darkgreen; background-color: none; } --media 뒤에 출력할 매체를 적어 css를 구분할 수 있음.
+스마트폰용 / pc용 등을 나눠 출력하고자 한다면?
+@media screen and (max-device-width:600px) -- 매체의 최대 픽셀이 600픽셀(스마트폰 등)이하일 때 입혀지는 css

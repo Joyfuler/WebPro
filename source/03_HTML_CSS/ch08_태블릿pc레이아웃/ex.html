@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+          initial-scale=1.0, user-scalable=no" />
+          <!-- user-scalable no 설정시 손동작으로 확대/축소불가-->
+    <title></title>
+    <style>
+        * { margin: 0; padding: 0; }
+        li {list-style:none;}
+        a {text-decoration:none; 
+           font-weight:bold;
+           color: white;
+        }
+        /* 상단메뉴. 항상 위 고정*/
+
+
+
+        #top_bar {
+            height: 100px;
+            line-height: 100px;
+            text-align:center;
+            background-color: #ffd800;
+            position:fixed;
+            left: 0px; top:0; right: 0;
+            overflow: hidden;
+        }
+        #top_bar ul li {
+            float: left;
+            width: 16.666%;
+            border: 1px dotted gray;
+            box-sizing:border-box;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            overflow:hidden;
+        }
+        #top_bar ul li:last-child{
+            border-right:0;
+        }
+        /* 왼쪽메뉴. 항상 왼쪽 고정*/
+        #left_bar {         
+            width: 150px; text-align:center;
+            background-color: saddlebrown;
+            position: fixed;
+            top: 100px; left:0; bottom: 100px;
+            
+        }
+            #left_bar ul li a {
+                padding: 5px 0px;
+                display: block;
+                border-bottom: 1px solid gray;
+                z-index: 1;
+            }
+        /* 오른쪽메뉴. 항상 오른쪽 고정 (가운데 content만 바뀜)*/
+
+        #right_bar {
+            width: 150px;
+            text-align: center;
+            background-color: lightyellow;
+            position: fixed;
+            top: 100px;
+            right: 0;
+            bottom: 100px;
+        }
+
+        #right_bar ul li {
+            padding: 20px 0;
+        }
+        #right_bar ul li img {
+            width: 100px;            
+        }        
+        #bottom_bar{
+            height: 100px; line-height:100px; text-align:center;
+            background-color:lightcyan;
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+        }
+
+
+        #content {
+            margin: 110px 160px;
+            text-align:justify;
+            overflow:hidden;
+        }
+        #content img {
+            float: left;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 총 5개로 공간이 분할되어 있음 -->
+    <div id="top_bar">
+        <ul>
+            <li> <a href="#">GNB_1</a></li>
+            <li> <a href="#">GNB_2</a></li>
+            <li> <a href="#">GNB_3</a></li>
+            <li> <a href="#">GNB_4</a></li>
+            <li> <a href="#">GNB_5</a></li>
+            <li> <a href="#">GNB_6</a></li>
+        </ul>
+
+    </div>
+    <div id="left_bar">
+        <ul>
+            <li> <a href="#">LNB_1</a></li>
+            <li> <a href="#">LNB_2</a></li>
+            <li> <a href="#">LNB_3</a></li>
+            <li> <a href="#">LNB_4</a></li>
+            <li> <a href="#">LNB_5</a></li>
+            <li> <a href="#">LNB_6</a></li>
+            <li> <a href="#">LNB_7</a></li>
+            <li> <a href="#">LNB_8</a></li>
+            <li> <a href="#">LNB_9</a></li>
+            <li> <a href="#">LNB_10</a></li>
+        </ul>
+    </div>
+    <div id="right_bar">
+        <ul>
+            <li><a href="http://daum.net"><img src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png"></a></li>
+            <li><a href="http://google.com"><img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" /></a></li>
+            <li><a href="http://yahoo.com"><img src="https://s.yimg.com/rz/p/yahoo_homepage_en-US_s_f_p_bestfit_homepage.png" /></a></li>
+        </ul>
+    </div>
+    <div id="bottom_bar">
+        <p> Copyright ⓒ Joeun System Co., All rights reserved. 2F Daehyundong Seodaemun-gu Seoul, Korea</p>
+    </div>
+    <div id="content">
+        <img src="https://via.placeholder.com/100x100" alt="더미이미지100*100" />
+        인민은행은 18일 위안화 고시환율을 1달러당 7.2006위안으로 전날보다 0.0070위안 높였다(달러화 절하·위안화 절상). 인민은행이 달러·위안 고시환율을 절상한 것은 6거래일 만이다. 블룸버그가 집계한 시장 추정 환율(7.3047위안)과는 1% 넘게 차이가 난다. 지난 2018년 시장 추정 환율 조사를 시작한 이래 가장 큰 폭 격차가 벌어졌다는 게 블룸버그의 설명이다.
+
+        이는 최근 급락하고 있는 위안화 가치를 다시 끌어올리기 위한 조치다. 심지어 역외시장에서 달러·위안 환율은 7.3496위안까지 치솟았다. 2010년 거래 시작 이후 가장 높은 수준이다. 전날 위안화 역내환율은 7.3172위안으로 2007년 12월 이후 최고치를 기록했다. 전날 역내 환율은 7.3172위안을 기록했다. 인민은행이 시장에서 형성된 위안화 가치보다 훨씬 높게 고시하는 것은 그만큼 환율 방어 의지가 크다는 해석이 가능하다.
+
+        마자빈 자만 호주뉴질랜드은행(ANZ) 전략가는 “인민은행은 금융 안정 이슈를 초래할 수 있는 대규모 위안화 절하 위험을 원하지 않을 것”이라며 “단기적으로 역외 달러·위안 환율은 7.4위안 근처에서 제한될 것”이라고 말했다.
+
+        중국 당국이 주요 국영은행들에게 달러화 매도 개입을 통한 위안화 방어를 지시했다는 보도까지 나왔다. 역내와 역외 시장에서 달러화가 부족하고 위안화가 넘치는 상황을 완화하겠다는 것이다. 블룸버그는 소식통을 인용해 “위안화 가치가 달러당 7.35위안까지 내렸을 시점에서 이런 지시를 했다”고 전했다. 로이터통신은 “지금처럼 위안화 가치가 흔들릴 때 국영은행들이 인민은행의 명령에 따라 움직이고는 한다”고 전했다. 켄 청 미즈호은행 외환전략가는 “인민은행이 외화 지급준비율을 낮추는 등 환율을 더 적극 방어할 수도 있다”고 말했다.
+
+        더 나아가 중국 당국은 미국 국채를 이전보다 더 팔아 시장 개입을 위한 달러화를 확보할 가능성이 높다. 미국 재무부에 따르면 올해 6월 중국의 미국 국채 보유액은 8354억달러(약 1120조원)로 1년 전(9388억달러)보다 11.01% 감소했다. 이는 2009년 5월 이후 14년여 만에 가장 작은 규모다. 그런데 이같은 매도세가 더욱 가팔라질 것이라는 의미다.
+    </div>
+</body>
+</html>
