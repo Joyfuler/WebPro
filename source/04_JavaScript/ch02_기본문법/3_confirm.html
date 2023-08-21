@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var answer = confirm("확인 취소 중 선택 : 수강신청하시겠습니까?")
+    document.write("결과: " + answer + " / 타입 : " + typeof(answer) + "<br>");
+    //boolean타입. 확인 누르면 true, 아니오면 false
+    // == 값이 같은지 따지는 여부(타입일치무관) // === 타입을 포함해 값이 모두 일치
+    if (answer == 1){ // ==이면 true와 1이 값이 같으므로 확인으로 출력. ===이면 타입이 다르므로 취소로 출력.
+        document.write("확인을 누르셨습니다.")
+    } else {
+        document.write("취소를 누르셨습니다.")
+    }
+</script>
+<body>
+    
+</body>
+</html>

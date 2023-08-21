@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var i = Number('a');
+        document.write('i=' + i + ' - i의 타입은 : ' + typeof(i) + "<br>");
+        // 숫자 타입이지만 숫자가 아님(nan)
+        document.write('i가 NaN인지 여부 파악: ' + isNaN(i) + '<br>');
+        i = 10/3;
+        document.write('i= ' + i + ' - i의 타입은 : ' + typeof(i)+ "<br>");
+        i = 10/0;
+        document.write('i= ' + i + ' - i의 타입은 : ' + typeof(i)+ "<br>");
+        document.write('i가 유한한 수인지 여부 확인 : ' + isFinite(i) + "<br>")
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

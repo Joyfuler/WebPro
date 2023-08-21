@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // 자료형 : undefined, number, string, boolean, function(함수), object(array)
+       var variable; //변수선언만 함(메모리만 할당한 것) 
+       document.write('1. variable 변수 타입 : ' + typeof(variable) + '/ 값 : ' + variable
+       + '<br>'); // undifined로 출력됨 (undefined형 변수).
+       
+       variable = 10.132435465768798;
+       document.write('2. variable 변수 타입 : ' + typeof(variable) + '/ 값 :  ' + variable
+       + '<br>');
+       // 소숫점이나 자릿수에 상관 없이 숫자는 모두 number형 변수
+
+       variable = "이름은 '홍길동'입니다.";
+       document.write('3. variable 변수 타입 : ' + typeof(variable) + '/ 값 : ' + variable
+       + '<br>');
+
+       variable = true;
+       document.write('4. variable 변수 타입 : ' + typeof(variable) + '/ 값 : ' + variable
+       + '<br>');
+
+       // 변수에 함수를 담을 수도 있음.
+       // 자바의 경우.. public int method_name (int a){
+
+        // }
+       variable = function (){
+        alert('함수 속');
+       };
+       document.write('5. variable 변수 타입 : ' + typeof(variable) + '/ 값 : ' + variable
+       + '<br>');
+    
+        // 자바의 경우... 
+        // class person{
+        //private String name;
+        //private int age;
+        // }
+        // Person variable = new Person("홍길동",20);
+        // variable.name은 "홍길동", variable.age는 20
+
+        variable = {'name':'홍길동', 'age':20}; // 객체는 중괄호로 입력
+        // name 변수를 홍길동으로, age 변수를 20으로 할당한 variable 객체 완성.
+        document.write('6. variable 변수 타입 : ' + typeof(variable) + '/ 값 : ' + variable
+       + '<br>');
+       document.write(variable.name + " / " + variable.age + '<br>');
+            // 자바 객체를 사용하듯이 출력이 가능함.
+
+       variable = [1,2,3];
+       document.write('7. variable 변수 타입 : ' + typeof(variable) + '/ 값 : ' + variable
+       + '<br>');
+    </script>
+    <title>Document</title>
+    
+</head>
+<body>
+    
+</body>
+</html>

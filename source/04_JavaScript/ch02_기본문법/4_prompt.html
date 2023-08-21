@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    // alert : 경고문구, confirm : yes / no 입력, prompt: 문자나 숫자 입력받음
+    let scoreStr = prompt("점수를 입력하세요","(0~100사이)");    
+    document.write("scoreStr타입 : " + typeof(scoreStr) + ", 값 : " + scoreStr + "<br>");
+    // 입력 후 확인을 누르면 string 타입으로 입력, 취소 누를 시 object 타입의 null값을 가짐.
+
+    if (scoreStr == null){
+        alert('점수를 입력하지 않았습니다.');
+    } else { 
+        document.write('입력한 점수는 ' + scoreStr + '입니다. <br>')
+        let score=Number(scoreStr); //형변환이 안 되는 경우에는 NaN 값으로 변경됨. ''는 0으로 변환
+        // score= parseInt(scoreStr); // 마찬가지로 number로 형변환. 불가시 NaN, ''도 0으로 변환
+        // (parseInt('100점') => 100으로 반환됨.
+        if (isNaN(score) || scoreStr == ''){ // score가 nan이라면?
+            alert('잘못된 입력입니다. 점수는 정수로 입력하세요.')
+        } else{
+            result = score >= 70 ? "잘하셨습니다." : "분발하세요."
+            document.write(result);
+        } 
+
+        }
+        // 다음과 같이 입력하면 안 됨! scoreStr은 string 타입이므로 아스키 코드로 두 값을 비교.
+        // 따라서 Number로 감싸서 형변환을 시켜주자.
+    
+
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

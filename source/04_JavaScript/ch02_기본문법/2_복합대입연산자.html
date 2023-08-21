@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        variable = {'name':'홍길동'};
+        variable.name='김길동';
+        document.write('<h2>점심시간 후 </h2>')
+        window.onload = function(){        
+        // window 내장함수.. 브라우저가 실행되면 다음과 같은 함수를 할당함. (event)
+        let list = '';
+        list += '<ul>';
+            list += '<li>HTML</li>';
+            list += '<li>JAVASCRIPT</li>';
+            list += '<li>jQuery & aJax</li>';
+            list += '</ul>';
+            document.body.innerHTML += list;
+            // body의 html 안에 list를 호출함.
+        };
+    </script>
+</head>
+<body>
+    (script에서 함수 할당 후, body를 브라우저에 출력.)    
+</body>
+</html>

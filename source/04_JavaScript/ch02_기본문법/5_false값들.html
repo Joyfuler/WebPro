@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // false로 해석되는 값들 목록 : undefined, 0, NaN(not a number), null 총 4가지.
+    var i;
+    document.write(Boolean(i) + "<br>");
+    // i에는 아무것도 입력하지 않았음 (undefined) 이므로, Boolean 형변환시 false가 반환됨.
+    document.write(Boolean(0) + "<br>");
+    document.write(Boolean(Number('a')) + "<br>");
+    document.write(Boolean(NaN) + "<br>");
+    document.write(Boolean('') + "<br>");
+    document.write(Boolean(null) + "<br>");
+    // 위 6개는 모두 false로 반환됨.        
+    document.write("==false의 결과 : " + (0 == false) + "<br>");
+    document.write("===false의 결과 : " + (0 === false) + "<br>");    
+    // 0==false의 경우, 0을 boolean으로 자동 형변환하여 false가 되므로 true 반환.
+    // 0===false의 경우, 두개의 타입이 다르므로 false 반환됨.
+    
+</script>
+<body>
+    
+</body>
+</html>

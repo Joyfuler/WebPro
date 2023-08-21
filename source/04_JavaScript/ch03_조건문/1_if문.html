@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        const date = new Date(); /* js는 import 없이 자바처럼 객체 생성이 가능.
+        /* date라는 상수에 오늘의 날짜+시간을 입력. */
+        // const hour = date.getHours(); // 현재 시간 (0~23 사이가 들어감)
+        hour = new Date().getHours(); // 혹은 한번에 해결도 가능.
+        if (hour < 12) {
+            document.write ('상쾌한 오전입니다. <br>');
+            document.write ('<img src="img/am.jpg" alt= "오전사진" ');
+        } else {
+            document.write ("더운 오후입니다. <br>")
+            document.write ('"<img src=img/pm.jpg alt = "오후사진">');
+        }
+        
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+</body>
+</html>
