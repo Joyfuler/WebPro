@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        var arr = [273, 32, '홍길동'];
+        // 1. 일반for문 (only 배열에서만)
+        document.write('<h3>1. 일반 for문 이용 </h3>');
+        for (var idx=0; idx<arr.length; idx++){
+            document.write(idx + '번째 값은 :' + arr[idx] + "<br>");
+        }
+
+        // 2. for-in문 (object, array 모두 사용가능)
+        document.write('<h3>2. for-in문 이용 </h3>');
+        for (var idx in arr){
+            // arr의 방 '번호수'가 idx에 카피됨.
+            document.write(idx + '번째 : ' + arr[idx] + '<br>');
+        } // 값 자체가 아닌, 배열방의 수로 for문을 돌리는 방법.
+
+        // 3. forEach() 함수 이용1
+        document.write('<h3>3. forEach() 함수 이용 </h3>');
+         // 배열은 동시에 객체로도 쓸 수 있으므로, arr뒤에 바로 함수 사용이 가능.
+        // 첫번째 매개변수에는 data가 들어갈 변수를 넣고, 두번째는 방번호가 들어갈 변수를 넣는다.
+        //배열명 - arr / 데이터: 273, 32, '홍길동' / 인덱스: 0, 1 , 2
+        arr.forEach(function(data,idx){
+            document.write(idx+'번째 : ' + data + '<br>')
+        }); // = 함수안 함수(콜백함수)
+
+        // 4. forEach() 함수 이용2 - idx는 필요하지 않고, 데이터만 필요한 경우
+        document.write('<h3>4. forEach() 함수 이용 (인덱스x)</h3>');
+        arr.forEach(function(data){
+            document.write(data + "<br>");
+        });
+
+        //arr.forEach (function(data))
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

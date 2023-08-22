@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // forEach(반복), push(배열추가), unshift(앞에배열추가,잘사용x), pop(배열값삭제)
+        // slice & splice(배열추출)
+        let arr = ['0가','1나','2다','3라','4마','5바'];
+        // slice = 배열의 원본은 바꾸지 않고, 새로운 배열을 반환함.
+        let sliceArr= arr.slice(2,5); //두번째 방부터 5-1 인덱스까지 배열을 잘라냄.
+        //단, 원본은 그대로 유지됨.
+        document.write(sliceArr + '<br>');
+        let spliceArr= arr.splice(2,5);
+        // 두번째 방부터 5-1인덱스까지 배열을 잘라내고, 실제 배열에서도 삭제됨.
+        // 남는 것은 '0가, '1나', '5바'
+        document.write(spliceArr + '<br>');
+        for (var i=0; i<arr.length; i++){
+            document.write(arr[i]);
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

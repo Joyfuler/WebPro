@@ -1,0 +1,46 @@
+배열
+---
+js는 배열 타입이 자유롭고, 크기를 변경할 수 있음.
+*** arr.push('value') / arr.unshift('value') 맨 뒤/ 맨 앞에 배열자료를 추가.
+arr.pop(); // 맨 뒤의 배열자료를 삭제.
+csv나 xml등 액셀파일, 혹은 txt나 json 파일을 통해 데이터를 가져와 배열화.
+csv 예) location, min, max 
+	서울,   24,   30
+json 예) {'location':'서울', 'min':24, 'max':30};
+xml 예) <section> <location> 서울 </location> <min> 24 </min> <max> 30 </max> </section>
+foreach 반복문을 통해 각 배열을 출력 가능. 
+arr.forEach(function(data,idx){
+document.write(idx+'번째 : ' + data) });
+
+함수
+---
+js는 자바와 달리 함수를 변수에 넣을 수 있음.
+var a = function(){}; 혹은 매개변수를 넣어 var a = function(a,b){
+alert(a'+'b);  a(10,20);
+익명함수는 반드시 함수를 먼저 선언 후 매개변수를 넣어야 호출이 가능.
+
+그러나 선언적 함수는 위에서 먼저 호출 후 함수를 선언해도 호출이 가능함.
+funVar();
+function funVar(){
+alert('funVar함수입니다')}; 로 적어도 alert가 정상적으로 출력됨.
+
+** 메소드 오버로드가 존재하지 않음!
+매개변수를 늘려 동일한 이름의 함수를 정의하는 경우 나중 함수로 덮어씌워지게 됨.
+매개변수 갯수가 서로 다른 경우: 함수보다 더 많은 매개변수를 넣으면 매개변수 뒷쪽은 버려짐.
+함수보다 더 적은 매개변수를 넣는 경우 해당 매개변수에는 undefined가 들어감.
+ex) for문을 undefined만큼 실행한다 = for문이 아예 실행되지 않으므로 a(10) = 1이 됨.
+
+그러나 prompt의 경우 prompt('넣을 값은?') or prompt('넣을 값은?', '기본100') 으로 매개변수를 1개도, 2개도 넣을 수 있음.
+이렇게 다양한 매개변수를 받을 수 있는 함수를 가변인자함수라 함.
+
+다양한 매개변수를 받을 수 있는 방법으로는 함수 매개변수에는 아무것도 넣지 않고,
+받을 함수를 arguments로 대입하고, 매개변수 숫자에 따라 if문으로 처리하는 방법이 있음.
+ex) arr1 = array(); / arr2 = array(1,5); 인 경우,
+function array(){
+var result = [];
+if (arguments.length==0){
+return result; } (아무것도 없는 배열을 그대로 리턴)
+
+if (arguments.length>=2){
+for (var idx=0; idx<arguments.length; idx++){
+result.push(arguments[idx]); (매개변수의 숫자만큼 반복해서 각 매개변수 값을 배열에 추가함)

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script>
+        
+        do{ 
+            var gugu= parseInt(prompt('출력을 원하는 구구단 수는?'));
+        if (isNaN(gugu) || gugu<2 || gugu>9){
+            alert('2부터 9사이의 단수를 입력하세요.');
+        } else {
+            break;
+        }              
+            } while (true);
+            document.write('<h3>' + gugu + '단 구구단</h3>');
+            for(var i=1; i<10; i++){
+                document.write(+ gugu + '*' + i + '=' + (gugu*i)+"<br>");
+            }
+        
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
