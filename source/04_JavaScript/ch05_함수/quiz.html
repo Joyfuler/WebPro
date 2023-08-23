@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-image: url('img01.png');
+            background-size: 100%; /* 브라우저의 넓이와 정확히 맞춤 */
+            color: yellow;
+        }
+    </style>
+    <script>
+        //1초마다 시간 출력 및 background 이미지 변경
+        let img = ['url("img01.png")', 'url("img02.png")','url("img03.png")'];
+        let color = ['white', 'red','yellow'];
+        let second = 0; // 초를 세는 숫자. %3을 하여 나오는 나머지로 3가지를 반복해 표시 가능 (0,1,2)
+        
+        var screen = setInterval(() => {
+            document.body.innerHTML = new Date() + "<br>";
+            // += 대신 =을 넣으면 새로 내용이 추가되지 않고 시간만 변경됨.
+            document.body.style.backgroundImage = img[second%img.length];
+            document.body.style.color= color[second%color.length];            
+            second++;
+        },1000); // 1초마다 반복하여 출력
+        
+        setTimeout(() => {
+            clearInterval(screen);            
+            document.body.innerHTML += '<h1> 타이머 종료 </h1>'; 
+        },10000);       
+        
+        // document.body.style = 'background-image:' + img[second%3]+ ";" + // script에서 body에 style을 입히고 싶다면 이 함수를 사용.
+        // 'color:' + color[second%3]+";";       
+        //document.body.style.backgroundImage = img[second%3];
+        //document.body.style.color= color[second%3];    
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    1초 후부터 10초동안 시간 출력<br>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // 변수에 함수를 넣을 수 있는 것처럼,
+        // 함수의 매개변수에 다른 함수를 넣을 수도 있음. 매개변수에 들어온 함수를 콜백함수라 함.
+        
+        
+        function callTenTimes(calback){
+            for (let i=0; i<10; i++){
+                calback();
+            } // calback이라는 매개변수를 선언함.
+        }
+
+    //    var funVar = function(){
+    //         document.write(new Date() + '<br>');
+    //    };
+    //     callTenTimes(funVar);
+    //     // 총 10번 현재시간을 표기하도록 함.
+
+        callTenTimes(function(){
+            document.write(new Date() + '<br>');
+        });
+        // 위와 같이 변수 대입 없이 매개변수에 바로 함수를 넣어서 축약 가능.
+
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

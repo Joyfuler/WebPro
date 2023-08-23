@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        var arr = [1, 2, 300]; // 0번키에 1, 1번키에 2, 2번키에는 300이 들어간 배열이자 객체 생성.
+        for (let idx in arr) { // idx는 임시변수로, arr의 키값. 
+            //arr의 첫번째 인덱스부터 마지막 인덱스까지 반복
+            document.write(idx + '번방 : ' + arr[idx] + '<br>');
+        }
+        var obj = {name : '홍길동', age : 20}; // 객체형으로 만든 경우, for-in 형으로만 출력 가능.
+        for (let key in obj) {            
+            document.write(key + ' 키값 : ' + obj[key] + '<br>');
+            } 
+            obj.address = '서울 서대문';
+            obj.hobby = '개발 수업 복습하기'; // 객체에 키와 해당하는 값을 자유롭게 추가할 수 있음.
+            document.write('<h2>obj객체에 address 추가한 후 </h2>');
+        for (let key in obj) {
+            document.write (key + ' 키값 : ' + obj[key] + '<br>');
+        }
+            // 반대로 삭제하는 방법은?
+            delete(obj.hobby); // delete 함수를 사용해 obj를 삭제할 수 있음.
+            document.write('<h2>obj객체에 hobby 삭제한 후 </h2>');
+            for (let key in obj) {
+            document.write (key + ' 키값 : ' + obj[key] + '<br>');
+        }   
+
+            
+        // 배열과 객체를 똑같이 forin문을 통해 출력할 수 있음.
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // a라는 사람이 만든 js를 가져온 것.
+        // (피타고라스(w,h)): 직각삼각형의 빗변을 return하는 함수.
+        // 피타고라스의 빗변을 구하기 위해 w^2+h^2를 구해야 하기 때문에 새로 함수를 구성
+       
+        // 함수구현방법 1
+        // var square = function (x) {
+        //    return x * x;
+        // }
+        // 함수구현방법 2
+
+
+        // var square = x => (x * x);
+        // 함수구현방법 3 - 화살표함수. 
+        // 매개변수가 1개라면 function, 대괄호, return을 모두 생략이 가능
+
+
+        function pythagoras(width, height) {
+            function square(x) { //매개변수 x의 제곱을 구하는 함수.
+            return x * x;
+        } // 내부함수. pythagoras 함수 내부에서만 사용됨
+            return Math.sqrt(square(width) + square(height));
+            // 가로변과 높이의 제곱을 각자 더한 후, 다시 루트를 씌운 것.
+            // Math.sqrt는 제곱근을 구하는 함수
+        };
+
+    </script>
+    <script>
+        // b라는 사람이 만든 js를 가져온 것.
+        // sqaure(w,h,hypotenuse) : 직각삼각형인지 여부 return
+        function square(width, height, hypotenuse) {
+            //     if ((width*width)+(height*height)==(hypotenuse*hypotenuse)){
+            //         return true;
+            //     } else {
+            //         return false;
+            //     }
+            // }
+            return (width * width) + (height * height) == (hypotenuse * hypotenuse);
+        }
+        // 마찬가지로 true 혹은 false로 반환됨. 1줄로 축약이 가능
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        alert('빗변의 길이는 ' + pythagoras(3, 4));
+        //아래에서 square함수를 추가로 선언하였으므로 위에 있는 제곱을 구하는 함수가 삭제됨.
+        //부족한 매개변수는 NaN으로 환산되고, false가 반환되면서 결과가 0으로 바뀜.
+        // (false를 자동적으로 0으로 변환하기 때문)
+        // 따라서 이름이 같아서 생기는 충돌을 피하기 위해 내부함수가 필요.
+        // '함수 안에 함수를 넣으면 해결!'
+        alert('직각삼각형 여부: ' + square(3, 4, 5));
+
+    </script>
+
+</body>
+
+</html>

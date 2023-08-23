@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        document.write('<h2>A</h2>');
+        setTimeout(function(){
+            document.body.innerHTML +='<h2>B</h2>';
+        }, 0);  // 0초 후 1회 실행. (즉시 실행)
+        document.write('<h2>C</h2>');
+        // 즉시실행이므로 A-> B -> C 순서가 될 것 같지만,
+        // 실제로는 타임설정이 되지 않은 코드가 먼저 브라우저에 노출된 후 0초 후 코드가 실행됨.
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

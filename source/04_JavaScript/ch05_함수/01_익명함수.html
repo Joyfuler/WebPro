@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script>
-        var i ='hello';
-        document.write(i+'<br>'); // 출력가능
-        var functionVar = function(i,j){
-            alert(i+ 'test' + j);
+        var i = 'hello';
+        document.write(i + '<br>'); // 출력가능
+        var functionVar = function (i, j) {
+            alert(i + 'test' + j);
         }; //익명함수. (이름이 없는 함수에 변수 2개를 넣어줌)
-        var v = function(){}; // 매개변수 없이도 함수를 넣을 수 있음.
+        var v = function () { }; // 매개변수 없이도 함수를 넣을 수 있음.
         document.write('functionVar의 내용 : ' + functionVar + '<br>');
-        document.write('functionVar의 타입 : ' + typeof(functionVar));
-        functionVar(10,20); // 익명함수를 넣은 변수를 호출하고, 매개변수 2개에 10과 20을 넣어줌.
+        document.write('functionVar의 타입 : ' + typeof (functionVar));
+        functionVar(10, 20); // 익명함수를 넣은 변수를 호출하고, 매개변수 2개에 10과 20을 넣어줌.
         //자바의 경우는 함수에만 변수를 넣을 수 있지만, js는 함수가 들어간 변수에 매개변수를 넣을 수 있다.
         // 순서주의! 함수 및 변수를 우선 선언하고, 그 후에 매개변수를 넣어주자.
         // functionVar(10,20)넣을 시 바로 위의 alert에 적용됨.
 
-        var functionVar = (i,j) => {
-            alert(i+'/' +j);
+        var functionVar = (i, j) => {
+            alert(i + '/' + j);
         }; // function을 생략하고, => 를 넣은 뒤, {} 안에 명령어를 넣어준다. (화살표함수)
-        functionVar(10,20);
+        functionVar(10, 20);
         // 바로 위에 있는 alert(i+/j에 적용됨).
         // 매개변수가 하나인 경우에는 괄호를 생략할 수 있음.
-        var functionVar = i => { alert (i)};
+        var functionVar = i => { alert(i) };
 
     </script>
 
@@ -29,7 +30,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

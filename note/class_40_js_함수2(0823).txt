@@ -1,0 +1,64 @@
+함수간 충돌을 방지하는 방법은 내부함수와 자기호출함수 두 가지로 나뉨.
+1) 내부함수: 함수 안에 사용될 함수를 괄호 안에 넣어, 다른 곳에서 사용하지 않도록 함.
+2) 자기호출함수: 함수 생성과 동시에 선언을 함께 함. 
+ex) function fun(a){
+alert(a)};
+fun(5); 
+를 괄호 안에 넣고 합친다.  (function fun(a){alert(a)})= (5);
+
+* 콜백함수: js의 경우 변수에 함수를 넣을 수 있는 것처럼, 
+함수 안에 들어가는 매개변수에도 함수를 넣을 수 있음. 이 때 매개변수로 들어가는 함수를 콜백함수라 부른다.
+function callTenTimes(calback){
+for (var i=0; i<10; i++) {
+calback();
+  }
+}
+callTenTimes(function(){
+document.write(new Date() + '<br>');
+
+(현재 시각을 출력하고 엔터를 치는 함수를 10번 반복하게 하는 콜백함수 예시)
+
+* 클로저함수: return되는 값이 변수가 아닌 함수.
+var msg='hello ' + name;
+const fun = function(){
+alert(msg);
+}
+return fun; (fun은 alert를 뿌리는 함수) 혹은 fun 변수 대입 없이 return fuction(){alert(msg)}을 그대로 넣어도 클로저함수가 됨.
+
+* 타이머 함수: 일정 시간마다 함수를 실행하는 함수.
+setTimeout(function,millisecond); //함수와 밀리세컨을 매개변수로 받아, 밀리세컨 후에 함수를 1회 실행함.
+setInterval(function, millisecond); //함수와 밀리세컨을 매개변수로 받고, 밀리세컨마다 함수 반복 실행.
+시간이 지난 후 더이상 함수를 표시하지 않기 위해서는 clearInterval(id)로 중지가 필요. (해당 시간 도달했을 경우 setInterval을 중지)
+
+(먼저 id를 함수에 대입)
+var id = setInterval(function(){
+document.write(new Date() + '<br>');
+},1000); 
+브라우저에 1초마다 현재 시간을 표시하게 함. 10초 후에 멈추게 하려면, setTimeout으로 멈추는 함수를 1회 실행.
+setTimeout(function(){
+clearInterval(id);
+},10000); 콜백함수 clearInterval을 이용하여 1만밀리세컨(10초) 후에 해당 함수가 멈추도록 프로그래밍이 가능.
+
+-- 내장함수
+인코딩 / 디코딩 : encodedURIComponent 함수를 통해 가능. (인터넷에서 정보 전달시 오류 회피를 위한 부호화)
+
+-- 객체 및 배열
+js는 객체를 배열처럼 사용할 수 있으며, 언제든 자유롭게 새로이 값을 추가하거나 제거할 수 있음.
+let obj= {name: '홍길동', age: 20};
+obj.hobby = '공부';  --> obj가 {name:'홍길동', age:20, hobby: '공부'} 로 변경됨.
+delete(obj.hobby) 사용시 다시 삭제할 수 있다.
+
+객체 속에 함수가 있는 것이 자바의 메소드.
+들어오는 매개변수를 제외한 변수에는 this.를 꼭 붙여주는 점에 주의할 것.
+자바와 마찬가지로 일반 출력시 toString을 거치며, 사용자가 원하지 않는 형식으로 출력될 수 있으므로
+toString을 이용하여 원하는 방식으로 출력하도록 변경이 가능함. (단, 함수 형식으로 되어 있는 객체값은 tostring으로 출력이 불가하니 주의)
+
+let person ={name : '홍길동', age: 20,
+toString : function(){
+var output = ''; (toString 함수 사용시 빈 스트링을 생성하고, 뒤에 원하는 형식의 텍스트를 붙이도록 조정)
+for (var key in this) <-- 객체 안에서의 for-in 사용시에는 person이라는 객체명 대신 this를 사용한다.
+output += key + ':' + this[key] + '\n';
+	}
+}
+return output;
+

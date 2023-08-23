@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function test(name) {
+            var msg = 'Hello,' + name + '님 방가방가';
+            const fun = function() {
+                alert(msg);
+            };
+            return fun;
+        }
+            //return에는 msg도, fun (function(){alert~})도 들어갈 수 있음.
+            // 이 때 return fun을 하는 경우, fun은 클로저함수화함.        
+        let variable = test('홍길동'); // variable이라는 변수 생성. name에 홍길동 대입
+        variable();
+        // 혹은
+        test('신길동')(); // 변수 없이 test 함수에 매개변수를 넣은 후 함수 실행.
+        // 매개변수용 괄호, 함수실행용 괄호로 괄호가 2개 필요함.
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

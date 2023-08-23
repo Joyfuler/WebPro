@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script>
         // 익명화살표함수. 함수 아래에서만 호출가능
-        var pow = (x,y) => { //화살표함수 사용시에는 {}끝에 ; 붙이기
+        var pow = (x, y) => { //화살표함수 사용시에는 {}끝에 ; 붙이기
             // x에 2, y에 10을 넣으면 2의 10승이 나오도록 출력?
             let result = 1;
-            for (cnt=1; cnt<=y; cnt++){
+            for (cnt = 1; cnt <= y; cnt++) {
                 result *= x;
             } // return result; 만일 리턴값을 없애버리면, 호출값들은 어떻게 될까?
         };
-            document.write(pow(2,10) + "</br>");
-            
-            let i =parseInt(prompt("i의 j승을 구하려는데 i값은?"));
-            let j =parseInt(prompt("i의 j승을 넣으려는데 j값은?"));
-            document.write("입력한 " + i + "의 " + j + "승은? : " + pow(i,j) + "</br>");
-            // 만일 j에 a,b같은 숫자가 아닌 값을 입력하는 경우, NaN이 대입됨.
-            // 이 경우 for문에 cnt<=NaN이 되며, for문을 아예 수행하지 않으므로 0승이 되어 1값이 됨.
-            // 여기서 매개변수를 2개가 아닌 3개를 넣으면?
-            
-            // 선언부를 먼저 해석하고, pow라는 함수가 x,y 2개 매개변수를 가지다가
-            // x,y,z 세개를 가진 함수로 '덮어쓰기' 됨. 따라서 전자에 있던 pow는 사라짐
-            // (js에는 메소드 오버로딩 없음)
-            document.write(pow(2,3)+'<br>');
-            document.write(pow(2,3,10) + '<br>');
-            // 결과는 똑같이 2의 3승인 8. 매개변수 숫자가 다른 경우, 남는 매개변수는 버려짐.
-            document.write(pow(2,3,10,20,30,40)+'<br>');
-            // 아무리 매개변수가 많아도 결과는 동일함.
-            // 반대로, 매개변수를 2개 넣어야 하는데 1개만 있는 경우는?
-            document.write(pow(2)+'<br>');
-            // 이 경우 남는 두번째 변수에 undefined가 대입됨. 
-            // 이 역시 마찬가지로 for문이 돌지 않으므로 0승이 되어 1값이 리턴됨.
+        document.write(pow(2, 10) + "</br>");
 
-            let r = pow(3,2);
-            document.write('r =' + r);
+        let i = parseInt(prompt("i의 j승을 구하려는데 i값은?"));
+        let j = parseInt(prompt("i의 j승을 넣으려는데 j값은?"));
+        document.write("입력한 " + i + "의 " + j + "승은? : " + pow(i, j) + "</br>");
+        // 만일 j에 a,b같은 숫자가 아닌 값을 입력하는 경우, NaN이 대입됨.
+        // 이 경우 for문에 cnt<=NaN이 되며, for문을 아예 수행하지 않으므로 0승이 되어 1값이 됨.
+        // 여기서 매개변수를 2개가 아닌 3개를 넣으면?
+
+        // 선언부를 먼저 해석하고, pow라는 함수가 x,y 2개 매개변수를 가지다가
+        // x,y,z 세개를 가진 함수로 '덮어쓰기' 됨. 따라서 전자에 있던 pow는 사라짐
+        // (js에는 메소드 오버로딩 없음)
+        document.write(pow(2, 3) + '<br>');
+        document.write(pow(2, 3, 10) + '<br>');
+        // 결과는 똑같이 2의 3승인 8. 매개변수 숫자가 다른 경우, 남는 매개변수는 버려짐.
+        document.write(pow(2, 3, 10, 20, 30, 40) + '<br>');
+        // 아무리 매개변수가 많아도 결과는 동일함.
+        // 반대로, 매개변수를 2개 넣어야 하는데 1개만 있는 경우는?
+        document.write(pow(2) + '<br>');
+        // 이 경우 남는 두번째 변수에 undefined가 대입됨. 
+        // 이 역시 마찬가지로 for문이 돌지 않으므로 0승이 되어 1값이 리턴됨.
+
+        let r = pow(3, 2);
+        document.write('r =' + r);
             // 만일 return을 빼는 경우, 자동으로 undefined가 return됨.
             // undefined의 undefined승이므로 전부 undefined로 출력
 
 
-        
+
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

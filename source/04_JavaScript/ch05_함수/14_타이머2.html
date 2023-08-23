@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        var id = setInterval(function(){ // id 변수를 미리 설정하고, 차후 멈출 수 있도록 조치
+            // document.write(new Date() + '<br>');
+            document.body.innerHTML += new Date() + '<br>';
+            //body에 새로 추가하도록할 수도 있음.
+            //일정 시간 (10초 후) 타이머를 중지시키는 방법
+        },1000); //1초마다 표시
+        setTimeout(function(){
+            clearInterval(id);
+        },10000);
+        // 10초 후에 1번만 콜백함수를 실행하도록 함.
+        
+        
+        
+    </script>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

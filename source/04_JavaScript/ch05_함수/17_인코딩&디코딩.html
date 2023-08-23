@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        //데이터 전송시에는 인코딩, 데이터를 받을 때에는 디코딩이 필요. (다른 글자로 변환)
+        var str = '이젠';
+        document.write('원본str: '+ str + '<br>');
+        var encodedStr = encodeURIComponent(str);
+        document.write('변환된 str :' + encodedStr + '<br>');
+        var decodedStr = decodeURIComponent(encodedStr);
+        document.write('디코딩한 str : '+ decodedStr);
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

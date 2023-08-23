@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // a라는 사람이 만든 js를 가져온 것.
+        // (피타고라스(w,h)): 직각삼각형의 빗변을 return하는 함수.
+        // 피타고라스의 빗변을 구하기 위해 w^2+h^2를 구해야 하기 때문에 새로 함수를 구성
+
+
+        var square = function (x) {
+            return x * x;
+        }
+        function pythagoras(width, height) {
+            return Math.sqrt(square(width) + square(height));
+        }
+        // 화살표 함수라면 function, return을 생략 가능
+        function pythagoras(width, height) {
+            return Math.sqrt((x => x*x)(width)+(x => x*x)(height))};
+                            // function(x) { return x*x;}를 화살표 함수로 최대한 축약한 결과
+                            // x => x*x로 변경되었음.
+
+    </script>
+    <script>
+        // 자기호출함수: 함수의 선언과 동시에 호출하는 방법.
+        //function fun(a){ 
+        //    alert(a);
+        // }
+        // fun(5); 일반적인 함수 선언 - 호출방법
+        //(function fun(a){
+        //    alert(a)})= (5);
+            // 함수 선언 동시에 호출하는 방법은 함수 자체에 괄호를 씌우고, 매개변수를 즉시 대입.
+
+        //화살표 함수, 매개변수 1개인 경우 자기호출함수(동시선언) 방법은
+        //(i => {
+        //alert(i);    
+        // })(10);
+
+
+        function square(width, height, hypotenuse) {
+           var sqaure = x => x*x;
+           // 화살표 함수인 경우엔 function, 중괄호, return 등을 모두 생략하여 간편히 표기.            
+            return (width * width) + (height * height) == (hypotenuse * hypotenuse);
+        }
+        
+
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        alert('빗변의 길이는 ' + pythagoras(3, 4));
+        //아래에서 square함수를 추가로 선언하였으므로 위에 있는 제곱을 구하는 함수가 삭제됨.
+        //부족한 매개변수는 NaN으로 환산되고, false가 반환되면서 결과가 0으로 바뀜.
+        // (false를 자동적으로 0으로 변환하기 때문)
+        // 따라서 이름이 같아서 생기는 충돌을 피하기 위해 내부함수가 필요.
+        // '함수 안에 함수를 넣으면 해결!'
+        alert('직각삼각형 여부: ' + square(3, 4, 5));
+
+    </script>
+
+</body>
+
+</html>

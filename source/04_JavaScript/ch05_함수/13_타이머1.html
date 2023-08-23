@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let id = setTimeout(function(){
+            alert('3초가 경과함');
+        }, 3000); //3초 후 해당 함수를 실행.
+
+        // 아래 함수를 축약한 것. 윗쪽이 익숙해지도록 하자..
+        var fun = function(){
+            alert('10초 경과함');
+        };
+        setTimeout(fun,10000);
+
+
+
+        var cnt = 0;
+        let nowTime = new Date().getTime(); // 현재시간을 밀리세컨으로 변환
+        while (new Date().getTime() < nowTime + 2000){ // 2초간
+        cnt++; // 현재 밀리세컨이 1000이라면, 3000이 될 때까지 while문을 반복. 
+        }
+        clearTimeout(id);
+        // 위의 3초 경과 alert가 뜨지 않도록 함. (1회만 발생하는 이벤트이므로 clearTimeout은 거의 사용되지 않음)
+        alert('2초가 경과하였습니다. cnt의 카운트 횟수는 ? ' + cnt);
+        // 순서는 위의 alert가 먼저더라도, 2초가 경과한 아랫쪽 alert가 먼저 실행된 후,
+        // 3초가 경과했을 때 윗쪽의 alert가 나옴.
+
+        // 타이머를 중지시키기 위한 clearInterval은? 우선 id를 선언해야 함.
+
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
