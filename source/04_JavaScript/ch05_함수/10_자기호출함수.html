@@ -16,7 +16,8 @@
         }
         // 화살표 함수라면 function, return을 생략 가능
         function pythagoras(width, height) {
-            return Math.sqrt((x => x*x)(width)+(x => x*x)(height))};
+            return Math.sqrt((x => x * x)(width) + (x => x * x)(height))
+        };
                             // function(x) { return x*x;}를 화살표 함수로 최대한 축약한 결과
                             // x => x*x로 변경되었음.
 
@@ -29,7 +30,7 @@
         // fun(5); 일반적인 함수 선언 - 호출방법
         //(function fun(a){
         //    alert(a)})= (5);
-            // 함수 선언 동시에 호출하는 방법은 함수 자체에 괄호를 씌우고, 매개변수를 즉시 대입.
+        // 함수 선언 동시에 호출하는 방법은 함수 자체에 괄호를 씌우고, 매개변수를 즉시 대입.
 
         //화살표 함수, 매개변수 1개인 경우 자기호출함수(동시선언) 방법은
         //(i => {
@@ -38,11 +39,11 @@
 
 
         function square(width, height, hypotenuse) {
-           var sqaure = x => x*x;
-           // 화살표 함수인 경우엔 function, 중괄호, return 등을 모두 생략하여 간편히 표기.            
+            var sqaure = x => x * x;
+            // 화살표 함수인 경우엔 function, 중괄호, return 등을 모두 생략하여 간편히 표기.            
             return (width * width) + (height * height) == (hypotenuse * hypotenuse);
         }
-        
+
 
     </script>
 

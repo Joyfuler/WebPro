@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Rectangle(width, height) {
+            if (width <= 0 || height <= 0) {
+                throw '가로,높이는 음수가 될 수 없습니다'; // 예외 객체는 타입이 없으므로 메시지로 가능
+            } else {
+                this.width = width;
+                this.height = height;
+            }
+        }
+
+        Rectangle.prototype.getArea = function () {
+            if (this.width <= 0 || this.height <= 0) {
+                throw '음수 넓이는 없습니다.';
+            } else {
+                return this.width * this.height;
+            }
+        };
+
+        Rectangle.prototype.toString = function () {
+            return '가로: ' + this.width + ', 세로: ' + this.height + ' , 넓이 : ' + this.getArea() + '<br>';
+        };
+
+        try { // 도형 길이와 높이를 새로 만들 때 예외가 발생할 수 있으므로, 이 부분을 try로 감싸준다.
+            var rect = new Rectangle(-3, 10);
+        } catch (e) {
+            console.log('오류발생');
+            location.href = '공사중.html';
+            // 유저에게는 새로운 페이지로 이동시킴.
+        }
+        document.write(rect);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

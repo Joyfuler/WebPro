@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
-        table{
+        table {
             text-align: center;
             width: 700px;
             margin: 0 auto;
         }
-        tr,td {
+
+        tr,
+        td {
             text-align: center;
             padding: 2px;
         }
     </style>
-    <script>    
-                
+    <script>
+
         document.write('<table><tr><td colspan="2"><h3> 2~9단 구구단</h3></td></tr><tr>');
-        for (var dansu=2; dansu<10; dansu++){
-            document.write('<td><b>' + dansu +'단 &nbsp;</b></td>');            
+        for (var dansu = 2; dansu < 10; dansu++) {
+            document.write('<td><b>' + dansu + '단 &nbsp;</b></td>');
         } document.write("</tr><tr>");
-        for (var dansu2=1; dansu2<10; dansu2++){
-            for (var dansu=2; dansu<=9; dansu++){
-            document.write('<td>' + dansu + '*' + dansu2 + '=' + (dansu*dansu2) + '&nbsp;</td>');            
-            
+        for (var dansu2 = 1; dansu2 < 10; dansu2++) {
+            for (var dansu = 2; dansu <= 9; dansu++) {
+                document.write('<td>' + dansu + '*' + dansu2 + '=' + (dansu * dansu2) + '&nbsp;</td>');
+
             } document.write('</tr>');
         } document.write('</table>');
 
-        
+
 
 
 
@@ -34,7 +37,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

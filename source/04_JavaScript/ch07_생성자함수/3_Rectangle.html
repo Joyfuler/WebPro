@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function Rectangle(w, h) {
+            this.w = w;
+            this.h = h;
+        }
+
+        Rectangle.prototype.getArea = function () { // 넓이반환메소드
+            return this.w * this.h;
+        };
+        Rectangle.prototype.toString = function () { // 출력형식메소드
+            return '가로는 : ' + this.w + ', 세로는 : ' + this.h + ', 넓이는 :' + this.getArea();
+        };
+
+        var rect = new Rectangle(-5, 4);
+
+        document.write(rect); // 새로 객체를 만들 때에는 반드시 new를 넣어줄 것!
+        rect.h = 20;
+        document.write('<hr>');
+        document.write(rect);
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

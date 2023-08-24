@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // 자바의 경우 생성자 및 함수를 만드는 방법
+        // class Student{
+        // private String name;
+
+        // public Student (String name){ -- '생성자함수', name이라는 매개변수를 받아 생성자함수의 객체로 편입
+        // this.name= name;
+        //   }
+        // }
+        // // 다른 클래스에서 객체를 생성하여 생성자에 매개변수를 넣는 식으로 사용하였음.
+        // Student s = new Student("홍길동");
+
+        function Student(name, kor, eng, mat, sci) { //일반함수는 소문자함수, 생성자함수는 대문자시작으로 할 것을 권장
+            this.name = name;
+            this.kor = kor;
+            this.eng = eng;
+            this.mat = mat;
+            this.sci = sci; // 여기까진 동일. function은?
+            this.getsum = function () {
+                return this.kor + this.mat + this.eng + this.sci;
+            };
+            this.getavg = function () {
+                return this.getsum() / 4;
+            };
+            this.toString = function () {
+                let output = '';
+                for (let key in this) { //외부함수 --> this로!
+                    if (key != 'getsum' && key != 'getavg' && key != 'toString') { //데이터만 있는 경우는 변수이름과 변수값만으로 가져옴
+                        output += key + " : " + this[key] + ' '
+                    } else if (key == 'getsum' || key == 'getavg') { //메소드로 되어있다면
+                        output += key.substring(3).toLowerCase() + " : " + this[key]() + ' '; // 함수이므로 this[key]후 괄호를 꼭 넣자
+                    }
+                }
+                return output;
+            };
+        } //생성자함수. 생성자함수는 return 없이 new Student 형식으로 호출이 가능함. (새로운 객체만듬)
+        // (new 없이 호출하는 것은 일반객체, new로 호출하는 것은 내장(생성자)함수)
+
+        let s = new Student('홍길동', 99, 88, 77, 66); // 객체생성방법. Student student (x), 변수로 만들어주자.\
+        document.write(s);
+        document.write('<hr>');
+        document.write(s.name);
+        document.write(s.constructor + "<br>"); // 만든 생성자 함수의 source를 확인할 수 있음.
+        // 단, 기본 내장함수의 source는 볼 수 없으니 참고.
+
+        let students = [
+            new Student("홍길동", 88, 77, 66, 55),
+            new Student("김길동", 88, 77, 66, 55),
+            new Student("장길동", 88, 77, 66, 55),
+            new Student("최길동", 88, 77, 66, 55),
+            new Student("전길동", 88, 77, 66, 55),];
+
+        students.forEach((element, idx) => {
+            document.write(idx + '번째 :' + element + "<br>");
+        });
+        document.write(students.length + "명");
+        students.pop(); // 언제든 추가, 삭제가 가능하므로 arraylist는 필요하지 않음.
+        document.write("<h2>삭제후 </h2>");
+        students.forEach((element, idx) => {
+            document.write(idx + '번째 :' + element + "<br>");
+        });
+        document.write(students.length + "명");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

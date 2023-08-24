@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script>
-        alert('경고창', 1,2,3,'string');
+        alert('경고창', 1, 2, 3, 'string');
         // alert의 매개변수를 여럿 넣더라도, 맨 앞 매개변수인 '경고창'만 출력한 뒤 종료됨.
-        var r = alert('경고창', 1,2,3,'string');
+        var r = alert('경고창', 1, 2, 3, 'string');
         document.write(r); //undefined return. 만일 undefined가 나온다면 return이 없는지 확인하자.
 
         prompt('넣을 값은?', '기본값은 100');
         prompt('넣을 값은?');
-        // 그런데 prompt의 경우는 질문과 default값, 2개 매개변수를 넣을 수도 있고, 
+        // 그런데 prompt의 경우는 질문과 default값, 2개 매개변수를 넣을 수도 있고,
         // 질문용으로 매개변수를 1개만 넣을 수도 있음.
         // 메소드 오버로딩이 안 된다면, 여러개의 매개변수를 넣는 방법은? --> 가변인자함수 사용
 
@@ -18,7 +19,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

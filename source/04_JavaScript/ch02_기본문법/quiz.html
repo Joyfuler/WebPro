@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
         var korStr = prompt('국어 점수를 입력해주세요.', '0~100 사이 숫자로 입력')
-        if (!Number(korStr)){
+        if (!Number(korStr)) {
             alert('국어 점수를 제대로 입력하지 않았습니다. 다시 입력해주세요.');
-        } else if (Number(korStr) <0 || Number(korStr) >100 || isNaN(korStr)){
-                alert('국어 점수를 잘못 입력하였습니다.');
-                
+        } else if (Number(korStr) < 0 || Number(korStr) > 100 || isNaN(korStr)) {
+            alert('국어 점수를 잘못 입력하였습니다.');
+
         }
         var engStr = prompt('영어 점수를 입력해주세요.', '0~100 사이 숫자로 입력')
-        if (!Number(engStr)){
+        if (!Number(engStr)) {
             alert('영어 점수를 입력하지 않았습니다. 다시 입력해주세요.');
-        } else if (Number(engStr) <0 || Number(engStr) >100 || isNaN(engStr)){
-                alert('영어 점수를 잘못 입력하였습니다.');
-                
+        } else if (Number(engStr) < 0 || Number(engStr) > 100 || isNaN(engStr)) {
+            alert('영어 점수를 잘못 입력하였습니다.');
+
         } else {
-            evg = (Number(korStr) + Number(engStr))/2;
+            evg = (Number(korStr) + Number(engStr)) / 2;
             document.write("입력하신 국어와 영어의 평균 점수는 " + evg + " 입니다.");
         }
     </script>
 </head>
-<body>    
+
+<body>
 </body>
+
 </html>

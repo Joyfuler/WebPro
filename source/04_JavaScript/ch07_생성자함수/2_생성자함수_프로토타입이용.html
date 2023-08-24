@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function Student(name, kor, eng, mat, sci) { //일반함수는 소문자함수, 생성자함수는 대문자시작으로 할 것을 권장
+            this.name = name;
+            this.kor = kor;
+            this.eng = eng;
+            this.mat = mat;
+            this.sci = sci;
+        }
+        // 서로 공통되지 않는 생성자 함수까지만 넣어주고, 
+        // getsum, getavg 등의 함수는 프로토타입 영역으로 산입.
+        Student.prototype.getSum = function () {
+            return this.kor + this.mat + this.eng + this.sci;
+        };
+        Student.prototype.getAvg = function () {
+            return this.getSum() / 4;
+        };
+
+        Student.prototype.toString = function () {
+            let output = '';
+            for (let key in this) {
+                if (key != 'getSum' && key != 'getAvg' && key != 'toString') {
+                    output += key + " : " + this[key] + ' ';
+                } else if (key == 'getSum' || key == 'getAvg') {
+                    output += key.substring(3) + " : " + this[key]() + ' ';
+                }
+            }
+            return output;
+        };
+        let s = new Student('홍길동', 99, 88, 77, 66); // 객체생성방법. Student student (x), 변수로 만들어주자.\
+        document.write(s); // 메소드 영역은 그대로 출력
+        document.write('<hr>');
+        document.write(s.constructor + "<br>"); // 
+
+        let students = [
+            new Student("홍길동", 88, 77, 66, 55),
+            new Student("김길동", 88, 77, 66, 55),
+            new Student("장길동", 88, 77, 66, 55),
+            new Student("최길동", 88, 77, 66, 55),
+            new Student("전길동", 88, 77, 66, 55),];
+
+        students.forEach((element, idx) => {
+            document.write(idx + '번째 :' + element + "<br>");
+        });
+        document.write(students.length + "명");
+        students.pop(); // 언제든 추가, 삭제가 가능하므로 arraylist는 필요하지 않음.
+        document.write("<h2>삭제후 </h2>");
+        students.forEach((element, idx) => {
+            document.write(idx + '번째 :' + element + "<br>");
+        });
+        document.write(students.length + "명");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

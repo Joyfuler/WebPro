@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,21 @@
     <script>
         var kor, eng;
         do {
-            var korStr = prompt ('국어 점수는 몇 점(0~100)?', '0~100');       
+            var korStr = prompt('국어 점수는 몇 점(0~100)?', '0~100');
             kor = Number(korStr);
-        } while ( !korStr || isNaN(kor) || kor <0 || kor > 100);        
-        do {            
-            var engStr = prompt ('영어 점수는 몇 점(0~100)?', '0~100');
-            eng = Number(engStr);            
-        } while ( !engStr || isNaN(eng) || eng < 0 || eng > 100);        
-            evg = (kor+eng)/2;
-            document.write("입력하신 국어와 영어의 평균 점수는 " + evg + " 입니다.");
-        
+        } while (!korStr || isNaN(kor) || kor < 0 || kor > 100);
+        do {
+            var engStr = prompt('영어 점수는 몇 점(0~100)?', '0~100');
+            eng = Number(engStr);
+        } while (!engStr || isNaN(eng) || eng < 0 || eng > 100);
+        evg = (kor + eng) / 2;
+        document.write("입력하신 국어와 영어의 평균 점수는 " + evg + " 입니다.");
+
     </script>
 </head>
+
 <body>
-        
+
 </body>
+
 </html>

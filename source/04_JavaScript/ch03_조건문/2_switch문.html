@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script>
         var su = parseInt(prompt('숫자를 입력하세요 (0~100)'));
         // su는 string으로 들어오므로 parseint로 처음부터 숫자형으로 바꿔줌.
         // 단, number 입력시 입력을 하지 않으면 0이 들어오므로 주의할 것. (헷갈릴수있음)
-        switch (su%2){ // (2로 나눈 나머지값. 0아니면 1)
+        switch (su % 2) { // (2로 나눈 나머지값. 0아니면 1)
             case 0:
                 document.write('짝수입니다.');
                 break;
@@ -14,17 +15,19 @@
                 break;
             case -1:
                 document.write('홀수입니다.');
-                break;    
-                
-                default: document.write('정수를 입력하지 않았습니다.')
-        }    
+                break;
+
+            default: document.write('정수를 입력하지 않았습니다.')
+        }
 
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

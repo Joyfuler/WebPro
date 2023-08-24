@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script>
         // 자바의 int[]arr= {1,2,3};
-        var person = {'name':'홍길동','age':20}; // person 객체
-        var arr = [273, 'hello', true, function(){alert(1);}, person, [1,2,3]];
+        var person = { 'name': '홍길동', 'age': 20 }; // person 객체
+        var arr = [273, 'hello', true, function () { alert(1); }, person, [1, 2, 3]];
         //배열 안에 함수, 객체, 배열 안의 배열도 들어감.
         // {'0':273, '1':'hello', '2':true, '3':function(){alert(1);}}...
         document.write("원래 배열방의 갯수: " + arr.length + '<br>');
         document.write('4번방' + ' : ' + arr[4] + '<br>');
-        if (confirm('배열방에 데이터를 추가할까요?')){
+        if (confirm('배열방에 데이터를 추가할까요?')) {
             // yes선택시 true, no 선택시 false. yes를 선택해 배열에 데이터를 추가한다.
             var data = prompt('배열방에 넣을 데이터는?');
             arr.push(data);
             document.write('추가 후 배열방의 갯수: ' + arr.length + '<br>');
-            document.write('추가된 맨 마지막 방 데이터 : ' + arr[arr.length-1] +'<br>');
+            document.write('추가된 맨 마지막 방 데이터 : ' + arr[arr.length - 1] + '<br>');
         }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

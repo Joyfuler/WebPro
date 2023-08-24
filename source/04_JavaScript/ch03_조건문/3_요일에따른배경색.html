@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script>
         document.write('<h3> 요일에 따른 배경색 지정 </h3>');
         document.write('<p> 일요일은 빨간색, 월요일은 주황색, 화요일은 노란색'
-            +'수요일은 초록색, 목요일은 파란색, 금요일은 남색, 토요일은 보라색 </p>');
-            var week = new Date().getDay();
-            switch (week){
-                case 0: document.body.style = 'background-color: #FF0000';
+            + '수요일은 초록색, 목요일은 파란색, 금요일은 남색, 토요일은 보라색 </p>');
+        var week = new Date().getDay();
+        switch (week) {
+            case 0: document.body.style = 'background-color: #FF0000';
                 //일요일에는 빨간색. (document의 body에 백그라운드컬러 스타일을 줌)
                 break;
-                case 1: document.body.style = 'background-color: orange';
+            case 1: document.body.style = 'background-color: orange';
                 break;
-                case 2: document.body.style = 'background-color: yellow';
+            case 2: document.body.style = 'background-color: yellow';
                 break;
-                case 3: document.body.style = 'background-color: #00ff00';
+            case 3: document.body.style = 'background-color: #00ff00';
                 break;
-                case 4: document.body.style = 'background-color: blue'; 
+            case 4: document.body.style = 'background-color: blue';
                 break;
-                case 5: document.body.style = 'background-color: navy';
+            case 5: document.body.style = 'background-color: navy';
                 break;
-                case 6: document.bgColor= 'background-color: purple';
+            case 6: document.bgColor = 'background-color: purple';
 
 
-            }
+        }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

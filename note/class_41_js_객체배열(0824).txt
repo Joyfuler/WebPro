@@ -1,0 +1,36 @@
+--객체
+
+객체배열을 원하는 대로 출력하기 위해서는 객체배열 안에 tostring 메소드를 만들고,
+if에서 (key==tostring을 제외한 나머지 부분을 출력함)
+'toString': function(){
+
+let output = ''; //비어있는 str 변수를 생성.
+for (let key in this) {
+if (key != 'tostring'){
+output += key + ":" + this[key]
+   }
+}
+return output;
+
+이후 배열에 push를 사용하고 document.write를 통하여 tostring 형식에 맞춰 출력이 가능해짐.
+
+-- 내장함수
+1) 생성자함수 : 자바와 흡사.
+function Student (매개변수){
+this.매개변수 = 매개변수; 
+와 같은 형식으로 외부의 매개변수를 Student라는 생성자 함수 내부의 객체로 전환함.
+
+이후 let s = new Student('매개변수');
+document.write(s) 형식으로 출력이 가능함. (생성자 함수는 new를 이용해 만들며, return값이 존재하지 않음)
+
+프로토타입 영역 - 자바의 상속과 흡사. 공통된 영역이 되는 함수를 따로 빼서 함께 사용할 수 있도록 해줌.
+생성자 함수에 .prototype.함수이름 = function(){ 
+}; 통해 만들어 줌.
+
+Student.prototype.getSum= function(){
+return this.kor + this.mat + this.eng;
+이후 new Student( ) 된 모든 객체에 사용할 수 있게 됨. (주로 for문으로 사용) --> 메모리 절감 위함!
+
+/// 자바의 경우 int i =10; 과 Integer iObj = 10; 이 서로 달랐음. (전자의 경우 10을 그대로, iObj는 10을 값으로 가지는 객체의 주소를 refer하였음.)
+그러나 js는 int i와 var iObj = new Number(10) 모두 새롭게 객체를 생성함. js의 경우 기본 데이터 타입은 number, string, boolean 3가지만 존재.
+객체에 필요한 메소드를 prototype로 추가할 수 있고, 해당 타입에 맞는 함수는 모두 프로토타입의 메소드를 이용할 수 있다.

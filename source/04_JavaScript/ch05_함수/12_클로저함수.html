@@ -5,13 +5,13 @@
     <script>
         function test(name) {
             var msg = 'Hello,' + name + '님 방가방가';
-            const fun = function() {
+            const fun = function () {
                 alert(msg);
             };
             return fun;
         }
-            //return에는 msg도, fun (function(){alert~})도 들어갈 수 있음.
-            // 이 때 return fun을 하는 경우, fun은 클로저함수화함.        
+        //return에는 msg도, fun (function(){alert~})도 들어갈 수 있음.
+        // 이 때 return fun을 하는 경우, fun은 클로저함수화함.        
         let variable = test('홍길동'); // variable이라는 변수 생성. name에 홍길동 대입
         variable();
         // 혹은

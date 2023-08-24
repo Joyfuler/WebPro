@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<script>
 
-    function sumAll(){
-        let sum = 0;
-    if (arguments.length==0){ // 매개변수가 없다면
-        sum= -999;        
-    }else if (arguments.length>=1){ // 매개변수가 1개이상이라면?            
-        for (var cnt=0; cnt < arguments.length; cnt++){ // 매개변수만큼의 방만큼 각 방의 합을 실행함
-            sum += arguments[cnt];            
-        } 
-      } return sum;
-    }  
-    var sum = sumAll();
-    document.write('sumAll() = ' + sum+ '<br>');
-    var sum = sumAll(1);
-    document.write('sumAll(1) = ' + sum+ '<br>');
-    var sum = sumAll(1,2,3,4,5);
-    document.write('sumAll(1,2,3,4,5) = ' + sum+ '<br>');
-    var sum = sumAll(6,5,4,3,2,5,2,6,3,6,2);
-    document.write ('sumAll(6,5,4,3,2,5,2,6,3,6,2) = ' + sum+ '<br>');
-</script>
+<head>
+    <script>
+
+        function sumAll() {
+            let sum = 0;
+            if (arguments.length == 0) { // 매개변수가 없다면
+                sum = -999;
+            } else if (arguments.length >= 1) { // 매개변수가 1개이상이라면?            
+                for (var cnt = 0; cnt < arguments.length; cnt++) { // 매개변수만큼의 방만큼 각 방의 합을 실행함
+                    sum += arguments[cnt];
+                }
+            } return sum;
+        }
+        var sum = sumAll();
+        document.write('sumAll() = ' + sum + '<br>');
+        var sum = sumAll(1);
+        document.write('sumAll(1) = ' + sum + '<br>');
+        var sum = sumAll(1, 2, 3, 4, 5);
+        document.write('sumAll(1,2,3,4,5) = ' + sum + '<br>');
+        var sum = sumAll(6, 5, 4, 3, 2, 5, 2, 6, 3, 6, 2);
+        document.write('sumAll(6,5,4,3,2,5,2,6,3,6,2) = ' + sum + '<br>');
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

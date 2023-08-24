@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="4_replaceAll.js"></script>
+    <script>
+        let students = [{ 'name': '홍', kor: 99, mat: 97, eng: 97, sci: 99 },
+        { 'name': '김', kor: 90, mat: 96, eng: 92, sci: 89 }];
+        students.push({ 'name': '송', kor: 100, mat: 50, eng: 63, sci: 78 });
+        students.push({ 'name': '유', kor: 20, mat: 50, eng: 79, sci: 89 });
+        students.push({ 'name': '정', kor: 40, mat: 62, eng: 55, sci: 70 });
+        for (let idx in students) {
+            students[idx].getSum = function () {
+                return this.kor + this.mat + this.eng + this.sci; // 외부변수는 반드시 this를 추가하자.                
+            }; // 변수에 function을 집어넣는 경우, 반드시 괄호 뒤에 세미콜론을 넣어주자.            
+            students[idx].getAvg = function () {
+                return this.getSum() / 4;
+            };
+            students[idx].toString = function () {
+                //tostring 변수를 따로 넣어 출력형식을 바꾸어줌
+                let output = '';
+                for (const key in this) { // 외부값은 꼭 this를 사용
+                    if (key != 'getSum' && key != 'getAvg' && key != 'toString') {
+                        output += key + ":" + this[key] + ' ';
+                    } else if (key == 'getSum') {
+                        output += key.substring(3) + ':' + this[key]() + ' '; // 함수이므로 꼭 괄호를 넣어주자                    
+                        //key는 getsum. substring(3)을 하면 sum으로 출력됨.
+                    } else if (key == 'getAvg') {
+                        output += key.substring(3) + ':' + this[key]() + '<br>'; // 마찬가지로 함수이므로 this[key]() 로 입력                    
+                        // key는 getavg. substring(3)을 하면 avg로 출력됨
+                    }
+                }
+                return output;
+            };
+        }
+
+        // 1일반for문
+        var out = '';
+        for (let idx = 0; idx < students.length; idx++) {
+            out += idx + '번째 값 : ' + students[idx];
+        }
+        document.write(out);
+        document.write('<hr>');
+        // alert(replaceAll(out.toString(),'<br>','\n'));
+        // 2forin문
+        for (var idx in students) {
+            document.write(idx + '번째 :' + students[idx]); // toString 안 붙여도 알아서 조정됨
+        }
+        document.write('<hr>');
+        // 3foruf문
+        for (var s of students) { // forof - 자바의 foreach처럼 idx를 직접 가져오는 것이 아님. 배열을 모두 돌면서 데이터만 가져올 수 있는 것
+            document.write(s);
+        }
+        document.write('<hr>');
+        // 4foreach문
+        students.forEach(function (data, idx) {
+            document.write(idx + '번째 데이터 :' + data);
+        });
+        document.write('<hr>');
+        students.forEach(data => { //idx를 가져오지 않고, data만 사용함.
+            document.write(data);
+        });
+
+
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

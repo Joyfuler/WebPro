@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script>
-        var cnt =0; //횟수저장
+        var cnt = 0; //횟수저장
         // 자바의 경우.. double startTime = System.currentMilliIs
         let startTime = new Date().getTime();
-        while (new Date().getTime() <= startTime+1000){ //1 초만큼 반복 (startTime+1000 = 1초추가)
+        while (new Date().getTime() <= startTime + 1000) { //1 초만큼 반복 (startTime+1000 = 1초추가)
             cnt++;
-        }        
-        document.write('1초동안 while문 수행 횟수: ' + cnt+ "<br>");
+        }
+        document.write('1초동안 while문 수행 횟수: ' + cnt + "<br>");
         document.write('1초동안 while문 수행 횟수: ');
         var cntStr = String(cnt); // 세자리마다 ,(콤마) 찍는 방법? cnt를 String 타입으로 변환함.
         let commaLoc = (cntStr.length % 3); // 우선 자릿수를 확인해야 맨 앞자리 콤마 자릿수를 알 수 있음.
-        for (let idx =0 ; idx<cntStr.length; idx++){
-             // commaLoc가 1인 경우, 반복문을 한번 돌면 0이 됨. 
-            if (commaLoc==0){
+        for (let idx = 0; idx < cntStr.length; idx++) {
+            // commaLoc가 1인 경우, 반복문을 한번 돌면 0이 됨. 
+            if (commaLoc == 0) {
                 commaLoc = 3; // 3으로 만들고, 반복문이 실행될 때마다 -1씩 되어 0이 됨. 0이 되면 다시 3으로 변경됨.
-                if (idx!=0){ //첫번째 자릿수에는 쉼표를 넣으면 안 되므로 idx!=0을 추가. 이후 3자리 수마다 ,를 찍게 함.
-                document.write(',');
+                if (idx != 0) { //첫번째 자릿수에는 쉼표를 넣으면 안 되므로 idx!=0을 추가. 이후 3자리 수마다 ,를 찍게 함.
+                    document.write(',');
                 }
             }
             document.write(cntStr[idx]);
@@ -29,7 +30,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

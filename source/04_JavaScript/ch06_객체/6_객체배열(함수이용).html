@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        //객체생성하는 함수 (오타방지를 위한)
+        function makeStudent(name, kor, mat, eng, sci) {
+            // 이름, 각 과목 점수를 받아 객체를 return하는
+            let obj = {
+                'name': name, 'kor': kor, 'mat': mat, 'eng': eng, 'sci': sci,
+                'getsum': function () {
+                    return this.kor + this.mat + this.eng + this.sci;
+                }, 'getavg': function () {
+                    return this.getsum() / 4;
+                }, 'toString': function () {
+                    let output = '';
+                    for (let key in this) { //외부함수 --> this로!
+                        if (key != 'getsum' && key != 'getavg' && key != 'toString') { //데이터만 있는 경우는 변수이름과 변수값만으로 가져옴
+                            output += key + " : " + this[key] + ' '
+                        } else if (key == 'getsum' || key == 'getavg') { //메소드로 되어있다면
+                            output += key.substring(3).toLowerCase() + this[key]() + ' '; // 함수이므로 this[key]후 괄호를 꼭 넣자
+                        }
+                    }
+                    return output;
+                }
+
+            }
+            return obj;
+        }
+
+
+        //이후 데이터는 key를 넣지 않고 값만 넣어 오타를 최소화
+        let students = [];
+        students.push (makeStudent('창',80,70,60,30));
+        students.push (makeStudent('상',80,70,60,30));
+        students.push (makeStudent('숭',80,70,60,30));
+        students.push (makeStudent('싱',80,70,60,30));
+        students.push (makeStudent('빙',80,70,60,30));
+        students.forEach((data,idx) => {
+            document.write(idx + '번째 ' + data + '<hr>');
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

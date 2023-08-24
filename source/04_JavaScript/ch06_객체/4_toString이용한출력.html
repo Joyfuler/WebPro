@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="4_replaceAll.js"></script>
-    <script >
-       let person = {
-            'name' : '홍길동',
-            'age' : 20,
-            'eat' : function (food) { 
-                let msg = this.age + '살' + this.name + ' 님은' + food  + '을(를) 먹습니다.';
-                alert (msg);
-            }, 
-            //toString 생성, 출력할 String을 원하는대로 변경하기 위한 return값 설정
-            toString : function(){
-                var output = '';
-                // for-in 이용, return할 String 만들기.
-                for (var key in this) { // forin이 안에서 생성될 때에는 객체이름 대신 this를 사용함.
-                  if (key!='eat' && key != 'toString'){
-                    output += key + ':' + this[key]+ '\n';
-                  }
-                }
-                return output; // 자바의 toString과 마찬가지로 output을 리턴함.
-            },
-         };
-         alert(person);
-         person.address = '서울 서대문';
-         person.hobby = '개발하기';
-         alert(person);
-         document.write(person.toString().replaceAll('\n','<br>')); // browser 화면에서는 위에서 지정한 \n을 인식하지 못하므로,
-         document.write(replaceAll(person.toString(), '\n', '<br>'));
-         // <br>로 바꾸어 적어야 함.
-         document.write('----------------------------<br>');
-         
-         
-         var output = ''; // 우선 빈 스트링을 만든 후,
-         for (var key in person) {
-            if (key != 'eat'){
-            output += key + ':' + person[key] + '<br>'; // key값 : key안의 속성값이 출력하도록 추가.
-            // 함수값이 아닌 값은 정상적으로 출력됨.
-         }
+  <script src="4_replaceAll.js"></script>
+  <script>
+    let person = {
+      'name': '홍길동',
+      'age': 20,
+      'eat': function (food) {
+        let msg = this.age + '살' + this.name + ' 님은' + food + '을(를) 먹습니다.';
+        alert(msg);
+      },
+      //toString 생성, 출력할 String을 원하는대로 변경하기 위한 return값 설정
+      toString: function () {
+        var output = '';
+        // for-in 이용, return할 String 만들기.
+        for (var key in this) { // forin이 안에서 생성될 때에는 객체이름 대신 this를 사용함.
+          if (key != 'eat' && key != 'toString') {
+            output += key + ':' + this[key] + '\n';
+          }
         }
-         document.write(output); // 그러나 여전히 eat 부분에는 function 부분이 모두 출력됨.
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+        return output; // 자바의 toString과 마찬가지로 output을 리턴함.
+      },
+    };
+    alert(person);
+    person.address = '서울 서대문';
+    person.hobby = '개발하기';
+    alert(person);
+    document.write(person.toString().replaceAll('\n', '<br>')); // browser 화면에서는 위에서 지정한 \n을 인식하지 못하므로,
+    document.write(replaceAll(person.toString(), '\n', '<br>'));
+    // <br>로 바꾸어 적어야 함.
+    document.write('----------------------------<br>');
+
+
+    var output = ''; // 우선 빈 스트링을 만든 후,
+    for (var key in person) {
+      if (key != 'eat') {
+        output += key + ':' + person[key] + '<br>'; // key값 : key안의 속성값이 출력하도록 추가.
+        // 함수값이 아닌 값은 정상적으로 출력됨.
+      }
+    }
+    document.write(output); // 그러나 여전히 eat 부분에는 function 부분이 모두 출력됨.
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

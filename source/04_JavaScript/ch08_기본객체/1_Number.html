@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 자바의 경우 기본 자료형과 객체 자료형이 완벽히 분리되어 있음.
+        // Integer iObj = new Integer(10); --> iObj.toString() 이 가능.
+        // int i = 10; --> i.toString()이 불가능 (i가 객체가 아니기 때문임)
+        // 그러나 python / js의 경우는 var i =10 으로 만들어도 객체로 생성되므로 i.toString이 가능함
+        // 그런데 js에서 기본 데이터 타입을 만들려면? --> number, string, boolean 3가지 중 하나로 만들어야 함.
+        let priNum = 237.21; // 기본 데이터타입?
+        let objNum = new Number(237.21); // 객체 데이터타입?
+        document.write(typeof (priNum) + '<br>'); // number로 반환
+        document.write(typeof (objNum) + '<br>'); // object로 반환. 그러나 둘 다 객체 타입으로 생성됨
+        document.write(priNum.constructor == Number);
+        document.write(objNum.constructor == Number);
+        // 둘 모두 true로 반환됨. 즉 typeof로는 달라보이지만, 둘 모두 같은 생성자인 number라 true가 됨.
+        // 진정한 type는 number!
+        document.write('<hr>');
+        if (priNum.constructor == objNum.constructor) {
+            document.write('둘의 객체타입은 동일함');
+        } else {
+            document.write("다름");
+        }
+        document.write('<hr>');
+        document.write(priNum.toExponential(4) + '<br>');
+        document.write(objNum.toExponential(4) + '<br>');
+        // 273을 지수형으로 표시 + 소숫점 4자리까지 표시. 객체와 마찬가지로 내장함수를 사용가능
+        // 따라서 생성자 함수 Number에 prototype 메소드 추가도 가능하며, 두 객체 모두 프로토타입 사용 가능
+        Number.prototype.method1 = function () {
+            document.write('Number 타입이면 모두 호출이 가능함<br>')
+        };
+
+        priNum.method1();
+        objNum.method1();
+
+        objNum.method2 = function () {
+            document.write('objNum에 추가된 메소드로, priNum은 사용 불가능');
+        };
+
+        // priNum.method2();
+        objNum.method2();
+
+        priNum.method3 = function () {
+            document.write('prinum에 method3을 실행');
+        };
+        priNum.method3();
+        // 그럼에도 불구하고 let priNum = 수; 로 추가한 priNum에 새로운 메소드는 추가할 수 없음.
+        // 따라서 메소드 추가는 되도록 상위 타입에 프로토타입으로 추가하자.
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        function Rectangle(w, h) {
+            this.w = w;
+            this.h = h;
+        }
+        Rectangle.prototype.area = function () {
+            return this.w * this.h;
+        }
+
+        function Triangle(w, h) {
+            this.w = w; this.h = h;
+        }
+        Triangle.prototype.area = function () {
+            return this.w * this.h * 0.5;
+        }
+        let shape1 = new Rectangle(5, 7);
+        let shape2 = new Rectangle(3, 5);
+        let shape3 = new Triangle(5, 9);
+        // 세 가지의 typeof를 물어보면 모두 object라 답함. ( 그러나 마지막은 삼각형 함수이므로 혼동이 쉬움)
+        // 자바인 경우 앞 두 객체의 타입은 Rectangle, 뒷 타입은 Triangle 이었음.
+        if (typeof (shape1) == typeof (shape3)) {
+            document.write('shape1 타입 : ' + typeof (shape1) + 'shape3 타입 : ' + typeof (shape3) + ' 둘이 같습니다');
+        }
+        document.write('<hr>');
+        // 따라서 비교를 '각 객체의 생성자 함수가 같은지'를 비교해야 함.
+        // 이 때 사용하는 것이 constructor
+        document.write('shape1 생성자 : ' + shape1.constructor + '<br> shape3 타입 : ' + shape3.constructor + '<br>');
+        document.write('shape1의 생성자가 Rectangle인지 :' + (shape1.constructor == Rectangle) + '<br>');
+        // 출력하면 더 길게 나오지만, constructor를 Rectangle과 비교했을 때 true (같다) 로 반환됨.
+        if (shape1.constructor == shape3.constructor) {
+            document.write('shape1과 shape3은 같은 유형의 객체입니다');
+        } else {
+            document.write('shape1과 shape3은 다른 유형의 객체입니다.');
+        }
+        document.write('<hr>');
+        if (shape1.constructor == shape2.constructor) {
+            document.write('shape1과 shape2는 같은 유형의 객체입니다');
+        } else {
+            document.write('shape1과 shape2은 다른 유형의 객체입니다.');
+        }
+
+
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
