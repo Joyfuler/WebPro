@@ -25,11 +25,46 @@
     // ex) [a-zA-Z]{2,3} (영문소or대문자가 2~3회 반복)
     // ex) [가-힣]? (한글1글자가 0or1회)
 
+    var str = 'abcd!abcd5가';
+    // 해당 문자에 숫자or 영어or한글 등이 붙었는지를 검사
+    var patternNum = /[0-9]/; // 숫자포함?
+    var patternEng = /[a-zA-Z]/; // 영어포함패턴
+    var patternEngUp = /[A-Z]/;
+    var patternEngLow = /[a-z]/;
+    // 대문자와 소문자를 모두 적어도 1개 이상 입력하려면 /[a-z]/; 패턴과 /[A-Z]/; 패턴을 1개씩 만들어줌.
+    var patternKor = /[가-힣ㄱ-ㅎㅏ-ㅣ]/; // 한글 가~힣, 자음모음도 모두 포함해서 한글로
+    // 특수문자 목록: ~`!@#$%^&*()_-+={}[]\|:;"'<>,.?/ 매우 다양..
+    var patternSpc = /[~`!@#$%^&*()_\-+={}\[\]\\|:;"'<>,.?\/]/; 
+    //특수문자 일부는 그대로 사용할 수 없으므로 앞에 \ 를 붙여주어야 함. ( -, [], ., )
+    document.write('str에 숫자가 포함되었는지 여부 : ' + patternNum.test(str) + '<br>');
+    document.write('str에 대문자 포함 여부: ' +  patternEngUp.test(str) + '<br>');
+    //향후에는 form으로 입력받고 frm.pw.value를 비교하게 될 것..
+    // 단, 꼭 앞/뒤 띄어쓰기는 삭제할 것. trim()을 사용하자
+    document.write('str에 특수문자 포함 여부 :' + patternSpc.test(str));
+    //이후 비밀번호 유효성검사 방법
+    //if (!patternNum.test(frm.pw.value.trim())|| !patternEngLow.test(frm.pw.value.trim())){
+    //  alert('비밀번호에는 숫자와 알파벳이 포함되어야 합니다');
+    //  frm.pw.focus();
+    //  return false; }
+
+    var email1 = 'hong@hong.co.kr';
+    var email2 = 'hong@hong';
+    var patternEmail = /^\w+@[0-9a-zA-Z]+(\.\w+){1,2}$/;  //시작기호에는 /^ 종료기호에는 $/ 가 붙음.    
+    // str.match(정규표현식) : 해당 문자열이 정규표현식에 부합하는지 물어봄.
+    document.write("<br>정규표현식 부합? : " + email1.match(patternEmail)); // str 반환 (true)
+    document.write("<br>정규표현식 부합? : " + email2.match(patternEmail)); // null 반환 (false)
+    // 부합하지 않으면 null, 부합하면 str을 반환
+if (email1.match(patternEmail)){
+    document.write ('<br>email1이 정규패턴과 일치');
+} else {
+    document.write('<br>email1이 불일치');
+}
 
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 </head>
 <body>
     

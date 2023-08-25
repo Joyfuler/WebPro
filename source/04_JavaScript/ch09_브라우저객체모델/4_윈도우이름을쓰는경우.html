@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        let openWin = function () {
+            let child = open('', 'childWin', 'width=700, height=400'); //open()의 매개변수는 3개! url, 이름, 창속성
+            if (!child) {
+                alert('팝업 차단을 해제해주세요');
+            }
+        };
+    // 이름을 정해주면 해당 창에서 새로 사이트를 불러올 수 있음. (childWin)
+
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <button onclick="openWin()">새 창 열기</button> <!-- form태그가 없는 경우-->
+    <!-- onclick = 클릭이 발생했을 때 다음과 같은 함수를 실행함-->
+    <a href="http://www.naver.com" target="childWin">네이버</a>
+    <!-- 새 창에서 이동한 후 다시 네이버를 클릭하면, 또 다른 새 창이 뜨지 않고 기존 open된 페이지에서 네이버를 불러옴.-->
+
+</body>
+
+</html>

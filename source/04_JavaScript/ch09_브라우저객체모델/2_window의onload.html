@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        //윈도우 내부의 이벤트변수에는 반드시 메소드만 넣을 수 있음
+        window.onload = function () {
+            document.body.innerHTML += ('<h1>Process-4</h1>');
+            alert('윈도우 로드완료');
+        }; 
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1> Process-1 </h1>
+    <script>
+        document.body.innerHTML += '<h1>Process-2</h1>';
+    </script>
+    <h1> Process-3 </h1>
+</body>
+
+</html>

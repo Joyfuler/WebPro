@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+    function Student(name,kor,mat){
+        this.name=name;
+        this.kor=kor;
+        this.mat=mat;
+    } // 생성자함수
+    Student.prototype.getSum = function(){
+        return this.kor + this.mat;
+    };
+    Student.prototype.getAvg = function(){
+        return this.getSum() / 2;
+    };
+    Student.prototype.toString = function(){
+        return this.name + ' ' + this.kor + 
+        ',' + this.mat + ',' +this.getSum() + ',' + this.getAvg() + '<br>';
+        };
+
+    var students = [new Student('홍',77,50),
+    new Student('킴',30,60),
+    new Student('마',40,70),
+    new Student('신',60,80),
+    new Student('장',50,90),];
+
+    students.forEach((data, idx) => {
+        document.write(idx + " : " + data);
+    });
+
+    // 이름정렬
+    students.sort(); // 맨 첫번째 속성값의 아스키코드순 정렬
+    students.forEach((data,idx) => {
+        document.write('이름순으로 정렬 : ' + idx + ':' + data);
+    });
+
+    // 국어점수 내림차순정렬 음수가 나오는 경우에는 자리바꿈 x, 양수인 경우엔 자리바꿈.
+    students.sort(function (left,right){
+        return right.kor - left.kor; // 옆 배열의 국어점수와 앞 배열의 국어점수를 빼서,
+                                     //양수가 나오는 경우 자리를 바꿈 (내림차순정렬)
+    });
+
+    students.forEach((data,idx) => {
+        document.write('국어순으로 정렬 : ' + idx + ':' + data);
+    });
+
+    students.sort(function (left,right){
+        return right.getSum() - left.getSum();
+    });
+
+    students.forEach((data,idx) => {
+        document.write('총점순으로 정렬 : ' + idx + ':' + data);
+    });
+
+    students.sort(function (left,right){
+        return right.getAvg() - left.getAvg();
+    });
+
+    students.forEach((data,idx) => {
+        document.write('평균순으로 정렬 : ' + idx + ':' + data);
+    });
+
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

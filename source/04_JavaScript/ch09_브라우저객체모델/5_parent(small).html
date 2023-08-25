@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+
+         // 바깥으로 빼서 닫을 때에도 child의 범위에 미치도록 함.
+        let child;
+        function openLarge() {
+            child = open('5_child(large).html', '', 'width=500, height=610, left=10');
+            if (!child) {// 새 창이 안 뜬 경우
+                // 새 창을 여는 메소드
+                alert("팝업 차단 해제가 필요합니다.");
+            }
+        }
+
+        function closeLarge() {
+            child.close();
+        }
+        
+        
+        
+
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2> 작은 그림의 parent 창 </h2>
+    <img src="img/small.jpg" alt="쟉은그림" onmouseover="openLarge()" onmouseout="closeLarge()">
+    <!--onmouseover : 마우스를 댔을 때 / onmouseout : 마우스를 해당 위치에서 뗐을 때 -->
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // document.write() 는 document라는 브라우저 객체에 write 함수를 사용해 내용을 출력하는 것.
+        var cnt = 0;
+        for (var key in window) { //alert,confirm,prompt등 일반 함수처럼 사용했던 것은 windows 객체 안의 속성.    
+            document.write(++cnt + key + ' : ' + window[key] + '<br>');
+        }
+        document.write('<hr>');
+        // window 객체에 다양한 on~ 함수 존재(대부분 null) -> 
+        // 이벤트 함수들. 사용자가 함수를 넣어 해당 동작을 하도록 할 수 있음.
+
+        window.onload = null; // 이벤트속성변수 (로딩할 때)
+        window.onkeyup = null; // 키보드를 눌렀다 뗐을 때 
+
+        window.onload = function () {
+            alert('윈도우가 로드됨'); // 모든 body까지 전부 출력한 이후, 아래 함수들이 출력됨.
+            // 즉 alert 역시 윈도우가 로드된 후에 실행되는 것.
+        };
+        var fun = function () { };
+        for (const key in window) {
+            if (key == 'onload' || key == 'fun' || key == 'cnt') {
+                document.write(key + ' : ' + window[key] + '<br>');
+            }
+        }
+
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>

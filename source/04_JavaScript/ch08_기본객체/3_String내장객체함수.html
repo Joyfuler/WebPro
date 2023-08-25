@@ -6,24 +6,24 @@
         // String의 내장함수는 아이디나 비밀번호 형식을 체크하는 정규표현식 등을 활용하는 데 사용
 
         // replace를 내가 직접 정의하는 방법. js에서는 필요한 함수를 직접 만들거나 가져올 수 있는 것이 장점.
-        String.prototype.replace = function (oldStr, newStr){
+        String.prototype.replace = function (oldStr, newStr) {
             return this.split(oldStr).join(newStr); // 원문에 있는 해당 텍스트를 잘라낸 후, 그 부분에 새로운 텍스트를 join
         }
         var str = 'abc@abcd@abc';
-        document.write (str.replaceAll('@','-',));
+        document.write(str.replaceAll('@', '-',));
         document.write('<hr>');
-        document.write (str.replace('@','') + '<br>');
+        document.write(str.replace('@', '') + '<br>');
         document.write(str.length + '<br>');
         document.write('문자 연결:' + str.concat(str) + '<br>'); // str에 str을 붙여서 2번출력
-        document.write('<br>3번째부터 5번째까지 잘라내어 표시' + str.substring(3,6)); // 6번째 앞까지 = 5번째까지
-        document.write('<br>3번째부터 2글자 추출 ' + str.substr(3,2)); // substring이 아닌 substr이니 주의!
+        document.write('<br>3번째부터 5번째까지 잘라내어 표시' + str.substring(3, 6)); // 6번째 앞까지 = 5번째까지
+        document.write('<br>3번째부터 2글자 추출 ' + str.substr(3, 2)); // substring이 아닌 substr이니 주의!
         document.write('<br>@가 처음 나오는 위치' + str.indexOf('@'));
         document.write('<br>@가 마지막으로 나오는 위치 ' + str.lastIndexOf('@'));
         var str1 = ' Ja va ';
-        document.write('띄어쓰기를 제거 (유효성 검사에 주로 사용, 양쪽 끝 스페이스만 제거) : ' + str1.trim()); 
+        document.write('띄어쓰기를 제거 (유효성 검사에 주로 사용, 양쪽 끝 스페이스만 제거) : ' + str1.trim());
         document.write('<br>대문자소문자' + str1.toUpperCase());
         document.write('<br>대문자소문자' + str1.toLowerCase());
-        
+
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

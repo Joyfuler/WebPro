@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        var child = open('6_centerChild.html','', 'width=100, height=100');
+        // width와 height의 값은 임의로 적는다. 
+        // (open 안에 screen.width/2 등의 변수를 넣지 못함)
+        let childWidth = screen.width/2; // 창을 정확히 한 가운데에 넣기 위해 전체 넓이 /2를 해줌.
+        let childHeight = screen.height/2; // 전체 높이 /2
+        // 총 크기의 정확히 반의 넓이를 가진 창을 만들고, 창의 한가운데로 이동시킬 예정.
+        let childLeft = screen.width /4; // 위치할 방향은 전체 스크린의 나누기 4를 해 줌
+        let childTop = screen.height/4;
+        child.resizeTo(childWidth,childHeight); //child의 사이즈를 조정함.
+        child.moveTo(childLeft,childTop); // child의 위치를 이동시킴.
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

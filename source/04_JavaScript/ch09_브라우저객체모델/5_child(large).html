@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+    setTimeout(()=>{ // setTimeout은 첫번째에 함수, 두번째에 닫을 시간을 입력
+        window.close();
+    },5000);   
+    
+    var sec = 5;
+    var id = setInterval(()=>{        
+        if (sec != 0) {
+            sec--; 
+        document.body.innerHTML= '<img src = "img/large.jpg" alt="큰그림"><br>'
+        +'<h1>'+ sec +'초 후에 큰 그림은 자동으로 닫힘</h1>';
+        
+        } if (sec ==0){
+    clearInterval(id);
+}},1000);
+        
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src = "img/large.jpg" alt="큰그림">
+    <h1> 5초 후에 큰 그림은 자동으로 닫힘</h1>    
+</body>
+</html>
