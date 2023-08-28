@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 280px;
+            height: 100px;
+            margin: 10px auto;
+        }
+        h1,
+        h2 {
+            text-align: center;
+        }
+    </style>
+    <script>
+        var color = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'violet', 'white'];
+        var h1; var h2;
+        window.onload = function () {
+            h1 = document.getElementsByTagName('h1');
+            h2 = document.getElementsByTagName('h2');
+            td = document.getElementsByClassName("1"); // 배열로가져옴 
+            for (let key in td) {
+                td[key].style = 'background-color:' + color[key] + ';';
+            }
+        };
+        function changeColor(a) {
+            document.body.style = "background-color:black;";
+            h1[0].style = "color:" + color[a] + ";";
+            h1[0].innerHTML = '야호 거의 끝났다';
+            h2[0].style = "color:white";
+        }
+        function colorBack() {
+            h2[0].style = "color:black";            
+            h1[0].innerHTML = '';
+            document.body.style = 'background-color:white;';
+        }
+    </script>
+</head>
+
+<body>
+    <h2> 중간예제 3</h2>
+    <table>
+        <tr>
+            <td class="1" onmouseover="changeColor(0)" onmouseout="colorBack()"></td>
+            <td class="1" onmouseover="changeColor(1)" onmouseout="colorBack()"></td>
+            <td class="1" onmouseover="changeColor(2)" onmouseout="colorBack()"></td>
+            <td class="1" onmouseover="changeColor(3)" onmouseout="colorBack()"></td>
+            <td class="1" onmouseover="changeColor(4)" onmouseout="colorBack()"></td>
+            <td class="1" onmouseover="changeColor(5)" onmouseout="colorBack()"></td>
+            <td class="1" onmouseover="changeColor(6)" onmouseout="colorBack()"></td>
+        </tr>
+    </table>
+    <h1></h1>
+</body>
+
+</html>

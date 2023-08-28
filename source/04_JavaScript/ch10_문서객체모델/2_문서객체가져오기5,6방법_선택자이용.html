@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    window.onload = function(){
+        // 1. id 이용 (getElementById(id명)) 
+        // 2. class이용 (getElementsByClassName(class명))
+        // 3. parameter(name) (getElementsByName(패러미터이름))
+        // 4. tag자체이용 (getElementsByTagName(태그명)
+        // 5. 선택자(1개/all) (1개(맨처음) - querySelector / all - querySelectorAll)
+        var header1 = document.querySelector('h1.header'); // 클래스이므로 .으로 (id는 #)
+        header1.innerHTML = '첫번째만 바뀜';        
+        // document.querySelector (h1:nth-child(1))
+        // css와 비슷한 방법으로 query를 select 가능.
+        var header = document.querySelectorAll('h1.header'); // selectorall의 경우는 배열로 return됨
+        let col = ['red', 'orange'];
+        for (let idx in header){
+            header[idx].style = 'background-color:'+col[idx] + ';';
+            // header[idx].style.cssText = 'background-color:' + col[idx] + ';';
+            //header[idx].style.backgroundColor = col[idx];
+        }
+         var param = document.querySelectorAll('input[type="text"]')[0]; // 배열로 받으므로 [0]넣자 (param 값은 1개니)
+         param.value = '다들 몸 조심하세요';
+                
+            
+        };    
+    </script>
+</head>
+<body>
+    <h1 class = "header">HEADER1</h1>
+    <h1 class = "header">HEADER2</h1>
+    <input type = "text" name = "param">
+    
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 280px;
+            height: 100px;
+            margin: 10px auto;
+        }
+        h2{
+            text-align: center;
+        }
+    </style>
+    <script>
+        var color = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'violet', 'white'];
+        window.onload = function () {
+            td = document.getElementsByClassName("1"); // 배열로가져옴 
+            for (let key in td) {
+                td[key].style = 'background-color:' + color[key] + ';';
+            }
+        };
+
+        function changeColor(n) {
+            document.body.style = "background-color:" + color[n];
+        }
+
+        function colorBack() {
+            document.body.style = "background-color:" + color[7];
+        }
+
+    </script>
+</head>
+
+<body>
+    <h2> 중간예제 1. 마우스를 올리면 바탕화면의 색상이 바껴요.</h2>
+    <table>
+        <tr onmouseout = "colorBack()">
+            <td class="1" onmouseover="changeColor(0)"></td>
+            <td class="1" onmouseover="changeColor(1)"></td>
+            <td class="1" onmouseover="changeColor(2)"></td>
+            <td class="1" onmouseover="changeColor(3)"></td>
+            <td class="1" onmouseover="changeColor(4)"></td>
+            <td class="1" onmouseover="changeColor(5)"></td>
+            <td class="1" onmouseover="changeColor(6)"></td>
+        </tr>
+    </table>
+</body>
+
+</html>

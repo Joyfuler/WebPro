@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // css처럼 특정 id를 가진 h1에 기능을 넣는 방법
+        var header1, header2;
+        var toggle1 = 0, toggle2 = 0;
+        var timerId;
+        window.onload = function () { // 항상 로드되는 함수를 우선 사용! (이벤트함수)
+            header1 = document.getElementById("header1"); // 해당id의 객체를 가져온다 --> header1이 문서객체화
+            header1.innerHTML = '날짜와 시간';
+            header2 = document.getElementById("header2");
+            header2.innerHTML = new Date().toLocaleString();
+            var button1 = document.getElementById("button1");
+            var button2 = document.getElementById("button2");
+            timerId = setInterval(() => {
+                header2.innerHTML = new Date().toLocaleString();
+            }, 1000);
+        
+            clearInterval(header2);
+        };
+        function change1() {
+            // 토글기능은 클릭횟수를 기억했다가 서로 다른 기능을 수행하도록 설정해야함.
+            if (toggle1 == 0) {
+                header1.innerHTML = 'HEADER-1';
+                toggle1 =1;                
+            } else if (toggle1 == 1){
+                header1.innerHTML = '날짜와 시간';
+                toggle1= 0;                
+            }
+        }
+
+        function change2() {
+            if (toggle2 == 0){
+               clearInterval(timerId);
+               toggle2 = 1;            
+               button2.innerHTML = "시간측정시작";
+            } else if (toggle2 ==1) {
+                timerId = setInterval(() => {
+                    header2.innerHTML = new Date().toLocaleString();
+                }, 1000);
+                toggle2 = 0;
+                button2.innerHTML ="시간측정멈춤";
+                
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <!-- 객체를 가져오는 6개 방법 1) id로 가져오기 2) class로 가져오기 3) parameter (name등) 으로 가져오기 4) 선택자로 가져오기 
+        5) 해당 태그 전체를 가져오기 ...-->
+    <h1 id="header1">HEADER-1(날짜)</h1>
+    <h1 id="header2">HEADER-2(시간)</h1>
+    <button id = "button1" onclick="change1()"> header-1 토글</button> <!-- 클릭하면 change1() js 함수를 실행하라는 의미-->
+    <button id = "button2" onclick="change2()"> 시간측정멈춤</button> <!-- 토글? 같은 키를 한 번 누를 때마다 a-b-a-b 번갈아 실행-->
+</body>
+
+</html>

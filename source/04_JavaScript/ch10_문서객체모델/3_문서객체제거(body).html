@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            color: red;
+        }
+    </style>
+    <script>
+        function append() {
+            document.body.innerHTML += '<h1>HEADER</h1>';
+            var h = document.querySelectorAll('h1');
+            for (var key in h) {
+                h[key].innerHTML += '<span>#</span>';
+
+            }
+        }
+
+        function remove() {
+            var h2 = document.getElementsByTagName('h1'); // 태그로 가져왔으므로 배열!
+
+            if (h2.length > 0) {
+                document.body.removeChild(h2[0]) // 가장 위에 있는 것을 1개 제거         
+            } else {
+                alert('삭제할 h1 태그가 없습니다');
+            }
+
+        }
+
+        function removeAll() {
+            var h3 = document.getElementsByTagName('h1'); // 배열.
+            if (h3.length > 0) {
+                for (var keys in h3) {
+                    document.body.removeChild(h3[0]); // key로 적는 경우, key값도 함께 늘어나면서 전체 삭제가 불가능함. 
+                }
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <button onclick="append()">h1태그 하나 추가하기</button> <!-- h1 태그 마지막에 1개가 추가됨-->
+    <button onclick="remove()">h1 태그 하나 지우기</button>
+    <button onclick="removeAll()">h1태그 싹 지우기</button>
+    <h1> HEADER </h1>
+    <h1> HEADER </h1>
+    <h1> HEADER </h1>
+    <h1> HEADER </h1>
+    <p> p </p>
+
+</body>
+
+</html>

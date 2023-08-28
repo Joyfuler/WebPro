@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      window.onload = function(){ // 윈도우 로드 실행 후 함수를 수행!!
+        // id로 가져오는 법 = document.getElementById('id명') : 엘리먼트 id 1개를 return
+        // class로 가져오는 법 = document.getElement"s"ByClassName('class명'): 해당 클래스를 배열로 return
+        var clock1 = document.getElementsByClassName('clock1');
+        clock1[0].innerHTML = new Date().toLocaleDateString(); // h1 에는 날짜만 출력하게끔. 
+        setInterval(() => {
+            clock1[1].innerHTML = '<b>'+ new Date().toLocaleTimeString() + '</b>'; // p에는 시간만 출력하게끔.        
+        }, 1000);             
+        var clock2 = document.getElementsByClassName('clock2')[0]; // 데이터가 1개밖에 없으므로 [0]을 가져옴.
+        setInterval(() => {
+            clock2.value = new Date().toLocaleTimeString();
+        }, 1000); 
+        document.body.style = 'background-color: yellow; text-align: center'; //바디스타일을 해당 함수 실행할때 바뀌는 동적인 것을 하려면 다음과 같이 js를 이용해야 함.
+        clock2.style = 'font-weight = bold; font-size:2em; color:red;';
+        clock2.style.fontWeight = '800';
+      };
+
+    </script>
+</head>
+<body>
+    <h1 class = "clock1 clk1"></h1>
+    <!-- class명에 스페이스가 들어간 경우, 클래스 이름이 2개인 것. (1개 이름에 스페이스 들어간 것이 x)-->
+    <p class = "clock1 clk2"></p>
+    <input type = "text" class = "clock2" value = "xx">
+</body>
+</html>

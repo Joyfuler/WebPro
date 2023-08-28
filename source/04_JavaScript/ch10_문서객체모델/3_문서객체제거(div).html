@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            color: red;
+        }
+    </style>
+    <script>
+        var wrap;
+        window.onload = function(){
+            // wrap = document.getElementById('wrap'); id를 이용하여 element를 가져옴.
+            // wrap = document.getElementsByTagName('div'); // div로 가져오므로 배열. [0]방 소환
+            // wrap = document.querySelector('div#wrap'); // div의 wrap클래스라는 선택자로도 소환가능
+            wrap = document.querySelectorAll('#wrap'); // #wrap을 모두 가져옴. (여기에서는 1개, 배열소환)
+        }
+        function append() {
+            wrap.innerHTML += '<h1>HEADER</h1>'; // document.body 대신 wrap을 넣어 내용 추가
+            var h = document.querySelectorAll('h1');
+            for (var key in h) {
+                h[key].innerHTML += '<span>#</span>';
+
+            }
+        }
+        
+        function remove() {
+            var h2 = document.getElementsByTagName('h1'); // 태그로 가져왔으므로 배열!
+
+            if (h2.length > 0) {
+                document.body.removeChild(h2[0]) // 가장 위에 있는 것을 1개 제거         
+            } else {
+                alert('삭제할 h1 태그가 없습니다');
+            }
+
+        }
+
+        function removeAll() {
+            var h3 = document.getElementsByTagName('h1'); // 배열.
+            let cnt = h3.length;
+            if (h3.length > 0) {
+                for (let i=0; i<cnt; i++){
+                    document.body.removeChild(h3[0]);
+                }
+                }
+            }
+        
+
+    </script>
+
+</head>
+
+<body>
+    <div id = "wrap"> <!-- body가 아닌 div에 태그를 추가하려 한다면-->
+    <button onclick="append()">h1태그 하나 추가하기</button> 
+    <button onclick="remove()">h1 태그 하나 지우기</button>
+    <button onclick="removeAll()">h1태그 싹 지우기</button>
+    <h1> HEADER </h1>
+    <h1> HEADER </h1>
+    <h1> HEADER </h1>
+    <h1> HEADER </h1>
+    <p> p </p>
+    </div>
+
+</body>
+
+</html>

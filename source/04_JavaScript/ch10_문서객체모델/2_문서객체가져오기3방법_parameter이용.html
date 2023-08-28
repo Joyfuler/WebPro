@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function loginChk(){
+            var id = document.getElementsByName("id")[0]; //name이라는 패러미터는 여럿. -> 배열return
+            var pw = document.getElementsByName("pw")[0]; // 배열 [0]에만 데이터 존재. (1개이므로)
+            var gender = document.getElementsByName("gender"); // 남/여 2개 존재. 
+            if (!id.value){ // id에 아무것도 입력하지 않은 경우
+                alert('아이디를 입력하세요.');
+                id.focus();
+            } else if (!pw.value){
+                alert('비밀번호를 입력하세요.');
+                pw.focus();
+            } else if (!gender[0].checked && !gender[1].checked){ //radio의 경우 checked 함수를 통해 체크함.
+                alert('성별을 선택하세요.');
+                gender.focus();
+            } else if (gender[0].checked){
+                alert ('남자' + id.value + '님의 비번은' + pw.value);
+            } else if (gender[1].checked){
+                alert('여자 ' + id.value + '님의 비번은 ' + pw.value);                
+            }
+            
+            var patternId = [/a-zA-Z가-힣{1,}/];
+        }
+
+    </script>
+</head>
+<body>
+    <h3>로그인</h3>
+    <form action = '#' method="get" name="login">
+        <p> ID <input type = "text" name= "id"></p>
+        <p> PW <input type = "password" name= "pw"></p>
+        <p> 
+        성별 
+         <input type = "radio" name= "gender" value="m">남자
+         <input type = "radio" name = "gender" value="f"> 여자
+        </p>
+        <p> <input type = "button" value = "로그인" onclick = "loginChk()"></p>
+        <!-- 클릭시 loginChk 함수를 수행함. 아이디 1글자/ 비번 1글자이상, 남/여중 체크 필여-->
+
+    </form>
+</body>
+</html>

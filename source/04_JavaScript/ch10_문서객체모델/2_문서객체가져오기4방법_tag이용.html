@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            var header = document.getElementsByTagName('h1'); // 배열리턴
+            //for (idx =0; idx <header.length; idx++){
+            //    header[idx].innerHTML  = '바꿔 #' + idx;
+            //}
+
+               for (const key in header) {                
+               header[key].innerHTML = '바꿔 #' + key;
+               }
+              //for (let element of header) {
+              //      element.innerHTML = '바꿔';
+              // }              
+
+        };
+    </script>
+</head>
+<body>
+    <!-- 같은 태그가 여럿 있을 수 있으므로,  tag로 가져오는 경우 값은 배열 return. [0] 주의! -->
+    <h1>HEADER</h1>
+    <h1>HEADER</h1>
+    <h1>HEADER</h1>
+    <h1>HEADER</h1>
+    <h1>HEADER</h1>    
+</body>
+</html>

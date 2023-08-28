@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // 방법1) h1태그 생성 -> textNode 생성 -> textNode를 h1에 추가, h1을 body 추가
+        // 단, 윈도우 로드가 완료된 다음에 수행해야 함.
+        window.onload = function(){                
+        var h1 = document.createElement('h1'); // 1) 일단 생성만 한 것 
+        var textNode = document.createTextNode('추가한 h1 태그 안의 text'); // 2) h1 안에 들어갈 텍스트를 createTextNode로 추가하였음.
+        h1.appendChild(textNode); // 3) textnode를 h1에 붙이는 작업.
+        document.body.appendChild(h1); // 4) h1을 body에 붙이는 작업
+
+        // 방법2) 1. img 태그 생성 2. src 속성 변경 3. img를 body에 추가
+        //setAtrribute - 안쪽의 속성을 변경함.
+        var img = document.createElement('img'); //body에 들어갈 img 문서객체(태그)생성
+        img.setAttribute('src', 'img/red.jpg'); // src의 속성에 img/red.jpg가 들어가도록 추가되었음.
+        img.setAttribute('alt', '체리'); 
+        document.body.appendChild(img); // body에 위에 설정한 img를 추가하였음.
+        
+        // 방법3(innerHTML을 이용 - easy )
+        document.body.innerHTML += '<h2> 방법3으로 추가</h2>';
+            
+
+    };
+    </script>
+
+        
+        
+
+    <title>INDEX</title>
+</head>
+<body>
+    <!-- body에 있는 태그 내용 중 일부만을 변경하고 싶다면?
+    태그 하나하나를 객체로 인식하므로 태그를 새로 만들거나 해당 태그의 내용을 변경할 수 있음-->
+    <!-- 동적으로 만들기 위해 javascript를 활용-->
+<h1> TEXT </h1>
+        <img src = "img/orange.jpg" alt="오렌지">
+</body>
+</html>
