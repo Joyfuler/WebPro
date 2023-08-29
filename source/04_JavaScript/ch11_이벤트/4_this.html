@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function () {
+            var header = document.getElementsByClassName("header"); //header 클래스를 가진 값들. 배열로 return            
+            //기존 방법
+            header[0].onclick = function () {
+                header[0].style = "color:red;";
+                // 해당 header를 클릭할 시 빨간색으로.. class가 여러 개일때 한번에 그 작업을 처리하는 방법은?
+            };
+
+            for (const key in header) {
+                header[key].onclick = function () {
+                    this.style = "color:red; border:2px solid orange;"; // click 이벤트를 걸었을 때 발생한 객체(component)를 this로 표기.
+                    // 함수 안으로 들어온 header[key]를 this로 표기하여 사용함.
+                }
+            }
+        };
+
+
+
+    </script>
+</head>
+
+<body>
+    <h1 class="header">click1</h1>
+    <h1 class="header">click2</h1>
+    <h1 class="header">click3</h1>
+    <h1 class="header">click4</h1>
+    <h1 class="header">click5</h1>
+</body>
+
+</html>

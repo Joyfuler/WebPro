@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img{
+            /* 클릭한 곳으로 마차를 옮기기 위해, left와 right값을 각각 offset으로 가져옴.*/
+            position:absolute;
+            top:0;
+            z-index : -1;
+            display: none;
+            
+            
+        }
+    </style>
+    <script>
+        window.onclick = function(){ //클릭시에 이벤트를 발생시킴.
+            //p태그에는 좌표를 출력, img 태그는 마우스 클릭시 해당 위치로 이동시키기 위해,
+            //두 태그를 모두 가져와야함.
+            let msg = document.querySelector('p.msg'); // p태그의 msg 클래스
+            let img = document.getElementsByTagName('img')[0]; //배열로 받으므로 [0]
+            let x = event.offsetX; let y = event.offsetY;
+            msg.innerHTML = '옮겨진 x좌표는' + x + ', ' + 'y좌표는' + y;
+            img.style = "display:inline; left:"+x +"px; top:"+y +"px;"
+        };
+    </script>
+</head>
+<body>
+<p class = "msg">클릭하면 클릭한 곳으로 마차가 옮겨지고 좌표가 출력됨.</p>
+<img src = "img/car.gif" alt ="마차...?">
+</body>
+</html>

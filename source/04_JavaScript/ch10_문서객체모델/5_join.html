@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table tr td,
+        table tr {
+            text-align: center;
+        }
+    </style>
+    <script>
+        const confirmOpen = function () {
+            let confirm = window.open('5_confirm.html', '', 'width=500 height=600 left=100');
+            if (!confirm) {
+                alert('팝업 차단을 해제하세요');
+            }
+        };
+
+        function chk() {
+            let idConfirmed = document.getElementById('idConfirmed').value; // idconfirmed 태그의 값. 만일 0이라면 아예 중복확인을 하지 않은 것
+            let idTag = document.getElementById('id'); // 띄어쓰기 가능성도 참고해야 함.
+            if (idConfirmed == '0') { // idconfirm ==> 중복확인을 거쳤다면 1, 아니라면 0
+                alert('아이디 중복 확인을 먼저 해 주세요.');
+                return false;
+            } else if (!idTag.value.trim()) { // id를 입력하지 않았을 경우
+                alert('아이디는 필수 입력 사항입니다.');
+                idTag.focuse();
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+</head>
+
+<body>
+    <form onsubmit="return chk();">
+        <input type="text" id="idConfirmed" value="0"> <!--회원가입시 아이디 중복체크를 했는지 여부를 확인하는 함수-->
+        <!-- 일반적으로는 hidden으로 사용함. (사용자에게는 보이지 않도록)-->
+        <table>
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" id="id" name="id"></td>
+                <td><input type="button" onclick="confirmOpen()" value="중복확인"></input></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="회원가입"></input></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

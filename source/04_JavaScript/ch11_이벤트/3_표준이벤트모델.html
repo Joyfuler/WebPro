@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        h1{ cursor:pointer;}
+    </style>
+    <script>
+        window.onload = function(){
+            var head = document.querySelector('h1');
+            head.addEventListener('click', () => {
+                alert("클릭됨");
+            }); //리스너함수 추가, 첫번째 매개변수에는 이벤트명, 두번째 매개변수는 함수로 (하고 싶은 행동)
+        };
+        
+    </script>
+</head>
+<body>
+<h1> 클릭해 봐</h1>
+</body>
+</html>

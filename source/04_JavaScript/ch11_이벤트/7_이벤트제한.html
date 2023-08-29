@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{text-align: center;}
+    </style>
+    <script>
+        window.onload = function(){
+            document.querySelector('form').onsubmit = function(){
+                let pw = document.querySelector('input[name="pw1"]');
+                let pw2 = document.getElementsByName('pw2')[0]; //elements이므로 배열return
+                // input에 직접 onsubmit을 넣지 않고, querySelector로 가져온 뒤 .onsubmit = 함수로 걸 수 있음.
+                if (!pw.value){
+                    alert('비밀번호는 필수 입력사항입니다');
+                    pw.focus();
+                    return false;
+                } else if (!pw2.value){
+                    alert('비밀번호는 필수 입력사항입니다');
+                    pw2.focus();
+                    return false;
+                } else if (pw.value!= pw2.value){
+                    alert('두 비밀번호의 값이 서로 다릅니다.');
+                    pw.value = '';
+                    pw2.value = ''; // 두 비밀번호의 값을 모두 초기화하는 작업
+                    pw.focus();
+                    return false;
+                } return true;
+            };
+        };
+    </script>
+</head>
+<body>
+<form>
+    <p>PW <input type="password" name="pw1" id="pw"></p>
+    <p>PWChk <input type="password" name="pw2" id="pw2"></p>
+    <p><input type="submit" value = "로그인"></p>
+    <!--submit 버튼을 클릭시 무조건 이벤트가 발생함. 이를 발생하지 못하도록 하는 것
+    return chk() 이외의 방법으로 막는 방법은?-->
+</form>
+</body>
+</html>

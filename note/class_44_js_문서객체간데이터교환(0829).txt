@@ -1,0 +1,55 @@
+창과 창 간에 데이터를 교환하는 방법은? 
+onclick시 sendDate() 함수로 보내도록 하고, 각 버튼이 어떤 데이터를 보내는지 구분하도록 매개변수를 대입함.
+기존의 파일간 open등을 테스트하던 alt+b와는 달리, 서버로 파일간 상호작용을 시키려면 alt + l + o 를 사용.(live server)
+새 창 오픈된 child 문서에서 opener의 객체를 소환함.
+window.onload = function(){
+var name = opener.document.getElementByID('name').value; --> opener, 즉 원래 새 창으로 열게 했던 문서의 id=name에 입력했던 값을 가져오는 것.
+var parentData = document.getElementById('parentData'); --> 다시 opener로 리턴해 줄 parentData 변수를 만들어줌.
+};
+만일 getElement가 아닌 getElements (byName등) 인 경우 return은 배열값이므로 반드시 [0] 등을 사용하여 배열을 지정해준다.
+
+아이디 중복체크의 경우, 보이지 않는 input을 만들고 값을 0으로 초기화.
+확인하는 페이지의 중복체크 함수 마지막 단계에 해당 값을 1로 변경하고,
+값이 1인 경우 가입이 가능하도록 chk() 함수를 수행.
+<input type="hidden id ="idConfirm" value ="0">
+이후 중복확인 html의 체크 함수에서
+opener.document.getElementById('idConfirm').value =1;
+window.close(); 식으로 변경.
+
+let idConfirmed = document.getElementById('idConfirm); 으로 객체를 넣은 후
+chk()에서는 if (idConfirmed =='0') 일시 alert 및 false로 return.
+
+-- 이벤트를 거는 방법
+1) 인라인 - 태그 자체에 거는 방법 ( <h1 onclick = "Click()"> 클릭 </h1>
+2) 기본 이벤트 - 변수로 만들고, getElement 혹은 querySelector로 가져옴.
+3) 표준 이벤트 - 리스너 변수를 추가 (addEventLister() , 첫번째 매개변수에는 이벤트 명을, 두번째 매개변수에는 함수를 넣어준다.
+
+-- 이벤트 강제 발생 방법
+a 함수 실행시 b함수도 실행하도록, a 안에 b를 넣어준다.
+b1.onclick = function(){
+b2.onclick();
+}
+-- 이벤트 삭제 방법
+onload 등 이벤트 함수의 값을 null로 돌려준다.  (원래 이벤트 함수 기본값은 null, function을 입력해 주면 바뀜)
+ex) click = document.getElementsByTagName('h1')
+click.onload = null; 
+
+-- 이벤트 제한
+기존 onsubmit ="return chk()"와 형식은 흡사. 
+단, 인라인 이벤트를 사용하지 않고 변수를 생성한 뒤 뒤에 .onsubmit = function() {
+} 형식으로 작성함.
+document.querySelector('form').onsubmit = function(){
+};
+
+-- 키값 or 좌표 가져오기 
+키가 올라왔을 떄 (onkeyup) 해당 키를 가져옴.
+window.onkeyup = function(){
+let key = event.keyCode; (해당 아스키 코드를 가져옴)
+위 숫자키 기준으로 -48을 하면 실제 숫자를 가져올 수 있음.
+
+마우스 좌표는 클릭시 이벤트 발생.
+window.onclick = function(){
+일반적으로 브라우저 좌표의 가로/세로 좌표를 가져옴. event.offsetX / event.offsetY 
+document.body.innerHTML += event.offsetX 형식으로 좌표를 출력.
+
+혹은 태그의 style을 position: absolute로 하고, 좌표를 가져와 해당 이미지를 옮기는 것도 가능.

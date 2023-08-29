@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #wrap {
+            width: 450px;
+            margin: 0 auto;
+        }
+
+        #wrap h1 {
+            color: red;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        #wrap h3 {
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid red;
+            text-align: center;
+            border-radius: 10px;
+            font-size: .9em;
+            cursor : pointer;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            //parent와 child간 데이터 통신
+            //parent 할 일 : child창 open하기 
+            //child 할 일 : opener(자기를 연 문서 -> parent)에 있는 아이디 값을 가져와 child 속 document에 출력.
+            // 내 document 객체의 데이터를 다시 opener(parent)의 id로 넘기기.
+            var name = opener.document.getElementById('name').value; // id이니 element로 사용할 것! 이름 가져오는 방법
+            var date = opener.document.getElementById('date').value;
+            var parentData = document.getElementById('parentData'); //h2는 빈공간이므로 value값 없이 가져옴!
+            parentData.innerHTML = '넘어온 이름 : ' + (name? name : '없음') + ', 날짜: ' + (date? date: '없음'); // 다시 돌아갈 데이터의 양식을 만들어줌.
+            var input = document.querySelector('input[type="text"]');
+            input.value = name;
+        };
+
+        const sendData = function(part){ // modifyname (수정했거나 안한 이름의 value)를 다시 opener에 쏘는 작업
+            var modifyName = document.getElementById('modifyName').value; // 위에서 가져온 내용이 아닌, child 내부의 input에 적혀 있는 값을 쏠 것.
+            opener.document.getElementById('name').value= modifyName; // 오프너의 id의 값을 본 문서의 input에 들어가 있는 값으로 바꾸어줌.
+            opener.document.getElementById('part').innerHTML = part;
+            window.close();
+        };
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <h1> 인사 정보 시스템</h1>
+        <hr>
+        <h2 id="parentData"></h2>
+        <h2> 이름 수정 가능 <input type="text" id="modifyName"></h2>
+        <hr>
+        <h3 onclick="sendData('인사')">인사로 하고 닫기</h3>
+        <h3 onclick="sendData('재무')">재무로 하고 닫기</h3>
+        <h3 onclick="sendData('회계')">회계로 하고 닫기</h3>
+        <h3 onclick="sendData('개발')">개발로 하고 닫기</h3>
+
+    </div>
+    </header>
+</body>
+
+</html>

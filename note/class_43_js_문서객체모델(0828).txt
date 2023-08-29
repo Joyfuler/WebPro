@@ -1,0 +1,36 @@
+객체 생성의 방법은 3가지
+1. h1 태그
+1) h1태그를 생성(var h1 = document.createElement('h1')
+2) h1에 들어갈 텍스트를 생성 (var text = document.createTextNode('텍스트'))
+3) h1에 추가 -> body에 해당 h1을 추가 (h1.appendChild(text)) -> (document.body.appendChild(h1))
+
+2. img 태그의 경우
+1) img 태그 생성 (var img = document.createElement('img')
+2) img의 속성을 넣어줌 (img 태그 단독으로는 작동하지 않으므로 src등을 추가해야) - img.setAttribute('src','img/flower.jpg')
+3) body에 해당 img를 추가 (document.appendChild(img))
+
+3. 기존과 같이 document.body.innerHTML을 사용 (+= 사용시 밑줄에 하나씩 추가, = 사용시 해당 텍스트로 대체됨.)
+
+
+객체를 가져오는 방법은 6가지로, id와 class, parameter(name 등)을 통해 가져오거나, 태그 전체를 가져오거나, 선택자를 통해 가져올 수 있음.
+var id = document.getElementById('id명') --> id는 단 한개의 값만 리턴되므로 일반 변수처럼 출력이 가능함.
+var classes = document.getElemenBy('class명')[0] --> 클래스는 여러 값이 리턴될 수 있으므로, 기본적으로 배열로 return됨.
+값이 한 개만 있는 경우에는 [0]을 붙여서 해당 데이터를 가져오거나, 객체를 가져올 때 배열을 넣는 등의 방법을 사용.
+
+★★ 리턴된 값이 undefined 등이 나오는 경우 배열 값을 실수로 처리하지 않은 것이니 다시 한번 check할것!!
+
+
+classes[1].innerHTML = new Date().toLocaleDateString(); 와 같이 사용
+var password =  document.getElementsByName("password")[0] --> 배열로 리턴되므로 배열 기호를 명시할 것.
+var header = document.getElementsByTagName ('h1) --> h1 태그를 모두 header로 가져옴. 마찬가지로 배열로 리턴.
+forin등으로 내용을 모두 변경하거나, 배열 번호를 지정해서 변경하는 것도 가능함.
+선택자는 querySelector / querySelectorAll을 사용. CSS와 흡사하게 input[type="submit"] 등 지정하여 객체를 가져올 수 있다.
+var header = document.querySelector('h1.header'); --> h1중 class가 header인 문서 객체를 header에 대입함.
+이후 function을 통해 forin -> header[idx].style = 'color: green' 등으로 전체를 변경할 수 있음.
+
+
+
+---
+1초 간격으로 현재 시각을 표시하는 등 일정 간격으로 실행하는 함수를 사용하려면 setInterval을 사용하자. (자동완성 추천)
+setInterval을 마치기 위해서는 setTimeout을 사용하고 clearInterval (해당 변수) 를 넣는 것으로 중단이 가능.
+

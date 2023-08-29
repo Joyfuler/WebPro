@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #wrap {
+            width: 300px;
+            margin: 50px auto;
+        }
+
+        #wrap h1 {
+            width: 250px;
+            padding: 20px 10px;
+            margin: 30px 15px;
+            border: 1px solid red;
+            background-color: lightpink;
+            border-radius: 10px 40px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        #wrap input,
+        #wrap span {
+            width: 150px;
+            height: 20px;
+            display: inline-block;
+            border: 1px solid pink;
+        }
+
+        #wrap p {
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        const childOpen = function () {
+            let child = window.open('4_child.html', '', 'width=500px, height=600px, left = 100px');
+            if (!child) {
+                alert('팝업 차단을 해제해 주세요.');
+            }
+        };
+        // var --> 다른 곳에서 같은 이름 변수 정의시 덮어씌워짐.
+        // let --> 다른 곳에서 같은 이름 변수 정의시 해당 부분에서는 따로 기능이 적용됨.
+        // const --> 다른 곳에서 같은 이름 변수를 정의할 수 없음.
+    </script>
+</head>
+
+<body>
+    <div id="wrap"><!-- 다른 창으로의 데이터 전송을 위해서는 id 지정이 꼭 필요 (class 안됨!)-->
+        <p> 사원이름 <input type="text" id="name"></p>
+        <p> 파트명칭 <span id="part"></span></p>
+        <p> 결제일자 <input type="date" id="date"></p>
+        <h1 onclick="childOpen()">인사정보 파트 선택</h1>
+    </div>
+</body>
+
+</html>

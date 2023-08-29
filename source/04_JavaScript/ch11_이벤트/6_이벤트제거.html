@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        h1 {cursor : pointer;}
+        span:nth-child(1){color: red;}
+        span:nth-child(2){color:orange;}
+        span:nth-child(3){color:yellow;}
+        span:nth-child(4){color:green;}
+        span:nth-child(5){color:blue;}
+        span:nth-child(6){color:navy;}
+        span:nth-child(7){color:violet;}
+        h1::selection{background-color:white;} /* 블럭 잡았을 때 색상 바꾸고 싶다면 */
+        span::selection{background-color:white;}
+        
+            </style>
+    <script>
+        var cnt =0;
+        window.onload = function(){
+            document.querySelector('h1').onclick = function(){  
+                // 변수지정 없이 h1 객체 생성.. 변수가 필요한 경우엔 this를 사용할 수 있음.
+                if (cnt <7){
+                cnt++;
+                this.innerHTML += '<span>♥</span>';
+                // 하트가 1개씩 추가.. 무지개색 이후 더이상 추가되지 않기 위해선?
+                // onclick은 원래 null --> 이후 함수를 넣는 것.
+                // 바깥에 cnt변수를 0으로 초기화하고 ++로 1씩 증가시킴.
+            } else { //클릭을 7번 이상 했을 경우 이벤트를 제거하는 작업
+                this.onclick = null; // this == document.querySelector('h1') 이벤트를 제거
+            }
+                
+                
+                
+            }
+            
+
+            };
+        
+    </script>
+</head>
+<body> <!-- 좋아요 클릭시 하트가 1개씩 증가. 하트가 5개까지 늘어나면 더이상 늘지 않도록 이벤트를 중단하는 것.-->
+    <h1> 좋아요</h1>
+</body>
+</html>

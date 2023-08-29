@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function(){
+            cnt =0;
+            var b1 = document.getElementById('b1');
+            var b2 = document.querySelector('#b2');
+            var countA = document.getElementById('count1');
+            var countB = document.getElementById('count2');
+            //b1 클릭시 b2의 click이벤트 강제발생
+            b1.onclick = function(){ // 첫번재 버튼을 클릭할 때 해당 함수 실행                
+            countA.innerHTML = Number(countA.innerHTML) + 1;
+            b2.onclick(); // 함수 안에 b2.onclick의 함수를 넣어, 첫번째 버튼 클릭시 두번째도 클릭하도록 강제설정.
+            };
+
+            b2.onclick = function(){
+            countB.innerHTML = parseInt(countB.innerHTML) + 1;    
+            }
+
+        };
+    </script>
+</head>
+<body>
+<button id = "b1">Button A</button>
+<button id = "b2">Button B</button>
+<!-- 버튼을 클릭한 횟수를 표시할 예정-->
+<h1>Button A 클릭 횟수 - <span id ="count1">0</span>번</h1>
+<h1>Button B 클릭 횟수 - <span id = "count2">0</span>번</h1>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        // 키보드를 눌렀을 때 / 뗐을 때, 마우스를 클릭했을 때와 놓았을 때의 이벤트 / 좌표값 가져오기
+        // window.onkeydown -> 눌러져 있는 도중
+        // window.onkeypress  -> 누르기 시작
+        // window.onkeyup -> 키보드를 뗐을 때 (이 때 무엇이 입력되어 있는지 인식 가능)
+        // 기본적으로 window객체 중 on~시작은 모두 null로 되어 있음. 사용자가 직접 설정 필요
+        window.onkeyup = function(){
+            let key = event.keyCode; // 누른 키의 아스키 코드가 key에 대입됨.
+            alert(key); // 같은 숫자라도 오른쪽 키패드와 윗쪽 숫자키의 아스키 코드는 서로 다름.
+            // 우측 키패드 아스키코드 : 96 ~ 105
+            // 윗쪽 숫자키 아스키코드 : 48~ 57 ..48차이
+            // 영문 a~z : 65 ~ 99
+            if (key >=48 && key <=57){ 
+                alert('위 숫자 ' + (key-48) + '를 누르셨군요');
+            } else if (key >=96 && key <=105) { // 아스키코드가 97이고 -96을 해주면 1
+                alert('우측 숫자' + (key-96) + '를 누르셨군요');
+            } else if (key >=65 && key <=90){ //영문인 경우
+                alert('문자' + String.fromCodePoint(key) + '를 누르셨군요.');
+            }
+        };
+
+        window.onclick = function(){
+            document.body.innerHTML = '스크린좌표' + event.screenX + ',' + event.screenY + '<br>' //screenX screenY 전체화면기준 x,y좌표
+            document.body.innerHTML += '브라우저좌표' + event.offsetX + ',' + event.offsetY + '<br>'; // offsetX offsetY 브라우저기준 x,y좌표
+            
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+    </style>
+    <script>
+        var imgs;
+        var overSrc;
+        var outSrc;
+        window.onload = function () {
+            overSrc = ['img/0over.jpg', 'img/1over.jpg', 'img/2over.jpg', 'img/3over.jpg'];
+            outSrc = ['img/0out.jpg', 'img/1out.jpg', 'img/2out.jpg', 'img/3out.jpg'];
+            imgs = document.getElementsByTagName('img');
+        };
+
+        function changeOrange(n) {
+            imgs[n].setAttribute('src', overSrc[n]);
+        }
+
+        function restoreColor(n) {
+            imgs[n].setAttribute('src', outSrc[n]);
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td><img src='img/0out.jpg' onmouseover="changeOrange(0)" onmouseout="restoreColor(0)"></td>
+            <td><img src='img/1out.jpg' onmouseover="changeOrange(1)" onmouseout="restoreColor(1)"></td>
+            <td><img src='img/2out.jpg' onmouseover="changeOrange(2)" onmouseout="restoreColor(2)"></td>
+            <td><img src='img/3out.jpg' onmouseover="changeOrange(3)" onmouseout="restoreColor(3)"></td>
+        </tr>
+    </table>
+</body>
+
+</html>

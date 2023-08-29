@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table {
+            width: 500px;
+            margin: 10px auto;
+            background-color: darkgreen;
+        }
+
+        td {
+            background-color: white;
+            padding: 50px;
+            text-align: center
+        }
+
+        ;
+    </style>
+    <script>
+        window.onkeyup = function () {
+            let key = event.keyCode;
+            var tds = document.getElementsByTagName('td'); // td의 모든 값을 배열로 return받음
+            if (key >= 48 && key <= 56) {
+                //모든 tds의 배경색을 white로 초기화한 후, 입력한 숫자의 td만을 yellow로 변경
+                for (const key in tds) {
+                    tds[key].style = "background-color:white";
+                }
+                tds[key - 48].style = "background-color: yellow";
+            } else if (key >= 96 && key <= 104) { // 아스키코드가 97이고 -96을 해주면 1
+                for (const key in tds) {
+                    tds[key].style = "background-color:white";
+                }
+                tds[key - 96].style = "background-color: red";
+            }
+            
+        };
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+        </tr>       
+
+    </table>
+</body>
+
+</html>
