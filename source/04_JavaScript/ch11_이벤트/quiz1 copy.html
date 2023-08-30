@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+    </style>
+    <script>
+        var imgs;
+        var overSrc;
+        var outSrc;
+        window.onload = function () {
+            overSrc = ['img/0over.jpg', 'img/1over.jpg', 'img/2over.jpg', 'img/3over.jpg'];
+            outSrc = ['img/0out.jpg', 'img/1out.jpg', 'img/2out.jpg', 'img/3out.jpg'];
+            imgs = document.getElementsByTagName('img'); // onload 안에 
+            for (let key in imgs) {
+                imgs[key].onmouseover = function () {
+                    this.setAttribute('src', overSrc[key]);
+                }
+            }
+            for (let idx in imgs) {
+                imgs[idx].onmouseout = function () {
+                    this.setAttribute('src', outSrc[idx]);
+                    // 안으로 들어온 변수를 this로 치환가능
+                };
+            }
+        };
+
+
+
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td><img src='img/0out.jpg'></td>
+            <td><img src='img/1out.jpg'></td>
+            <td><img src='img/2out.jpg'></td>
+            <td><img src='img/3out.jpg'></td>
+        </tr>
+    </table>
+</body>
+
+</html>

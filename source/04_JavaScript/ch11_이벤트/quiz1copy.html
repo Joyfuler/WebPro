@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img{
+            cursor:pointer; 
+        }
+    </style>
+    <script>
+        var imgs;
+        var overSrc;
+        var outSrc;
+        window.onload = function () {
+            overSrc = ['img/0over.jpg', 'img/1over.jpg', 'img/2over.jpg', 'img/3over.jpg'];
+            outSrc = ['img/0out.jpg', 'img/1out.jpg', 'img/2out.jpg', 'img/3out.jpg'];
+            imgs = document.getElementsByTagName('img');
+
+            for (let key = 0; key < imgs.length; key++) {
+                imgs[key].addEventListener('mouseover', () => {
+                    imgs[key].setAttribute('src', overSrc[key]);
+                });
+            }
+
+            for (let key = 0; key < imgs.length; key++) {
+                imgs[key].addEventListener('mouseout', () => {
+                    imgs[key].setAttribute('src', outSrc[key]);
+                });
+            }
+        };
+
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td><img src='img/0out.jpg'></td>
+            <td><img src='img/1out.jpg'></td>
+            <td><img src='img/2out.jpg'></td>
+            <td><img src='img/3out.jpg'></td>
+        </tr>
+    </table>
+</body>
+
+</html>
