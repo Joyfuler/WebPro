@@ -61,4 +61,3 @@ output += key + ':' + this[key] + '\n';
 	}
 }
 return output;
-

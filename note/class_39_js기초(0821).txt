@@ -18,5 +18,3 @@ let list = '';
 list += "<ul> <li> html </li> </ul>"
 document.doby.innerHTML += list;
 다음과 같이 입력하여 body를 먼저 출력 후 다음 값을 소환.
-
-
