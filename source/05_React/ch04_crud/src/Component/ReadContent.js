@@ -1,7 +1,9 @@
 import { Component } from "react";
+import './ReadContent.css';
 
-class Content extends Component{
+class ReadContent extends Component{
     render(){
+        console.log ('ReadContent Rendering');
         return(
             <article>
                 <h2> {this.props.title} </h2>
@@ -10,4 +12,4 @@ class Content extends Component{
         );
     }
 }
-export default Content;
+export default ReadContent;

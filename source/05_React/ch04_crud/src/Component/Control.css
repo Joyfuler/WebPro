@@ -1,0 +1,18 @@
+ul {
+    width:100%;       
+}
+
+ul.control, ul.control li {        
+    padding-left: 10px;    
+    margin: 0 auto; 
+    text-align: center;
+}
+
+
+ul.control li {
+    list-style:none;
+}
+
+ul.control li button{
+    cursor:pointer;
+}

@@ -1,9 +1,15 @@
 ul {
-    text-align: center;
+    text-align: left;
 }
 li {      
     width: 100px;  
     list-style: none;
     margin: 0 auto;
-    display:table;    
+    display:table;  
+    text-align: left;  
+}
+
+h1 a {
+    color: black;
+    ;
 }

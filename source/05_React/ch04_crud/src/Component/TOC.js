@@ -2,7 +2,14 @@ import { Component } from "react";
 import "./TOC.css";
 
 class TOC extends Component {
+  shouldComponentUpdate(newProps /* 이전 props값*/){    
+    if (this.props.data === newProps.data){
+      return false; //이전값과 같다면, 변경할 필요가 없으므로 렌더링을 하지 않음.
+    } 
+    return true;
+  }
   render() {
+    console.log('TOC Rendering');
     var lists = [];
     var data = this.props.data;
     for (var key = 0; key < data.length; key++) {
@@ -21,6 +28,7 @@ class TOC extends Component {
       );
     }
     return (
+      
       <nav>
         <ul>{lists}</ul>
       </nav>

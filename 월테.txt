@@ -1,0 +1,10 @@
+ip란?
+port: 같은 ip에 여러 프로그램을 구분하기 위한 번호
+DNS 165.123.201.2 <-> www.naver.com 으로 변경하는 것(도메인문자열)
+
+웹 브라우저의 기본 포트: 80
+HTML (JS, CSS, JSP) 문서와 같은 소스를 가져올 수 있도록 해주는 약속(프로토콜) =  HTTP
+
+관계형 DBMS -> foreign key / primary key (가짐) Oracle, MySQL, MariaDB
+SQL문 3가지 종류 : DDL(select) ( / DML(create/delete) / DCL(계정삭제/생성)
+JSP 환경설정에 대한 문항 (2문항) 
