@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h2, button{
+            display: inline-block;
+        }
+    </style>
+      
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>다른 부분</div>
+    <hr>
+    <div id = "root"></div>
+    <hr>
+    <div>다른 부분</div>
+    <!-- 개발용 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type = "text/babel">
+        // class LikeButton extends React.Component{
+        //     constructor(props){
+        //         super(props);
+        //         this.state = {liked : Boolean(Number(props.liked))}; // liked가 1이나 0
+        //     }
+        //     render(){
+        //         if (this.state.liked){
+        //         return(
+        //           <h2>You liked this. Thank you</h2>  
+        //         );
+        //     } else {
+        //         return(
+        //         <button onClick = {() => {
+        //             this.setState({liked : true});
+        //         }}>좋아요 버튼을 눌러주세요!</button>
+        //         );
+        //     }
+        //     }
+        // }
+
+        // 클래스 대신 함수를 사용하여 좋아요 버튼을 구현하는 법 -
+        const LikeButton = props => {
+            // 일반 지역변수를 state화하는 hook변수. 
+            const [liked,setLiked] = React.useState(Boolean(Number(props.liked))); // react.useState사용시 rendering
+            // 첫번째 값은 liked, 두번째 값은 setliked (hook)
+            if (liked){
+                return(
+                <button onClick = {() => {
+                    setLiked(false);
+                }}>좋아요 취소</button>
+                );
+            }
+            return (
+                <button onClick = {() => {
+                    setLiked(true);
+                }}>
+                좋아요 버튼을 눌러주세요!    
+                </button>
+            );
+        };
+    </script>        
+    <script type = "text/babel">
+        ReactDOM.createRoot(document.querySelector('#root')).render( // 교안에 있는 웹팩을 사용! #root는 div의 id
+      <div>
+            jQuery : <LikeButton liked="1"/><br/>
+            React : <LikeButton liked="0"/><br/>
+      </div>
+    );
+
+  </script>  
+</body>
+</html>

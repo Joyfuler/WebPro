@@ -1,0 +1,7 @@
+header.subject h1{
+    color: red;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+    padding-left: 50px;
+}

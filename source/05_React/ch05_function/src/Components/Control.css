@@ -1,0 +1,24 @@
+ul.control {
+    padding-left: 10px;    
+    margin: 0 auto;  
+}
+
+ul.control{
+    overflow: hidden;
+    padding:0;
+    width: 260px;
+    margin: 0 auto;
+}
+
+ul.control li {
+    float: left;
+    list-style: none;
+    padding-left: 18px;
+    text-align: center;  
+   
+}
+
+button {
+    font-size : 0.7em;
+    cursor: pointer;
+}

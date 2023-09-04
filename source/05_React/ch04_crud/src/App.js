@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.maxId = 4; // 불필요한 렌더링방지를위해 this.state 밖으로 빼줌.
-    // state가 set될떄마다 새롭게 렌더링이 되기 때문에
+    // state가 set될 때마다 새롭게 렌더링이 되기 때문
     this.state = {
       mode: "welcome",
       selected_content_id: 0, //선택하지 않은 상태
@@ -30,7 +30,7 @@ class App extends Component {
     for (var i = 0; i < this.state.contents.length; i++) {
       var data = this.state.contents[i];
       if (data.id === this.state.selected_content_id) {
-        //같은 선택된 id와 데이터 아이디가 동일한 경우 해당 내용을 return
+        //선택된 id와 데이터 아이디가 동일한 경우 해당 내용을 return
         return data;
       }
     } //for
