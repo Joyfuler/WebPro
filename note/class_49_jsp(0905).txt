@@ -1,0 +1,47 @@
+환경설정 - 인코딩을 utf-8로 통일. (기본 + 웹 html / css / jsp 세가지 모두)
+플러그인 - 이클립스 자동완성 기능 (jsp 교안 참조하여 help 메뉴에서 추가)
+dynamic web project를 생성하고, 프로젝트를 실행한 후 삭제한 경우, 같은 이름의 프로젝트로는 다시 만들 수 없으니 주의하자.
+
+tomcat은 java만 해석이 가능. servlet으로 바꾼 후 javacomfiler를 통해 웹브라우저에 노출되는 것.
+f12에서 노출되는 것은 자바 컴파일을 거친 html만 나오므로, html 코드는 볼 수 있지만 
+java코드는 나오지 않음. // src에는 자바 소스가, jsp는 webcontent에 저장됨.
+1) jsp 소스폴더: webpro\source\...\WebContent,
+2) 실행폴더: ide에 있는 apache-tomcat-jsp의 wtpwebapps의 동일한 소스 폴더 밑에 있는 것을 실행함.
+http://localhost:8090/ch02_semiJSP/hello.jsp
+
+3)작업폴더 : (jsp를 servlet(자바내의 html)로 변경)하는 폴더 - ide의 apache-tomcat-jsp\work\Catalina\localhost\밑 소스폴더
+에 java와 class를 생성하고, 그 실행 결과를 html로 바꿔 브라우저에 출력.
+(html에 반영되는 과정과 java의 모든 소스를 확인하고 싶다면 작업 폴더의 _jsp.java 파일을 확인하자.
+
+
+----
+1) jsp의 html 사이에 자바 코드를 넣으려면 <% %> 사용.
+2) 자바의 변수 등을 html에서 부르려면 <%= %> 표현식을 사용한다.
+3) 파일을 불러오기 위해서는 <%@ 등 지시자를 사용. ex) <%@include file = "1_hello.jsp%>
+4) <%! %> 선언부. 코드에서 가장 먼저 해석하는 부분으로, 메소드나 변수를 선언하는 곳에 사용한다. (단순 선언만 가능)
+
+웹 페이지에서 입력한 parameter를 받는 방법.
+form action에 패러미터를 받을 jsp 경로를 넣고, method를 get으로 해 준다.
+결과 5_guguOut.jsp?su=6 (su라는 패러미터가 6으로 넘어옴)
+<%=request.getParameter("su")%> 를 통해 받는다.
+** parameter 값은 무조건 String으로 넘어오므로 형변환 주의. (int s = Integer.parseInt(request.getParameter("su"))
+method를 get으로 하는 경우, 주소창에 보임. post로 하는 경우에는 보이지 않음.
+따라서 로그인 정보가 보이거나, 게시판 글 내용 등 주소가 너무 길어질 때는 post를 사용한다.
+단, post 사용 시 한글 데이터는 깨지는 증상이 발생하므로,
+각 변수에 패러미터를 대입하기 전 request.setCharacterEncoding("utf-8")로 인코딩을 변경하자.
+
+--- Servlet
+자바에서 html을 해석 가능하도록 변경.
+response.setContentType("text/html;charset=UTF-8")
+PrintWriter out = response.getWriter(); -- 스트림을 생성하는 함수
+이후 html 소스를 모두 out.println으로 감싼다.
+out.println("<html>"); ~
+out.println("</html>"); 와 같은 식으로 자바에서 html 입력이 가능.
+(print로 입력시 Sources에서는 모두 줄바꿈되지 않고, println으로 입력하면 줄바꿈. 단, 실제 브라우저에 출력되는 화면은 동일함.)
+form action에서 확장자를 jsp로 입력하면 jsp, 입력하지 않으면 servlet(java)로 지정된다.
+
+둘의 차이?
+jsp ( html 중간에 자바를 <% %> 형식으로 삽입)
+servlet (java 중간에 PrintWriter 변수를 만들고, 해당 변수에 println괄호 안에 html을 삽입!
+response.setContentType("text/html; charset=utf-8") 을 넣어주자.
+이후 PrintWriter out = response.getWriter(); 객체 선언하고 out.println 형식으로 출력.

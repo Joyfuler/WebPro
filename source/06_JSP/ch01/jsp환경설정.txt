@@ -1,0 +1,5 @@
+1) 이클립스 EE 설치
+2) tomcat (9버전) 설치 후 실행 버튼을 눌러 tomcat과 java 연동. -> 이후 8090 서버에서 확인
+3) 인코딩을 utf-8로 통일 (General-Workspace, Web - CSS/HTML/JSP
+4) 플러그인 설치 (자바스크립트 자동완성 기능 추가 -
+(http://oss.opensagres.fr/tern.repository/1.2.0/ ) add.
