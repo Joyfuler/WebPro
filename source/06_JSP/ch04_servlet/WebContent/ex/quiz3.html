@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style>
+	@charset "UTF-8";
+body { background-color: #FFF0B5;font-size: 9pt; }
+table {border: pink solid 2px; margin:0 auto;}
+tr {background-color: #FFE271;}
+tr:HOVER {background-color: orange;cursor: pointer;}
+td,th {text-align: center; padding: 5pt;}
+caption { font-size: 25px;}
+legend {text-align: center;}
+	</style>
+	<script></script>
+</head>
+<body>
+	<fieldset>
+	<legend>게시판</legend>	
+	<form action = "../Quiz3" method = "post">
+	<table>
+	<tr>
+	<td>제 목 </td><td><input type = "text" name = "title"></td>	
+	</tr>
+	<tr>
+	<td>작 성 자 </td><td><input type = "text" name = "writer"></td>	
+	</tr>
+	<tr>
+	<td> 내 용 </td><td><textarea rows="10" cols="33" name = "desc"></textarea></td>
+	</tr>
+	<tr><td colspan="2"><input type = "submit" value = "작성"><input type = "reset" value = "초기화"></td>
+	</tr>
+	</table>
+	</form>
+	</fieldset>
+</body>
+</html>

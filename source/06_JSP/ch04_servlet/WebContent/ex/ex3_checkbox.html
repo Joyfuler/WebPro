@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style></style>
+	<script>
+		window.onload = () => {
+			// document.querySelectorAllinput[name="/restaurant"]')
+			document.querySelector('form').onsubmit = function(){
+				var rest = document.getElementsByName('restaurant');				
+				// 각 form태그를 submit할 때마다 함수발생.
+				// rest는 배열.
+				var chkdCnt =0;
+				for (var i=0; i<rest.length; i++){
+					// alert(rest[i].checked); 0 혹은 1
+					chkdCnt += rest[i].checked;
+				}
+				if (!chkdCnt){
+					alert('식당을 한개 이상 선택하셔야 합니다.');
+					return false;
+				}
+				return true;
+			};			
+		};
+	
+	</script>
+</head>
+<body>
+<form action = "../Ex2" method = "post">
+	<p>
+	식당 : <input type = "checkbox" name = "restaurant" value = "이대">이대
+	<input type = "checkbox" name = "restaurant" value = "신촌">신촌
+	<input type = "checkbox" name = "restaurant" value = "명동">명동
+	</p>	
+	<p><input type = "submit"></p>
+	</form>
+</body>
+</html>
