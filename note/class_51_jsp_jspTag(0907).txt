@@ -1,0 +1,31 @@
+자바스크립트 복습 (window.onload function + queryselector('form').onsubmit function 밑에
+pattern 변수를 만든 뒤, nameStr = querySelector('조건').value 와 값 비교 - 
+if (!nameStr.match (pattern) {
+alert('다시 입력')
+return false; 식으로 유효성 검사 실행.
+
+비밀번호는 받아온 String pw의 길이를 계산 pw.length() 하여 for문만큼
+out.println("*"); 을 실행하면 해당 길이만큼의 * 을 입력 가능.
+만일 날짜 외에도 구체적인 시간이 필요하다면 Date 대신 Timestamp를 사용하자.
+Date 출력 방법은 Date.valueOf(birth), timestamp는 Timestamp.valueOf(birth + " 00:00:00") 형식.
+if 대신 삼항연산자로 간편히 표시할 수 있다는 거 잊지 말 것! (birthDate==null? "-" : birthDate);
+
+
+--- jsp
+servlet과 동일하게 request.getParameter를 통해 해당 패러미터의 값을 가져온다.
+jsp이므로 <% %> 를 통해 java 구문이 들어가는 부분을 감싸주면 됨.
+<%
+String color = request.getParameter("color);
+<style>
+body{
+background-color: <%=color%>
+
+선언부에 넣은 변수는 전역변수화되어 메모리에 저장. F5를 눌러도 저장된 값이 불러와진다.
+(i++등을 하면 숫자가 점점 증가.)
+일반 스트립트 내 넣은 변수는 지역변수로 메모리에 저장되지 않음. F5를 누를 때마다 초기값이 출력된다.
+
+패러미터를 받기 전의 값은 null이므로, 만일 패러미터를 받기 전이라면 nullpointerexception이 발생할 수 있으므로 trim() 등의 함수를 
+if !=null 로 비교하기 전에 미리 넣지 않도록 주의하자.
+패러미터를 submit할 때 input에 있던 값은 지워짐. 넘길 때의 패러미터 값을 value로 넣으면 해결 가능. ( value = <%=num%>)
+
+jsp에서 if문의 조건이 참이 아닌 경우, if 문의 중괄호 안에 있는 html 태그 역시 출력되지 않는다.
