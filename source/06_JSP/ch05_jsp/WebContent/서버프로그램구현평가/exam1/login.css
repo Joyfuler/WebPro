@@ -1,0 +1,12 @@
+@charset "UTF-8";
+body { background-color: lightyellow;}
+table tr{text-align: center; padding:2px 5px; }
+table tr td {margin: 0 auto;}
+h4 {color:red; text-align: center;}
+fieldset {
+	width: 400px;
+	border: 1px solid blue;	
+	margin: 0 auto;
+}
+h3 { text-align: center;}
+
