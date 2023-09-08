@@ -1,0 +1,28 @@
+흔히 쓰는 jsp의 request / response 내부의 객체
+request.getRemoteAddr(); 의 결과는 ipv6으로 출력되며 0:0:0:0:0:0:1 식으로 가독성이 낮아짐. 
+Run configuration의 arguments에서 수정 가능 (progrm/ vm 에 모두 -Djava.net.preferIPv4Stack=true  추가)
+
+request.getSession() (현재 세션을 가져옴). 
+request.getRequestURI() / request.getRequestURL() // 현재 URI와 URL을 가져옴. (MVC패턴에서 URI을 사용할 빈도가 높으니 꼭 억할 것)
+css나 form 등 경로가 확실하지 않은 경우에는 request.getContextPath()를 이용하여 정확한 경로를 확인할 수 있다.
+String conpath = request.getContextPath로 변수를 만든 후, 
+<link href = "<%=conPath%>/css/footer.css 등으로 jsp마다 위치가 다른 footer 파일들의 css를 일괄적으로 적용해줄 수 있음.
+
+response.sendRedirct("다른주소");
+주로 index.jsp 등 다른 페이지로 다시 다이렉트되는 초기 페이지 기능을 함. 이외에도 리다이렉트는 로그인, 성인인증 등에도 자주 사용됨
+
+**만든 jsp를 배포하는 방법 
+1) 이클립스의 프로젝트를 우클릭 - Export - 경로를 tomcat이 위치된 곳 아래의 webapps 아래에 넣는다.
+2) tomcat 폴더 - bin에 들어가 cmd를 실행, startup 입력하면 해당 war파일 이름으로 폴더가 생성됨.
+
+input 태그가 아닌 button으로 value를 넘겨주는 방법은 2가지
+1) onclick = position(1) 과 같은 식으로 매개변수로서 적고, script에 position 함수를 만들어 전달시킴. -> 
+함수 내에선 location.href = "갈 문서.jsp?num=" +num 형식으로 입력한다.
+2) onclick = "location.href = 'ex4_expro.jsp? num=1" 식으로 주소에 직접 num 패러미터를 넣어 전달함.
+
+한글 패러미터를 전달하기 위해서는 msg = URLEncoder.encode(msg,"utf-8"); 로 인코딩을 utf-8로 변경한 후 전달해주자. (parameter를 전달받아 웹브라우저에 한글을 출력해야 할 때 사용)
+
+파일 첨부시 해당 파일의 경로를 알기 위해 application을 사용. 
+String filePath = application.getRealPath ("txt/text.txt") 상대경로에 있는 텍스트의 실제 위치를 알 수 있음.
+파일을 읽고 쓰는 방법은 Java에서 사용했던 방법을 사용. new FileReader -> br = BufferedReader 스트림 객체를 생성해 읽을 수 있으며,
+br.readLine(); 을 이용해한 줄마다로 out.println 출력이 가능. html에 뿌릴 때에는 + <br>을 사용하여 줄바꿈을 활용하자.
