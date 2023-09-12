@@ -7,11 +7,16 @@
 	<title>Insert title here</title>
 </head>
 <body>
-<% int age = Integer.parseInt(request.getParameter("age"));
-	if (age >=19){
-		response.sendRedirect("ex3_pass.jsp?age=" +age);
-	} else {
-		response.sendRedirect("ex3_ng.jsp?age=" +age);
-	} %>	
+<%
+int age = Integer.parseInt(request.getParameter("age"));
+if (age >=19){
+	response.sendRedirect("ex3_pass.jsp?age="+age);
+	
+} else{
+	response.sendRedirect("ex3_ng.jsp?age="+age);
+}
+
+
+%>
 </body>
 </html>

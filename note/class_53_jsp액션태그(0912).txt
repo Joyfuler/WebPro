@@ -1,0 +1,31 @@
+jsp창 속 <jsp: > 로 시작하는 객체들. 
+jsp: forward -> 
+response.sendRedirect의 경우, 주소창의 url이 변경되며 새로운 request 객체가 생성된다.
+이동된 주소에서 다시 리다이렉트되는 과정에서 넘어간 parameter가 증발하나
+jsp:forward page = "주소"/>의 경우 주소창이 변경되지 않으며 parameter 역시 보존됨.
+forward 태그 안에 <jsp:param value = "" name = "">을 입력하여 input처럼 패러미터의 이름과 값을 전달할 수 있음.
+
+** 스크립틀릿 안에 있는 식 / 변수에는 ; 를 사용하지 말 것! <%=request.getParameter("id") %>
+* String conPath = request.getContextPath(); // 각 프로젝트마다 위치가 달라질 수 있으므로, conPath를 사용하여 각 파일에 맞도록 경로를 지정함.
+<%@include file 사용시 해당 파일 안에 있는 내용이 그대로 아래에 복사되는 것. 만일 conPath를 본문과 include된 파일에 모두 사용시 중복되었다는 오류가 발생함.
+<jsp:include page ="주소" > 태그를 사용한 경우 해당 파일 내용 그대로 복사 X, 결과 HTML만을 복사하므로 conPath가 중복될 걱정 없이 사용할 수 있음.
+
+conPath등 jsp에 여러 번 반복해 사용되는 코드를 템플릿으로 등록할 수 있음. window -> preperence -> web -> jsp files -> editor -> templates로 이동.
+만일 파일 경로 등에 오타 등을 쳐서 수정한 경우는 project -> clean을 통해 다시 컴파일할 수 있도록 조정하자.
+
+
+--session
+
+사용자의 정보가 추가되었을 때 웹서버가 일시적으로 보관할 수 있게 하는 기능으로,
+jsp에서는 session.setAttribute("이름","값") -> session.getAtrribute("이름,"값) 으로 주고받을 수 있음.
+java(서블릿)인 경우에는 HttpSession이라는 객체를 생성해 가져올 수 있음. (HttpSession session2 = request.getSession();)
+세션 (로그인 유지) 시간은 기본적으로 30분(1800초). 바꾸겠다면 tomcat이 깔린 폴더의 conf -> web.xml에서 session을 검색하여
+30이 적혀있는 곳을 변경해주면 된다.
+
+setAttribute -> 로그인시 사용자의 정보가 웹에 저장됨.
+getAttribute -> 웹에 저장된 정보를 토대로 로그인 상태를 확인
+removeAttribute -> 로그아웃시 사용하는 것으로, Atrribute값을 제거함.
+
+if (getAttribute("name"))이 null이 아니라면 메인 페이지로 이동 (response.sendRedirect("주소"))하거나 out.println()을 추가하는 식으로 
+로그인 상황에 따라 화면을 달리 표시할 수 있음.
+로그인 유지 이외에도, 회원가입 후 로그인 창에 자신이 입력했던 id가 자동적으로 입력되게 하는 등의 용도로도 활용할 수 있음.

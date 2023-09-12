@@ -73,7 +73,7 @@ public class Quiz4 extends HttpServlet {
 		out.println("비번 : " + pwOut + "<br>");
 		out.println("</td></tr>");
 		out.println("<tr><td>");
-		out.println("생년월일 : " + (birth.contentEquals("")? "-" : birth) + "<br>");
+		out.println("생년월일 : " + (birth.equals("")? "-" : birth) + "<br>");
 		out.println("</td></tr>");
 		out.println("<tr><td>");
 		out.println("생년월일(Date) : " + (birthDate==null? "-" : birthDate) + "<br>");

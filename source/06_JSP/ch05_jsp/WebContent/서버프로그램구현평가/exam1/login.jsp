@@ -6,11 +6,6 @@
 <link href = "login.css" rel = "stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-const loginPro = function(){
-	location.href = "loginPro.jsp?id="+document.querySelector('input[name="id"]'.value)+"&pw="+document.querySelector('input[name="pw"]'.value);
-};
-</script>
 </head>
 <body>
   <form action = "loginPro.jsp" method = "get">

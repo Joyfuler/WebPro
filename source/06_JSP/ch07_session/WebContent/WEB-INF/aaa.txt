@@ -1,0 +1,4 @@
+오늘은 DB insert 대신 파일 출력을 하겠습니다.
+id = aaa
+pw = ***
+name = wkdwlsdnr

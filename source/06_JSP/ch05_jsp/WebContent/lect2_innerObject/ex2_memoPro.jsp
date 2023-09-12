@@ -13,7 +13,7 @@
 	request.setCharacterEncoding("utf-8");	
 	String writer = request.getParameter("writer");
 	String memo = request.getParameter("memo");
-	String ip = request.getRemoteAddr(); //요청한 클라이언트의 ip주소
+	String ip = request.getRemoteAddr();
 	Date date = new Date(System.currentTimeMillis()); //요청한 시점
 	Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 	%>

@@ -23,7 +23,7 @@ background-color: <%=color%>
 </head>
 <body>
 	<h1> 배경색 바꾸기 </h1>
-	<form action = "">
+	<form action = "" method = "post">
 	<select name = "color">
 	<option value = "red">빨강</option>
 	<option value = "orange">주황</option>	

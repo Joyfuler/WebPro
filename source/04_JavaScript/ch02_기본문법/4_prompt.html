@@ -18,7 +18,7 @@
             let score = Number(scoreStr); //형변환이 안 되는 경우에는 NaN 값으로 변경됨. ''는 0으로 변환
             // score= parseInt(scoreStr); // 마찬가지로 number로 형변환. 불가시 NaN, ''도 0으로 변환
             // (parseInt('100점') => 100으로 반환됨.
-            if (isNaN(score) || scoreStr == '') { // score가 nan이라면?
+            if (isNaN(score) || scoreStr == ''||score>100) { // score가 nan이라면?
                 alert('잘못된 입력입니다. 점수는 정수로 입력하세요.')
             } else {
                 result = score >= 70 ? "잘하셨습니다." : "분발하세요."

@@ -5,6 +5,19 @@
     <meta charset="utf-8" />    
     <title></title>
   <link href="quiz.css" rel="stylesheet" type="text/css" />
+    <script>
+        window.onload = function () {
+            var links = document.getElementsByTagName('a');
+            for (var i = 0; i < links.length; i++) {
+                links[i].onmouseover = function () {
+                    this.style.color = 'red';
+                }            
+                links[i].onmouseout = function () {
+                    this.style.color = '';
+                }
+            };
+        };
+    </script>
 </head>
 <body>
     <div id="header">

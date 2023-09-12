@@ -27,8 +27,8 @@ public class Ex1_HelloWorld extends HttpServlet {
 	}
 
 	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter(); // 스트림을 생성
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<head>");
 		out.println("<style>");

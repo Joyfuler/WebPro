@@ -15,10 +15,10 @@
 	<%-- 주석 --%>	
 	
 	<%!
-		public long power(int a, int b){ //a의 b승을 return.
 		long result = 1;
-		for (int i =0; i<b; i++){
-			result = result * a; // result *= a
+		public long power (int a, int b){		
+		for (int i=0; i<b; i++){
+			result *= a;
 		}
 		return result;
 	}

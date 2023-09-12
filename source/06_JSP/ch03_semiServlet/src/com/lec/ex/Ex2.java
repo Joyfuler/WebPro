@@ -15,7 +15,7 @@ public class Ex2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String name = request.getParameter("name");
 		String numStr = request.getParameter("num");
-		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("text/html; charset=utf-8");
 		if (numStr == null) {			
 			response.getWriter().print("넘어온 파라미터가 없습니다.");			
 		} else {
