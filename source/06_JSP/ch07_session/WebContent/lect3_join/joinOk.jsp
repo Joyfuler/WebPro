@@ -33,9 +33,9 @@ if ("yes".equals(agree)){ // 약관에 동의한 경우 세션 속성값(id,pw,n
 	// id 속성은 지우지 않고, 다음 로그인시 표시할 예정
 	response.sendRedirect(conPath + "/lect3_join/result.jsp?msg=success");	
 } else { // 약관에 동의하지 않은 경우, 이 주소부터 실행한경우 : 세션에 이미 데이터가 들어와 있으므로, 세션 데이터를 지워야함.
-	// 이후 result.jsp?msg=fail 회원가입 실패
-	session.invalidate();
+	// 이후 result.jsp?msg=fail 회원가입 실패	
 	response.sendRedirect(conPath + "/lect3_join/result.jsp?msg=fail");	
+	
 }
 
 %>

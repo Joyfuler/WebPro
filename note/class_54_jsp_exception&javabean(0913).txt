@@ -1,0 +1,44 @@
+주소를 "<%=conPath%>/" 로 입력하면 맨 앞 페이지로 이동. 위치는 WebContent 앞에 있는 메인페이지. 프로젝트 우클릭 후 자바 실행시 나오는 첫 페이지를 의미함.
+Webcontent 위치에 index.jsp를 만들고, main페이지로 리다이렉트하도록 하자.
+
+-- 예외페이지
+예외페이지에는 web.xml문서가 필요함. 만일 프로젝트 생성시에 만들지 못했다면
+프로젝트 아래 Deployment Descriptor를 우클릭하여 Generate deployment descriptor를 선택.
+try/ catch를 대신하여 웹에서 직접 예외 페이지를 표시하고 싶다면, 예외가 발생할 수 있는 페이지에 선언부를 넣는다.
+<%@ page errorPage = "예외페이지주소.jsp"%>
+이후 예외 대상이 되는 페이지에도 선언부를 넣어야 함.
+<%@ page isErrorPage="true"%>
+에러페이지를 선언해준 경우엔 우선순위가 가장 먼저, 선언하지 않았다면 web.xml에서 에러가 발생했을 때 행동을 지정해줄 수 있음.
+<error-page>
+<error-code> 500 </error-code>
+<location>/error/error500.jsp</location> (주소 앞 / 를 잊지 말 것)
+</error-page>
+
+--자바빈
+회원가입 등 데이터를 받을 때 각 데이터를 하나씩 getParameter로 하는 경우 번거로우므로,
+java의 객체처럼 데이터를 모은 하나로 통합하고, 각 값을 get/set을 통해 가져올 수 있다.
+단, bean 태그를 사용할 때에는 매개변수가 없는 디폴트 생성자 함수가 필요.
+0. (기존방법 - Person person = new Person();에 각 값을 setName(request.getParameter("name")~을 통해 set하고,
+출력할 때에는 <%=person.getName()%>을 통해 출력하였음)
+자바빈은 <jsp:useBean id = "person" class = "com.lec.ex.Person" scope="page"/> 을 통해 객체(빈)을 선언.
+
+1. 기본적인 방법
+받은 값을 <jsp:setProperty property="" name = "person" value = "<%=request.getParameter("name")%> 을 통해 person이라는 자바빈에 name값 가진 패러미터를 넣음.
+값을 출력할 때에는 <jsp:getProperty property =  "name" name = "person > 등으로 기존과 동일하게 출력할 수 있다.
+
+2. view단과 process단을 분리함 ( ★★ scope는 다른 페이지에서도 사용할 수 있도록 page에서 request로 변경 )
+기존과 동일하게 <jse:useBean id = "person ~> 으로 선언하고, <jsp:setProperty로 person 자바빈의 패러미터 이름과 값을 넣는다.)
+이후 <jsp:forward page = "personView.jsp">로 view단으로 이동하고, 마찬가지로
+<jsp:useBean id="person" class = "com.lec.ex.Person" scope = "request"/> 로 객체(자바빈)을 선언한 후
+ getProperty를 통해 값을 출력하도록 분리한다.
+forward 사용시 주소창이 변경되지 않으므로 만들어진 객체를 그대로 사용할 수 있음.
+
+3. process단에서 value를 직접 입력하는 대신 param으로 바꾸고, property와 동일하게 입력
+<jsp:setProperty name ="person" property = "name" param = "name"> 으로 바꿔준다. <%=request.getParameter~%>
+등으로 직접 입력하지 않아 단축이 가능.
+
+4. process단에서 property를 = * 로 입력. 모든 값의 이름과 속성값을 가져오므로 코드량을 크게 단축가능!
+단, 변수 이름과 property의 이름을 통일해야만 가능하다는 점, person의 기본 생성자가 필요하다는 점을 기억하자.
+
+** response.redirect등을 통해 주소를 이동하면 jsp:setProperty한 값은 증발함!
+따라서 jsp:forward page = 를 이용해 주소 이동을 하지 않고 값을 넘겨야 한다.
