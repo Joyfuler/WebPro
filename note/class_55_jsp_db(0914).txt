@@ -1,0 +1,36 @@
+db 되새기기 - 
+1-2-3 : Connection개체, Statement객체, Resultset객체를 sql import하여 준비
+Class.forName(driver) -> conn = DriverManager.getConnection(url,uid,upw) -> pstmt = conn.prePareStatement(sql);
+if (rs.next()) 후, 있으면 do{ (rs.getString("name")  } while (rs.next())하여 데이터베이스 결과를 모두 출력. 이후 개체를 연 반대 순서로 닫기.
+
+사용자에게 선택해야 하는 영역을 현재 데이터베이스의 수치를 그대로 입력하는 하드코딩으로 직접 치는 것보다는,
+이 역시 sql에서 가져와서 데이터베이스 내용에 맞춰 출력하는 것이 좋음. 
+예)  while (rs.next()){
+out.println("<option value = '"+deptno"'>"+deptno+"-"+dname+"-"+loc"</option>");
+
+사용자가 선택한 value는 request.getParameter로 가져온 뒤, output을 통해 input 칸 안에 출력할 수 있다.
+String deptno = request.getParameter("deptno");  --> <option value = "<%=deptno>">
+sql = "SELECT * FROM EMP WHERE DEPTNO LIKE '%'||?";
+받은 deptno변수를 준비한 pstmt sql문 중 ? 에 넣자. 
+pstmt = conn.prepareStatement(sql) -->  pstmt.setInt(1,deptno); 
+(첫번째 물음표에 deptno를 대입한다는 의미)
+
+만일 선택했을 때, 페이지를 이동하지 않고 해당 input 이 없어지지 않도록, 선택한 것을 그대로 남기도록 구현하는 방법은?
+form action = "" 을 하여 페이지를 이동하지 않도록 하고, 해당 문서에서 request.getParameter로 데이터를 받는다.
+각 option 안의 밸류값이 <% if (num ==value) 인 경우 out.print("selected='selected'"); 를 넣어주면 선택을 남길 수 있음.
+선택할 값을 데이터베이스에서 가져오도록 하는 select sql 구문이 1개,
+사용자의 검색 조건에 맞는 쿼리를 만든 select sql구문이 1개가 필요함.
+
+단, 여러 테이블을 EQUI 조인으로 가져오는 경우, 중복된 이름의 테이블이 있으면 오류가 발생함. 따라서 ALIAS를 통해 이름을 변경해 주어야 함.
+** java에서 sql문이 길어 줄바꿈을 할 경우, 띄어쓰기를 꼭 넣어줄 것! 띄어쓰기가 없으면 실행되지 않음.
+
+이미 페이지로 넘어간 input 값을 초기화하려면 버튼을 만들고, 클릭시 js에서 이벤트를 발생시켜야 함.
+function clickReset(){
+var op = document.getElementsByTagName('option');
+op[0].selected = true; // option중 아무것도 선택되지 않은 기본형을 선택
+var input = document.getElementsByName('search');
+input[9].value = ''; // input창에 있는 텍스트를 제거
+
++ submit을 걸어주면 초기화 시 검색결과도 함께 초기화할 수 있음.
+document.getElementsByTagName('form')[0].submit();
+}
