@@ -20,7 +20,8 @@ input 태그가 아닌 button으로 value를 넘겨주는 방법은 2가지
 함수 내에선 location.href = "갈 문서.jsp?num=" +num 형식으로 입력한다.
 2) onclick = "location.href = 'ex4_expro.jsp? num=1" 식으로 주소에 직접 num 패러미터를 넣어 전달함.
 
-한글 패러미터를 전달하기 위해서는 msg = URLEncoder.encode(msg,"utf-8"); 로 인코딩을 utf-8로 변경한 후 전달해주자. (parameter를 전달받아 웹브라우저에 한글을 출력해야 할 때 사용)
+한글 패러미터를 전달하기 위해서는 msg = URLEncoder.encode(msg,"utf-8"); 로 인코딩을 utf-8로 변경한 후 전달해주자. 
+(parameter를 전달받아 웹브라우저에 한글을 출력해야 할 때 사용)
 
 파일 첨부시 해당 파일의 경로를 알기 위해 application을 사용. 
 String filePath = application.getRealPath ("txt/text.txt") 상대경로에 있는 텍스트의 실제 위치를 알 수 있음.

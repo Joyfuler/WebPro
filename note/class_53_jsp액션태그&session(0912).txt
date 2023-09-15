@@ -6,11 +6,15 @@ jsp:forward page = "주소"/>의 경우 주소창이 변경되지 않으며 para
 forward 태그 안에 <jsp:param value = "" name = "">을 입력하여 input처럼 패러미터의 이름과 값을 전달할 수 있음.
 
 ** 스크립틀릿 안에 있는 식 / 변수에는 ; 를 사용하지 말 것! <%=request.getParameter("id") %>
-* String conPath = request.getContextPath(); // 각 프로젝트마다 위치가 달라질 수 있으므로, conPath를 사용하여 각 파일에 맞도록 경로를 지정함.
-<%@include file 사용시 해당 파일 안에 있는 내용이 그대로 아래에 복사되는 것. 만일 conPath를 본문과 include된 파일에 모두 사용시 중복되었다는 오류가 발생함.
-<jsp:include page ="주소" > 태그를 사용한 경우 해당 파일 내용 그대로 복사 X, 결과 HTML만을 복사하므로 conPath가 중복될 걱정 없이 사용할 수 있음.
+* String conPath = request.getContextPath(); // 각 프로젝트마다 위치가 달라질 수 있으므로, 
+conPath를 사용하여 각 파일에 맞도록 경로를 지정함.
+<%@include file 사용시 해당 파일 안에 있는 내용이 그대로 아래에 복사되는 것. 
+만일 conPath를 본문과 include된 파일에 모두 사용시 중복되었다는 오류가 발생함.
+<jsp:include page ="주소" > 태그를 사용한 경우 해당 파일 내용 그대로 복사 X, 
+결과 HTML만을 복사하므로 conPath가 중복될 걱정 없이 사용할 수 있음.
 
-conPath등 jsp에 여러 번 반복해 사용되는 코드를 템플릿으로 등록할 수 있음. window -> preperence -> web -> jsp files -> editor -> templates로 이동.
+conPath등 jsp에 여러 번 반복해 사용되는 코드를 템플릿으로 등록할 수 있음. 
+window -> preperence -> web -> jsp files -> editor -> templates로 이동.
 만일 파일 경로 등에 오타 등을 쳐서 수정한 경우는 project -> clean을 통해 다시 컴파일할 수 있도록 조정하자.
 
 
