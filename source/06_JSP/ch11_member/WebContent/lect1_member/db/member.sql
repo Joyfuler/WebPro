@@ -35,7 +35,7 @@ SELECT * FROM MEMBER WHERE ID = 'A';
 -- 4. 로그인 성공시 SESSION에 setAttribute할 회원 정보 (id로 dto 가져오기)
 -- public MemberDto getMember (String id)
 -- 만일 정보가 일치하면 세션을 객체화하여 넘김
-SELECT * FROM MEMBER WHERE ID = 'A';
+SELECT * FROM MEMBER WHERE ID LIKE  '%A%';
 
 
 -- 5. 회원정보 수정 (아이디는 수정불가, 나머지는 수정가능)
@@ -54,3 +54,5 @@ WHERE ID = 'AAA';
 SELECT * FROM MEMBER;
 INSERT INTO MEMBER (ID,PW, NAME, PHONE1, PHONE2, PHONE3, GENDER, EMAIL, BIRTH, ADDRESS, RDATE)
 VALUES ('AAA', '111', '홍길동', '010','6666','5555','m','honggildong@hong.com',TO_DATE('1977-03-11','yyyy-mm-dd'),'부산동구',SYSDATE);
+
+
