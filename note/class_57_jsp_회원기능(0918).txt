@@ -1,0 +1,95 @@
+- 객체 만들때 헷갈린다면?
+회원가입에 필요한 정보 등 각종 데이터를 넣는 객체는 dto에,
+sql을 사용해 각종 메소드를 실행하는 것은 dao 역할!
+ex) int result = Dao.confirmID(id);  (이후 result값을 if로 나누어 out.print로 결과를 출력)
+Dto dto = new Dto(id, pw, .....) 
+result = Dao.joinMember(dto); // dao의 회원가입 메소드를 dto 객체로 만든 회원정보를 매개변수를 통해 결과 출력
+
+세션) 
+
+1) 회원가입 or 로그인했을 때의 정보를 세션에 저장한다 (joinOk, loginPro)
+
+회원가입 시에는 id 정보를 세션에 저장한다.
+result = mDao.joinMember(dto); // dto 객체를 넣어 회원가입 메소드를 진행한 후 결과를 result에 넣는다.
+if (result == SUCCESS) {
+session.setAtrribute("id", dto.getId()); // 회원가입이 완료되면 다음과 같이 id를 session에 넣어준다.
+
+로그인 시에는 해당 정보를 모두 가져오도록 한다.
+MemberDto member = mDao.getMember(id);    // dto에서 id를 이용해 해당 멤버의 정보들을 객체로 가져온다.
+getMember 메소드의 id를 넣어 데이터들을 모두 객체로 반환하는 기능을 활용,
+
+session.setAttribute("member", member); // id를 사용하여 dto의 모든 객체 데이터를 리턴받은 후,
+리턴받은 값을 MemberDto member = mDao.getMember(id); 를 통해 member로 object 대입.
+이후 member객체를 세션에 등록하면 된다.
+
+
+2) 메인과 로그인
+메인 페이지에서는 세션을 가져와(session.getAttribute(member) 
+정보가 있으면(!=null) 로그인 상태, 없으면 로그아웃 상태로 각자 다른 내용을 출력하게 함.
+회원가입을 진행한 후 완료되면 로그인할 때에는 value 안에 session.getattribute(id) 로 자동 출력되도록 하자.
+
+
+3) 로그아웃 상태에서 회원정보 수정 눌렀을 때 :
+본래는 로그인 후 리다이렉트로 인해 메인 페이지로 강제 이동. 
+그러나 로그인 -> 회원정보 수정으로 바로 이동하게 만들고 싶다면?
+
+>> 회원수정 페이지에서 response.sendRedirect("login.jsp")에 패러미터를 추가한다. 
+
+순서)
+MemberDto member = (MemberDto)session.getAttribute("member"); // 해당멤버의 객체정보를 세션으로 가져옴.
+(if member == null) // 만일 로그인이 안 된 상태라면 마찬가지로 로그인 페이지로 가는데, '이 때 method 값을 추가하여 보낸다.'
+response.sendRedirect("login.jsp?method=modify");
+이후 로그인 페이지에서 보이지 않는 input을 추가한다.
+<input type = "hidden" name = "method" value = "<%=request.getParameter("method")%>">
+이후 loginOk.jsp에서 이 값이 null이라면 (로그아웃이라면) 메인으로 보내고, 로그인 상태라면 패러미터로 받은 method 값을 받아 해당 페이지로 리다이렉트 시킨다.
+String method = request.getParameter("method"); 
+
+// 1. 회원정보 페이지에서 method=modify로 보냄, 이후 login 페이지에서 modify값이 hidden에 입력됨. -> loginok에서 다시 한번 받아서 null이 아닌 경우 
+response.sendRedirect(method+".jsp"); 로 이동하도록 조건을 설정한다.
+
+가져와야 할 dto 값이 너무 많아 일일히 getParameter를 하기 어렵다면 
+jsp페이지에서는 jsp:useBean을 통해 java에서 객체를 선언한 것과 동일하게 사용할 수 있다.
+<jsp:useBean id = "dto" class = "~.member"/>
+<jsp:setProperty property= "*" name = "dto> 
+이와 같이 입력하여 자바에서 dto.getName() 등을 사용할 수 있게 된다.
+dto member = (dto) session.getAttribute("member");
+if (member != null) { out.print( member.getName() + "님 어서오세요"); }
+
+
+* timestamp의 경우 세션으로 넘어온 값을 출력하려 하면 오류가 나므로, toString을 사용하여 출력시켜야 함.
+birth.toString();  -> 2023-09-18 14:39:00
+birth.toString.substring(0,10); -> 14:39:00
+
+
+회원정보 수정시 확인해야 할 것. (modifyOk.jsp)
+MemberDto member = (Memberdto)session.getAttribute("member");
+세션에 있는 각종 값들을 가져와 input창에 value로 표시해 줄 것.
+이후 String id = member.getId(); ~ 를 통해 값을 가져온다.
+1) 바꿔야하지 않아야 하는 값 (id) 는 그대로 표시 및 readonly를 사용하여 바꾸지 못하도록 함.  <value = "<%=id%>" readonly = "readonly">
+2) 기존 비밀번호 그대로 사용 or 새 비밀번호 사용에 따라 비밀번호를 바꾼 후 setPw.
+-- 새 비밀번호가 있다면 modify에서 세션으로 넣은 비밀번호를 대입한다.
+sessionPw = member.getPw();
+String oldPw = request.getParameter("oldPw") --> 기존 비밀번호 값
+새 비밀번호를 입력하지 않은 경우는 기존 비밀번호 값으로 치환해 대입한다.
+if (dto.getPw() == null) {
+dto.setPw(oldPw);
+
+db에도 수정된 내용을 반영하기 위해 Dao 객체를 부르고 (MemberDao.getInstance();)
+result = dao.modifyMember(dto); 를 통해 결과를 확인. db수정이 무사히 성공했다면 session 역시 갱신해준다.
+session.setAttribute("member",dto);
+
+
+세션은 여러 페이지를 이동해도 남는 데이터이므로 전 & 전전페이지를 모두 확인해야 하니 주의할 것
+
+
+-- 커넥션풀
+server 밑 context.xml에 코드를 추가하여 동시 접속자 및 대기시간을 설정가능. (maxActive,maxWait)
+java에서 context.xml을 저장하더라도 실제 ide - conf 안에 있는 context.xml은 변화하지 않으므로 동기화가 필요.
+자바 콘솔 - tomcat 오른쪽에 publish to server를 눌러 동기화 가능.
+
+-- 커넥션풀로 인해 속도가 단축되었으므로 싱글톤 대신 객체를 생성해서 사용해도 무방.
+기존에 Class.forName(driver)를 수행하던 getConnection 메소드를 아래와 같이 수정.
+Context ctx = new InitialContext(); // (커넥션풀을 가져오는 객체)
+DataSource ds = (DataSource) ctx.lookup("java:comp/env/(context.xml의 name값을 입력))";
+conn = ds.getConnection(); 
+이후 동일하게 return conn; 을 넣고, 싱글톤으로 getInstance(); 한 곳은 새롭게 new MemberDao 등을 통해 사용할 수 있음.
