@@ -6,6 +6,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<style>
+	body { 
+	background-color: #FFF0B5; 
+	font-size: 9pt;
+	}
+	</style>
 	<link href='<%=conPath %>/css/join.css' rel='stylesheet'>
 	<script>
 		window.onload = function(){
@@ -30,7 +36,7 @@
 	</script>
 </head>
 <body>
-	<jsp:include page="../customer/header.jsp"/>
+	<jsp:include page="../main/header.jsp"/>
 	<div id="joinForm_wrap">
 		<div id="join_title">회원가입</div>
 		<form action="joinPro.jsp" method="post">
@@ -81,13 +87,18 @@
 					<td colspan="2">
 						<input type="submit" value="가입하기" class="joinBtn_style">
 						<input type="reset" value="다시하기" class="joinBtn_style">
+						<%if (session.getAttribute("customer") == null){ %>						
 						<input type="button" value="로그인" class="joinBtn_style" 
 											onclick="location.href='<%=conPath%>/customer/loginForm.jsp'">
+						<%}else{%>
+						<input type="button" value="로그아웃" class="joinBtn_style" 
+											onclick="location.href='<%=conPath%>/customer/logout.jsp'">
+						<%}%>										
 					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
-	<jsp:include page="../customer/footer.jsp"/>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

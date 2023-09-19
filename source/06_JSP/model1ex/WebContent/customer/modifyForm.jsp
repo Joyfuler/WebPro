@@ -1,4 +1,4 @@
-<%@page import="com.lec.customer.CustomerDto"%>
+<%@page import="com.lec.dto.CustomerDto"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,6 +9,12 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link href='<%=conPath %>/css/join.css' rel='stylesheet'>
+	<style>
+	body { 
+	background-color: #FFF0B5; 
+	font-size: 9pt;
+	}
+	</style>
 	<script>
 		window.onload = function(){
 			document.querySelector('form').onsubmit = function(){
@@ -34,12 +40,12 @@
 <body>
 	<%! 
 		String cid, cname, ctel, cemail, caddress, cgender; 
-		Date cbirth; 
+		Date cbirth; //아래 form태그에서 쓰기 위해 따로 선언하였음 
 	%>
 	<%
 		CustomerDto customer = (CustomerDto)session.getAttribute("customer");
-		if(customer==null){
-			response.sendRedirect("loginForm.jsp?method=modify");
+		if(customer==null){ //로그아웃 상태라면
+			response.sendRedirect("loginForm.jsp?method=customer/modifyForm");
 		}else{
 			cid = customer.getCid();
 			cname = customer.getCname();
@@ -48,9 +54,10 @@
 			caddress = customer.getCaddress();
 			cbirth = customer.getCbirth();
 			cgender  = customer.getCgender();
+			//rdate는 정보수정x이므로 받을필요 없음.
 		}
 	%>
-	<jsp:include page="../customer/header.jsp"/>
+	<jsp:include page="../main/header.jsp"/>
 	<div id="joinForm_wrap">
 		<div id="join_title">정보수정</div>
 		<form action="<%=conPath %>/customer/modifyPro.jsp" method="post">
@@ -121,7 +128,7 @@
 			</table>
 		</form>
 	</div>
-	<jsp:include page="../customer/footer.jsp"/>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
 

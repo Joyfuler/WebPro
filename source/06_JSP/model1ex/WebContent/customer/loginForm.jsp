@@ -11,10 +11,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<style>		
+	body { 
+	background-color: #FFF0B5; 
+	font-size: 9pt;
+	}
+	</style>	
 	<link href="<%=conPath %>/css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<jsp:include page="../customer/header.jsp"/>
+	<jsp:include page="../main/header.jsp"/>
 	<div id="loginForm_wrap">
 		<div id="login_title">로그인</div>
 		<form action="<%=conPath%>/customer/loginPro.jsp" method="post">
@@ -46,9 +52,9 @@
 					<td colspan="2">
 						<%
 							String msg = request.getParameter("msg");
-							if(msg!=null){ // 로그인 실패해서 다시 옴
+							if(msg!=null){
 						%>
-							<p id="login_findIdPw" onclick="alert('아이디는 aaa/비번은 111')">
+							<p id="login_findIdPw" onclick="alert('아이디는 aaa/비번은 444')">
 								아이디/비밀번호를 잊으셨나요?
 							</p>
 						<%}%>
@@ -61,6 +67,6 @@
 			</p>
 		</form>
 	</div>
-	<jsp:include page="../customer/footer.jsp"/>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

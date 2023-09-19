@@ -18,7 +18,7 @@ SELECT COUNT(*) COUNTS FROM CUSTOMER WHERE CID = 'aaa';
 
 -- 2. 회원가입 insert (public int joinCustomer(CustomerDto customer)
 INSERT INTO CUSTOMER (CID, CPW, CNAME, CTEL, CEMAIL, CADDRESS, CBIRTH, CGENDER)
-VALUES ('aaa', 'ccc', '장장', '010-9999-8888','tr@tr.com','서울마포',TO_DATE('1999-01-01','YYYY-MM-DD'), 'm' );
+VALUES ('aaa', 'ccc', '장장', '010-9999-8888','tr@tr.com','서울마포', ? , 'm' );
 
 -- 3. 로그인 :public int loginCheck (String id, String pw)
 SELECT * FROM CUSTOMER WHERE CID = 'aaa'; 

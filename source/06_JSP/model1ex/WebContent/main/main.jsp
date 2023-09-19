@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<link href = "<%=conPath%>/css/style.css" rel = "stylesheet">
 	<style>
 		#mainForm_wrap{
 			width:1000px; margin: 10px auto; height: 600px; 
@@ -18,10 +19,10 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="../customer/header.jsp"/>
+	<jsp:include page="header.jsp"/>
 	<div id="mainForm_wrap">
 		main 화면
 	</div>
-	<jsp:include page="../customer/footer.jsp"/>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>

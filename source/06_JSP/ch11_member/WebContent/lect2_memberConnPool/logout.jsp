@@ -19,7 +19,7 @@
 // session.invalidate();
 // response.sendRedirect("main.jsp");
 
-if (session.getAttribute("member")!= null){
+if (session.getAttribute("customer")!= null){
 	session.invalidate();
 	out.print("<h2>로그아웃 되었습니다. 잠시 후 메인 페이지로 이동합니다.");
 } else {
