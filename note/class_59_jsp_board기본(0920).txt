@@ -1,0 +1,21 @@
+(파일첨부 등의 기능 없는 기본 게시판)
+답변글은 원글의 아래로 위치하기 위해 따로 테이블이 필요. 
+BGROUP : 필드를 사용해 글그룹(원래글은 글번호 / 답변글은 원글과 같은 BGROUP으로) 지정, -> SEQUENCE.CURVAL이 들어감.
+BSTEP :같은 글그룹 내의 출력 순서 (원글 0, 답변글 순서대로 1,2,3...)
+BINDENT : 리스트 출력시 글 제목 들여쓰기 정도 (원글 1, 답변글 순서대로 1,2,3...)
+쿼리 역시 BID 정렬보다는, 그룹으로 나누고 그룹 정렬. 같은 그룹인 경우는 BID 정렬하면 됨.
+SELECT * FROM BOARD ORDER BY BGROUP;
+
+글 조회시에는 상세 내용을 보는 쿼리와 조회수를 올리는 쿼리 1개가 따로 필요함. (BID 매개변수)
+* count(*) 수행시 반드시 1행이 리턴되므로 if나 while을 사용할 필요가 없음. rs.next();를 사용하여 해당 숫자값을 int로 get하면 됨.
+
+게시판에서 게시글 작성의 경우 method는 항상 post로 할 것. get으로 할 경우 250자 제한이 있으므로, 
+게시글의 내용이 길어지는 경우 패러미터가 제대로 전달되지 않을 수 있음.
+
+jsp를 만들기 전에 항상 test 페이지를 만들어 확인! test에서 오류 메시지를 확인하는 것이 고치기 쉬움!
+각 메소드를 getInstance로 받아서 수행할 때 무엇으로 받을지는, 메소드의 타입을 보고 판단하자.
+update, insert 등이라면 int -> int result = Dao.writeBoard(Dto dto);
+select 등의 BoardDto 타입이라면 Dto dto = Dao.getBoard(bid); 등으로.
+
+** 만일 updateform으로 직접 접속했을 때 에러를 회피해서 다른 곳으로 안내하는 방법은?
+parameter를 받은 값이 null인 경우 response.sendredirect를 통해 list로 보냄.

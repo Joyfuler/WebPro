@@ -31,4 +31,5 @@ session.setAttribute("customer",dto);
 
 //
 sql복습 - seq는 table과 별개로 생성.
-Create SEQU
+CREATE SEQUENCE 테이블명_필드명_SEQ START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+이후 INSERT시 (필드명) VALUES (SEQUENCE명.NEXTVAL)을 사용하여 번호를 매겨줄 수 있음.
