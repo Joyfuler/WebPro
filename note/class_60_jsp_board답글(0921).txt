@@ -1,0 +1,132 @@
+서로 다른 페이지에서 올 때 패러미터를 받아서 수행하는 메소드를 달리할 수 있음.
+ex) 게시글 리스트에서 바로 글내용으로 갈 때는 패러미터 없이 순수 url만 보냄.
+게시글을 수정한 후 글내용으로 갈 경우, 패러미터 뒤에 jsp?method=modify 등으로 보냄.
+이후 글내용을 확인하는 페이지에서 method parameter를 받아 null인 경우와 아닌 경우를 나눠 메소드를 수행한다.
+
+-- 글수정시에 조회수를 안 올리도록. or 같은 유저인 경우 조회수 안 오르게 하기
+만일 session에서 받아온 (로그인한) 유저의 id와 dto에 있는 (게시글 데이터에 있는) 유저의 id가 동일하면
+조회수를 올리지 않고, 서로 달라야만 조회수를 올릴 수 있도록 조정.
+dto.getBid().euqlas(session.getAttribute("bid");
+** response.sendredirect가 있는 경우에는 패러미터를 넣어서 보내 강제 리다이렉트를 회피할 수 있도록 하자.
+
+-- 페이징 처리
+<기본 공식 매번 활용하므로 계속 참고!>
+페이지 사이즈 = 한 페이지에 몇 개의 컨텐츠가 들어가는지 (글 수)
+블록 사이즈 = 한 블록당 페이지 수 (5? 10?)
+list.jsp를 실행하면 기본적으로 pageNum=1로 들어감. (패러미터 없음)
+다른 페이지를 선택할 때 pageNum을 패러미터로 넘김.
+startRow는 페이지 번호 -1 * 페이지당 갯수 +1 (1페이지라면 1, 2페이지라면 11)
+endRow는 startRow + 페이지당 갯수 -1 (1페이지라면 10, 2페이지라면 20)
+paceCnt 는 올림 -> Math.ceil((double)전체글갯수/페이지당갯수) (5개라면 0.5-> 1 / 20개라면 2->2...)
+startPage시작 페이지 -> 한 블록에서 몇 페이지로 시작하는지는 현재 페이지 기준으로 비교.
+(현재 페이지 -1) / 블록 사이즈 ) * 블록사이즈 +1
+현재 8페이지에 있다면 (8/10 -> java = 0 ) * 10 + 1 = 1페이지 시작
+현재 11페이지에 있다면 (11/10 -> java = 1) * 10 + 1 = 11페이지 시작
+endPage는 끝페이지 -> 한 블록에서 몇 페이지로 끝나는지.
+(시작페이지 + 블록당 페이지 수 -1) 
+현재 12페이지에 있다면 11페이지 시작. 11+10-1 = 20.
+
+<<db에서 처리하는 방법>>
+0) 기존의 게시판 출력 쿼리 - SELECT * FROM BOARD ORDER BY BGROUP DESC;
+1) 탑앤구문 전단계 - ROWNUM 추가. RN으로 ALIAS를 주고 FROM절에 BOARD 대신 기존 출력 쿼리를 넣는다.
+SELECT ROWNUM RN, A.*
+FROM (SELECT * FROM BOARD ORDER BY BGROUP DESC) A;
+2) 게시판 탑앤구문
+다시 SELECT로 감싸고, RN에 BETWEEN 조건을 준다.
+SELECT * FROM
+(SELECT ROWNUM RN, A* FROM (SELECT * FROM BOARD ORDER BY BGROUP DESC) A)
+WHERE RN BETWEEN 11 AND 20;
+* ROWNUM을 그대로 사용하면 11-20 등을 수행할 때 앞부분만 다시 덮어씌워져서 출력되지 않음.
+따라서 ROWNUM을 RN으로 바꾼 후 인라인으로 바꿔준다.
+
+<<list.jsp에서 처리 -- 윗부분>>
+페이징에 필요한 각종 변수의 값을 정의해준다.
+0) 사용자가 페이지를 클릭하는 경우 pageNum으로 패러미터가 전달. (전달되지 않으면 1)
+1) pageNum은 String이므로 int currentPage로 형변환.
+2) 필요한 pagesize와 blocksize를 설정. (final int PAGESIZE = 10, BLOCKSIZE = 10)
+3) 위 공식을 참고하여 startRow, endRow를 설정.
+int startRow = (currentPage-1) * PAGESIZE + 1;
+int endRow = startRow +PAGESIZE -1; 
+이후 게시글리스트에 startRow와 endRow를 매개변수로 넣어 출력하면 된다.
+ArrayList<Dto> lists = Dao.boardList(startRow,endRow) --> 시작번호와 끝번호까지만 게시글이 출력.
+<< list.jsp에서 처리 -- 아랫부분 페이징>>
+11 12 13 14 15 ... 등으로 출력하기 위해 page갯수와 시작페이지를 확인.
+int pageCnt = (int)((double)totalCnt / PAGESIZE)
+int startPage = (currentPage-1)/BLOCKSIZE) * BLOCKSIZE +1;
+
+그런데 만일 마지막 페이지가 22인데, endPage가 30이 된다면 블록에 21 -30이 출력됨.
+출력되지 않도록 endPage에 if문을 건다.
+if (endPage > pageCnt){
+endPage = pageCnt;
+
+1) [이전] 
+블록사이즈가 10인 경우, 11페이지까진 [이전]이 출력되어야 함.
+if (startPage >BLOCKSIZE){
+<a href = board/list.jsp?pageNum=(startPage-1)>[이전]</a> 으로 설정한다.
+
+2) [1][2][3]....
+이후 for문을 이용해 출력하는데, 현재 페이지인 경우에는 <b> 태그를,
+현재 페이지가 아닌 경우에는 <a href = + conPath + /board/list.jsp?pageNum ="idx> 태그를 넣는다.
+for (int i = startPage; i<=endPage; i++){
+if (i==currentPage){
+out.print([<b>+i+</b>]);
+} else {
+out.print([<a href = board/list.jsp? pageNum = i> i </a>]); 등으로 코드를 넣자.
+
+3) [다음]
+총 페이지수보다 현재 블록에서 출력되는 마지막페이지수가 작다면 [다음]이 출력되어야 함.
+다음을 클릭하면 마지막 페이지 +1 을 해줄것.
+if (endPage<pageCnt){
+out.print("<a href = "/board/list.jsp? pageNum = (endPage+1)"> [다음]</a>"); 
+
+4) list.jsp에서 게시글 상세보기를 한 후, 글목록을 갈 때 list.jsp에 parameter를 넣어준다.
+(parameter를 넣지 않으면 반드시 list 첫페이지로 이동함)
+제목을 누르면 게시글로 이동하므로 이 때 &pageNum="+pageNum+"'> 추가
+이후 게시글의 버튼에 모두 pageNum 패러미터를 추가해주자. (글수정후 글목록, 글삭제후 글목록 등)
+
+★★ 답글 로직
+처음 db를 만들 때 설정한 bgroup, bstep, bindent를 활용.
+기본 게시글 번호는 bid이고, 정렬은 bid가 아닌 bgroup으로 정렬하였음. 원글의 경우 bid과 bgroup이 동일
+답변글의 경우 bgroup은 원글의 bgroup과 동일하게. 
+bstep은 첫번째 답변이면 1, 
+두번째 답변이 달리면 첫번째 답변은 2, 두번째 답변은 1, 
+세번째 답변이면 첫번째 답변을 3, 두번째 답변은 2, 세번째를 1... 식으로 오래된 답변의 숫자를 하나씩 밀어낸다. 이후 ORDER BY로 정렬하면
+원글 0
+세번째답변 1
+두번째답변 2
+첫번째답변 3
+와 같은 순서로 정렬된다.
+
+*답변의 답변글인 경우에는 답변글은 두고 자신을 답변글에 +1하고, 자신 이후 답글들에는 모두 +1하는 식으로 하나씩 밀어낸다. 이후 ORDER BY로 정렬하면
+원글 0
+세번째답변 1
+두번째답변 2
+두번째답변의답변 3
+첫번째답변 4
+와 같은 순서로 정렬된다.
+
+(이 로직의 경우 답변은 최신이 위로 달리는데, 다답글은 아래로 달리는 로직이므로)
+bindent의 경우 첫번째 답변이면 1, 두번째 답변도 1, 세번째 답변도 1이지만, 답변의 답변인 경우는 2가 되어야 함.
+답변글의 순서는 order by를 통해 확인하자.
+SELECT * FROM BOARD ORDER BY BGROUP DESC, BSTEP DESC
+
+답글을 추가할 때는 선행으로 다른 답글들의 STEP을 +1 해 준다.
+UPDATE BOARD SET BSTEP = BSTEP+1 WHERE BGROUP = 글번호 AND BSTEP >0;
+(0은 원글이므로 원글은 제외해야)
+답변의 답글을 추가할 때는 답변글보다 BSTEP이 큰 답변글에만 +1을 해 준다.
+답변글의 BSTEP이 2라면, BSTEP이 3인 것부터 +1이 되고, 그 전의 것은 변화 없음.
+결과 답변글은 BSTEP 2, 답변의답변은 BSTEP 3, BSTEP3이었던것은 4... 로 밀려나게 됨.
+
+-- 실제 답변글 메소드를 작성할 때 사용자에게 받아올 데이터는 글내용 + 원글의 bgroup, bstep, bindent.
+sql을 준비한 후 ? 내용에는 bstep이 아닌 bstep+1, bindent+1 해야 함. (원글의 bstep, bindent를 가져왔으므로)
+답변글의 들여쓰기는 indent를 이용하여 이미지의 width에 곱하기를 해 줌.
+if (dto.getIndent>0){ //답글인경우
+<img src = "~~.gif" width = <%=bstep * 15%> 와 같은 식으로 들여쓰기가 가능.
+
+jsp에서는 답글 클릭시 replyForm으로 이동하고, 이 때 원글의 bid 정보를 패러미터로 가져간다.
+replyForm에서는 bid를 통해 dto를 가져오고, dto.getbstep을 가져와 패러미터로 세팅해서 보내면 답변글로 작성이 완료됨!
+
+** 톰캣 주의**
+jsp는 프로젝트를 복사하여 다른 이름으로 만들더라도 context root가 동일하므로
+그대로 실행하면 톰캣이 멈추며 삭제 후 다시 설정해주어야 함.
+따라서 복사한 프로젝트는 properties -> context root를 변경해주어야 제대로 동작한다는 점에 주의.

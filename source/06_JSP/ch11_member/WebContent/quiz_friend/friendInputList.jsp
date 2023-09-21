@@ -10,10 +10,14 @@
 <title>Insert title here</title>
 <link href = "../css/style.css" rel = "stylesheet">
 <script>
-function search(){
+function searching(){
 	var name = document.querySelector("input[name='name']").value;
 	var tel = document.querySelector("input[name='tel']").value;
+	if (name == null || name == ''){
+		alert("이름은 반드시 입력하셔야 합니다.");
+	} else {
 	location.href = "friendInputList.jsp?name="+name+"&tel="+tel;
+	}
 }
 
 function resetDefault(){
@@ -26,7 +30,7 @@ function resetDefault(){
 	<p>
 	이름 <input type = "text" name = "name" required = "required">
 	전화 <input type = "text" name = "tel">
-	<input type = "button" value = "검색" onclick = "search()">
+	<input type = "button" value = "검색" onclick = "searching()">
 	<input type = "submit" value = "친구추가">
 	<input type = "button" value = "검색초기화 " onclick = "resetDefault()">
 	</p>
@@ -48,14 +52,8 @@ function resetDefault(){
 			String telStr = friends.get(idx).getTel();
 			out.print("<td>"+(telStr!= null? telStr: "없음")+"</td>");
 		}
-	}	
+	}
 	%>
-	<%String name = request.getParameter("name"); 
-	String tel = request.getParameter("tel");	
-	if (name!= null || tel != null){
-	dao.friendSearch(name, tel);
-}
-%>
 	</table>
 </body>
 </html>

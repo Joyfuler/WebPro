@@ -156,7 +156,7 @@ public class BoardDao {
 	}
 
 	// -- 4) 글보기 - 조회수올리기 (BID 이용)
-	private void hitUp(int bid) { // 5번 메소드에서 호출할 예정이므로 리턴할 필요 없음. 함수 수행만
+	public void hitUp(int bid) { // 5번 메소드에서 호출할 예정이므로 리턴할 필요 없음. 함수 수행만
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE BOARD SET BHIT = BHIT+1 WHERE BID =?";
@@ -181,7 +181,7 @@ public class BoardDao {
 		}
 	}
 
-	private void hitUp(String bid) { // 5번 메소드에서 호출할 예정이므로 리턴할 필요 없음. 함수 수행만
+	public void hitUp(String bid) { // 5번 메소드에서 호출할 예정이므로 리턴할 필요 없음. 함수 수행만
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE BOARD SET BHIT = BHIT+1 WHERE BID =?";
@@ -206,51 +206,6 @@ public class BoardDao {
 		}
 	}
 	// UPDATE BOARD SET BHIT = BHIT+1 WHERE BID = 1;
-
-	// -- 5) 글보기 - 게시글 상세보기 (DTO 가져오기).. 4와 5를 함께 사용
-	public BoardDto getContent(int bid) {
-		hitUp(bid); // 글 상세보기 시 조회수가 자동으로 1 올라갈 것.
-		BoardDto dto = null;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM BOARD WHERE BID = ?";
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bid);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				String bname = rs.getString("bname");
-				String btitle = rs.getString("btitle");
-				String bcontent = rs.getString("bcontent");
-				String bemail = rs.getString("bemail");
-				int bhit = rs.getInt("bhit");
-				String bpw = rs.getString("bpw");
-				int bgroup = rs.getInt("bgroup");
-				int bstep = rs.getInt("bstep");
-				int bindent = rs.getInt("bindent");
-				String bip = rs.getString("bip");
-				Timestamp bdate = rs.getTimestamp("bdate");
-				dto = new BoardDto(bid, bname, btitle, bcontent, bemail, bhit, bpw, bgroup, bstep, bindent, bip, bdate);
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (SQLException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return dto;
-	}
-
 	public BoardDto getContent(String bid) {
 		hitUp(bid); // 글 상세보기 시 조회수가 자동으로 1 올라갈 것.
 		BoardDto dto = null;
@@ -337,6 +292,49 @@ public class BoardDao {
 		return dto;
 	}
 
+	public BoardDto getBoardNothitup(String bid) {
+		BoardDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM BOARD WHERE BID = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String bname = rs.getString("bname");
+				String btitle = rs.getString("btitle");
+				String bcontent = rs.getString("bcontent");
+				String bemail = rs.getString("bemail");
+				int bhit = rs.getInt("bhit");
+				String bpw = rs.getString("bpw");
+				int bgroup = rs.getInt("bgroup");
+				int bstep = rs.getInt("bstep");
+				int bindent = rs.getInt("bindent");
+				String bip = rs.getString("bip");
+				Timestamp bdate = rs.getTimestamp("bdate");
+				dto = new BoardDto(Integer.parseInt(bid), bname, btitle, bcontent, bemail, bhit, bpw, bgroup, bstep, bindent, bip, bdate);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dto;
+	}
+	
+	
 	// -- 7) 글수정 (작성자, 글제목, 본문, 이메일, 비밀번호 수정가능)
 	public int modifyBoard(BoardDto dto) {
 		int result = FAIL;

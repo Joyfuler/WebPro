@@ -21,4 +21,7 @@ INSERT INTO FRIEND (NO, NAME, TEL)
 VALUES (FRIEND_NO_SEQ.NEXTVAL, '김김김', '010-252-2525');
 
 -- 3) 친구검색
-SELECT * FROM FRIEND WHERE ( NAME LIKE '%'||''||'%' AND TEL LIKE '%'||''||'%' ) OR tel is null;
+SELECT * FROM FRIEND WHERE NAME LIKE '%'||''||'%' AND TEL LIKE '%'||''||'%' ;
+SELECT * FROM FRIEND WHERE NAME LIKE '%'||''||'%' ;
+
+select * from board;

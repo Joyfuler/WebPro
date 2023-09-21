@@ -73,9 +73,9 @@ public class FriendDao {
 		ArrayList<FriendDto> friendList = new ArrayList<FriendDto>();
 		String sql = "";
 		if(tel==null|| tel.equals("")) {
-			sql = "SELECT * FROM FRIEND WHERE (NAME LIKE '%'||?||'%' AND TEL LIKE '%'||?||'%') OR (TEL IS NULL)";
-		}else {
-			sql = "SELECT * FROM FRIEND WHERE (NAME LIKE '%'||?||'%' AND TEL LIKE '%'||?||'%')";
+			sql = "SELECT * FROM FRIEND WHERE NAME LIKE '%'||?||'%'";
+		} else {
+			sql = "SELECT * FROM FRIEND WHERE NAME LIKE '%'||?||'%' AND TEL LIKE '%'||?||'%'";
 		}
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -114,25 +114,25 @@ public class FriendDao {
 	
 	
 	// 3.친구검색 (String id, String tel)
-	public FriendDto friendSearch(String name, String tel) {
-		FriendDto dto = new FriendDto();
-		String sql = "SELECT * FROM FRIEND WHERE NAME LIKE '%'||?||'%' AND TEL LIKE '%'||?||'%'";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;			
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setNString(2, tel);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-			dto.setName(rs.getString("name"));
-			dto.setTel(rs.getNString("tel"));
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}		
-		return dto;
-	}
+//	public FriendDto friendSearch(String name, String tel) {
+//		FriendDto dto = new FriendDto();
+//		String sql = "SELECT * FROM FRIEND WHERE NAME LIKE '%'||?||'%' AND TEL LIKE '%'||?||'%'";
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;			
+//		try {
+//			conn = getConnection();
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, name);
+//			pstmt.setNString(2, tel);
+//			rs = pstmt.executeQuery();
+//			if (rs.next()) {
+//			dto.setName(rs.getString("name"));
+//			dto.setTel(rs.getNString("tel"));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}		
+//		return dto;
+//	}
 }
