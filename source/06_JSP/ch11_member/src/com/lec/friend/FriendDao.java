@@ -73,7 +73,7 @@ public class FriendDao {
 		ArrayList<FriendDto> friendList = new ArrayList<FriendDto>();
 		String sql = "";
 		if(tel==null|| tel.equals("")) {
-			sql = "SELECT * FROM FRIEND WHERE (NAME LIKE '%'||?||'%' AND TEL LIKE '%'||?||'%') OR (TEL IS NULL)";
+			sql = "SELECT * FROM FRIEND WHERE NAME LIKE '%'||?||'%' AND ? != 1";
 		}else {
 			sql = "SELECT * FROM FRIEND WHERE (NAME LIKE '%'||?||'%' AND TEL LIKE '%'||?||'%')";
 		}

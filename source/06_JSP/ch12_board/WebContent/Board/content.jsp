@@ -13,7 +13,14 @@
 <body>
 <%String bid = request.getParameter("bid"); // null이거나 "1" 등으로 넘어옴 
  BoardDao bDao = BoardDao.getInstance();
- BoardDto dto = bDao.getContent(bid); // 조회수 1 올리고 dto가져오기 -> 이후 글출력에 사용
+ //list.jsp를 통해 상세보기 페이지를 올 때만 조회수 +1 업
+ //list.jsp를 통해 페이지로 올 때의 url: content.jsp?bid=2
+ // 수정 성공 후 페이지로 올 때의 url : content.jsp?bid=2&after=u 
+ String isUpdate = request.getParameter("after");
+ if (isUpdate == null){
+	 bDao.hitUp(bid);
+ }
+ BoardDto dto = bDao.getBoardNothitup(bid); // 조회수 1 올리고 dto가져오기 -> 이후 글출력에 사용
  if (dto == null){ // 만일 해당 bdi의 게시글이 없다면? or 이 페이지부터 실행한 경우
 	 response.sendRedirect(conPath + "/Board/list.jsp");
  } else {
@@ -43,7 +50,7 @@
 	</tr>
 	<tr>
 		<th>IP</th>
-		<td><%=dto.getBtitle()%></td>
+		<td><%=dto.getBip()%></td>
 	</tr>
 	<tr>
 		<th>작성일</th>

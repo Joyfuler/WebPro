@@ -25,7 +25,8 @@
 	out.print("<h3> 6. 조회수 안올리고, 글번호로 dto만 가져오기(글수정위함)");
 	out.println("<h3> 1번글 :" + bDao.getBoardNothitup(1) + "<br>");	
 	out.print("<h3> 4와 5. 조회수 올리고, 글번호로 dto 가져오기");
-	out.print("<h3> 2번글 상세보기 : " + bDao.getContent("2") + "상세보기는 hitup 수행");
+	bDao.hitUp(2);
+	out.print("<h3> 2번글 상세보기 조회수업 - 게시글보기): "+ bDao.getBoardNothitup(2) + "상세보기는 hitup 수행");
 	out.print("<h3> 7. 글수정 --> 2번글을 수정하기 : ");	
 	dto = bDao.getBoardNothitup(2); // 2번글 정보를 넣음
 	dto.setBname("신성기사");

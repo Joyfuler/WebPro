@@ -21,7 +21,7 @@ if (result == BoardDao.SUCCESS){
 	%>
 	<script>
 	alert("수정완료");
-	location.href = "<%=conPath%>/Board/content.jsp?bid=<%=dto.getBid()%>";
+	location.href = "<%=conPath%>/Board/content.jsp?bid=<%=dto.getBid()%>&after=u";
 	</script>
 <%} else {%>
 	<script>
