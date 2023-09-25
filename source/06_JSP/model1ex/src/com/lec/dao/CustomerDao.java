@@ -230,15 +230,18 @@ public class CustomerDao {
 	}
 
 	// 회원리스트출력
-	public ArrayList<CustomerDto> getCustomerList() {
+	public ArrayList<CustomerDto> getCustomerList(int startRow, int endRow) {
 		ArrayList<CustomerDto> dtos = new ArrayList<CustomerDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM CUSTOMER";
+		String sql = "SELECT * FROM (SELECT ROWNUM RN, C.* FROM "
+				+ "(SELECT * FROM CUSTOMER) C) WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				CustomerDto dto = new CustomerDto();
@@ -247,6 +250,8 @@ public class CustomerDao {
 				dto.setCname(rs.getString("cname"));
 				dto.setCemail(rs.getString("cemail"));
 				dto.setCaddress(rs.getString("caddress"));
+				dto.setCbirth(rs.getDate("cbirth"));
+				dto.setCgender(rs.getString("cgender"));				
 				dtos.add(dto);
 			}
 		} catch (SQLException e) {

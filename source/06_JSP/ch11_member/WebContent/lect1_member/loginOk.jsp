@@ -1,3 +1,4 @@
+<%@page import="com.lec.member.MemberDaoCP"%>
 <%@page import="com.lec.member.MemberDao"%>
 <%@page import="com.lec.member.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

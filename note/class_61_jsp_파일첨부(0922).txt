@@ -1,0 +1,41 @@
+Form에서 input type를 file로 첨부. form action에는 enctype를 추가한다.
+<form action="ex1_filePro.jsp" method="post" enctype="multipart/form-data">
+
+1. 저장할 경로를 가져오고, 최대 용량을 설정. 저장할 이름, 원본 이름은 기본 ""로 둔다.
+String path = request.getRealPath("fileUpFolder");
+int maxSize = 1024*1024*10;
+String filename = "";
+String originalFilename = "";
+
+MultipartRequest를 이용하여 저장할 파일의 경로와 최대 용량, 인코딩과 저장시 rename되는 형식을 설정가능.
+사용하기 위해서는 servlet.com 에서 cos.jar를 다운받아 WEB-INF에 넣어야 사용할 수 있음.
+MultipartRequest mRequest = new MultipartRequest(request, path, maxSize, "utf-8",
+			new DefaultFileRenamePolicy());
+이후 패러미터 이름을 가져오고, 패러미터에 파일이 있다면 그 파일의 이름을 가져온다.
+Enumeration<String> paramNames = mRequest.getFileNames();
+while (paramNames.hasMoreElements()){
+String param = paramNames.nextElement(); 이후 파일이름에 param을 대입한다.
+filename = mRequest.getFilesystemName(param);
+
+파일 이름을 얻는 데에 성공했다면 InputStream과 OutputStream을 이용하여 업로드된 파일을
+소스 폴더로 copy하자. 기존 java 수업에서 배웠듯 출력할 파일 경로를 우선 설정한다.
+File file = new File (path + "/" + filename);
+if (file.exists()){
+is = new FileInputStream(file);
+os = new FileOutputStream("저장할 경로")
+1바이트씩 읽어들여 쓰는 방식을 사용.
+byte[] bs = new byte ((int)file.length());
+1바이트씩 읽고, 더 이상 읽을 것이 없는 경우엔 -1을 출력한다. 이를 이용하여
+while (true){
+int readByteCnt = is.read(bs);
+if (readByteCnt == -1) break; os.write(bs, 0, readByteCnt)
+파일 저장까지 완료되었으면 filename과 경로를 통해 이미지를 출력할 수 있게 된다.
+<img src = "<%=conPath%>/fileUpFolder/<%=fileName%>과 같은 형식.
+
+
+
+
+
+
+**MultipartRequest를 사용시 request.getParameter를 사용할 수 없으니 주의!
+
