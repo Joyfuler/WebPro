@@ -54,7 +54,7 @@
 							String msg = request.getParameter("msg");
 							if(msg!=null){
 						%>
-							<p id="login_findIdPw" onclick="alert('아이디는 aaa/비번은 444')">
+							<p id="login_findIdPw" onclick="alert('아이디는 aaa1/비번은 111')">
 								아이디/비밀번호를 잊으셨나요?
 							</p>
 						<%}%>

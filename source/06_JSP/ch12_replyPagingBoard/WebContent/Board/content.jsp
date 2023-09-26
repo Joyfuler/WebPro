@@ -24,7 +24,7 @@ String pageNum = request.getParameter("pageNum");
  }
  BoardDto dto = bDao.getBoardNothitup(bid); // 조회수 1 올리고 dto가져오기 -> 이후 글출력에 사용
  if (dto == null){ // 만일 해당 bdi의 게시글이 없다면? or 이 페이지부터 실행한 경우
-	 response.sendRedirect(conPath + "/Board/list.jsp");
+	 response.sendRedirect(conPath + "/Fileboard/csList.jsp");
  } else {
 %>
 	<table>

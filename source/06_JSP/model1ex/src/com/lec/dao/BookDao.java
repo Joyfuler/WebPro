@@ -43,7 +43,7 @@ public class BookDao {
 		int result = FAIL;
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO BOOK (bID, bTITLE, bPRICE, bIMG1, bIMG2, "
+		String sql = "INSERT INTO BOOK (bID, bTITLE, bPRICE, bIMAGE1, bIMAGE2, "
 				+ "bCONTENT, bDISCOUNT) "  
 				+ "VALUES (BOOK_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 		try {
@@ -86,12 +86,12 @@ public class BookDao {
 				int bid          = rs.getInt("bid");
 				String btitle    = rs.getString("btitle");
 				int    bprice    = rs.getInt("bprice");
-				String bimg1   = rs.getString("bimg1");
-				String bimg2   = rs.getString("bimg2");
+				String bimage1   = rs.getString("bimage1");
+				String bimage2   = rs.getString("bimage2");
 				String bcontent  = rs.getString("bcontent");
 				int    bdiscount = rs.getInt("bdiscount");
 				Timestamp brdate = rs.getTimestamp("brdate");
-				books.add(new BookDto(bid, btitle, bprice, bimg1, bimg2, bcontent, bdiscount, brdate));
+				books.add(new BookDto(bid, btitle, bprice, bimage1, bimage2, bcontent, bdiscount, brdate));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -126,12 +126,12 @@ public class BookDao {
 				int bid          = rs.getInt("bid");
 				String btitle    = rs.getString("btitle");
 				int    bprice    = rs.getInt("bprice");
-				String bimg1   = rs.getString("bimg1");
-				String bimg2   = rs.getString("bimg2");
+				String bimage1   = rs.getString("bimage1");
+				String bimage2   = rs.getString("bimage2");
 				String bcontent  = rs.getString("bcontent");
 				int    bdiscount = rs.getInt("bdiscount");
 				Timestamp brdate = rs.getTimestamp("brdate");
-				books.add(new BookDto(bid, btitle, bprice, bimg1, bimg2, bcontent, bdiscount, brdate));
+				books.add(new BookDto(bid, btitle, bprice, bimage1, bimage2, bcontent, bdiscount, brdate));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -187,12 +187,12 @@ public class BookDao {
 			if(rs.next()) {
 				String btitle    = rs.getString("btitle");
 				int    bprice    = rs.getInt("bprice");
-				String bimg1   = rs.getString("bimg1");
-				String bimg2   = rs.getString("bimg2");
+				String bimage1   = rs.getString("bimage1");
+				String bimage2   = rs.getString("bimage2");
 				String bcontent  = rs.getString("bcontent");
 				int    bdiscount = rs.getInt("bdiscount");
 				Timestamp brdate = rs.getTimestamp("brdate");
-				book = new BookDto(bid, btitle, bprice, bimg1, bimg2,
+				book = new BookDto(bid, btitle, bprice, bimage1, bimage2,
 						bcontent, bdiscount, brdate);
 			}
 		} catch (SQLException e) {

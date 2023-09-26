@@ -22,6 +22,8 @@ if (result == CustomerDao.LOGIN_SUCCESS){
 	session.setAttribute("customer", customer);
 	if (method.equals("null")){
 		response.sendRedirect("../main/main.jsp");
+	} else if (method.equals("writeForm")){
+		response.sendRedirect("../Fileboard/writeForm.jsp");
 	} else {
 		response.sendRedirect("../"+ method + ".jsp");
 		// 로그아웃 상태에서 회원수정을 하면 login.jsp로 가며 method = 'modify' 패러미터를 추가하여 보낸다.

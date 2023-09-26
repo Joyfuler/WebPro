@@ -21,6 +21,11 @@ public class CustomerDao {
 	public static final int LOGIN_FAIL = 0;
 	public static final int SUCCESS = 1;
 	public static final int FAIL = 0;
+	private static CustomerDao INSTANCE = new CustomerDao();
+	
+	public static CustomerDao getInstance() {
+		return INSTANCE;
+	}
 
 	private Connection getConnection() {
 		Connection conn = null;
@@ -270,4 +275,37 @@ public class CustomerDao {
 		}
 		return dtos;
 	}
+	
+	// 총 회원수를 출력
+	public int getCustomerCount() {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) CNT FROM CUSTOMER";		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			result = rs.getInt("CNT");			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}	
+		return result;
+	}
+	
+	
+	
 }

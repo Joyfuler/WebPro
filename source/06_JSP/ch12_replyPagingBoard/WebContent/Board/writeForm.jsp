@@ -5,7 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%String conPath = request.getContextPath();%>
+<%String conPath = request.getContextPath();
+String cid = (String)session.getAttribute("cid");
+if (cid != null) {
+session.invalidate(); 
+}
+%>
+
 <link href = "<%=conPath%>/css/style.css" rel = "stylesheet">
 </head>
 <body>

@@ -40,35 +40,35 @@
 			idx++;
 		}
 		
-		for (String fileNames : images){
-			InputStream is = null;
-			OutputStream os = null;
-			try{
-				File serverFile = new File(path + "/" + fileNames); 
-				//if(filename!=null){
-				if(serverFile.exists()){
-					is = new FileInputStream(serverFile); // 서버에 업로드된 파일
-					os = new FileOutputStream("D:/webPro/source/06_JSP/ch13_fileUpLoading/WebContent/bookImg/"
-											+fileNames); // 소스폴더로 복사될 파일
-					byte[] bs = new byte[(int)serverFile.length()];
-					while(true){
-						int readByteCnt = is.read(bs);
-						if(readByteCnt==-1) break;
-						os.write(bs, 0, readByteCnt);
-					}
-					System.out.println(fileNames +" 복사 완료");
-				}
-			}catch(Exception e){
-				System.out.println(e.getMessage());
-			}finally{
-				if(os!=null) os.close();
-				if(is!=null) is.close();
-			}
-		}		
 	} catch (IOException e){
 		System.out.println(e.getMessage());
 	}	
-	
+	// 복사
+	for (String fileNames : images){
+		InputStream is = null;
+		OutputStream os = null;
+		try{
+			File serverFile = new File(path + "/" + fileNames); 
+			//if(filename!=null){
+			if(serverFile.exists()){
+				is = new FileInputStream(serverFile); // 서버에 업로드된 파일
+				os = new FileOutputStream("D:/webPro/source/06_JSP/ch13_fileUpLoading/WebContent/bookImg/"
+										+fileNames); // 소스폴더로 복사될 파일
+				byte[] bs = new byte[(int)serverFile.length()];
+				while(true){
+					int readByteCnt = is.read(bs);
+					if(readByteCnt==-1) break;
+					os.write(bs, 0, readByteCnt);
+				}
+				System.out.println(fileNames +" 복사 완료");
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}finally{
+			if(os!=null) os.close();
+			if(is!=null) is.close();
+		}
+	}
 	// btitle, bprice, bcontent, bdiscount 패러미터 받기
 	String btitle = mRequest.getParameter("btitle");
 	int bprice = Integer.parseInt(mRequest.getParameter("bprice"));

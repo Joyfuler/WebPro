@@ -21,7 +21,7 @@
 <body>
 	<jsp:include page="header.jsp"/>
 	<div id="mainForm_wrap">
-		main 화면
+		어서오세요. 메인화면입니다
 	</div>
 	<jsp:include page="footer.jsp"/>
 </body>
