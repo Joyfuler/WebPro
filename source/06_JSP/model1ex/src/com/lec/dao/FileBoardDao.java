@@ -91,7 +91,7 @@ public class FileBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) CNT FROM CUSTOMER";
+		String sql = "SELECT COUNT(*) CNT FROM FILEBOARD";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -112,10 +112,8 @@ public class FileBoardDao {
 				System.out.println(e.getMessage());
 			}
 		}
-		return result;
-		
-	}
-	
+		return result;		
+	}	
 	
 	// 3. 게시판에 글쓰기  
 	public int WritecsBoard(FileBoardDto dto) {

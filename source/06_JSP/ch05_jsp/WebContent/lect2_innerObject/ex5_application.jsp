@@ -2,7 +2,8 @@
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.Reader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 
 
 	<%
-		String conPath = request.getContextPath(); // /ch05_jsp
+	String conPath = request.getContextPath(); // /ch05_jsp
 	String appPath = application.getContextPath(); // /ch05_jsp
 	String absolutePath = application.getRealPath("."); // 현재 실행되는 경로	
 	String filePath = application.getRealPath("files/test.txt");
@@ -43,7 +44,7 @@
 	 */
 	// 일반적으로 자바에서는 위와 같이 try - catch - finally를 이용하여 예외를 잡지만,
 	// jsp 환경에서는 브라우저에 대신 에러를 출력하여 굳이 필요하지 않으므로 걷어냄.	
-	
+
 	Reader reader = new FileReader(filePath); // 기본스트림 reader 생성
 	BufferedReader br = new BufferedReader(reader); //보조스트림은 기본스트림을 통해 생성
 	while (true) {
@@ -73,8 +74,5 @@
 	<h2>
 		텍스트경로 =
 		<%=filePath%></h2>
-
-
-
 </body>
 </html>

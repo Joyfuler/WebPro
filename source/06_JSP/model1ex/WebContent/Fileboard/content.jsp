@@ -19,7 +19,7 @@
 <jsp:include page="../main/header.jsp"/>
 	<%
 		String fidStr = request.getParameter("fid");
-	CustomerDto customer = (CustomerDto) session.getAttribute("customer");
+	CustomerDto customer = (CustomerDto)session.getAttribute("customer");
 	if (fidStr == null) {
 		response.sendRedirect("csList.jsp");
 	} else {
@@ -86,26 +86,26 @@
 				%>
 				<button
 					onclick="location.href='<%=conPath%>/Fileboard/updateForm.jsp?fid=<%=fidStr%>&pageNum=<%=pageNum%>'">글수정</button>
-				<%
-					}
-				%>
+				<%}%>
+				
 				<%
 					if (customer != null && dto.getCid() != null && dto.getCid().equals(customer.getCid())) {
 				%>
 				<button
 					onclick="location.href='<%=conPath%>/Fileboard/deleteForm.jsp?fid=<%=fidStr%>&pageNum=<%=pageNum%>'">글삭제</button>
-				<%
-					}
-				%>
+				<%}	%>
+				
+				<%			
+					if (customer != null) {
+				%>				
 				<button
 					onclick="location.href='<%=conPath%>/Fileboard/replyForm.jsp?fid=<%=fidStr%>&pageNum=<%=pageNum%>'">답변</button>
+				<%}%>	
 				<button
 					onclick="location.href ='<%=conPath%>/Fileboard/csList.jsp?pageNum=<%=pageNum%>'">글목록</button>
 			</td>
 	</table>
-	<%
-		}
-	%>
+	<%}	%>
 <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

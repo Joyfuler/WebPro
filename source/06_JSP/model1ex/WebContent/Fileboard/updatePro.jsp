@@ -11,43 +11,43 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.lec.dao.FileBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%String conPath = request.getContextPath();%>
+	pageEncoding="UTF-8"%>
+<%
+	String conPath = request.getContextPath();
+%>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href = "<%=conPath%>/css/style.css" rel = "stylesheet" type = "text/css">
+<link href="<%=conPath%>/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<%
-	request.setCharacterEncoding("utf-8");
-	//String 
+	<%
+		request.setCharacterEncoding("utf-8");
 	FileBoardDao dao = FileBoardDao.getInstance();
 	String path = request.getRealPath("fileboardUpload");//첨부할 파일이 저장될 서버(WAS)의 폴더
-	int maxSize = 1024*1024*10; // 업로드 최대 용량 10M
+	int maxSize = 1024 * 1024 * 10; // 업로드 최대 용량 10M
 	String filename = "";
 	String originalFilename = "";
 	MultipartRequest mRequest = null;
-	try{
-		mRequest = new MultipartRequest(request, path, maxSize, "utf-8",
-							new DefaultFileRenamePolicy());	
+	try {
+		mRequest = new MultipartRequest(request, path, maxSize, "utf-8", new DefaultFileRenamePolicy());
 		Enumeration<String> paramNames = mRequest.getFileNames(); // 파일 첨부한 파라미터 이름들
-		while(paramNames.hasMoreElements()){
+		while (paramNames.hasMoreElements()) {
 			String param = paramNames.nextElement(); // param="file"
 			filename = mRequest.getFilesystemName(param); // 파라미터로 서버에 저장된 파일이름
 			originalFilename = mRequest.getOriginalFileName(param); // 파라미터에 첨부한 오리지널 파일이름		
 		}
-	}catch(IOException e){
+	} catch (IOException e) {
 		System.out.println(e.getMessage());
 	}
-	
+
 	InputStream is = null;
 	OutputStream os = null;
-	
+
 	try {
 		File serverFile = new File(path + "/" + filename);
-	
+
 		if (serverFile.exists()) {
 			is = new FileInputStream(serverFile); // 서버에 업로드된 파일
 			os = new FileOutputStream(
@@ -79,21 +79,22 @@
 	String fcontent = mRequest.getParameter("fcontent");
 	String fpw = mRequest.getParameter("fpw");
 	String dbfile = mRequest.getParameter("dbFile");
-	if (filename == null){
-		filename = (dbfile.equals("null") ? "":dbfile);
+	if (filename == null) {
+		filename = (dbfile.equals("null") ? "" : dbfile);
 	}
-	String fip = request.getRemoteAddr();	
-	FileBoardDto dto = new FileBoardDto(Integer.parseInt(fid),cid,ftitle,fcontent,filename,0,fpw,0,0,0,fip,null);	
+	String fip = request.getRemoteAddr();
+	FileBoardDto dto = new FileBoardDto(Integer.parseInt(fid), cid, ftitle, fcontent, filename, 0, fpw, 0, 0, 0, fip, null);
 	int result = dao.modifycsBoard(dto);
-	if (result == FileBoardDao.SUCCESS){
-		%> 
-		<script>
+	if (result == FileBoardDao.SUCCESS) {
+	%>
+	<script>
 		alert("success");
 		location.href = '<%=conPath%>/Fileboard/csList.jsp'
 		</script>
-		<%} else { %>
-		<script>
+	<%} else {%>
+	<script>
 		alert("fail");
-		location.href = '<%=conPath%>/Fileboard/csList.jsp'
-		</script>		
+		location.href = '<%=conPath%>
+		/Fileboard/csList.jsp'
+	</script>
 	<%}%>

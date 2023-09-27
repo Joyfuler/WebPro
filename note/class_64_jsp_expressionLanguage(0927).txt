@@ -1,0 +1,81 @@
+-- 기존의 jsp 표현식
+<% session.getAttribute("customer") == null? "로그인 안함": "로그인 완료"%>
+-- el 표현식
+${ empty customer ? "로그인 안함" : "로그인 완료" }
+${} 형식을 사용하여 기존 <% %> 문법을 고칠 수 있고 가독성을 높일 수 있다.
+
+기존 방법으로는 로그인 페이지에서 로그인 처리 후 
+CustomerDto customer = null;
+session.setAttribute("customer", customer) 와 같은 형식으로 세션 데이터를 대입하였음.
+혹은 pageContext.setAttribute("pageName", "pageValue") 로 한 페이지 내부에서 유지되는 속성을 세팅할 수 있었음.
+request.setAttribute("requestName", "requestValue") (새로운 request 객체가 만들어지기 전까지 유효한 속성)
+(주로 request.setAttribute와 session.setAttribute를 사용)
+
+el 표현식에서 속성을 가져올 때는 ${sessionScope.sessionName}을 통해 가져올 수 있으며, 앞의 scope는 생략이 가능함.
+결과적으로 session.getAttribute("sessionName") 과 ${sessionName } 이 동일한 session 속성을 가져올 수 있다.
+(전 페이지에서 넘어왔다면 request, session이 살고, 새로 브라우저를 열어서 실행했다면 값이 모두 없어짐)
+
+-- 복습.
+response.sendRedirect("ex2_scope.jsp") 로 가는 경우 주소(url)가 바뀌며 기존의
+pageContext의 attribute와 request의 attribute가 증발함.
+대신 <jsp:forward page="ex_scope.jsp"/> 로 가는 경우에는 주소창에 표시되는 주소가 바뀌지 않고, 
+request와 session이 보존됨.
+
+*java와 java가 아닌 부분을 완전히 분리하는 방법은?
+java에서는 <jsp:forward page~ > 와 같은 기능을 사용할 수 없으므로 java 내에서 
+forward할 객체를 생성한 후 forward시켜야 함.
+
+-- forward할 dispatcher 객체 생성
+RequestDispatcher dispatcher = request.getRequestDispatcher("ex2_scope.jsp");
+dispatcher.forward(request, response);
+를 통해 <jsp:forward page> 와 동일한 기능이 실행됨.
+이후 넘어간 페이지에서 ${pageName } , ${param.id} 등을 받아올 수 있다. 
+
+(dispatcher를 사용해 값을 전달할 때 한글이라면 URLEncoder.encode("한글","utf-8") 을 통해 인코딩을 조정해야 함.
+--> RequestDispatcher dispatcher = request.getRequestDispatcher("ex2_scope.jsp?id="+URLEncoder.encode("한글아이디","utf-8"));
+
+checkbox나 multiple처럼 같은 패러미터 이름의 값이 여러 개 넘어가는 경우?
+기존 방법 - String[] pets = request.getParameterValues("pets"); 으로 여러 개 패러미터를 가져온다.
+(단 pets가 null일 수 있으므로 for문으로 출력하면 nullpointerexception이 발생할 수 있으니 주의)
+for (String pet : pets){
+out.print(pet + " " ); 와 같은 방식으로 출력하였음.
+}
+el 표현식에서는 ${paramValues.pets[0]} 을 사용. 또한 해당 배열의 값이 null이더라도 오류가 발생하지 않고,
+빈 스트링으로 표시되는 것이 장점.
+전체가 null이라면 ${empty paramValues.pets ? "없습니다":""} 로 확인가능.
+
+더블 삼항연산자 - el을 전체로 감싸면 각 패러미터에 ${} 를 할 필요가 없음 .
+${not empty param.result ? (param.n1*param.n2 eq param.result ? "정답":"오답") : "" }
+
+
+java에서 세팅한 생성자와 그 함수를 getter하는 방법도 존재.
+Member member = new Member("aaa","1","홍길동"); 으로 member 객체를 생성하였으면,
+${member.id } ${member.pw } 로 객체 내의 값을 간단하게 가져올 수 있다. 
+** 패러미터의 경우에는 ${param.a} 등으로 앞에 param을 붙여줄 것!
+
+1. dispatcher
+<%%> servlet으로 웹페이지 만들기는 매우 불편.. 화면에서 유저와 상호작용하는 페이지는 기본 jsp로
+mvc 패턴 사전 연습을 위해 jsp와 java를 분리하도록 훈련 - 기존의 Pro.jsp 에서 하는 작업은 이제 java로 분리하여 수행한다.
+
+1) servlet을 만들고, get메소드와 post메소드에 모두 먼저 actionDo를 수행하도록 함.
+2) 이후 actionDo에서 각 패러미터를 받아 객체로 넣는다. (String id = request.getParameter~)
+3) request.setAttribute를 통해 view(jsp)단으로 전달하려는 데이터를 담는다.
+Member member = new Member(id,pw,name) -> request.setAttribute("member",member);
+이후 Dispatcher 객체를 만들고 이용하여 forward에 dispatcher를 넣어 해당 주소로 가게 만든다.
+RequestDispatcher dispatcher = request.getRequestDispatchehr("1_dispatcher/ex1_view.jsp)";
+dispatcher.forward(request, response);
+
+수 a까지의 합을 구하려면 servlet에서 parameter를 받고 for문을 수행. 이후
+request.setAttribute("sum",sum); 으로 값을 정해주고 forward해주자.
+forward를 하는 경우 이전 주소 기준으로 주소가 정해지므로 <%=conPath%>를 사용하여 주소를 설정해야 함.
+location.href = '1_dispatcher/ex2_suInput.jsp' 로 적기보단,
+location.href = '<%=conPath%>/1_dispatcher/ex_suInput.jsp'>로 적자.
+
+
+2. redirect
+request.setAttribute 등 한 request객체의 값은 redirect 과정에서 모두 증발함. 
+따라서 response.sendRedicret("주소"?id="+id); 와 같은 형식으로 주소에 패러미터를 직접 입력해주어야 하며,
+단일 패러미터는 넘길 수 있지만 배열 등의 패러미터도 넘기지 못함. (거의 사용되지 않으니 참고만 할 것)
+만일 무슨 일이 있어도 객체로 받고 싶다면, usebean을 사용하자.
+<jsp:useBean id="member" class = ~">
+<jsp:setProperty="*" name = "member">

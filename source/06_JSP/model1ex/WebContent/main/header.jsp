@@ -19,7 +19,7 @@
 					<li><a href="<%=conPath%>/customer/loginForm.jsp">로그인</a></li>
 					<li><a href="<%=conPath%>/main/main.jsp">홈</a></li>
 				</ul>
-		<%}else{ // 로그인 후 해더화면%>
+		<%}else{%>
 				<ul>
 					<li><a href="<%=conPath%>/customer/logout.jsp">로그아웃</a></li>
 					<li><a href="<%=conPath %>/customer/modifyForm.jsp">정보수정</a></li>

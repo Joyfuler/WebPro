@@ -205,6 +205,7 @@ public class BoardDao {
 			}
 		}
 	}
+
 	// UPDATE BOARD SET BHIT = BHIT+1 WHERE BID = 1;
 	public BoardDto getContent(String bid) {
 		hitUp(bid); // 글 상세보기 시 조회수가 자동으로 1 올라갈 것.
@@ -248,6 +249,7 @@ public class BoardDao {
 		}
 		return dto;
 	}
+
 	// -- 6) 글수정/답변글 - BID로 DTO 가져오기 (글수정FORM, 답변글FORM 이용시 사용), 조회수 올리기 사용 X
 	// SELECT * FROM BOARD WHERE BID = 1;
 	public BoardDto getBoardNothitup(int bid) {
@@ -315,7 +317,8 @@ public class BoardDao {
 				int bindent = rs.getInt("bindent");
 				String bip = rs.getString("bip");
 				Timestamp bdate = rs.getTimestamp("bdate");
-				dto = new BoardDto(Integer.parseInt(bid), bname, btitle, bcontent, bemail, bhit, bpw, bgroup, bstep, bindent, bip, bdate);
+				dto = new BoardDto(Integer.parseInt(bid), bname, btitle, bcontent, bemail, bhit, bpw, bgroup, bstep,
+						bindent, bip, bdate);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -333,8 +336,7 @@ public class BoardDao {
 		}
 		return dto;
 	}
-	
-	
+
 	// -- 7) 글수정 (작성자, 글제목, 본문, 이메일, 비밀번호 수정가능)
 	public int modifyBoard(BoardDto dto) {
 		int result = FAIL;

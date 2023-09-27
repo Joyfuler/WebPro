@@ -14,6 +14,7 @@
 <body>
 <% BookDao bDao = BookDao.getInstance();
 ArrayList<BookDto> books = bDao.listBook();
+String pageNum = request.getParameter("pageNum");
 %>
 <table>
 	<caption> 책 리스트 (board Style)</caption>

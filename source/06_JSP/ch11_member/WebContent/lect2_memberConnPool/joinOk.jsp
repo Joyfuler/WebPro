@@ -1,7 +1,8 @@
 <%@page import="com.lec.member.MemberDaoCP"%>
 <%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+%>
 <%
 	String conPath = request.getContextPath();
 %>
@@ -22,22 +23,23 @@
 	<%-- join에서 입력했던 패러미터를 모두 property에 넣음. 단, birth는 타입오류 떄문에 tempbirth로 지정 --%>
 	<%
 		String tempBirth = request.getParameter("tempBirth"); // "" 이거나 "1999-12-12" 
-		if (!tempBirth.equals("")) { // 빈값이 아니라, 날짜가 제대로 들어왔다면
-			dto.setBirth(Date.valueOf(tempBirth));
-			//dto의 birth가 TimeStamp형이면 dt.setBirth(Timestamp.valueof(tempBirth + " 00:00:00"));
-		}
-		// jsp 액션태그로 회원가입 정보를 모두 가져왔다면, dao를 통해 db에 넣는 작업을 시작.
-		MemberDaoCP mDao = new MemberDaoCP();
-		int result = mDao.confirmID(dto.getId()); // id 중복체크
-		if (result == MemberDaoCP.MEMBER_NONEXISTENT) {
-			//사용가능한 아이디 / 회원가입 진행 -> session에 id데이터 추가 -> login 페이지로
-			result = mDao.joinMember(dto); // 중복체크후 문제없으면 dto의 객체를이용해 db에 넣는다
-			if (result == MemberDaoCP.SUCCESS) {
-		session.setAttribute("id", dto.getId()); // 회원가입이 완료되었으면 id를 세션에 넣는다.
+	if (!tempBirth.equals("")) { // 빈값이 아니라, 날짜가 제대로 들어왔다면
+		dto.setBirth(Date.valueOf(tempBirth));
+		//dto의 birth가 TimeStamp형이면 dt.setBirth(Timestamp.valueof(tempBirth + " 00:00:00"));
+	}
+	// jsp 액션태그로 회원가입 정보를 모두 가져왔다면, dao를 통해 db에 넣는 작업을 시작.
+	MemberDaoCP mDao = new MemberDaoCP();
+	int result = mDao.confirmID(dto.getId()); // id 중복체크
+	if (result == MemberDaoCP.MEMBER_NONEXISTENT) {
+		//사용가능한 아이디 / 회원가입 진행 -> session에 id데이터 추가 -> login 페이지로
+		result = mDao.joinMember(dto); // 중복체크후 문제없으면 dto의 객체를이용해 db에 넣는다
+		if (result == MemberDaoCP.SUCCESS) {
+			session.setAttribute("id", dto.getId()); // 회원가입이 완료되었으면 id를 세션에 넣는다.
 	%>
 	<script>
-			alert("<%=dto.getName()%>님 회원가입 감사합니다");			
-			location.href = 'login.jsp';
+			alert("<%=dto.getName()%>
+		님 회원가입 감사합니다");
+		location.href = 'login.jsp';
 	</script>
 	<%
 		} else {
