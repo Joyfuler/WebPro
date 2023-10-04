@@ -1,0 +1,80 @@
+지난주 주의사항)
+jsp를 만들 때 실제 주소 path를 설정할 수 있음. 대문자인 경우 웹페이지에서는 소문자로 바꿀 수 있도록 하자.
+scope = "page" 와 "request"의 차이? page는 같은 페이지 내에서의 지역 변수처럼 사용.
+request는 다른 페이지로 갈 때 보내서 해당 페이지가 응답하는 데까지 사용가능.
+
+--
+ArrayList를 출력하기 위해서는 if문이나(if totalcount==00) for문을 사용해야 하고, 
+따라서 jsp에서 자바(스크립틀릿)를 넣을 수밖에 없는 상황이 있음. (게시판 글 리스트 등) 
+이를 위해 jsp에서 사용할 수 있는 for태그나 if태그가 존재하는데 이를 jstl이라 함.
+이를 사용하기 위해서는 Taglibs를 다운로드 필요. (standard 1.1 -> jakarta-standard~ 1.1.2)
+
+jstl 라이브러리는 주로 core와 I18N formatting 두 가지를 사용한다. 
+core는 if나 for를 쓸 수 있고, formatting은 시간이나 인코딩을 설정 가능.
+jsp의 윗부분에 <%@ taglib prefix = "c" uri = "~/jstl/core"%>를 입력하면 사용 가능.
+formatting(fmt) 는 taglib prefix = "fmt" uri = "~jstl/fmt"  --> 
+두 개를 템플릿에 추가하여 사용할 것! (주의:: ${ } 는 자바 내부 변수가 아닌 경우 템플릿에서 $가 무시됨. $${ } 로 입력 필요)
+
+1) core
+
+- for문 <c:forEach ~ >
+
+기존처럼 스크립틀릿을 열어 if (list.size()==0){ <% %> } 처럼 자바와 jsp를 왕복하지 않도록 변경가능.
+for문의 경우 <c:forEach var="i" begin="1" end="10" step="1">
+${i } 번째 손님 어서오세요
+</c:forEach> 로 기존 for (int i=1; i<=10; i++)과 동일하게 사용 가능.
+변수 선언의 경우는 <c:set var = "names" value = <%=names%> 등으로 표기.
+jstl의 확장for문은 무조건 끝까지가 아닌, 어디까지 돌 지를 지정할 수 있다.
+<c:forEach var = "name" items= "${names}" begin="0" end="1">
+<p> ${name}
+0번째부터 1번째까지 2번만 도는 name이 출력된다.
+
+-변수선언<c:set var =>
+
+input.jsp에서 입력한 값을 ${param.id } 등으로 받은 후 이를 변수에 대입.
+<c:set var = "n1" value = "${param.n1}">
+이후 n1을 ${n1} 등으로 대체해 사용가능.
+
+
+-- if문 <c:if test~ >
+
+<c:if test = "${n1*n2 eq result}">
+정답입니다.
+</c:if>
+단, jstl 구문에서는 else가 없으므로, 반대 조건을 추가한 if를 더 넣어야 함. 
+<c:if test = "${n1*n2 != result} " var = "conditionResult">
+오답입니다.
+</c:if>
+
+<c:choose~> 를 사용할 수도 있으나 일반적으로 if 사용
+
+
+2) fmt
+숫자나 날짜 format 지정가능.
+<fmt:formatNumber value = "1234567.256" format="#,###.##"/>
+결과 숫자 세자리마다 쉼표, 수솟점 두번째자리까지 표시로 형식이 지정됨.
+#을 입력하면 해당 자릿수가 없을 경우 출력되지 않지만, 0으로 입력하면 0으로 출력됨.
+<fmt:formatNumber value = "${num }" pattern = "00,000,000.000"/> 으로 입력 시 num이 12345였다면
+00,012,345.000으로 출력됨.
+
+날짜는 date이든, timestamp이든 java.util의 date이든 모두 date타입이면 똑같이 적용됨.
+<fmt:formatDate value= "${nowDate }" type = "date" dateStyle = "long"> 날짜 표시.
+<fmt:formatDate value= "${nowDate }" type = "time" timeStyle = "medium"> 시간 표시.
+혹은 both를 사용하여 두개를 동시에 표시할 수도 있다. date/timeStyle을 각각 표시하거나 맘에 들지 않는다면 pattern을 직접 설정가능.
+<fmt:formatDate value = ${nowDate }" type = "both" pattern = "yy년 MM월 dd일(E요일) HH:mm:ss">
+
+기존의 경우 깨지는 한글을 <% request.setCharacterEncoding("utf-8")%> 로 스크립틀릿을 사용하여 인코딩을 지정.
+이를 <fmt:requestEncoding value = "utf-8"/> 로 변경해 사용 가능.
+*** 프로젝트 시에는 스크립틀릿이 보이지 않도록 태그와 fl을 사용하자.
+
+3) fn의 경우는 거의 사용하지 않음. 
+${fn:toUpperCase(param.id) } but 실제 사용은 ${param.id.toUpperCase()} 등을 주로 사용함.
+
+
+---
+기존에는 jsp 사이에 스크립틀릿으로 넣었던 EmpDao dao = EmpDao.getInstance() ; 와
+ArrayList<EmpDto>lists = dao.getListEmp(); 등을 서블릿으로 옮김. 이후 request.setAttribute("보낼객체명",실제객체명)을 넣고,
+RequestDispatcher에 forward 시켜 넘긴다. (RequestDispatcher dispatcher = request.getRequestDispatcher("경로)" --> dispatcher.forward(request,response);
+
+servlet에서 forward해서 간 페이지에서는 form action에 다시 servlet 주소를 넣지 않아도 됨. <form action = "">
+포워드되어 표기되는 주소가 변경되지 않았기 때문.
