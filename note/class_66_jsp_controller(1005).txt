@@ -1,0 +1,57 @@
+각 기능마다 모두 servlet을 만들면 파일이 너무 많기에 frontcontroller를 이용하여 조정
+url과 uri의 차이 - url은 전체 주소, uri는 일부 주소.
+command 경로는 uri에서 conpath만큼 자른 나머지를 가져온다.
+String uri = request.getContextPath();
+String command = uri.substring(conPath.length());
+
+이 과정을 frontcontroller에 넣어 각 요청이 들어온 것이 무엇인지 command를 추출하여 구분한다.
+frontcontroller에서는 command가 무엇인지에 따라서 수행해야 할 service 클래스를 지정하고 그에 맞게 forward 시켜줌.
+
+if (command.equals("/insert.do")){ // insert페이지 요청이 왔다면 해당 기능을 수행하고 insert.jsp로 forward시킴
+viewPage = "ex2/insert.jsp";
+}
+~ RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+dispatcher.forward(request,response);
+
+다음 service 인터페이스를 만들어 각종 기능을 수행할 메소드의 껍데기만을 만든다.
+이후 각 기능을 수행하는 하위 service클래스들(insertService, updateService 등등)은 
+service 인터페이스를 implement하고 빈 메소드를 오버라이드하여 실제 기능을 넣는다.
+
+정리) insert의 경우
+1) jsp파일에서 a태그가 들어간 버튼을 누르는 등  ../insert.do로 이동.
+2) frontcontroller.java에서 받아온 /insert.do 를 command로 받는다.
+if (command.equals(~") 에 따라서 실행할 기능을 service에,
+이후 forward할 페이지를 viewpage에 넣는다.
+service = new InsertService(); // 이 command에서는 이 service 기능 수행.
+
+3) service는 인터페이스를 만들어 빈 껍데기만 넣은 메소드를 생성하고,
+이후 실제로 실행해야 할 기능을 담은 하위 service 클래스에서 메소드 오버라이드한 후 넣는다.
+@Override
+public void execute (request, response){
+(insert 로직을 수행하고 결과를 insertResult에 담음. 이후 setAttribute를 통해 view단으로 데이터를 쏜다.)
+MemberDto newMember = new Member(~)
+MemberDao mDao ~ int result = mDao.joinMember(newMember)
+--> request.setAttribute("insertResult", result);
+}
+
+4) 기능 실행 및 실제 forward
+service.execute(request,response);
+이후 if문을 벗어나 RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+
+-- 기타 참고해야 할 것
+사용자가 글작성, 글수정, 글삭제 등을 완료하는 경우 일반적으로 목록(list.jsp?)으로 돌아감.
+다만 list.jsp로 그대로 작성 시, service의 기능을 수행하지 않은 빈 페이지가 나오므로 select.do 등으로 
+service의 기능을 수행한 주소를 지정할 필요가 있음
+
+또한 가입 후 목록으로 돌아가는 과정에서 FrontController의 memberJoin이 재차 실행되어 
+에러가 발생하는 경우가 존재함. (가입한 후의 url 주소창을 확인)
+따라서 Boolean 타입의 joinMode 변수를 만들어 기본적으로 false로 만들고,
+가입하는 사용자의 요청 + 패러미터가 온 경우에만 if (command.equals("memberJoinView.do")){
+joinMode = true; } 로 변경시킨다. 
+이후 memberJoin.do단에서 if문으로 joinMode가 true일 때만 service = new MemberJoinService() 기능을 수행하도록 하고,
+joinMode를 다시 false로 변경한다. (forward는 그대로 놔둬도 무방함)
+
+
+
+** select가 있는 경우 꼭 페이징 처리를 넣어주자.
+
