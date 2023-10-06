@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var = "conPath" value = "${pageContext.request.contextPath }"/>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href = "${conPath}/css/style.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+	<!-- requestScope.replyBoard(원글의 정보), bid와 pageNum도 넘어옴. -->
+	<form action = "${conPath }/reply.do" method = "post">
+		<input type = "hidden" name = "pageNum" value = "${param.pageNum }">
+		<input type = "hidden" name = "bid" value = "${param.bid }">
+		<input type = "hidden" name = "bgroup" value = "${replyBoard.bgroup }">
+		<input type = "hidden" name = "bstep" value = "${replyBoard.bstep }">
+		<input type = "hidden" name = "bindent" value = "${replyBoard.bindent }">
+		<table>
+		<caption>${param.bid }번 답변글쓰기</caption>
+		<tr>
+			<th>작성자</th>
+			<td><input type = "text" name = "bname" required = "required" autofocus="autofocus"></td>
+		</tr>
+		<tr>	
+			<th>글제목</th>
+			<td><input type = "text" name = "btitle" required = "required" value = "re: ${replyBoard.btitle }"></td>
+		</tr>
+		<tr>	
+			<th>글본문</th>
+			<td><textarea rows="5" name = "bcontent"></textarea></td>
+		</tr>
+		<tr>	
+			<td colspan = "2">
+				<input type = "submit" value = "답변글쓰기" class = "btn">
+				<input type = "reset" value = "초기화" class = "btn">
+				<input type = "button" value = "목록" class = "btn" onclick = "location.href='${conPath}/list.do?pageNum=${param.pageNum }'">
+			<!--  submit을 누를 경우 write.do로 요청보냄. -->
+			</td>
+		</tr>	
+		</table>	
+	</form>
+</body>
+</html>

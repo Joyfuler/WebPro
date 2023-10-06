@@ -6,7 +6,7 @@ const infoConfirm = function(){
 	const id = document.getElementsByName('id')[0];
 	const pw = document.getElementsByName('pw')[0];
 	const pwChk = document.getElementsByName('pwChk')[0];
-	const name = document.getElementsByName('name')[0];
+	const name = document.getElementsByName('name')[0];	
 	if (id.value.length < 3){
 		alert('아이디는 3글자 이상으로 입력해주세요');
 		id.focus();

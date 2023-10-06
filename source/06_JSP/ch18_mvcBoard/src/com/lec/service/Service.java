@@ -1,4 +1,4 @@
-package ch18_mvcpractice.service;
+package com.lec.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
