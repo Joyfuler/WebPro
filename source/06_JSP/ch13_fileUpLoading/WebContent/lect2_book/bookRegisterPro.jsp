@@ -67,9 +67,9 @@
 			System.out.println(e.getMessage());
 		} finally {
 			if (os != null)
-		os.close();
+			os.close();
 			if (is != null)
-		is.close();
+			is.close();
 		}
 	}
 	// btitle, bprice, bcontent, bdiscount 패러미터 받기

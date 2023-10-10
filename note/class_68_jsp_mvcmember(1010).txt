@@ -1,0 +1,43 @@
+mvc 패턴이라면 response.sendredirect시에 .jsp페이지가 아닌 .do로 보내야 함.
+index.jsp에서 <%response.sendredirect("main.do"); 로 이동하도록 하고,
+이를 controller에서 command로 받아서 viewpage와 service를 처리해 준다.
+이후 main.jsp에 불러올 db를 mainservice.java에서 처리할 수 있음.
+
+로그인이라면 command가 /loginView.do일 때와 /login.do 때를 각각 구분한다.
+loginView.do는 로그인 페이지로만 이동. 유저가 해당 페이지에서 정보를 입력하게 한다.
+login.do는 로그인 후 실제로 정보를 db에 저장 및 session 처리하고 메인 페이지를 입력하게 한다.
+
+--
+
+특정 페이지에서 기능을 수행할 때 로그인 페이지로 이동하고, 로그인 후 메인으로 가지 않고
+해당 기능이 있는 페이지로 돌아가게 하는 방법을 mvc에서도 수행 필요.
+(ex) modifyView.do -> modify.jsp로 가려고 할 때 로그아웃 상태라면, loginView.do로 이동하면서 동시에 next 패러미터를 추가,
+loginView.do?next=modifyView.do 등으로 설정하고 input type = "hidden" 등으로 넘긴다.
+
+이후 login.jsp에서 MemberDao의 loginCheck 함수를 실행하고, 만일 result가 success라면 세션에 member 객체 정보를 담는다.
+(기존 jsp에서의 session은 바로 set이 가능했으나 java에서는 HttpSession session = request.getSession(); 을 통해 우선 가져와야 함.
+이후 MemberDto member = mDao.getMember(id, pw) 를 하고, session.setAttribute("member",member) 로 담을 수 있음.
+이후 jsp페이지에서는 세션이 담겨지며 ${member.id } 등을 통해서도 사용 가능함.
+
+
+
+** 각 service를 매칭하고, viewPage를 설정한 후
+service.execute(request,response) 기입하는 것 잊지 말 것! 하지 않으면 실제로 실행되지 않음.
+
+** if문을 잘 보고, viewpage가 제대로 변경되지 않으면 기본값인 null이 됨.
+이후 requestdispatcher에서 forward되는 viewpage가 null이므로 nullpointerexception이 발생하게 됨.
+
+** 회원가입 등 파일첨부 시에는 form태그에 반드시 enctype = "multipart/form-data" 를 삽입하자.
+이후 request.getParameter 대신 MultipartRequest를 사용하여 패러미터를 받아야 함.
+
+** 각 메소드에서 조건문에 벗어나거나 예외일 경우에는 setAttribute로 errorMsg를 담아 쏘고,
+이후 main.jsp 등 받은 페이지에서 <script> alert(${errorMsg}) 등으로 뿌릴 수 있음.
+
+** viewPage 입력시 do는 / 없이. join.do;
+command 비교는 / 포함. if (command.equals("/join.do")){ ...
+
+
+파일첨부 후 처리 순서.
+1) 서버에 파일 저장
+2) 저장한 파일의 이름을 가져온다. 만일 저장된 파일이 없다면 기본 파일 or 이전 파일로 설정
+3) 해당 파일을 복사한다. (서버에 해당 파일을 그냥 두는 경우 파일이 날아가므로 복사가 필요)
