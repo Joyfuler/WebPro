@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(function(){
+		//jquery : $('선택자').action();
+		// $('*').css('color','blue').css('margin','20px'); 모든태그가 파란색 20px마진
+		$('p').click(function(){
+			$(this).hide('fast');
+		});		
+		
+		$('#showPtag').click(function(){
+			$('p').show('fast');
+		});
+		
+		$('button#hideP1').click(function(){
+			$('p#p1').hide('fast');	
+		});	
+	
+		$('button#hidePtagAll').click(function(){
+			$('p').hide('fast');
+		});
+	});	
+	</script>
+</head>
+<body>
+	<h1> 이곳은 header </h1>
+	<p> 1. 이 p태그를 클릭하면 숨겨져요</p>
+	<p> 2. 이 p태그를 클릭하면 숨겨져요</p>
+	<p id = "p1">이 p1 하나만 숨겨지는 버튼을 만들어요</p>
+	<button id = "showPtag">p태그들이 다 나타나요</button>
+	<button id = "hideP1"> p1하나만 숨겨져요</button>
+	<button id = "hidePtagAll">p태그를 모두 숨겨요</button>
+</body>
+</html>

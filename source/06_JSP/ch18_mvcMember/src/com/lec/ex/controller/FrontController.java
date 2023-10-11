@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lec.ex.service.MAllViewService;
 import com.lec.ex.service.MJoinService;
 import com.lec.ex.service.MLoginService;
 import com.lec.ex.service.MLogoutService;
 import com.lec.ex.service.MModifyService;
+import com.lec.ex.service.MWithdrawalService;
 import com.lec.ex.service.Service;
 
 @WebServlet("*.do")
@@ -66,9 +68,13 @@ public class FrontController extends HttpServlet {
 			service.execute(request, response);
 			viewPage = "member/main.jsp";
 		} else if (command.equals("/allView.do")) { // 회원 전체리스트를 출력할 때. pageNum이 있을때와 없을 때를 구분하여 출력함.
-					
-		} else if (command.equals("withdrawl.do")) { // 회원탈퇴 기능 수행. 이후 로그아웃 필요
-			
+			service = new MAllViewService();
+			service.execute(request, response);
+			viewPage = "member/mAllView.jsp";
+		} else if (command.equals("/withdrawal.do")) { // 회원탈퇴 기능 수행. 이후 로그아웃 필요
+			service = new MWithdrawalService();
+			service.execute(request, response);
+			viewPage = "member/main.jsp";
 		}	
 		
 		//viewPage로 forward함

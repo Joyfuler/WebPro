@@ -39,7 +39,7 @@ public class MJoinService implements Service {
 				String mpw = mRequest.getParameter("mpw");
 				String mname = mRequest.getParameter("mname");
 				String memail = mRequest.getParameter("memail");
-				mphoto = (mphoto == null ? "NOIMG.JPG" : mRequest.getParameter("mphoto"));
+				mphoto = (mphoto == null ? "NOIMG.JPG" : mphoto);
 				// 첨부한 사진이 없다면 noimg.jpg로 대체됨
 				String mbirthStr = mRequest.getParameter("mbirth");
 				Date mBirth = null;

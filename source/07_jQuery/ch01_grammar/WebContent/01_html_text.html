@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		$('p#p1').click(function(){
+			// $(this).html('<b>태그내용바뀜</b>');
+			$(this).text('<b>태그내용바뀜</b>');
+			$('p').css('backgroundColor','red').css('color','yellow').css('font-weight','bold');
+		});
+	});
+	</script>
+</head>
+<body>
+	<p id = "p1">p태그 하나</p>
+</body>
+</html>

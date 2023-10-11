@@ -1,0 +1,65 @@
+jquery = 자바스크립트의 라이브러리. (print.out 등 기능이 갖춰져 있는 것)
+아이디/이메일 중복체크를 브라우저 이동 없이 즉시 표시 가능
+
+톰캣 재설정 - jstl과 standard.lib를 다운받아둔 tomcat에 넣고,
+workspace를 바꾼 후 서버의 경로를 새 tomcat으로 바꾸고, 포트 번호도 기존과 다르게 변경.
+server locations는 두번째인 use tomcat installation을 쓴다.
+
+jquery 다운로드 - jquery.com
+code.jquery.com/jquery-3.7.1.js 를 다른이름으로 저장하여 소스 폴더에 옮긴다.
+본문에서 <script src ="js/jquery-3.7.1.js"> 를 입력 후 사용 가능.
+
+사용하기 위해서는 <script> 태그 사이에 다음과 같이 입력한다.
+$(document).ready(function(){        (window.onload = function();과 동일)
+	$('#p1')
+	});
+(탬플릿에 넣는 것을 추천. 주의 : 템플릿에서 $는 인식되지 않으니 반드시 $$로 입력할 것.)
+$('#p1') 는 document.getElementById('p1')을 의미.
+$('p#p1') p태그 중 p1 name을 가져옴.
+
+1) HTML 함수
+해당 선택자 안에 html코드를 삽입.
+
+$('#p1').click(function(){
+$('#p1') 혹은 $(this).html('<br>태그 내용 바뀜</br>');
+}); 
+내가 클릭한 p1 태그에 이벤트 발생 -> html태그를 다음과 같이 삽입함.
+기존 자바스크립트와 동일하게 .은 class, #은 id, []는 query를 의미. class처럼 동일 속성이 여러 개라면 모두를 가져옴.
+
+2) TEXT 함수
+해당 선택자 안에 텍스트를 삽입, 혹은 가져오기.
+$(this).text('<br>태그 내용 바뀜</br>');
+<b> 등을 입력시 html함수에서는 코드로 인식하나 text에서는 해당 글자가 그대로 출력된다.
+
+
+3) CSS함수
+css('css속성','값'): 해당 선택자에 css를 적용.
+$('p').css('backgroundColor','red').css('color','yellow').css('font-weight','bold');
+$('*').css('color','blue') 로 입력하면 페이지 내 모든 속성자가 파란색으로 변경된다.
+--> p태그 모두에 빨간색 배경을 css로 입히고 노란글씨, 굵게.
+css는 .css를 통해 연결해서 사용이 가능함.
+
+
+4) hide() 함수 : 해당 선택자를 숨김 <-> show() 함수
+$(function(){
+$('p').click(function(){
+	$(this).hide();
+});
+p태그를 클릭하면 해당 p태그가 가려진다. hide(); 안에 'slow', 'fast'를 넣어 움직이는 동작을 구현가능.
+$('#showPtag').click(function(){
+$('p').show('fast');
+});
+
+
+
+문법 순서는 항상 $(('선택자').action(); 
+혹은
+$(function(){
+
+}); 로도 사용이 가능함. (** window가 load되었을 때 실행됨. 즉 body가 먼저 실행된다.)
+
+
+
+
+** this 재정리 - this는 함수 내 이벤트가 걸려있는 해당 태그를 의미함.
+위의 경우 $('p#p1').click에 function이 걸려있으므로, 이 안에 $(this) 사용시 이는 p#p1을 말함.

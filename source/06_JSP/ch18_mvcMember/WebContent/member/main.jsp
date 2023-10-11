@@ -19,6 +19,23 @@
 	location.href='${conPath }/loginView.do';
 	</script>
 	</c:if>
+	<c:if test = "${not empty modifyResult }">
+	<script>
+	alert('${modifyResult }');
+	</script>
+	</c:if>
+	<c:if test = "${not empty modifyErrorMsg }">
+	<script>
+	alert('${modifyErrorMsg }');
+	history.back();	
+	</script>
+	</c:if>
+	<c:if test = "${not empty withdrawalResult }">
+	<script>
+	alert('${withdrawalResult }');	
+	</script>
+	</c:if>
+	
 	<c:if test="${empty member }">
 		<!-- sessionScope, requestScope등을 생략할 수 있음. 로그인하지 않은 경우 -->
 		<h1> 로그인 상태가 아닙니다.</h1>
