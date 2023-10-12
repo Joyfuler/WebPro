@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table td {
+	width: 100px;
+	height: 100px;
+	background-color: #AAFFAA;
+	}
+	
+	.tdRed{
+	background-color: red;
+	}
+	
+</style>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){	
+			$('td').click(function(){ // each로 각 버튼을 클릭할 때마다 이벤트 발생
+			$('td').removeClass('tdRed'); 	
+			$(this).addClass('tdRed'); //모든 td의 클래스를 지운 후 클릭한 곳만 클래스 추가
+			let idx = $(this).attr('id'); // id 속성값을 가져오기.
+			$(this).attr('id',Number(idx)+1); // 속성값에 +1 을 해주기.
+			alert(idx+"번째 td를 선택하셨군요");			
+		  });		  
+		});
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td id="0"></td><td id="1"></td><td id="2"></td>
+		</tr>	
+		<tr>
+			<td id="3"></td><td id="4"></td><td id="5"></td>
+		</tr>
+		<tr>
+			<td id="6"></td><td id="7"></td><td id="8"></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -17,8 +17,7 @@
 		String pageNum = request.getParameter("pageNum");
 		String cid = request.getParameter("cid");
 		FileBoardDao fDao = FileBoardDao.getInstance();
-		int result = fDao.removecsBoard(cid, fpw);
-		
+		int result = fDao.removecsBoard(cid, fpw);		
 		if (result == FileBoardDao.SUCCESS) { //비밀번호가 일치하여 정상적으로 삭제됨%>
 	<script>
 		alert('<%=fid%>번 게시글 삭제 완료. 리스트로 돌아갑니다');

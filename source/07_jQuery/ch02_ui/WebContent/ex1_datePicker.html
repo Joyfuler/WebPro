@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">  
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+    	dateFormat: "yy-mm-dd",
+    	monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+    	showMonthAfterYear: true,
+    	yearSuffix: '년',
+    	changeMonth: true,
+    	changeYear: true,
+    	monthNamesShort:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+    	yearRange: "c-100:c+3", //년도 선택 select box를 현재 년도에서 이전 100년 / 이후 10년으로 설정
+    });
+	    
+  });
+  </script>		
+</head>
+<body>
+	<div id = "datepicker"></div>
+	<p>생년월일 <input type = "text" name = "birth" id = "datepicker"></p>
+	<p>생년월일<input type = "date"></p>
+</body>
+</html>

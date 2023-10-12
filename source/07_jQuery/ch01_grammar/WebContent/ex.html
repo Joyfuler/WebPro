@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		const oversrc = ['img/0over.jpg', 'img/1over.jpg', 'img/2over.jpg', 'img/3over.jpg'];
+		const outsrc = ['img/0out.jpg', 'img/1out.jpg', 'img/2out.jpg', 'img/3out.jpg'];
+		const menu = ['tutorial', 'example', 'special','link'];
+		$('img').each(function(idx,item){
+			$(this).mouseover(function(){
+				$(this).attr('src',oversrc[idx]);
+				$(this).attr('alt',menu[idx]+' 선택');
+			});			
+			$(this).mouseout(function(){
+				$(this).attr('src',outsrc[idx]);
+				$(this).attr('alt',menu[idx]+' 선택해제');
+			});			
+		  });
+		});
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+	  		<td><img src='img/0out.jpg' class = "0"></td>
+            <td><img src='img/1out.jpg' class = "1"></td>
+            <td><img src='img/2out.jpg' class = "2"></td>
+            <td><img src='img/3out.jpg' class = "3"></td>
+		</tr>
+	</table>            
+</body>
+</html>

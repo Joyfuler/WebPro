@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		$('#msg').html('<b>Hello, jQuery</b>');	
+		$('input.msg').val('Hello.Jsp');
+		$('button').click(function(){
+			var pMsg = $('p#msg').html(); // <b> Hello, jQuery</b>
+			var pMsgtext = $('p#msg').text(); // Hello, jQuery
+			var inputMsg = $('input[name="msg"]').val(); //input 안에 입력된 값
+			alert(pMsgtext + "\n" + inputMsg);
+		});
+	});
+	</script>
+</head>
+<body>
+	<p id = "msg"> xxx </p>
+	<p>메시지 <input type = "text" name = "msg" class = "msg"></p>
+	<button>msg 경고창 </button>
+</body>
+</html>

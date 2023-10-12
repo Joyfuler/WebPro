@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <style>
+input[type=submit] { 
+background-image: url('reservation.png'); 
+background-size:100%;
+width:100px; height:70px;
+background-color:white;
+border:0; outline:0;
+}
+  </style>
+    
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+    	dateFormat: "yy-mm-dd",
+    	monthNames: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+    	showMonthAfterYear: true,
+    	yearSuffix: '년',
+    	changeMonth: true,
+    	changeYear: true,
+    	monthNamesShort:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+    	yearRange: "c-100:c+3", 
+    	minDate: 0, // 0은 지금을 의미. 지금 이후의 날짜만 선택이 가능함.
+    	onSelect : function(dateText, inst){ // 선택시 아래 칸에 날짜가 text로 입력되도록 하는 함수.
+    		$('.reservedDate').val(dateText); // 아래 input의 값에 dateText를 대입함.
+    		$('span.result').html('날짜: ' + dateText + ' / 시간 : ');
+    		$('input.reservedTime').val(''); // 날짜 선택시 시간을 매번 초기화함.    		
+    		for (var i=0; i<=23; i++){
+    			$('#'+i).attr('disabled',false); // 모두 선택할 수 있도록 함.
+    			$('#'+i).css('color','#000000'); // 선택된 것을 제외한 버튼의 글씨 색은 모두 검은색.    			
+    		}
+    		// dateText가 오늘인지 check.
+    		var today = new Date(); // 현재시간
+    		alert(today);
+    	},
+    });	    
+  });
+  </script>		
+</head>
+<body>
+	<div id = "datepicker"></div>
+	  <form>
+    <p><b>Date :</b> <input type="text" name="reservedDate" class="reservedDate" /></p>
+    <p class="tSelect">
+      <b>시간선택 :</b>
+      <table>
+        <tr>
+          <td id="am">
+            <span style="display:block;">오전</span>
+            <input type="button" id="0" class="0" value="0시" />
+            <input type="button" id="1" class="1" value="1시" />
+            <input type="button" id="2" class="2" value="2시" />
+            <input type="button" id="3" class="3" value="3시" />
+            <input type="button" id="4" class="4" value="4시" />
+            <input type="button" id="5" class="5" value="5시" />
+            <input type="button" id="6" class="6" value="6시" />
+            <input type="button" id="7" class="7" value="7시" />
+            <input type="button" id="8" class="8" value="8시" />
+            <input type="button" id="9" class="9" value="9시" />
+            <input type="button" id="10" class="10" value="10시" />
+            <input type="button" id="11" class="11" value="11시" />
+          </td>
+        </tr>
+        <tr>
+          <td id="pm">
+            <sapn style="display:block;">오후</sapn>
+            <input type="button" id="12" class="12" value="12시" />
+            <input type="button" id="13" class="1" value="1시" />
+            <input type="button" id="14" class="2" value="2시" />
+            <input type="button" id="15" class="3" value="3시" />
+            <input type="button" id="16" class="4" value="4시" />
+            <input type="button" id="17" class="5" value="5시" />
+            <input type="button" id="18" class="6" value="6시" />
+            <input type="button" id="19" class="7" value="7시" />
+            <input type="button" id="20" class="8" value="8시" />
+            <input type="button" id="21" class="9" value="9시" />
+            <input type="button" id="22" class="10" value="10시" />
+            <input type="button" id="23" class="11" value="11시" />
+          </td>
+        </tr>
+      </table>
+    </p>
+    <p><b>Time :</b> <input type="text" name="reservedTime" class="reservedTime" size="50" /></p>
+    <p><b>예약결과 :</b> <span class="result"></span></p>
+    <p><input type="submit" value=""/></p>
+  </form>
+</body>
+	
+	
+	
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<style>
+		table td {
+			width: 100px; height: 100px; background-color: #AAFFAA;
+		}
+		.tdRed { background-color: red; }
+	</style>	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		var ddukIdx = parseInt((Math.random()*9) +1);
+		$('td').each(function(idx, item) {
+			$(this).click(function(){
+				$('td').removeClass('tdRed');
+				$(this).addClass('tdRed');		
+					if (idx+1 == ddukIdx){
+						$(this).css('background-image','url(img/dduk.jpg)').css('background-size','100%');
+						$('p#response').text('축하축하 맞췄어요');
+						$('td').off();
+					} else {
+						$('p#response').text('거기가 아니에요 비밀인데' + ddukIdx);
+					}
+			});
+		  });
+		});
+	</script>
+</head>
+<body>
+	<table>
+		<caption><h1>연습문제 - 떡이 있는 곳을 맞춰봐</h1></caption>
+		<tr><td class = "1"></td><td class = "2"></td><td class = "3"></td></tr>	
+		<tr><td class = "4"></td><td class = "5"></td><td class = "6"></td></tr>
+		<tr><td class = "7"></td><td class = "8"></td><td class = "9"></td></tr>		
+	</table>
+	<p id = "response"></p>
+</body>
+</html>

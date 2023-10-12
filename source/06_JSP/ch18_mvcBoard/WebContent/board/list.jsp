@@ -9,7 +9,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href = "${conPath}/css/style.css" rel = "stylesheet" type = "text/css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
 </head>
+<script>
+	$(document).ready(function(){
+		$('tr').click(function(){
+			var no = $(this).children().eq(0).text().trim(); // 클릭한 tr의 자식(td)의 첫번째의 글자를 띄어쓰기 지워서 
+			if (!isNaN(Number(no))){
+				location.href= '${conPath }/content.do?bid='+no+'&pageNum=${pageNum }'
+			}
+		});
+	});
+</script>
 <body>
 	<c:set var = "SUCCESS" value="1"/>
 	<c:set var = "FAIL" value = "0"/>
@@ -78,9 +91,8 @@
 				&nbsp;&nbsp;&nbsp;
 				</c:if>
 			</c:forEach>
-				<a href = "${conPath }/content.do?bid=${dto.bid }&pageNum=${pageNum }"> <!-- 제목클릭시 상세보기로 감. setattribute된 것은 getparameter하지 않아도 사용됨.-->
-				${dto.btitle }
-				</a>
+				<%--<a href = "${conPath }/content.do?bid=${dto.bid }&pageNum=${pageNum }"> <!-- 제목클릭시 상세보기로 감. setattribute된 것은 getparameter하지 않아도 사용됨.--> --%>
+				${dto.btitle }				
 				<c:if test="${dto.bhit >= 10 }">
 				<b>(*)</b>
 				</c:if>

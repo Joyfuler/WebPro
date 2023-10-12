@@ -11,7 +11,8 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.lec.dao.FileBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+%>
 <%
 	String conPath = request.getContextPath();
 %>
@@ -23,7 +24,7 @@
 </head>
 <body>
 	<%
-		request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8");
 	FileBoardDao dao = FileBoardDao.getInstance();
 	String path = request.getRealPath("fileboardUpload");//첨부할 파일이 저장될 서버(WAS)의 폴더
 	int maxSize = 1024 * 1024 * 10; // 업로드 최대 용량 10M
@@ -91,10 +92,14 @@
 		alert("success");
 		location.href = '<%=conPath%>/Fileboard/csList.jsp'
 		</script>
-	<%} else {%>
+	<%
+		} else {
+	%>
 	<script>
 		alert("fail");
 		location.href = '<%=conPath%>
 		/Fileboard/csList.jsp'
 	</script>
-	<%}%>
+	<%
+		}
+	%>

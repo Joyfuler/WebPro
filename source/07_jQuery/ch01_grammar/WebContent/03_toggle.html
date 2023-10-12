@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+<style>
+	div#toggle{
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	background-color: red;	
+	}
+</style>	  
+	  
+	<script>
+	$(document).ready(function(){
+		let showToggle = true; // 토글구간이 보이는지 사라졌는지를 저장하는 함수		
+	$('.goShow').on('click',function(){
+		$('div#toggle').show();
+		showToggle = true;
+	});
+	
+	$('.goHide').on('click',function(){
+		$('#toggle').hide();
+		showToggle = false;
+	});
+	
+	$('button').on('click',function(){
+		$('#toggle').toggle('fast');		
+	  });	
+	});
+	</script>
+</head>
+<body>
+	<button>토글</button>
+	<h1 class = "goShow">보이게</h1>
+	<h1 class = "goHide">사라지게</h1>
+	<div id = "toggle">토글구간</div>
+</body>
+</html>

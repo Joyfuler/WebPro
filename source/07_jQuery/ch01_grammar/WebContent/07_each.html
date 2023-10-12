@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		const list = [
+			{name : '한빛출판사', link : 'http://www.hanbit.co.kr'},
+			{name : '네이버' , link : 'http://naver.com'},
+			{name : '다음' , link : 'http://daum.net'},
+			{name : '구글' , link : 'http://google.com'}			
+		];
+		list.forEach(function(item, idx) {
+			document.body.innerHTML 
+			+= '<h2><a href ="'+item.link+'">' + idx + '. '+ item.name+'</a></h2>';
+		});
+		document.body.innerHTML+='<hr>';
+		$(list).each(function(idx,item){
+			$('body').html($('body').html() +
+			'<h2><a href ="'+item.link+'">' + idx + '. '+ item.name+'</a></h2>');			
+		});		
+	  });
+	</script>
+</head>
+<body>
+
+</body>
+</html>

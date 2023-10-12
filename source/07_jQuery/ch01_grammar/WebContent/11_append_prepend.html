@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.red {
+color: red; 
+}
+.blue {
+color: blue;
+}
+</style>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		var clickCnt = 0;
+		$('h1#h1').on('click',function(){
+			if (clickCnt < 5){
+			$(this).append('<span class = "red">♡</span>');
+			$(this).prepend('<span class = "blue">♡</span>');
+				clickCnt++;
+			} else {
+				$(this).off();
+			}				
+		});
+		
+		$('h1#h2').on('click',function(){
+			$(this).append('<span class = "red">★</span>');
+			$(this).prepend('<span class = "blue">★</span>');
+		});
+		
+		// 3초마다 클릭이벤트가 강제 발생.
+		setInterval(() => {
+			$('h1').trigger('click');
+			//$('h1').first() or $('h1').last() 등으로 고를 수도 있음.
+		}, 1000);		
+	});
+	</script>
+</head>
+<body>
+	<h1 id = "h1">좋아요 (5회 제한)</h1>
+	<h1 id = "h2">좋아요 (무제한)</h1>
+</body>
+</html>

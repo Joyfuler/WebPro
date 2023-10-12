@@ -95,7 +95,5 @@
 		location.href = '<%=conPath%>/Fileboard/csList.jsp'
 	</script>
 	<%}%>
-
-
 </body>
 </html>

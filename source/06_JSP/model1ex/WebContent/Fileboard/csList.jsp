@@ -4,7 +4,8 @@
 <%@page import="com.lec.dao.FileBoardDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+%>
 <!DOCTYPE html>
 <%
 	String conPath = request.getContextPath();
@@ -15,6 +16,10 @@
 <link href="<%=conPath%>/Fileboard/css/style.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"
+></script>
 <body>
 	<jsp:include page="../main/header.jsp" />
 	<%
@@ -24,16 +29,21 @@
 	<script>
 		alert("게시글 작성 완료");
 	</script>
-	<%} else if (result != null && result.equals("0")) {%>
+	<%
+		} else if (result != null && result.equals("0")) {
+	%>
 	<script>
 		alert("게시글 작성 실패");
 	</script>
-	<%}%>
+	<%
+		}
+	%>
 	<table>
 		<caption>고객센터 게시판</caption>
 		<tr onclick="location.href='<%=conPath%>/Fileboard/writeForm.jsp'">
 			<td id="writeForm"><a
-				href="<%=conPath%>/Fileboard/writeForm.jsp">글쓰기</a></td>
+				href="<%=conPath%>/Fileboard/writeForm.jsp"
+			>글쓰기</a></td>
 		</tr>
 	</table>
 	<table>
@@ -67,20 +77,26 @@
 					//제목 (왼쪽정렬 + hot이미지 출력 / 클릭시 상세보기)
 					out.print("<td class = 'left'>");
 					if (dtos.getFindent() > 0) { // 답변글인 경우는 이미지를 가지고 indent를 넣어줌. 이미지 넓이를 indent로 조절함.
-				int width = dtos.getFindent() * 15;%>
+				int width = dtos.getFindent() * 15;
+			%>
 			<img src="<%=conPath%>/img/level.gif" width="<%=width%>">
 			<img src="<%=conPath%>/img/re.gif">
-			<%}
-					
-			if (dtos.getFhit() >= 10) {%>
+			<%
+				}
+
+			if (dtos.getFhit() >= 10) {
+			%>
 			<img src="<%=conPath%>/img/hot.gif">
-			<%}%>
-			<a href="<%=conPath%>/Fileboard/content.jsp?fid=<%=dtos.getFid()%>&pageNum=<%=pageNum%>"><%=dtos.getFtitle()%></a>
+			<%
+				}
+			%>
+			<%=dtos.getFtitle()%>
 			</td>
 			<%
 				//메일
 			String file = dtos.getFilename();
-			out.print("<td>" + (file == null ? "-"
+			out.print("<td>" + (file == null
+					? "-"
 					: "<a href = '" + conPath + "/fileboardUpload/" + dtos.getFilename() + "'><img src = '" + conPath
 					+ "/img/fileup.jpg' height = '25'>" + "</a></td>"));
 			//조회수
@@ -92,7 +108,7 @@
 	</table>
 	<div class="paging">
 		<%
-		int pageCnt = (int)Math.ceil((double) totalCnt / PAGESIZE);
+			int pageCnt = (int) Math.ceil((double) totalCnt / PAGESIZE);
 		int startPage = ((currentPage - 1) / BLOCKSIZE) * BLOCKSIZE + 1;
 		int endPage = startPage + BLOCKSIZE - 1;
 		if (endPage > pageCnt) {
@@ -114,8 +130,30 @@
 		%>
 	</div>
 	<p>
-		startPage = <%=startPage %> / endPage : <%=endPage %> / pageCnt : <%=pageCnt %> / Blocksize : <%=BLOCKSIZE %> / totCnt : <%=totalCnt %>
+		startPage =
+		<%=startPage%>
+		/ endPage :
+		<%=endPage%>
+		/ pageCnt :
+		<%=pageCnt%>
+		/ Blocksize :
+		<%=BLOCKSIZE%>
+		/ totCnt :
+		<%=totalCnt%>
 	</p>
 	<jsp:include page="../main/footer.jsp" />
+
+	<script>
+			$(document).ready(function(){	
+				$('tr').click(function(){
+					var fid = $(this).children().eq(0).text().trim(); // 클릭한 tr의 자식(td)의 첫번째의 글자를 띄어쓰기 지워서 
+					if (!isNaN(Number(fid))){
+						location.href= 'content.jsp?pageNum=<%=pageNum%>
+		&fid='
+															+ fid;
+												}
+											});
+						});
+	</script>
 </body>
 </html>
