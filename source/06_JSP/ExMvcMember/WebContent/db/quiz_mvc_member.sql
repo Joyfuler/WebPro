@@ -27,3 +27,5 @@ commit;
     SELECT * FROM MVC_MEMBER2 WHERE MID = 'aaa' and MPW = '111';
 -- 4. 로그인 성공시 SESSION에 넣을 DTO 가져오기 (MID로)
     SELECT * FROM MVC_MEMBER2 WHERE MID = 'aaa';
+    
+    select * from mvc_member;

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		$('input[name="mid"]').keyup(function(){
+			var mid = $(this).val(); // 입력한 id 값.
+			if (mid.length <3){
+				$('#midConfirmResult').text("아이디는 3글자 이상 입력하세요");	
+			} else {
+				// $.get의 경우는 ()
+				$.post('midConfirm.jsp', {mid: mid}, function(data,status){
+					if (status == 'success'){
+						$('span').html(data);
+					} else{
+						alert(status);					
+					}
+			    });		
+			 }
+		});
+	});	
+		
+	</script>
+</head>
+<body>
+	아이디 <input type = "text" name = "mid" id = "mid"><br>
+	<span id = "midConfirmResult"></span>
+</body>
+</html>

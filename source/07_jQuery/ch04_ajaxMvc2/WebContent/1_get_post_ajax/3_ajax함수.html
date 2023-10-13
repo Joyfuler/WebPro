@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+		$('input[name="mid"]').keyup(function(){
+			var mid = $(this).val(); // 입력한 id 값.
+			if (mid.length <3){
+				$('#midConfirmResult').html("<b>아이디는 3글자 이상 입력하세요</b>");	
+			} else {
+			// $.get의 경우는 ()
+				$.ajax({
+			// url : 요청경로 (★)   , type : get/post, data : 요청한 파라미터명과 값(★) 
+			// dataType : html / json... 
+			// success : 요청경로 실행 성공시 수행하는 함수 (★)
+			// error : 요청경로 실행 실패시 수행하는 콜백함수 (★)
+					url : 'midConfirm.jsp',
+					type : 'get',			
+					data : {mid: mid}, // data는 즉 패러미터.
+					dataType : 'html', //기본적으로 html
+					success : function(data){ //성공했을 때만 수행하므로 status 없음.
+						$('#midConfirmResult').html(data);	
+					},
+					error : function(code){
+						alert(code.status + '/' + code.statusText);
+					},	
+			  	});
+			   }	
+			});
+		});	
+	</script>
+</head>
+<body>
+	아이디 <input type = "text" name = "mid" id = "mid"><br>
+	<span id = "midConfirmResult"></span>
+</body>
+</html>

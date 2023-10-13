@@ -39,11 +39,40 @@ border:0; outline:0;
     		}
     		// dateText가 오늘인지 check.
     		var today = new Date(); // 현재시간
-    		alert(today);
+    		var year = today.getFullYear(); // 2023
+    		var month = today.getMonth() +1 // 0 (9 + 1)
+    		if (month <10){
+    			month = "0" + month;
+    		}
+    		var day = today.getDate(); // 1~31 
+    		if (day <10){
+    			day = "0" + day;    			
+    		}
+    		var todayString = year + "-" + month + "-" + day;
+    		
+    		if (dateText == todayString){
+    			var hour = today.getHours();
+    			alert('오늘(' + todayString + ")예약은 " + hour + " 이후만 가능합니다.");
+    		}
+    		// 0 ~ hour시까지의 버튼을 선택 불가.
+    		for (var i =0; i<=hour; i++){
+    			$('#'+i).attr('disabled',true);	
+    		}    
     	},
     });	    
   });
-  </script>		
+  </script>	
+  <script>
+  	$(function(){
+  		$('#am input').on('click',function(){
+  			$('input.reservedTime').val($('input.reservedTime').val() + 'am' + $(this).attr('class') + '시. ');
+  			$('span.result').append('am'+ $(this).attr('class')+'시. ');
+  			$(this).attr('disabled',true);
+  			$(this).css('color','red');
+  		});
+  	});
+  </script>
+  	
 </head>
 <body>
 	<div id = "datepicker"></div>
@@ -71,7 +100,7 @@ border:0; outline:0;
         </tr>
         <tr>
           <td id="pm">
-            <sapn style="display:block;">오후</sapn>
+            <span style="display:block;">오후</span>
             <input type="button" id="12" class="12" value="12시" />
             <input type="button" id="13" class="1" value="1시" />
             <input type="button" id="14" class="2" value="2시" />

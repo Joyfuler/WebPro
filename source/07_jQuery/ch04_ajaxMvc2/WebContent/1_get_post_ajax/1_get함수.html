@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+	// ajax 관련 함수: $.get(), $.post(), $.ajax()
+		$('input[type="button"]').click(function(){
+			//midConfirm.jsp?mid=aaa 요청한 결과를 #midConfirmResult로 출력.
+				var mid = $('#mid').val();	
+			// $.get(요청경로, 콜백함수(data, status {});
+			$.get("midConfirm.jsp?mid="+mid, function(data, status){
+				if (status == 'success'){ 
+					alert(data + "///" + status);
+					$('span#midConfirmResult').html(data);
+				}	
+			}); // $.get()
+		  }); //button의 클릭이벤트
+		  
+		  $('#mid').keyup(function(){
+			 var mid = $(this).val();
+			 if (mid.length < 2){
+				 $('span#midConfirmResult').html('<b>아이디는 2글자 이상으로 입력해야 합니다</b>');
+			 } else {
+				 $.get("midConfirm.jsp?mid="+mid, function(data, status){
+					if (status == 'success'){
+						$('span#midConfirmResult').html(data);
+					} 
+				 });
+			 }
+		  });
+		});
+	</script>
+</head>
+<body>
+	아이디 <input type = "text" name = "mid" id = "mid"><input type = "button" value = "중복확인"><br>
+	<span id = "midConfirmResult"></span>
+</body>
+</html>

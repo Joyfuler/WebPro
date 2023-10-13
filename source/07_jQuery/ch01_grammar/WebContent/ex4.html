@@ -16,16 +16,16 @@
 	$(document).ready(function(){
 		var ddukIdx = parseInt((Math.random()*9) +1);
 		$('td').each(function(idx, item) {
-			$(this).click(function(){
-				$('td').removeClass('tdRed');
-				$(this).addClass('tdRed');		
-					if (idx+1 == ddukIdx){
-						$(this).css('background-image','url(img/dduk.jpg)').css('background-size','100%');
-						$('p#response').text('축하축하 맞췄어요');
-						$('td').off();
-					} else {
-						$('p#response').text('거기가 아니에요 비밀인데' + ddukIdx);
-					}
+		$(this).click(function(){
+			$('td').removeClass('tdRed');
+			$(this).addClass('tdRed');		
+				if (idx+1 == ddukIdx){
+					$(this).css('background-image','url(img/dduk.jpg)').css('background-size','100%');
+					$('p#response').text('축하축하 맞췄어요');
+					$('td').off();
+				} else {
+					$('p#response').text('거기가 아니에요 비밀인데' + ddukIdx);
+				}
 			});
 		  });
 		});

@@ -1,0 +1,83 @@
+db와의 상호작용에서 페이지 전체가 바뀌는 것이 아닌, 페이지의 일부 ex) 아이디 중복체크
+만 바뀌도록 하는 것.
+에이작스 관련 함수는 $.get() 과 $.post(), $.ajax() 3가지가 존재.
+
+1) 중복체크
+--> input에 있는 데이터를 먼저 변수로 받는다.
+var mid = $('#mid').val();
+
+get을 통해서 가져옴.
+$.get (요청경로, 콜백함수 (data, status){
+	data: 요청경로를 수행한 결과 (<b>중복된 ID </b> / 사용 가능한 ID)
+	status : 상태 (success / fail)
+
+data는 해당 jsp에서 패러미터를 받아 수행한 결과를 모두 가져옴. <html>태그부터 ~
+status는 해당 패러미터를 받아 수행한 결과. success 아니면 fail이 존재.
+
+ex) 
+get 방식으로 input에서 아이디를 입력할 때마다 중복 확인
+$('#mid').keyup(function(){
+ var mid = $(this).val();
+ if (mid.length <2){
+  $('span').html ('<b>아이디는 2글자 이상</b>');
+else{
+   $.get(주소?mid=+mid,function(data,status){
+      if (status == 'success'){
+   $('span').html(data);	
+  });
+)};
+
+ex2)
+post방식의 경우 입력하는 주소에 패러미터를 포함하지 않고, 요청하는 패러미터를 객체화하여 기입.
+$.post('midConfirm.jsp', {mid: mid}, function(data,status){
+if (status == 'success'){
+$('span').html(data)...
+
+
+ex3)
+ajax는 post와 get을 모두 사용 가능함. 세 가지 방법 중 $.ajax를 가장 많이 사용
+$.ajax({
+ url : (★ (요청경로) type : get/post  data: 요청한 파라미터명과 값 (★) ex) {mid: 'aaa', pageNum: 3}
+ dataType : html / json / .. (기본은 html) success : 성공시 수행할 콜백함수 (★)
+error : 만일 에러 등으로 실패할 경우 수행하는 콜백함수
+url과 data, success는 반드시 들어가야 함.
+});
+
+$('input').keyup(function(){
+   $.ajax({
+	url: 'midConfirm.jsp', // 요청할 주소
+	type : 'post', // 요청시 타입
+	data : {mid : mid}, // 넘길 패러미터 이름과 그 값
+	dataType = 'html'  // 주고받는 데이터의 타입.
+	success : function(data){ // 성공했을 때 수행할 함수 - span에 .jsp의 수행 결과를 data에 받아와 출력.
+	$('span').html(data);
+});
+
+json파일의 경우 각 객체를 담은 배열로 저장하므로, 이를 출력하기 위해서는 배열을 출력하는 함수인 each() 를 사용해야 함.
+   $.ajax({
+	url: 'ex.json',
+	dataType : 'json',
+	success : function(data){
+	$('table').html ('<tr><td>.....)'
+	$(data).each(function(idx, item){
+	let out = '<tr>';
+	out += '<td>' + item.id + '</td><td>' + item.name +....
+	$('table').append(out); 을 사용하여 반복출력 가능.
+
+만일 mvc 패턴대로 수행한다면, $.ajax의 url을 .jsp 대신 .do로 설정하고 패러미터를 보낸다.
+db와 상호작용해야하는 id 중복체크 등은 $.ajax를,
+비밀번호 일치 확인 / 중복체크 확인 후 제출시의 유효성 검사는 jquery(javascript)로 진행.
+$.ajax 수행시 출력시킨 text를 비교하고 '사용 가능한 ID입니다' 가 아닌 경우 submit을 못하도록 할 수 있음.
+text 비교시는 꼭 text().trim()을 잊지 말고 넣어줄 것. 없이 가져올 경우 빈칸이 많아 일치하지 않게 됨.
+(어떤 값인지 모르겠을 땐 alert를 통해 값을 확인해보자)
+
+
+** submit이벤트에서 chk하고 싶다면 submit 버튼에 onlick 이벤트를 걸어도 되지만,
+$('form).submit(function(){ 
+var confirmResult = $('idConfirmResult').text().trim();
+if ( confirmResult != '사용 가능한 아이디입니다'){
+return false;
+}); 와 같은 식으로도 submit을 막을 수 있다.
+
+ajax를 mvc패턴으로 하더라도 중간 과정인 jsp를 완전히 제거할 수는 없음.
+service단에서 setattribute한 값을 jsp에서 ${id } 등으로 받고, 이를 다시 view단에서 $.ajax를 통해 받아와야 함.

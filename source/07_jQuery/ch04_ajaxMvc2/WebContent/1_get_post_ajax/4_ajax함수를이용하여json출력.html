@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+	  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	  crossorigin="anonymous"></script>
+	<script>
+	$(document).ready(function(){
+			$.ajax({
+				url: 'ex.json',
+				dataType : 'json', // 각 객체별로 가져옴.
+				success : function(data){ // json데이터를 읽고 난 데이터 배열이 data로 대입.
+					$('table#dataShow').html('<tr><th>ID</th><th>name</th><th>price</th><th>desc</th></tr>');
+					$(data).each(function(idx, item){
+						let out = '<tr>';
+						out += '<td>' + item.id + '</td>';
+						out += '<td>' + item.name + '</td>';
+						out += '<td>' + item.price + '</td>';
+						out += '<td>' + item.description + '</td>';
+						out += '</tr>';						
+						$('table#dataShow').append(out);
+					});
+					/* // or
+					$.each(data,function(idx,item){
+						
+					}); */
+				},
+				
+			});
+		});
+	</script>
+</head>
+<body>
+	<table id = "dataShow">
+		
+	</table>
+</body>
+</html>

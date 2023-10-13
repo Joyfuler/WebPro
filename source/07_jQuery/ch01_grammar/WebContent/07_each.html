@@ -14,10 +14,12 @@
 			{name : '다음' , link : 'http://daum.net'},
 			{name : '구글' , link : 'http://google.com'}			
 		];
+		
 		list.forEach(function(item, idx) {
 			document.body.innerHTML 
 			+= '<h2><a href ="'+item.link+'">' + idx + '. '+ item.name+'</a></h2>';
 		});
+		
 		document.body.innerHTML+='<hr>';
 		$(list).each(function(idx,item){
 			$('body').html($('body').html() +
@@ -27,6 +29,5 @@
 	</script>
 </head>
 <body>
-
 </body>
 </html>
