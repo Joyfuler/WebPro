@@ -49,12 +49,20 @@
 								<tr>
 									<td><input type = "text" name = "email"></td>
 								</tr>
+								<c:if test="${not empty findidResult }">
+								<tr>
+									<td>
+										<span>요청하신 ID는 ${result }</span>
+									</td>
+								</tr>
+								</c:if>
 							</tbody>
 						</table>		
 					</div>								
 					<div class="check" style = "width:250px;">
 						<button class = "btn"> &nbsp;계정찾기 </button>
 						<button class = "btn" tabindex="4" onclick = "location.href='${conPath }/main/'loginForm.jsp"> &nbsp;로그인 </button>
+						
 					</div>
 				</form>
 			</div>
@@ -94,6 +102,13 @@
 										<input type = "text" name = "identify_answer">										
 									</td>
 								</tr>
+								<c:if test="${not empty findidResult }">
+								<tr>
+									<td>
+										<span>요청하신 ID는 ${result }</span>
+									</td>
+								</tr>
+								</c:if>
 							</tbody>
 						</table>		
 					</div>								

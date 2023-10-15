@@ -57,8 +57,8 @@
 								<tr>
 									<td colspan= "3">
 									<input type = "button" name = "writeButton" value = "글작성" style = "margin-left: 400px;"> 
-									<input type = "button" value = "초기화"> 
-									<input type = "button" value = "뒤로가기" onclick = "history.back()"> 
+									<input type = "button" value = "초기화" style = "margin-left: 10px;"> 
+									<input type = "button" value = "글목록" onclick = "location.href='${conPath }/board/list.jsp'" style = "margin-left: 10px;"> 
 									</td>
 							</tbody>
 						</table>

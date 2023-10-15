@@ -68,8 +68,10 @@
                 </tbody>
             </table>            
         </div>
-        <button style = "margin-top: 5px; margin-left:900px; position: absolute;"> 글작성 </button>        
-        <button style = "margin-top: 5px; margin-left:980px; position: absolute;"> 전체글 </button>
+        <div class = "button-container">
+        	<button style = "margin-top: 5px; margin-left:900px; position: absolute;"> 글작성 </button>        
+        	<button style = "margin-top: 5px; margin-left:980px; position: absolute;"> 전체글 </button>
+        </div>
     </div>
 	<div id="board-search">
         <div class="container" style = "margin-left: 10%; margin-top: 5px;">               

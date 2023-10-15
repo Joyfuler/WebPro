@@ -37,6 +37,7 @@
                     </td>
                     <td class="title-cell">
                        	<b>작성일: 2022/03/20 01:00:35</b>
+                       	<b>수정일: 2022/03/21 03:00:00</b>
                     </td>
                     <td class = "title-cell">
                     	<b>조회수: 10</b>
@@ -132,7 +133,7 @@
           </div>
        </div>
        <div class = "button-container"> 
-        <button style="margin-top: 5px; margin-left: 750px; position: absolute;">게시글목록</button>
+        <button style="margin-top: 5px; margin-left: 750px; position: absolute;" onclick = "location.href='${conPath}/board/list.jsp'">게시글목록</button>
         <button style="margin-top: 5px; margin-left: 860px; position: absolute;">답변글쓰기</button>
         <button style="margin-top: 5px; margin-left: 970px; position: absolute;">게시글 수정</button>
         </div>

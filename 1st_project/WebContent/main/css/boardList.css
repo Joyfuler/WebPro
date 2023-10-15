@@ -157,6 +157,12 @@ width:100px;
   color: #fff;
 }
 
+.button-container{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* reset */
 
 .clearfix:after {
