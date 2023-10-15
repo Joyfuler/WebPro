@@ -11,8 +11,7 @@
 	<h2> ex2_forward.jsp 페이지입니다. </h2>
 	
 	<%
-	String n = request.getParameter("n"); 
-	
+	String n = request.getParameter("n");	
 	%>
 	<h2> ex1에서 요청한 n = <%=n%></h2>
 </body>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+	$(document).ready(function(){
+		$('tr:even').css('background-color','#cccccc');
+		$('tr:odd').css('background-color','#FFFFAA');
+		$('tr').click(function(){
+			var no = $(this).children().eq(0).text().trim();
+			if (isNaN(Number(no))){
+				alert('타이틀클릭함');
+			} else {
+				location.href = '06_게시판.html?no='+no;
+			}
+		});
+	});
+	</script>
+</head>
+<body>
+<table>
+		<tr><th>글번호</th><th>제목</th><th>글쓴이</th><th>조회수</th></tr>
+		<tr><td>4 </td><td>제목임다</td><td>홍길동</td><td>9</td></tr>
+		<tr><td>3</td><td>제목이라</td><td>김길동</td><td>8</td></tr>
+		<tr><td>2</td><td>제목이다</td><td>신길동</td><td>7</td></tr>
+		<tr><td>1</td><td>제목이네</td><td>홍길순</td><td>6</td></tr>
+		<tr><th colspan="4">총 4개</th></tr>
+	</table>
+</body>
+</html>

@@ -18,8 +18,7 @@
 	<p> 로그인 여부: <%=session.getAttribute("customer") != null ? "로그인 함" : "로그인 안함"%></p>
 	<p> pageNum 패러미터 여부 : <%=request.getParameter("pageNum") == null? "패러미터 없음": "패러미터 있음" %>
 	<p> name 패러미터 값 : <%=request.getParameter("name")%></p>
-	<%--<p> name 패러미터 대문자 변경 : <%=request.getParameter("name").toUpperCase()%></p>--%>
-	
+	<%--<p> name 패러미터 대문자 변경 : <%=request.getParameter("name").toUpperCase()%></p>--%>	
 	<h2> EL 표기법 (표현식 안에 쓸 수 있는 모든 연산자 다 사용가능)</h2>
 	<p> 산술연산자: 10 + 1 = ${10+1 }</p>
 	<p> 산술연산자 : 10/0.0 = ${10/0.0 }</p>

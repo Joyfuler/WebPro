@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+		table{width: 500px; margin: 0 auto;}
+		table td {
+			width:100px; height: 100px; background-color: #AAFFAA; 
+			text-align: center;
+		}
+		.tdRed {background-color: red;}	
+		img{
+			display:block;width:100%;height:100%;
+		}
+		div{text-align: center;}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+	
+	$(document).ready(function(){
+		var ddukIdx = parseInt(Math.random()*9);
+		$('td').click(function(){
+			$('td').removeClass('tdRed');
+		var idx = Number($(this).attr('title'));
+		if (idx == ddukIdx){
+			$('#msg').html ('축하');
+			$(this).html('<img src="img/dduk.jpg">');
+			$('td').off();			
+		} else {
+			$(this).addClass('tdRed');
+			$('#msg').html ('틀림, 답은' + ddukIdx);
+			
+		}
+		});
+	});
+	</script>
+</head>
+<body>
+	<body>
+	<h1>연습문제1. 떡이 있는 곳을 맞춰봐(attr함수이용)</h1>
+  <table>
+    <tr><td title="0"></td><td title="1"></td><td title="2"></td></tr>
+    <tr><td title="3"></td><td title="4"></td><td title="5"></td></tr>
+    <tr><td title="6"></td><td title="7"></td><td title="8"></td></tr>
+  </table>
+  <div id="msg">선택한 곳이 맞는지 답 뿌리는 곳</div>
+</body>
+</html>
