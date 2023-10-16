@@ -18,7 +18,7 @@
 	<script>	
 	function noImage(imageElement) {
 	 	imageElement.src = "${conPath }/img/noimg.jpg";
-	}	
+	}
 	</script>
 </head>
 <body>    	
@@ -38,7 +38,7 @@
 				<p class="game_genre">
 	    		장르 : [RPG] / 개발사 : 넷마블</p>
 				<p class="game_open">
-    			출시일 : 2017.11.21
+    			출시일 : 2017.11.21 <span>(출시됨)</span>
 				</p>
 			</div>
 			<div class="point_new">

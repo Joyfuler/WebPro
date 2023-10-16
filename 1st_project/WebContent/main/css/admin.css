@@ -39,6 +39,7 @@ h2, b {
 
 .paging {
 	text-align: center;
+	font-size: 15px;
 }
 
 input:not(.btn), textarea {

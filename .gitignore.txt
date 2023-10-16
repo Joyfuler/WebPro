@@ -1,4 +1,0 @@
-note/
-source/
-1st/
-1st_project/

@@ -57,6 +57,7 @@
 	    <li><a href="#tabs-2">회원 리스트 출력</a></li>
 	    <li><a href="#tabs-3">게임정보 변경</a></li>
 	    <li><a href="#tabs-4">관리자 추가/제거</a>
+	    <li><a href="#tabs-5">상단메뉴 관리</a>
 	  </ul>
 	  <div id="tabs-1">
 	     <form action = "${conPath }/addGame.do">
@@ -100,7 +101,10 @@
 			<tr>
 				<th> ID </th><th> 이름 </th><th>이메일</th><th>휴대폰번호</th>
 			</tr>
-			</table>			
+			</table>
+			<div class = "paging">
+			[이전] 1 2 3 [다음]
+			</div>			
 	  </div>
 	  <div id="tabs-3">
 	   	<form action = "${conPath }/modifyGame.do">
@@ -141,16 +145,54 @@
 	    	<table>	   
 	    		<tr>
 	    			<th>아이디 검색</th>
-	    			<td><input type = "text" id = "gid"></td><td><input type = "button" value = "검색" class = "gameSearch"></td>	    			
+	    			<td><input type = "text" id = "gid"></td><td><input type = "button" value = "검색" class = "gameSearch"></td>	    				    			
 	    		</tr>	    		
 	    		<tr>
-	    			<td>
+	    			<td><!-- 각 버튼마다 location.href = ~do 로 보냄. -->
 	    			<input type = "button" value = "관리자추가" id = "addAdmin" style = "width:150px;">
 	    			&nbsp;	    					    			
 	    			<input type = "button" value = "관리자삭제" id = "removeAdmin" style = "width:150px;">
-	    			</td>
+	    			</td>	    		
+	    			<td><span class = "searchResult"></span></td>	
 	    		</tr>			    			
 	    	</table>	    
+	  </div>
+	   <div id="tabs-5">
+	   	<form action = "">	   		
+	    	<table>	   
+	    		<tr>
+	    			<th>상단메뉴 관리 (한줄당 5개씩 3줄, 총 15개 등록 가능)</th>
+	    		</tr>
+	    		<tr>
+	    			<td> 1. ㅇㅇㅇ</td> <td> 2. ㄴㄴㄴ </td><td> 3. ㅋㅋㅋ </td> <td> 4. ㄹㅇㄴㅁㄹㅇㄴㅁ</td> <td> 5. gfdaggg</td>
+	    		</tr>					    			
+	    		<tr>
+	    			<td> 1. ㅇㅇㅇ</td> <td> 2. ㄴㄴㄴ </td><td> 3. ㅋㅋㅋ </td> <td> 4. ㄹㅇㄴㅁㄹㅇㄴㅁ</td> <td> 5. gfdaggg</td>
+	    		</tr>
+	    		<tr>
+	    			<td> 1. ㅇㅇㅇ</td> <td> 2. ㄴㄴㄴ </td><td> 3. ㅋㅋㅋ </td> <td> 4. ㄹㅇㄴㅁㄹㅇㄴㅁ</td> <td> 5. gfdaggg</td>
+	    		</tr>
+	    		<tr>
+	    			<th> 내릴 게임을 선택 (선택한 것은 제출시 ghit을 0으로 만듦)</th>
+	    		</tr>	
+	    		<tr>	
+	    			<td>
+	    				<input type = "text" id= "removeMenu">
+	    			</td>
+	    		</tr>	
+	    		<tr>
+	    			<th> 올릴 게임을 선택 (선택한 것은 제출시 ghit를 1로 변경)</th>
+	    		</tr>
+	    		<tr>	    			
+	    			<td>
+	    				<input type = "text" id = "addMenu">
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td><input type = "submit">
+	    		<tr>	
+	    	</table>	
+	    </form>    
 	  </div>
 	</div>
 </body>

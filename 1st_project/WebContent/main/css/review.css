@@ -75,12 +75,14 @@ p.game_name {
     line-height: 37pt;
     font-size: 12pt;          
     border: 2px solid #FFFFFF;    
-    cursor: pointer;   
-    }        
     
+    }          
     .community_bt .board_link a{
     color: #FFFFFF;	
     font-weight: 500;
+    }
+    .community_bt .board_link a:hover{
+    color: aqua;
     }
          
      /* 별점 평점영역 */     
