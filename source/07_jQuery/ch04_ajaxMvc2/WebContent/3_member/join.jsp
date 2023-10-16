@@ -62,6 +62,9 @@
 				$('#pwChkResult').html('');
 			}	
 		});
+		
+		
+		
 	 });	
 	</script>
 	 <script>

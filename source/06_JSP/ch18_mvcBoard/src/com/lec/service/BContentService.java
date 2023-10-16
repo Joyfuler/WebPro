@@ -17,7 +17,7 @@ public class BContentService implements Service {
 		if (request.getParameter("after") == null) {
 			bDao.hitup(bid);
 		}
-		request.setAttribute("contentBoard", bDao.getBoardInfo(bid));
+		request.setAttribute("board ", bDao.getBoardInfo(bid));
 		//수정 성공 후 content.do로 오는 경우에는 조회수가 오르지 않음.
 
 	}

@@ -24,7 +24,9 @@ INSERT INTO MVC_MEMBER (mID, mPw, mName, mEmail, mPhoto, mBirth, mAddress)
     VALUES ('son','1','손흥민','son@naver.com','son.jpg','1992/07/08','강원도');
 INSERT INTO MVC_MEMBER (mID, mPw, mName, mEmail, mPhoto, mBirth, mAddress)
     VALUES ('han','1','한지민','han@naver.com','han.jpg','1982/11/05','서울시');
+commit;
 SELECT * FROM MVC_MEMBER ORDER BY mRDATE DESC;
+
 
 -- DAO에 들어갈 QUERY
 -- (1) 회원mid 중복체크

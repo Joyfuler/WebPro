@@ -1,0 +1,24 @@
+파일첨부 기능이 있는 게시판의 글을 수정하는 경우에는 MultipartRequest 사용.
+이 경우 setAttribute pageNum을 사용해야 할 때 pageNum 패러미터가 증발하는 수가 있음.
+request.setAttribute("pageNum",mRequest.getParameter("pageNum") 와 같은 식으로 전달.
+
+---
+
+회원가입 페이지에서의 jquery 영역을 추가.
+회원가입 완료시 member 객체로 dto를 넣는다.
+
+
+
+
+
+
+
+
+
+
+--- 기타 프로젝트 생각할 점
+
+1) header 영역에서 로그인 상태 구분. 
+<c:if test = ${not member and member.mlevel eq 2 } 관리자
+<c:if test = ${not member and member.mlevel eq 1 } 일반로그인
+<c:if test = ${empty member } 로그아웃
