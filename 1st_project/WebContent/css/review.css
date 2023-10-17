@@ -74,7 +74,8 @@ p.game_name {
     text-align: center;
     line-height: 37pt;
     font-size: 12pt;          
-    border: 2px solid #FFFFFF;    
+    border: 2px solid #FFFFFF; 
+    transition: border-color 0.3s;   
     
     }          
     .community_bt .board_link a{
@@ -83,6 +84,7 @@ p.game_name {
     }
     .community_bt .board_link a:hover{
     color: aqua;
+    border-color: 2px solid aqua;
     }
          
      /* 별점 평점영역 */     

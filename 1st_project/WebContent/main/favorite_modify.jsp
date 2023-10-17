@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>즐겨찾기관리 - 게임아이다</title>
-<link href = "${conPath }/main/css/style2.css" rel = "stylesheet">
+<link href = "${conPath }/css/style2.css" rel = "stylesheet">
 <link rel="icon" type="image/x-icon" href="${conPath }/img/logo4.gif" sizes="144x144">
 	<script>
 		function deleteConfirm(num){

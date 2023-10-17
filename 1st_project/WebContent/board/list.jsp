@@ -9,8 +9,8 @@
 <meta charset="UTF-8">
 <title>드래곤플라이 게시판</title>
 <link rel="icon" type="image/x-icon" href="${conPath }/img/logo4.gif" sizes="144x144">
-<link href = "${conPath }/main/css/style2.css" rel = "stylesheet">
-<link href = "${conPath }/main/css/boardList.css" rel = "stylesheet">
+<link href = "${conPath }/css/style2.css" rel = "stylesheet">
+<link href = "${conPath }/css/boardList.css" rel = "stylesheet">
 </head>
 <script>
 	function noImage(imageElement) {

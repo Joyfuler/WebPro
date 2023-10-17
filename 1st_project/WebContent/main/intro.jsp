@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회사소개</title>
-<link href = "${conPath }/main/css/intro.css" rel = "stylesheet">
+<link href = "${conPath }/css/intro.css" rel = "stylesheet">
 <link rel="icon" type="image/x-icon" href="${conPath }/img/logo4.gif" sizes="144x144">
 </head>
 <body>

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
-<link href="${conPath }/main/css/login.css" rel="stylesheet">
+<link href="${conPath }/css/login.css" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="${conPath }/img/logo4.gif" sizes="144x144">
 </head>
 <jsp:include page="header.jsp"/>

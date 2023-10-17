@@ -1,18 +1,23 @@
- -- 1) í…Œì´ë¸” ë“œëž
+ -- 1) Drop Table & Sequence
 
+DROP SEQUENCE BOARD_COMMENT_SEQ;
 DROP TABLE BOARD_COMMENT;
 DROP SEQUENCE BOARD_SEQ;
 DROP TABLE BOARD;
+DROP SEQUENCE BOARD_SEQ;
 DROP TABLE FAVORITE;
+DROP SEQUENCE FAVORITE_SEQ;
 DROP TABLE REVIEW;
+DROP SEQUENCE REVIEW_SEQ;
 DROP TABLE GAME;
 DROP TABLE MEMBER;
 
- -- 2 ) í…Œì´ë¸” ìƒì„±
+ -- 2 ) Table Creating
  
  CREATE TABLE MEMBER(
-    MID VARCHAR2 (36) PRIMARY KEY,
-    MPW VARCHAR2 (36) NOT NULL,
+    MID VARCHAR2 (30) PRIMARY KEY,
+    MNICKNAME VARCHAR2 (30) NOT NULL, 
+    MPW VARCHAR2 (30) NOT NULL,
     MEMAIL VARCHAR2 (50) NOT NULL UNIQUE,
     MPHONE VARCHAR2 (20) NOT NULL,
     MPHOTO VARCHAR2 (60),
@@ -20,21 +25,17 @@ DROP TABLE MEMBER;
     MANSWER VARCHAR2 (60),
     MLEVEL NUMBER(1) DEFAULT 0    
  );
- 
- SELECT * FROM MEMBER;
- 
+  
  CREATE TABLE GAME(
     GID VARCHAR2 (60) PRIMARY KEY,
-    GNAME VARCHAR2 (30) NOT NULL,
+    GNAME VARCHAR2 (120) NOT NULL,
+    GGENRE VARCHAR2 (60),
     GPUB VARCHAR2 (60) NOT NULL,
     GPDATE DATE,
     GICON VARCHAR2 (60),
     GDESC CLOB,
     GHIT NUMBER(1) DEFAULT 0 NOT NULL    
  );
- 
- SELECT * FROM GAME;
- 
  CREATE SEQUENCE BOARD_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCACHE NOCYCLE;
  CREATE TABLE BOARD(
      BNO NUMBER(8) PRIMARY KEY,
@@ -52,6 +53,7 @@ DROP TABLE MEMBER;
  );
 
 SELECT * FROM BOARD;
+
 CREATE SEQUENCE BOARD_COMMENT_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCACHE NOCYCLE;
 CREATE TABLE BOARD_COMMENT (
     BCNO NUMBER(8) NOT NULL,
@@ -65,7 +67,9 @@ CREATE TABLE BOARD_COMMENT (
     FOREIGN KEY (MID) REFERENCES MEMBER(MID)
 );
 
+
 SELECT * FROM BOARD_COMMENT;
+
 CREATE SEQUENCE FAVORITE_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCACHE NOCYCLE;
 CREATE TABLE FAVORITE (
     FID NUMBER(5) PRIMARY KEY,
@@ -78,6 +82,7 @@ CREATE TABLE FAVORITE (
     
 SELECT * FROM FAVORITE;    
 
+DROP SEQUENCE REVIEW_SEQ;
 CREATE SEQUENCE REVIEW_SEQ START WITH 1 INCREMENT BY 1 MAXVALUE 99999 NOCACHE NOCYCLE;
 CREATE TABLE REVIEW (
     RID NUMBER(5) PRIMARY KEY,
@@ -90,3 +95,259 @@ CREATE TABLE REVIEW (
 );
 
 SELECT * FROM REVIEW;
+alter table game add ggenre varchar(60);
+-- 3) Dummy Data
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('aaa', '¤©¤·ÀÎ°¡', '111', 'aa@bb.com', '010-1111-2222', 'unnamed.png', '1', '¸ô¶ó');
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('bbb', '¤»¤»¤©¤·', '222', 'bb@cc.co.kr', '010-1122-2323', 'unnamed.png', '2', '¸ô¶ó');
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('ccc', '¿ì¿Õ±Â', '444', 'cc@cc.co.kr', '010-1122-2323', 'unnamed.png', '2', '¸ô¶ó');    
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('ddd', 'Àü¿øÃ³Ä¡´Ù', '444', 'dd@ee.com', '010-2525-6666', 'unnamed.png', '3', '¸ô¶ó');        
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('eee', '¿ìÇÏÇÏ¿ì¸®¹è²Å', '555', 'dd@ff.com', '010-2626-7686', 'unnamed.png', '1', '¾Æ¸¶');            
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('fff', 'Áß±¹´Ù·Ë', '666', 'sorim@chuk.gu', '010-2525-6266', 'unnamed.png', '1', '±Û½ê');            
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('ggg', '±øÆÐÃà±¸', '2626', '33@bb.com', '010-1111-2979', 'unnamed.png', '1', '¹¹Áö');                
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('hhh', '¼ö¼®º¸ÁÂ°ü', '252532', '44@cc.com', '010-2521-5252', 'unnamed.png', '1', '¹¹´õ¶ó');                
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('iii', 'µ¿³×Ãà±¸', '5521515A2', '33@aa.ca', '010-5325-2522', 'unnamed.png', '2', '¿¨');                
+INSERT INTO MEMBER (MID, MNICKNAME, MPW, MEMAIL, MPHONE, MPHOTO, MQUEST, MANSWER)
+    VALUES ('jjj', '¿ìÁîº¤Çìµù½¸', '111', '44@naver.com', '010-1131-2424', 'unnamed.png', '3', '¹¹¶ó°í');                
+SELECT * FROM MEMBER;
+---
+SELECT * FROM GAME;
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC)
+    VALUES ('fo4m', 'EA SPORTS FC Online M', 'NEXON Company', TO_DATE('2018-08-01','YYYY-MM-DD'), 'thum2.jpg', '»õ·Î¿î Look&Feel·Î ´õ¿í ¼¼·ÃµÇ°Ô!
+°ÔÀÓ ÇÃ·¹ÀÌ ÅÛÆ÷¿Í Ã¼°¨ °³¼±À» ÅëÇØ ´õ¿í Çö½Ç°¨ ÀÖ°Ô!
+ÆÄ¿ö½¸, ÇÏµåÅÂÅ¬, ³ì¿Â µå¸®ºí·Î ´õ¿í ´Ù¾çÇÏ°Ô!
+¸ðµç °ÍÀÌ »õ·Î¿öÁø FC ¸ð¹ÙÀÏ¿¡¼­, ³ª¸¸ÀÇ ÆÀÀ» ¿Ï¼ºÇÏ¼¼¿ä!!');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC)
+    VALUES ('wos','WOS:È­ÀÌÆ® ¾Æ¿ô ¼­¹ÙÀÌ¹ú', 'Century Games Pte.Ltd.','2023-09-15','thum3.jpg','È­ÀÌÆ® ¾Æ¿ô ¼­¹ÙÀÌ¹úÀº ºùÇÏ Á¾¸» ¼­¹ÙÀÌ¹ú Àü·« °ÔÀÓÀÔ´Ï´Ù. ¸ÅÈ¤ÀûÀÎ ±â°è¿Í º¹ÀâÇÑ »ç¾ÈµéÀÌ ¿©·¯ºÐÀ» ±â´Ù¸®°í ÀÖ½À´Ï´Ù.
+
+±Þ°ÝÇÏ°Ô ÇÏ¶ôÇÑ Áö±¸ÀÇ ±â¿ÂÀ¸·Î ÀÎ°£ »çÈ¸¿¡ ´ëÈ¥¶õÀÌ ÀÏ¾î³µ½À´Ï´Ù. ¹«³ÊÁ®°¡´Â Áý¿¡¼­ Å»ÃâÇÑ »ç¶÷µéÀº ÀÌÁ¦ È¤µ¶ÇÑ ´«º¸¶ó, °ø°ÝÀûÀÎ Áü½Âµé, ±×µéÀÇ Àý¸ÁÀ» ¸ÔÀÌ·Î »ï´Â ±âÈ¸ÁÖÀÇÀûÀÎ ¾Ç´çµé°ú °°Àº »õ·Î¿î ³­°ü¿¡ ºÎµúÈ÷°Ô µÇ¾ú½À´Ï´Ù.');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC)
+    VALUES ('leneagem','¸®´ÏÁöM','NCSOFT','2019-09-24','thum7.jpg','¡á MMORPGÀÇ ½ÃÀÛ°ú ³¡, ¸®´ÏÁöM
+PCÀÇ Çâ¼ö¿Í ±× ÀÌ»óÀÇ Çõ½ÅÀ¸·Î,
+¾ðÁ¦ ¾îµð¼­³ª À§´ëÇÑ ¼­»çÀÇ ÁÖÀÎ°øÀÌ µÇ½Ê½Ã¿À.
+
+¡á º¯ÇÏÁö ¾Ê´Â °¡Ä¡
+´Ù¾çÇÑ Àç¹Ì¸¦ ¼±»çÇÒ Å¬·¡½º
+¿ÀÇÂ ÇÊµå¿¡¼­ ¹ú¾îÁö´Â Àû°úÀÇ Á¶¿ì
+´ë±Ô¸ð ÀüÀåÀÇ Ä¡¿­ÇÑ ÀüÅõ
+ÀÌ ¸ðµç Ãß¾ïÀ» ÇÔ²² ÇÒ Ç÷¸Í±îÁö
+½Ã°£ÀÌ Áö³ªµµ º¯ÇÏÁö ¾Ê´Â °¡Ä¡¸¦ °æÇèÇÏ¼¼¿ä.
+
+¡á º¸´Ù °­·ÂÇØÁø ´ë±Ô¸ð ÀüÅõÀÇ Àç¹Ì
+±¤È°ÇÑ ÇÊµå ³» ¸ðµç °÷ÀÌ ÀüÅõÀÇ Á¢Á¡
+Å×º£¶ó½ººÎÅÍ ¿¡½ºÄ«·Î½º±îÁö, ¿äÀÏº°·Î ½¯ Æ´ ¾øÀÌ ÆîÃÄÁö´Â ¿ùµå ´øÀü
+Áö¹èÀÇ Å¾ µî Àü ¿ùµå ÃÖ»óÀ§ ¿¬ÇÕµéÀÇ °­ÇÔÀ» Áõ¸íÇÒ ¸¶½ºÅÍ ´øÀü
+
+¡á Á¶ÀÛ
+ÀÚÀ¯·Ó°í °£ÆíÇÑ ¾ÆÅ© ¼¿·ºÅÍºÎÅÍ ¹«Á¢¼Ó ÇÃ·¹ÀÌ±îÁö, ²÷ÀÓ¾ø´Â ±â¼úÀÇ Çõ½Å
+
+¡á ¸ð¹ÙÀÏ UI
+ÃÖ¼ÒÀÇ Á¶ÀÛÀ¸·Î ÃÖ´ëÀÇ È¿°ú¸¦ ¹ßÈÖÇÏ´Â ¸ð¹ÙÀÏ ÀüÅõ UI');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC)
+    VALUES ('skiagb','¼¼ºì³ªÀÌÃ÷ Å°¿ì±â','Netmarble','2023-09-01','thum1.jpg','¢º¹æÄ¡¸¸À¸·Îµµ ¼ºÀåÇÏ´Â ³ª¸¸ÀÇ ¼¼ºì³ªÀÌÃ÷
+ÀüÅõµµ ¼ºÀåµµ ½±°í ºü¸£°Ô!
+ÀÚµ¿ »ç³ÉÀ¸·Î ¼Õ½¬¿î ÀüÅõ, Á¢¼ÓÇÏÁö ¾Ê¾Æµµ °æÇèÄ¡¿Í °ñµå¸¦ È¹µæÇÒ ¼ö ÀÖ¾î¿ä.
+
+¢º³ª¸¸ÀÇ ¿µ¿õÀ» ¼öÁýÇØ º¸¼¼¿ä.
+¸Å·Â ¸¸Á¡ ±Í¿©¿î ¼¼ºì³ªÀÌÃ÷ÀÇ µîÀå
+°³¼º ³ÑÄ¡´Â ¿µ¿õµé·Î ³ª¸¸ÀÇ ÆÀÀ» ±¸¼ºÇØ º¸¼¼¿ä.
+
+¢º10 vs 10 Àü·«Àû ÀüÅõ!
+ÃÖ´ë 10¸íÀÇ Ä³¸¯ÅÍµéÀÌ ÆîÄ¡´Â ½Ã¿ø½Ã¿øÇÑ ÀüÅõ
+ÇÊµå, ´øÀü, °áÅõÀå¿¡¼­ ³ª¸¸ÀÇ ¸Å·ÂÀûÀÎ ¿µ¿õµéÀ» »Ë³»º¸¼¼¿ä.
+
+¢ºÆê, ÄÚ½ºÆ¬À¸·Î ´õ¿í È­·ÁÇÏ°Ô!
+±Í¿©¿î Æê°ú °³¼º¸¸Á¡ ÄÚ½ºÆ¬À¸·Î ³ª¸¸ÀÇ ¿µ¿õÀ» ¸¸µé¾îº¸¼¼¿ä.
+
+¢ºÇ³¼ºÇÑ Á¢¼Ó ÀÌº¥Æ®! ·çºñ°¡ ½ñ¾ÆÁø´Ù!
+ÆøÇ³ ¼ºÀå Áö¿ø!
+¸ÅÀÏ¸ÅÀÏ ½ñ¾ÆÁö´Â Ç³¼ºÇÑ Á¢¼Ó º¸»óÀ¸·Î, ºü¸£°Ô ¿µ¿õµéÀ» ¼ºÀå ½ÃÄÑº¸¼¼¿ä.');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC)
+    VALUES ('cod', 'ÄÝ ¿Àºê µå·¡°ïÁî', 'FARLIGHT', '2023-09-15','thum11.jpg','¡á º£Çì¸ð½º
+ÃÖ´ë 40ÀÎÀÇ ·¹ÀÌµå·Î ÁøÇàµÇ´Â º£Çì¸ð½º Æ÷È¹!
+¸ðµç »ç¶÷µéÀÌ ¼±¸ÁÇÏ°í, ¶Ç µÎ·Á¿öÇÏ´Â º£Çì¸ð½º¸¦ »ç·ÎÀâ¾Æ ¿¬¸ÍÀÇ ºñ¹Ðº´±â·Î È°¿ëÇÏ¼¼¿ä!
+È£±â·Ó°Ô Áø±º ÁßÀÎ Àû±º ¸ðµÎ¸¦ ¿òÁ÷ÀÏ ¼öµµ ¾ø´Â µÎ·Á¿ò ¼ÓÀ¸·Î ¹Ð¾î ³Ö°í, ÀüÀïÀÇ ÆÇµµ¸¦ ´ç½ÅÀÇ ¼Õ¾Æ±Í ¾È¿¡ ´ãÀ» ¼ö ÀÖ´Â ¼ö´Â º£Çì¸ð½º »ÓÀÔ´Ï´Ù!
+È÷µå¶ó, ÀÚÀÌ¾ðÆ®, ÀÚÀÌ¾ðÆ® º£¾î, ±×¸®°í ÇÃ·¹ÀÓ µå·¡°ï±îÁö! ´Ü ÇÏ³ªÀÇ ¼ö¸¸À¸·Î Àü¼¼¸¦ µÚÁý¾îº¸¼¼¿ä!
+
+¡á ¹«·áÄ¡·á
+°¡½¿ ¾ÆÇÁÁö¸¸ ÀüÀï¿¡´Â ¹Ýµå½Ã ºÎ»óÀÚ°¡ ¹ß»ýÇÏ±â ¸¶·ÃÀÔ´Ï´Ù.
+±×µéÀÇ °¡Á·À» À§ÇØ¼­¶óµµ, »ç»óÀÚ¸¦ ÃÖ¼ÒÈ­ÇÏ°í ÀÏ»óÀ¸·Î º¹±Í½ÃÅ°´Â °Ç ÁöÈÖÀÚÀÇ Áß¿äÇÑ Ã¥¹« Áß ÇÑ°¡ÁöÀÔ´Ï´Ù.
+ÇÏÁö¸¸ Ä¡·á ÀÎ¿ø¿¡ Á¦ÇÑÀÌ ÀÖ°í, ¼ö¸¹Àº ÀçÈ­°¡ ÇÊ¿äÇÑ °Í¸¸Å­ Åë¼ÖÀÚ·Î¼­ ÇÑÅº½º·¯¿î ÀÏÀÌ ¾øÁÒ.
+±×·¡¼­ [ ÄÝ ¿Àºê µå·¡°ïÁî ]¿¡¼­´Â ºÎ»óÀÚÀÇ Ä¡·á¿¡ Áö¿øÀ» ¾Æ³¢Áö ¾Ê±â·Î Çß½À´Ï´Ù!
+¸¶À½²¯ ÀüÀïÇÏ°í, ¸¶À½ ÆíÈ÷ º¹±ÍÇÏ½Ê½Ã¿À! ÀÎ¿ø Á¦ÇÑÀÌ ¾ø°í, ÀçÈ­°¡ ÇÊ¿äÇÏÁö ¾ÊÀº Ä¡·á¼Ò°¡ ÀüÀï ¿µ¿õµéÀ» È¯´ëÇÒ °ÍÀÔ´Ï´Ù!
+
+¡á ¾ÆÆ¼ÆÑÆ®
+¿µ¿õµé¿¡°Ô´Â ±×µé¿¡°Ô ¾î¿ï¸®´Â ½ÅÈ­ÀûÀÎ Àåºñ¸¦ ºÎ¿©ÇÏ´Â °Ô Á¤¼®ÀÔ´Ï´Ù.
+ÇÏÁö¸¸ ½ÅÈ­ÀûÀÎ Àåºñ¶ó°í ±×µéÀÇ ´É·ÂÄ¡¸¸ ¿Ã·ÁÁØ´Ù¸é, ¡± ½ÅÈ­ÀûÀÎ ¡° Àåºñ¶ó ÇÒ ¼ö ÀÖÀ»±î¿ä? ¡° ÁøÂ¥ ¡° ½ÅÈ­ÀûÀÎ Àåºñ¶ó¸é, ÀÀ´ç ±×¿¡ ¸Â´Â ½ºÅ³ÀÌ ÀÖ¾î¾ß ÇÒ °ÍÀÔ´Ï´Ù.
+¡° Àº½Å ¡± , ¡± ÅÚ·¹Æ÷Æ® ¡± , ¡± ´ÜÃ¼ ¹öÇÁ ¡± µîµî ÀüÀåÀÇ ÆÇµµ¸¦ ¹Ù²Ü ¼ö ÀÖ´Â ´Ù¾çÇÑ ¾ÆÆ¼ÆÑÆ® ½ºÅ³!
+¿µ¿õ¿¡°Ô ¾î¿ï¸®´Â Àåºñ¸¦ ºÎ¿©ÇÏ°í, ½Ã³ÊÁö¸¦ ¹ß»ý½ÃÅ³ ¼ö ÀÖ´Â ¾×Æ¼ºê ½ºÅ³À» È°¿ëÇÏ¼¼¿ä!
+´ç½Å¸¸ÀÇ Àü·«°ú ÇÔ²² Àü¼¼¸¦ µÚÁýÀ» È÷µç Ä«µå·Î ÀÛ¿ëÇÏ±â¿¡ ºÎÁ·ÇÔÀÌ ¾øÀ» °ÍÀÔ´Ï´Ù!');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC)
+    VALUES ('nightcrows', '³ªÀÌÆ® Å©·Î¿ì', 'Wemade Co., Ltd', '2023-10-03','thum5.jpg','https://nightcrows.co.kr/
+
+¢Â°ÔÀÓ ¼Ò°³¢Â
+
+¸¶¹ýÀÌ °øÁ¸ÇÏ´Â 13¼¼±â¸¦ ¹è°æÀ¸·Î »õ·Ó°Ô Ã¢Á¶µÈ À¯·´ ´ë·ú,
+¡°Deus vult¡±, ½ÅÀÇ ÀÌ¸§À¸·Î ½ÃÀÛµÇ´Â ±× °Å´ëÇÑ ÀüÀïÀÇ ¿ª»ç·Î ÃÊ´ëÇÕ´Ï´Ù.
+
+¢Ã¡±Creatio Mundi¡± (Creation of the world)¢Ã
+¸¶¹ýÀÌ °øÁ¸ÇÏ´Â 13¼¼±â À¯·´. ÆÇÅ¸Áö¿Í Çö½ÇÀÌ ÇÔ²²ÇÏ´Â »õ·Î¿î ¼¼»óÀ» Ã¢Á¶ÇÏ¿´½À´Ï´Ù.
+³·°ú ¹ã, ¹àÀ½°ú ¾îµÒ, Áú¼­¿Í È¥µ·, ±Ç·Â°ú ¹Ý¶õ±îÁö, ¸ðµç °ÍµéÀÌ Ãæµ¹ÇÏ´Â Áß¼¼ À¯·´.
+¾ð¸®¾ó ¿£Áø 5·Î ±×·Á³½ °¡Àå Çö½ÇÀûÀÎ ¿ª»ç ¼Ó À¯·´ ´ë·úÀ» °æÇèÇÒ ¼ö ÀÖ½À´Ï´Ù.
+
+¢Ã¡±Modus Vivendi¡± (Way of life)¢Ã
+RPG¿¡¼­ÀÇ Ä³¸¯ÅÍ´Â ¶Ç ´Ù¸¥ ¡°³ª¡±ÀÔ´Ï´Ù.
+ÀÌÁ¦ ¿î°ú ¿ì¿¬¿¡ ÀÇÁöÇÏÁö ¾Ê°í, ³ªÀÇ ½Ã°£, ³ë·Â, ±×¸®°í ¼±ÅÃ¿¡ µû¸¥ ½Â±Þ°ú ÀüÁ÷À» ÅëÇØ ³ªÀÇ Ä³¸¯ÅÍ´Â ¼ºÀåÇÏ¸ç, ³ªÀÌÆ® Å©·Î¿ì ´Ü¿øÀ¸·Î¼­ ÁÖ¾îÁø ¿ªÇÒÀ» ¼öÇàÇØ ³ª°©´Ï´Ù. ÀÌ°ÍÀÌ ¹Ù·Î ³ªÀÌÆ® Å©·Î¿ì°¡ Ãß±¸ÇÏ´Â RPG º»¿¬ÀÇ ¼ºÀåÀÌÀÚ »îÀÇ ¹æ½ÄÀÔ´Ï´Ù.
+
+¢Ã¡±Alta Volare¡± (Fly high)¢Ã
+ÀÌÁ¦ ¶¥°ú ÇÏ´Ã, ±× »çÀÌ ¸ðµç °ø°£ÀÌ ÀüÀåÀÌ µË´Ï´Ù.
+³ªÀÌÆ® Å©·Î¿ìÀÇ ÀÌ¾ß±â ¼Ó À¯·´ ´ë·ú¿¡¼­´Â "±Û¶óÀÌ´õ"¸¦ ÅëÇØ µåµð¾î ÇÏ´ÃÀ» Ç°°Ô µÇ¾ú½À´Ï´Ù. ±Û¶óÀÌ´õ´Â °íÀúÂ÷¸¦ ÀÌ¿ëÇÑ ´Ü¼øÇÑ È°°­¿¡ ±×Ä¡Áö ¾Ê°í, È°°ø°ú È£¹ö¸µ ±×¸®°í »ó½Â ±â·ù¸¦ ÀÌ¿ëÇÑ ´Ù¾çÇÑ Àü·«ÀûÀÎ ÀüÅõ±îÁö °¡´ÉÇÏ°Ô ÇÏ¸ç, Æò¸éÀûÀÎ ÀüÅõ¿¡¼­ ¹þ¾î³­ ÀÔÃ¼ÀûÀÎ ÀüÅõÀÇ °æÇèÀ» ¼±»çÇÕ´Ï´Ù.');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT)
+    VALUES ('odin', '¿Àµò: ¹ßÇÒ¶ó ¶óÀÌÂ¡', 'Kakao Games Corp.', '2021-06-26', 'thum6.jpg', '¢Ã°ÔÀÓ ¼Ò°³¢Ã
+¡á MMORPG, ½ÅÀÇ ¿µ¿ª¿¡ µµÀüÇÏ´Ù
+¸ð¼Ç Ä¸Ã³, 3DÄ¸Ã³ µîÀ» ÅëÇÑ ½Ç»ç ±×·¡ÇÈ ±¸Çö
+¾ð¸®¾ó ¿£Áø4·Î º¸´Ù ¿Ïº®ÇÏ°Ô, º¸´Ù ¾Æ¸§´ä°Ô!
+½É¸®½º ¹æ½ÄÀ¸·Î ·Îµù¾øÀÌ ÀÚÀ¯·Î¿î ¿ÀÇÂ ÇÊµå
+
+¡á ½ÅÀÇ ¿µ¿ªÀ» ÇâÇÑ ¸ðÇèÀÇ ½ÃÀÛ
+¹æ´ëÇÑ ½ºÄÉÀÏ¿¡ µðÅ×ÀÏÀ» ´õÇÑ ºÏÀ¯·´ ½ÅÈ­ ¼¼°è°ü
+¹Ìµå°¡¸£µå, ¿äÅ÷ÇÏÀÓ µî ½ÅÈ­ ¼Ó 4°³ ´ë·ú¿¡¼­ÀÇ ¸ðÇè!
+°ÅÀÎ, ³­ÀïÀÌ, ¾Ëºê, ÀÎ°£ µî ´Ù¾çÇÑ Á¾Á·ÀÇ µîÀå
+
+¡á ³» ¹æ½Ä´ë·Î ½ÅÀÇ ¿µ¿ªÀ» Å½ÇèÇÏ´Ù
+º®Å¸±â, ¼ö¿µ µî ÁöÇüÁö¹°À» ÀÌ¿ëÇÏ´Â Àü·«Àû ÇÃ·¹ÀÌ
+¸íÈ®ÇÑ ¿ªÇÒ ±¸ºÐÀ¸·Î ³ª¿¡°Ô ¸Â´Â Å¬·¡½º¸¦ Ã£´Ù!
+¿¬°è ½ºÅ³, Á¶°ÇºÎ ½ºÅ³·Î ³ª¸¸ÀÇ ÀüÅõ ½ºÅ¸ÀÏ ¿Ï¼º
+
+¡á Àü»ç¿©, ½ÅÀÇ ¿µ¿ªÀ» Â÷ÁöÇÏ¶ó
+ºÏÀ¯·´ ½ÅÈ­ ¼Ó ½Å°ú ±«¼ö¿¡ ¸Â¼­´Ù!
+¾ÐµµÀûÀÎ ½ºÄÉÀÏÀÇ º¸½º ·¹ÀÌµå
+¹ßÇÒ¶ó¸¦ Â÷ÁöÇÏ±â À§ÇÑ ´ë±Ô¸ð RvR', 1);
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT)
+    VALUES ('pubg','¹èÆ²±×¶ó¿îµå','KRAFTON, Inc.', '2018-05-15', 'thum16.jpg', '¢º¹èÆ²±×¶ó¿îµå (PUBG) ¸ð¹ÙÀÏ °ÔÀÓ ¼Ò°³¢¸
+¹è±× ¸ð¹ÙÀÏ °ÔÀÓÀº ´Ù¼öÀÇ À¯ÀúµéÀÌ ¹èÆ²·Î¾â ÀüÀå¿¡¼­ ÃÑ±â ¹× °¢Á¾ ÀüÅõ ¾ÆÀÌÅÛÀ» È°¿ëÇÏ¿© °¢ÀÚÀÇ Àü·«À¸·Î ÃÖÈÄÀÇ ½ÂÀÚ¸¦ °¡·Á³»´Â ¼­¹ÙÀÌ¹ú Çü½ÄÀÇ fps ¹èÆ²·Î¾â ¸ð¹ÙÀÏ °ÔÀÓÀÔ´Ï´Ù.
+
+¹èÆ²±×¶ó¿îµå (PUBG) ¸ð¹ÙÀÏ °ÔÀÓÀÇ ¸®¾óÇÑ ¼­¹ÙÀÌ¹ú ¹èÆ²·Î¾â ÀüÀå
+¹è±× ¸ð¹ÙÀÏ °ÔÀÓÀº ¾ð¸®¾ó ¿£Áø 4¸¦ ±â¹ÝÀ¸·Î ÇÑ HD ±×·¡ÇÈ°ú 3D »ç¿îµå·Î ¸®¾óÇÑ ÀüÀåÀ» ±¸ÇöÇß½À´Ï´Ù.
+½ÇÁ¸ÇÏ´Â ´Ù¾çÇÑ ¼­¹ÙÀÌ¹ú ¹«±â¿Í ÀüÅõ Àåºñµé, ½ÇÁ¦ ÃÑ±â »ç¿îµå µîÀ» ÅëÇØ ¸ð¹è´Â »ý»ýÇÑ fps ¹èÆ²·Î¾â ÀüÅõ Ã¼Çè°¨À» ¼±»çÇÕ´Ï´Ù.',1);
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT)
+    VALUES ('redline', 'Ç×·Î: ·¹µå¶óÀÎ', 'WORCESTER FESTIVAL LTD', '2023-10-14', 'thum_line.png','ºÒÅ¸´Â ±Ã±Ø±â, ÀÚÀ¯·Î¿î ´ë°á! ½Ã¿øÇÏ°í Â¥¸´ÇÑ ÀüÅõ¸¦ Áö±Ý ¹Ù·Î Ã¼ÇèÇØº¸¼¼¿ä!
+
+
+Å¬·¡½Ä ÀçÇö: ÀÎ±â IP Ä³¸¯ÅÍ ´ëÁýÇÕ, ´ç½Å¸¸ÀÇ ÆÀÀ» ±¸¼ºÇÏ°í ÁÁ¾ÆÇÏ´Â Ä³¸¯ÅÍ¿Í ÇÔ²² ¹Ù´Ù ¸ðÇèÀ» ¶°³ª¼¼¿ä!
+
+
+°³¼ºÀÖ´Â ÄÜÅÙÃ÷: ÀÓÆç ´Ù¿î, ¹Ù´Ù ½Ã·ÃºÎÅÍ Á¤»óÀüÀï±î ¿øÇÏ´Â ÄÜÅÙÃ÷°¡ ´Ù ÀÖ½À´Ï´Ù. »¡¸® ¿Í¼­ ´ç½Å¸¸ÀÇ ½ÉÇØ º¸¹°À» ¹Þ¾Æ°¡¼¼¿ä!
+
+
+°¡º­¿î ÇÃ·¹ÀÌ: ÀÚµ¿ ÀüÅõ¸¸À¸·Îµµ ·¹º§¾÷ÇÒ ¼ö ÀÖ½À´Ï´Ù. ¿©·¯°¡Áö ÀÚµ¿ ½Ã½ºÅÛÀÌ µé¾îÀÖÀ¸´Ï Áö±ÝºÎÅÍ ½ºÅ×ÀÌÁö¿Í ·¹º§¿¡ ´ëÇÑ ÀûÁ¤À» ¹ö¸®°í Ä«µå °ÔÀÓÀÇ ¸Å·ÂÀ» ¸¾²¯ Áñ±â¼¼¿ä!
+
+
+Àü·«Àû ¹èÄ¡: ´É·ÂÄ¡ »ó¼º, ½ºÅ³ »ó¼º°ú ¾ÆÆ¼ÆÑÆ® ÄÜÅÙÃ÷°¡ ¾î¿ì·¯Á® ÁÁ¾ÆÇÏ´Â Ä³¸¯ÅÍ°¡ ´©±¸ÀÎ »ó°ü¾øÀÌ Á¶ÇÕ¸¸ ÀßÇÏ¸é ´Ù ÀÌ±æ ¼ö ÀÖ½À´Ï´Ù!',1);
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT)
+    VALUES ('teamfighttactics','Àü·«Àû ÆÀ ÀüÅõ: ¸®±× ¿Àºê ·¹Àüµå Àü·« °ÔÀÓ', 'Riot Games,Inc','2023-03-17', 'thum_league.png','¸®±× ¿Àºê ·¹Àüµå¸¦ ¸¸µç ¶óÀÌ¾ù °ÔÀÓÁî°¡ ¼±º¸ÀÌ´Â Àü·«Àû ÆÀ ÀüÅõ´Â ÆÀ ±¸¼º ´É·ÂÀ» ½ÃÇèÇÏ´Â ±Ã±ØÀÇ ¸ÖÆ¼ÇÃ·¹ÀÌ¾î PvP ¿ÀÅä ¹èÆ²·¯ÀÔ´Ï´Ù.
+
+8ÀÎ ³­ÅõÀü¿¡¼­ Ã¨ÇÇ¾ðÀ» ¸ðÁýÇÏ°í ¹èÄ¡ÇÏ¸ç ÀüÅõ¸¦ ¹úÀÌ°í ±â¹ßÇÑ Àü·«À» ÆîÃÄ¼­ ½Â¸®¸¦ ÇâÇØ ³ª¾Æ°¡¼¼¿ä. ÆÀ Á¶ÇÕÀÌ ¼ö¹é °¡Áö¿¡ ´ÞÇÏ°í ¸ÞÅ¸°¡ ²÷ÀÓ¾øÀÌ ÁøÈ­ÇÏ´Ï °¡´ÉÇÑ Àü·«Àº ¹«±Ã¹«ÁøÇÏÁö¸¸, ´Ü ÇÑ ¸í¸¸ ½Â¸®¸¦ °Å¸ÓÁæ ¼ö ÀÖ½À´Ï´Ù.
+
+±²ÀåÇÑ ÀÚµ¿ ÀüÅõ°¡ ÆîÃÄÁö´Â °áÅõÀå¿¡¼­ ÅÏÁ¦ Àü·«ÀÇ ´ë°¡°¡ µÇ¾îº¸¼¼¿ä. Ã¼½º °°Àº °ÔÀÓÇÃ·¹ÀÌ¿Í »óÈ£ÀÛ¿ë, °æÀïÀ» ¼±»çÇÏ´Â ´Ù¾çÇÑ ¸ÖÆ¼ÇÃ·¹ÀÌ¾î °ÔÀÓ ¸ðµå¿¡¼­ ÀûÀ» ¶Ù¾î³Ñ´Â Àü·«À¸·Î ³¡±îÁö »ì¾Æ³²¾Æ ÃÖÈÄÀÇ ½ÂÀÚ°¡ µÇ¼¼¿ä!
+
+ÀçÃ¢Á¶µÈ ·éÅ×¶ó
+ÆøÇ³ÀÌ ·éÅ×¶óÀÇ ¿©·¯ Áö¿ªÀ» Á¶°¢³»°í ÇÕÃÄ ±âÀÌÇÑ ½Å¼¼°è¸¦ Ã¢Á¶ÇÏ¸ç ±¤ÀåÀ» È¥µ·¿¡ ºü¶ß·È½À´Ï´Ù.
+½Å±Ô Àü·«°¡µéÀ» ¼±µÎ¿¡ ¼¼¿ì°í ÁÁ¾ÆÇÏ´Â ·éÅ×¶ó Ã¨ÇÇ¾ðÀ» ½Â¸®·Î ÀÌ²ø¾î º¸¼¼¿ä. ¹Ì´Ï Æ¼¸ð¿Í ÇÑ ¹«¸®ÀÇ Ä®³¯ºÎ¸® ±×¸®°í ´Ù¾çÇÑ ¿ÜÇüÀÇ Æ÷·Î°¡ µîÀåÇÕ´Ï´Ù!
+ÀÚ½ÅÀÇ ÇÃ·¹ÀÌ½ºÅ¸ÀÏÀ» µÞ¹ÞÄ§ÇÒ ¼ö ÀÖµµ·Ï Áõ°­¿¡ ¿µÇâÀ» ÁÖ´Â Àü¼³ÀÇ À§·ÂÀ» ºÒ·¯³»º¸¼¼¿ä.
+
+ÀÍ¼÷ÇÑ Ä£±¸µé°ú »õ·Î¿î ÀüÅõ¸¦
+°øµ¿À¸·Î ÀÌ·ç¾îÁö´Â ¸ÖÆ¼ÇÃ·¹ÀÌ¾î Ã¨ÇÇ¾ð ¼±ÅÃÀ» ÅëÇØ ¸·°­ÇÑ ÆÀÀ» ±¸¼ºÇÏ¼¼¿ä.
+¶ó¿îµå¸¶´Ù ÀüÅõ¸¦ ¹úÀÌ¸ç ¸¶Áö¸·±îÁö »ì¾Æ³²¾Æ¾ß ÇÕ´Ï´Ù.
+¹«ÀÛÀ§·Î µîÀåÇÏ´Â Ã¨ÇÇ¾ð°ú °ÔÀÓ ³» ÀÌº¥Æ®ÀÇ ¿µÇâÀ¸·Î °ÔÀÓ ¾ç»óÀÌ ¸Å¹ø ´Þ¶óÁö´Ï Ã¢ÀÇ·Â°ú ±âÁö¸¦ ¹ßÈÖÇØ ÇÊ½Â Àü·«À» ±¸»óÇØº¸¼¼¿ä.
+
+Àå¼Ò ºÒ¹® ÇÃ·¹ÀÌ °¡´É
+PC¿Í Mac, ¸ð¹ÙÀÏ¿¡ °ÉÃÄ ÆîÃÄÁö´Â ÅÏÁ¦ ÀüÅõ¿¡¼­ Ä£±¸¿¡°Ô µµÀüÇÏ°í ÀûÀ» ¾²·¯¶ß¸± ¼ö ÀÖ½À´Ï´Ù.
+Ä£±¸¿Í ÇÔ²² ÇÃ·¹ÀÌÇÏ¸ç ´©°¡ ÃÖÈÄÀÇ ½ÂÀÚ°¡ µÉ ÀÚÁúÀ» °¡Á³´ÂÁö È®ÀÎÇØº¸¼¼¿ä.',1);
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT)
+    VALUES ('royalmatch', '·Î¾â ¸ÅÄ¡ Royal Match', 'Dream Games, Ltd.','2021-02-24','thum13.jpg','Áö±Ý »õ·Î¿î ¸ðÇèÀ» ½ÃÀÛÇÏ¼¼¿ä! »ö±òº°·Î ºí·°À» ¹Ð°í, ÆÛÁñÀ» Ç®°í, ¼ºÀ» ²Ù¹Ì°í, µ¿Àüµµ ¸ðÀ¸¼¼¿ä. ·Î¾â Ä³½½¿¡´Â ½ÂºÎ¿åÀ» ÀÚ±ØÇÏ´Â Àç¹ÌÀÖ´Â ¸ÅÄ¡ 3 ÆÛÁñÀÌ °¡µæÇÏ´ä´Ï´Ù! »ö±ò ºí·°À» 3°³ ÀÌ»ó ¸ÂÃç¼­ °ÔÀÓÆÇÀ» ºñ¿ì°í ÆÛÁñÀ» ÇØ°áÇØº¸¼¼¿ä! Â¥¸´ÇÑ Àç¹Ì·Î °¡µæÇÑ ·Î¾â ¸ÅÄ¡¸¦ Áö±Ý ¹Ù·Î ¹«·á·Î Áñ°Üº¸¼¼¿ä!
+
+·Î¾â ¸ÅÄ¡ÀÇ ·Î¹öÆ® ¿ÕÀÌ ¿Õ±ÃÀ» ¾Æ¸§´ä°Ô ²Ù¹Ì´Â µ¥ ¿©·¯ºÐÀÇ µµ¿òÀÌ ÇÊ¿äÇÏ´ë¿ä. ·¹º§ ¿Ï·á ÈÄ ´ÙÀ½ ¿¡ÇÇ¼Òµå·Î ³Ñ¾î°¡±â Àü¿¡ ¿Õ±ÃÀ» ¸ÕÀú ¹æ¹®ÇØº¸¼¼¿ä! ¿Õ±ÃÀÇ °ø°£À» ÇÏ³ª¾¿ ´Ù ²Ù¹Ð ¶§¸¶´Ù µ¿ÀüÀ» ¹Þ¾Æ¿ä. ¿ÕÀÇ °ÅÃ³¸¦ ¸ÚÁö°Ô ²Ù¹Ì°í º¸³Ê½º¿Í Ãß°¡ ºÎ½ºÅÍ¸¦ ¹Þ¾Æ¼­ ¸ðÇèÀ» ÀÌ¾î°¡¼¼¿ä!
+
+°ÔÀÓ ¼Ó¿¡ µÎ³ú¸¦ ÀÚ±ØÇÏ´Â ÆÛÁñÀÌ °¡µæÇÏ°Åµç¿ä! »õ·Î¿î ¿¡ÇÇ¼Òµå¸¶´Ù ¹«·á µ¿Àü, Æ¯º°ÇÑ º¸»ó, ³î¶ó¿î Äù½ºÆ®, ¾Æ¸§´Ù¿î Àå¼Òµé°ú ´õºÒ¾î ³¡³»ÁÖ´Â ¸ÅÄ¡¸¦ Áñ±æ ¼ö ÀÖ´ä´Ï´Ù!
+
+³¡³»ÁÖ´Â ±×·¡ÇÈ°ú ½Å³ª´Â ÆÛÁñ·Î °¡µæÇÑ, ÃÖ°íÀÇ ¸ÅÄ¡ 3 °ÔÀÓ ·Î¾â ¸ÅÄ¡¸¦ Áö±Ý ÇÃ·¹ÀÌ ÇØº¸¼¼¿ä.',1);
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT)
+  VALUES ('genshin', '¿ø½Å', 'MIHOYO', '2020-09-25', 'thum9.jpg', '¡ëÀÚÀ¯µµ ³ôÀº ¿ÀÇÂ¿ùµå ½Ã½ºÅÛ¡ë
+¡¶¿ø½Å¡·Àº ¿ÀÇÂ¿ùµå ¾îµåº¥Ã³ °ÔÀÓÀ¸·Î, ¿©ÇàÀÚ´ÔÀº ¡¸Æ¼¹ÙÆ®¡¹ ´ë·ú¿¡ µé¾î¿Â ¼ø°£ºÎÅÍ »êÀ» ³Ñ°í, °­À» °Ç³Ê¸ç »õ·Î¿î ¼¼°è·ÎÀÇ ¸ðÇèÀ» ¶°³¯ ¼ö ÀÖ½À´Ï´Ù. °øÁß¿¡ ¶°´Ù´Ï´Â ¼±·Éµé°ú ±âÀÌÇÑ ÀåÄ¡µéÀ» ¹ß°ßÇÏ°Ô µÇ¸é, ¾î¶² ³î¶ó¿î ÀÏÀÌ ¹ß»ýÇÒÁö ±â´ëÇØº¸¼¼¿ä!
+
+¡ë¿ø¼Ò »óÈ£ÀÛ¿ëÀ» ÅëÇÑ Àü·«ÀûÀÎ ÀüÅõ¡ë
+¿ø¼Ò°¡ »ì¾Æ ¼û ½¬´Â Æ¼¹ÙÆ® ¼¼°è¿¡´Â ¹Ù¶÷, ¹ø°³, ¹°, ºÒ, ¾óÀ½, Ç®, ¹ÙÀ§ 7°³ ¿ø¼Ò°¡ Á¸ÀçÇÕ´Ï´Ù! ¡¸½ÅÀÇ ´«¡¹À» °¡Áø Ä³¸¯ÅÍ´Â ¿ø¼ÒÀÇ ÈûÀ» »ç¿ëÇØ ÀüÅõ¿Í Å½ÇèÀ» ¼öÇàÇÒ ¼ö ÀÖ½À´Ï´Ù. ¹°°ú ºÒÀÌ ¸¸³ª¸é ¡¸Áõ¹ß¡¹ÇÏ°í ºÒ°ú ¹ø°³´Â ¡¸°úºÎÇÏ¡¹¸¦ ÀÏÀ¸Å°¸ç, ¹ø°³¿Í ¹°ÀÌ ¸¸³ª¸é ¡¸°¨Àü¡¹ÀÌ ¹ß»ýÇÕ´Ï´Ù. »ó´ë¿¡ ¸Â°Ô ÀûÀýÇÑ ¿ø¼Ò È¿°ú¸¦ »ç¿ëÇÏ´Â °ÍÀÌ ¹Ù·Î ½Â¸®ÀÇ ¿­¼èÀÔ´Ï´Ù!
+
+¡ë°íÄ÷¸®Æ¼ ±×·¡ÇÈ°ú OST¡ë
+¡¶¿ø½Å¡·Àº Ä«Å÷·»´õ¸µ ±â¼úÀ» È°¿ëÇÑ °íÄ÷¸®Æ¼ ±×·¡ÇÈÀ¸·Î Á¦ÀÛµÇ¾ú½À´Ï´Ù. Ä³¸¯ÅÍµéÀÇ ½Ç½Ã°£ µ¿ÀÛµéÀ» ¼¼¹ÐÇÏ°Ô Á¶Á¤ÇØ ³ôÀº Ä÷¸®Æ¼ÀÇ ¿¬Ãâ È¿°ú¸¦ Ç¥ÇöÇß½À´Ï´Ù. 24½Ã°£¿¡ µû¶ó ¹ã³·ÀÌ ¹Ù²î°í, ³¯¾¾¿Í OSTµµ È¯°æ¿¡ ¸Â°Ô º¯È­ÇÕ´Ï´Ù. ¶ÇÇÑ, ¿©ÇàÀÚ ¿©·¯ºÐµéÀº Æ¼¹ÙÆ® ¼¼°è ¾îµð¿¡ ÀÖµç, ¼¼°è Á¤»ó±Þ ±³Çâ¾Ç´ÜÀÎ ·±´øÇÊÇÏ¸ð´Ï ¿ÀÄÉ½ºÆ®¶ó¿Í »óÇÏÀÌ ±³Çâ¾Ç´ÜÀÌ ¼±º¸ÀÌ´Â Áö¿ª Æ¯»ö °¡µæÇÑ ¿¬ÁÖµµ µéÀ» ¼ö ÀÖ½À´Ï´Ù!
+
+¡ë°¢¾ç°¢»öÀÇ µ¿·áµé°ú ÇÔ²²ÇÏ´Â ¸ðÇè¡ë
+¿©·¯ºÐÀº ¿©Çà Áß µ¶Æ¯ÇÑ ´É·ÂÀ» Áö´Ñ µ¿·áµéÀ» ¸¸³¯ ¼ö ÀÖ½À´Ï´Ù. ÃÖ°íÀÇ ÆÄÆ¼¸¦ Á¶ÇÕÇÏ°í, ¿©Çà Áß ¼öÁýÇÑ Àç·á·Î Ä³¸¯ÅÍ¸¦ °­È­ÇÏ¿© Æ¼¹ÙÆ® ´ë·úÀÇ ¸ó½ºÅÍ¿Í ºñ°æÀ» Á¤º¹ÇØ º¸¼¼¿ä! ³ôÀº »ê Á¤»ó¿¡ ¼­¸é ºñ¿Í ´«, ±×¸®°í ¾Æ¸§´Ù¿î ±¸¸§ÀÌ ´«¾Õ¿¡ ÆîÃÄÁý´Ï´Ù. ±×·¯³ª ¾ÆÁ÷ ÀÒ¾î¹ö¸° Ç÷À°°úÀÇ ÀçÈ¸¿Í ¡¸¿ø½Å¡¹ÀÇ Áø½ÇÀ» ¹àÇô³»Áö ¸øÇß½À´Ï´Ù¡¦¡¦. ¿©ÇàÀÚ, ÁøÁ¤ÇÑ ¸ðÇèÀº ÀÌÁ¦ ½ÃÀÛµÆ½À´Ï´Ù!',1);
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT, GGENRE)
+VALUES ('gardenscapes', '²ÞÀÇ Á¤¿ø(Gardenscapes)', 'PlayRix', '2016-08-25', 'thum_garden.png', 'Playrix ²Þ ½Ã¸®Áî(Scapes¢â ½Ã¸®Áî)ÀÇ Ã¹ È÷Æ®ÀÛ, ²ÞÀÇ Á¤¿ø¿¡ ¿À½Å °ÍÀ» È¯¿µÇÕ´Ï´Ù. 3Á¶°¢ ¸ÂÃß±â ÆÛÁñÀ» Ç®¾î Á¤¿øÀÇ ¿µ±¤À» µÇÃ£¾ÆÁÖ¼¼¿ä!
+
+3Á¶°¢ ¸ÂÃß±â ·¹º§À» ±ú¸ç Á¤¿øÀÇ ¿©·¯ ±¸¿ªÀ» º¹¿ø ¶Ç´Â Àå½ÄÇÏ°í, ±×¿¡ ¾ôÈù ºñ¹ÐÀ» ÆÄÇìÄ¡¸ç ¿©·¯ºÐÀÇ Áý»ç ¿À½ºÆ¾À» ºñ·ÔÇÑ °ÔÀÓ Ä³¸¯ÅÍµéÀ» ¸¸³ª º¸¼¼¿ä! Áö±Ý ¹Ù·Î ²ÞÀÇ Á¤¿øÀ» ¸¸µé¾î¿ä!
+
+°ÔÀÓ Æ¯Â¡:
+* µ¶Ã¢ÀûÀÎ °ÔÀÓ ÇÃ·¹ÀÌ: ÇÑ °ÔÀÓ¿¡¼­ Á¶°¢ ¸ÂÃß±â¿Í Á¤¿ø º¹¿øÇÏ±â, ²Ù¹Ì±â, ±×¸®°í Âü½ÅÇÑ ÀÌ¾ß±â¸¦ ¸ðµÎ Áñ±æ ¼ö ÀÖ½À´Ï´Ù.
+* ¼öÃµ °³ÀÇ µ¶Ã¢ÀûÀÎ 3Á¶°¢ ¸ÂÃß±â ·¹º§
+* Ä£±ÙÇÑ °ÔÀÓ Ä³¸¯ÅÍ
+* ¾ðÁ¦³ª ±âºÐÀ» ºÏµ¸¾ÆÁÖ´Â »ç¶û½º·¯¿î µ¿¹°
+* ÃÖ½Å ¼Ò½ÄÀ» Á¢ÇÒ ¼ö ÀÖ´Â °ÔÀÓ ³» ¼Ò¼È ³×Æ®¿öÅ©
+* µ¶Æ¯ÇÑ ±¸Á¶·Î ¸¸µé¾îÁø Á¤¿øÀÇ ¿©·¯ ±¸¿ª: ºÎ¼­Áø ºÐ¼ö´ë¿Í ¹Ì½ºÅÍ¸® ¹Ì·Î µî
+* Ä¿¹Â´ÏÆ¼: Facebook Ä£±¸µé°ú ÀÌ¿ôÀÌ µÇ¼¼¿ä!',1,'½Ã¹Ä·¹ÀÌ¼Ç');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT, GGENRE)
+VALUES ('uparu', '¿ìÆÄ·ç ¿Àµ÷¼¼ÀÌ', 'NHN Corp.', '2023-10-04', 'thum_uparu.png', '¢Ë °­·Â ÃßÃµ! ¿ìÆÄ·ç ¿Àµ÷¼¼ÀÌ Æ¯Â¡ ¢Ë
+1. ¼ö¹é °¡Áö Á¾·ùÀÇ ¸Å·ÂÀûÀÎ ¿ìÆÄ·ç ÃÑÁýÇÕ!
+½ÅºñÀÇ »ý¸íÃ¼ ¿ìÆÄ·ç¸¦ ¸ðÀ¸°í, Å°¿ì´Â ÄÃ·º¼Ç SNG!
+»ó»óÀ» ¶Ù¾î³Ñ´Â ´Ù¾çÇÑ Á¶ÇÕÀ¸·Î ±Í¿°»ÇÂ¦ÇÑ ¿ìÆÄ·ç¸¦ ¼ÒÈ¯ÇÏ¼¼¿ä.
+Å°¿ì´Â Àç¹Ì°¡ °¡µæÇÑ ¿ìÆÄ·ç¸¦ ¼öÁýÇÏ¿© °³¼º ³ÑÄ¡´Â ÄÃ·º¼ÇÀ» ¿Ï¼ºÇØº¸¼¼¿ä.
+
+2. ¿ìÆÄ·çµéÀÇ ÀÏ»óÀ» ¸¸³ª´Â Èú¸µÅ¸ÀÓ ¢¾
+À¯´ÏÅ©ÇÑ ¼­½ÄÁö¿Í ´Ù¾çÇÑ Àå½Äµé·Î ²Ù¹Î ³ª¸¸ÀÇ ¸¶À»¿¡¼­
+¿ìÆÄ·çµéÀÇ ÀÌ¾ß±â¿¡ ±Í ±â¿ï¿© º¸¼¼¿ä.
+
+3. ¸ÔÀÌ¿Í ¹°¾àÀ¸·Î ¹ÝÀü ¸Å·Â ¼ºÀå ¢Ý
+Æ¯»ö ÀÖ´Â º¯½Å¿¡ ºñ¹Ð ´É·Â±îÁö! 
+¿ìÆÄ·çÀÇ ¹ÝÀü ¸Å·Â¿¡ ºüÁ® º¸¼¼¿ä.
+
+4. ¼¼»óÀ» ±¸¿øÇÒ ¿ìÆÄ·çÀÇ ÀüÅõ!
+´Ù¾çÇÑ ¼Ó¼º Á¶ÇÕÀ¸·Î µ¦À» ±¸¼ºÇÏ¿© Àü·«ÀûÀÎ ÀüÅõ¸¦ Áñ°Üº¸¼¼¿ä.',1,'½Ã¹Ä·¹ÀÌ¼Ç');
+
+INSERT INTO GAME (GID, GNAME, GPUB, GPDATE, GICON, GDESC, GHIT, GGENRE)
+VALUES ('hkstarrail', 'ºØ±«:½ºÅ¸·¹ÀÏ', 'È£¿ä¹ö½º', '2023-04-26', 'thum_hkstarrail.jpg', '[ºØ±«: ½ºÅ¸·¹ÀÏ]Àº HoYoverse ½ÅÀÛ ÀºÇÏ ÆÇÅ¸Áö RPG °ÔÀÓÀÔ´Ï´Ù
+¡¸ÀºÇÏ¿­Â÷¡¹¸¦ Å¸°í ÀºÇÏ°èÀÇ ½Åºñ·Ó°í È¯»óÀûÀÎ Ç³°æÀ» °æÇèÇÏ¸ç, ¸ðÇè°ú Â¥¸´ÇÔÀÌ °¡µæÇÑ ¿©Á¤ÀÇ ¼±À²À» Áñ°Üº¸¼¼¿ä.
+ÇÃ·¹ÀÌ¾î´Â ¿©·¯ ¼¼°è¿¡¼­ »õ·Î¿î Ä£±¸¸¦ ¸¸³ª°í ¹Ý°¡¿î Ä£±¸¿Í ÀçÈ¸ÇÏ¸ç ÇÔ²² ¡¸½ºÅÚ¶ó·Ð¡¹À¸·Î ÀÎÇÑ ºÐÀïÀ» ÇØ°áÇÏ°í ºñ¹ÐÀ» ÆÄÇìÄ¡°Ô µË´Ï´Ù. ¿©Á¤ÀÇ ³¡ÀÌ ¹µº°¿¡ ´ê±æ!
+
+¡à ´Ù¾çÇÑ ¼¼°è¿¡¼­ Áñ±â´Â Å½Çè - ÀÚÀ¯ Å½»ç, ÀÎÅÍ·¢Æ¼ºê ¼ö¼ö²²³¢
+3, 2, 1 ¿öÇÁ °³½Ã! ±â¹°ÀÌ ºÀÀÎµÈ ¿ìÁÖÁ¤°ÅÀå, ¾óÀ½À¸·Î µÚµ¤ÀÎ ±âÀÌÇÑ Çà¼º, Èä¹°À» ¼ö·ÆÇÏ´Â °Å´ë ÇÔ´ë... ¿­Â÷°¡ Á¤Â÷ÇÏ´Â ¿ª¸¶´Ù »õ·Î¿î ÀºÇÏ ¼¼°è°¡ ÆîÃÄÁý´Ï´Ù! ±â¹¦ÇÏ°í È¯»óÀûÀÎ ¹®¸í°ú ¼¼°è¸¦ ÀÚÀ¯·Ó°Ô Å½»öÇÏ°í ¼ö»óÇÑ ¹èÈÄ¿¡ ¼û°ÜÁø ¼ö¼ö²²³¢¸¦ Ç®¾îº¸¼¼¿ä!
+
+¡à º¸´Â Àç¹Ì¿Í µè´Â Áñ°Å¿ò - ¿µÈ­°°ÀÌ ¸ôÀÔ°¨ ³ÑÄ¡´Â Ã¼Çè
+½Ç½Ã°£ ·»´õ¸µÀ¸·Î °íÄ÷¸®Æ¼ ½ºÅä¸® Ç¥Çö, ½Å±Ô °³¹ß Ä³¸¯ÅÍ Ç¥Á¤ ½Ã½ºÅÛÀ¸·Î ½Ç°¨ ³ª´Â °¨Á¤ ¹¦»ç, ÀÚÃ¼ »ç¿îµå Á¦ÀÛÆÀ HOYO-MiXÀÇ Àü·ÂÀ» ´ÙÇÑ BGM, ´ç½ÅÀÇ, ´ç½Å¿¡ ÀÇÇÑ, ´ç½ÅÀ» À§ÇÑ ÀºÇÏ ÆÇÅ¸Áö, Áö±Ý ¹Ù·Î ¿©Á¤¿¡ ¿Ã¶ó °¥µî°ú Çù·Â »çÀÌ¿¡¼­ ÀÚ½ÅÀÇ ÀÇÁö·Î ¼±ÅÃÇÏ°í ÀÌ¾ß±âÀÇ °á¸»¿¡ µµ´ÞÇÏ¼¼¿ä!
+
+¡à °³¼º ³ÑÄ¡´Â Ä³¸¯ÅÍ - ÇÔ²² ¸¸³ª ¶°³ª´Â °³Ã´ ¿©Á¤
+º°¹Ù´Ù¿¡´Â ³¡¾ø´Â ¸ðÇè°ú ¸¸³²ÀÌ ÀÖ½À´Ï´Ù. µ¿·áµéÀ» À§ÇÑ Æ¼ÄÏÀ» ÁØºñÇØ ÀÌ ³î¶ó¿î ¿©Á¤¿¡ ¸öÀ» ½ÇÀ¸¼¼¿ä! ±â¾ïÀ» ÀÒÀº ¿µ¹ÎÇÑ ¼Ò³à, °í°áÇÏ°í Á¤Á÷ÇÑ ½Ç¹ö¸ÞÀÎ Ã¶À§´ë, ´Ù¼Ò ³ªÅÂÇØ º¸ÀÌ´Â ¿î±â Àå±º, º£ÀÏ¿¡ ½ÎÀÎ Á¦º¹ ¹Ì³à±îÁö... ÇÔ²² ¡¸½ºÅÚ¶ó·Ð¡¹ÀÇ À§±â¿¡ ¸Â¼­°í ¿ôÀ½°ú ´«¹°ÀÌ ÇÑµ¥ ¸ðÀÎ ÇöÀç, °ú°Å, ¹Ì·¡¸¦ ¸¸µå¼¼¿ä.',1,'ÅÏÁ¦RPG');
+
+select * from game;

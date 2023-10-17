@@ -9,11 +9,21 @@
     <meta charset="UTF-8">
     <title>게시글수정</title>
     <link rel="icon" type="image/x-icon" href="${conPath}/img/logo4.gif" sizes="144x144">    
-    <link href="${conPath}/main/css/boardWrite.css" rel="stylesheet">
+    <link href="${conPath}/css/boardWrite.css" rel="stylesheet">
     <script>    
 	function noImage(imageElement) {
 	 	imageElement.src = "${conPath }/img/noimg.jpg";
 	}
+    </script>
+     <script>
+        function checkFileType(inputElement) {        
+            var file = inputElement.files[0];       
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i; // 이미지 확장자 목록
+            if (!allowedExtensions.exec(file.name)) {
+                alert("이미지 파일만 업로드 가능합니다.");
+                inputElement.value = ''; // 입력 필드 비우기
+            }
+        }        
     </script>
 </head>
 <body>
@@ -49,9 +59,9 @@
 									</td>
 								</tr>								
 								<tr>
-									<th>파일첨부</th>
+									<th>사진추가</th>
 									<td>
-									<input type = "file" name = "bfile">
+									<input type = "file" name = "bfile" accept=".jpg, .jpeg, .png, .gif" onchange = "checkFileType(this)">
 									</td>
 								</tr>
 								<tr>

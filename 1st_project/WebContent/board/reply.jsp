@@ -9,12 +9,22 @@
     <meta charset="UTF-8">
     <title>댓글 작성 페이지</title>
     <link rel="icon" type="image/x-icon" href="${conPath}/img/logo4.gif" sizes="144x144">    
-    <link href="${conPath}/main/css/boardWrite.css" rel="stylesheet">
+    <link href="${conPath}/css/boardWrite.css" rel="stylesheet">
     <script>    
 	function noImage(imageElement) {
 	 	imageElement.src = "${conPath }/img/noimg.jpg";
 	}
     </script>
+    <script>
+        function checkFileType(inputElement) {        
+            var file = inputElement.files[0];       
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i; // 이미지 확장자 목록
+            if (!allowedExtensions.exec(file.name)) {
+                alert("이미지 파일만 업로드 가능합니다.");
+                inputElement.value = ''; // 입력 필드 비우기
+            }
+        }   
+    </script>    
 </head>
 <body>
 <jsp:include page="../main/header.jsp"/>
@@ -49,9 +59,9 @@
 									</td>
 								</tr>								
 								<tr>
-									<th>파일첨부</th>
+									<th>사진추가</th>
 									<td>
-									<input type = "file" name = "bfile">
+									<input type = "file" name = "bfile" onchange = "checkFileType(this)">
 									</td>
 								</tr>
 								<tr>

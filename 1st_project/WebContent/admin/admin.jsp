@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 	<title>관리자모드</title>
-	<link href = "${conPath }/main/css/style2.css" rel = "stylesheet">
-	<link href = "${conPath }/main/css/admin.css" rel = "stylesheet">
+	<link href = "${conPath }/css/style2.css" rel = "stylesheet">
+	<link href = "${conPath }/css/admin.css" rel = "stylesheet">
 	<link rel="icon" type="image/x-icon" href="${conPath }/img/logo4.gif" sizes="144x144">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -92,7 +92,22 @@
 	    			<td><input type = "submit" value = "게임추가">	
 	    	</table>
 	    </form>	    
+	    <hr>
+	    	<table>	    		
+	    		<tr>
+	    			<th>등록된 게임 목록 </th>
+	    		</tr>
+	    		<tr>	
+	    			<th> 게임아이디 </th><th>게임명</th><th>개발사</th><th>출시일</th><th>상단등록</th><th>조회수</th>
+	    		</tr>
+	    		<tr>
+	    			<td> sevenknights</td><td>세나키우기</td><td>넷마블</td><td>2022.12.12</td><td>1</td><th>10</th>
+	    	</table>
+	    	<div class = "paging">
+			[이전] <a href = "#tabs-2?pageNum=1">1</a> <a href = "#tabs-2?pageNum=2">2</a> 3 [다음]
+			</div>			
 	  </div>
+	  
 	  <div id="tabs-2">
 	    <p>
 			회원리스트 (총 ${cnt }명)

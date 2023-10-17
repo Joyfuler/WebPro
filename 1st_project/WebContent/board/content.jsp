@@ -9,8 +9,8 @@
 <meta charset="UTF-8">
 <title>게시글 상세보기</title>
 <link rel="icon" type="image/x-icon" href="${conPath }/img/logo4.gif" sizes="144x144">
-<link href = "${conPath }/main/css/style2.css" rel = "stylesheet">
-<link href = "${conPath }/main/css/boardContent.css" rel = "stylesheet">
+<link href = "${conPath }/css/style2.css" rel = "stylesheet">
+<link href = "${conPath }/css/boardContent.css" rel = "stylesheet">
 </head>
 <script>
 	function noImage(imageElement) {

@@ -375,6 +375,11 @@ m-right_favorite td a:hover{
 	color: ghostwhite !important;
 }
 
+.td01 a{
+	font-size: 13px;
+	text-decoration: none;
+}
+
 /* 하단 페이징 처리 */
 
 .paging{

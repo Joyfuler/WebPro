@@ -11,7 +11,7 @@
     <title>게임아이다</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>    
-    <link href="${conPath }/main/css/main.css" rel = "stylesheet">
+    <link href="${conPath }/css/main.css" rel = "stylesheet">
     <link rel="icon" type="image/x-icon" href="${conPath }/img/logo4.gif" sizes="144x144">
     <script src = "${conPath }/main/js/main.js"></script>        
 </head>
