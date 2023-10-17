@@ -153,7 +153,7 @@
 		<ul class = "review">
 			<li><img src = "img/1610523129.jpg" height= "20"><strong>닉네임1</strong></li>			
 			<li>평점 <strong>5</strong><span class = "star"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"></span></li>
-			<li class = "text"> 재미있습니다 애정의 끝판왕</li>
+			<li class = "text"> 재미있습니다 애정의 끝판왕&nbsp;&nbsp;<br><a href = ""><u>수정</u></a>&nbsp;<a href = ""><u>삭제</u></a></li>
 			<li><img src = "img/1610523129.jpg" height= "20"><strong>닉네임1</strong></li>
 			<li>평점 <strong>5</strong><span class = "star"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"><img src = "img/point_star_on.png"></span></li>
 			<li class = "text"> 재미있습니다 애정의 끝판왕</li>

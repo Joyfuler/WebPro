@@ -99,8 +99,11 @@
 		</p>	
 			<table>
 			<tr>
-				<th> ID </th><th> 이름 </th><th>이메일</th><th>휴대폰번호</th>
+				<th> ID </th><th> 이름 </th><th>이메일</th><th>휴대폰번호</th><th>차단</th>
 			</tr>
+			<tr>
+				<td> aaaaa</td><td>있겠지뭐</td><td>itgetg@naver.com</td><td>010-3333-5555</td><td><input type = "button" value = "차단"></td>
+			</tr>	
 			</table>
 			<div class = "paging">
 			[이전] 1 2 3 [다음]
@@ -161,7 +164,7 @@
 	   	<form action = "">	   		
 	    	<table>	   
 	    		<tr>
-	    			<th>상단메뉴 관리 (한줄당 5개씩 3줄, 총 15개 등록 가능)</th>
+	    			<th>상단메뉴 관리</th>
 	    		</tr>
 	    		<tr>
 	    			<td> 1. ㅇㅇㅇ</td> <td> 2. ㄴㄴㄴ </td><td> 3. ㅋㅋㅋ </td> <td> 4. ㄹㅇㄴㅁㄹㅇㄴㅁ</td> <td> 5. gfdaggg</td>

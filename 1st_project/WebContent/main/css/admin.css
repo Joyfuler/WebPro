@@ -18,8 +18,7 @@ table tr:hover {
 	background-color: lightgray;
 }
 
-td, th {
-	text-align: center;
+td, th {	
 	padding: 5px;
 }
 
@@ -48,4 +47,8 @@ input:not(.btn), textarea {
 
 h4 {
 	text-align: center;
+}
+
+#tabs_5 table tr td {
+	width: 20%;
 }

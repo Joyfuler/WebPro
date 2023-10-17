@@ -35,11 +35,11 @@
 		if(i%5!=0){
 			dto.setMid("go");
 			dto.setFfilename(null);
-			dao.writeBoard(dto);			
+			//dao.writeBoard(ftitle, fcontent, ffilename, fip, mid)(dto);			
 		}else if(i%5==0){
 			dto.setMid("gico");
 			dto.setFfilename("a.docx");
-			dao.writeBoard(dto);		
+			//dao.writeBoard(dto);		
 		}	
 	}
 	response.sendRedirect("../boardList.do");

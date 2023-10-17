@@ -28,7 +28,7 @@
 	<!-- gameName으로 검색버튼을 누르면 해당  game의 dto를 가져옴. gid에는 dto.gid를 추가한다-->
 	<span class = "searchResult"> 검색결과: </span> <img class = "searchImg" src = "${conPath }/main/img/thum1.jpg">
 	<br><br>		
-	<input type = "button" value = "추가하기" class = "addFavorite">
+	<input type = "button" value = "추가하기" class = "addFavorite"><input type = "button" value = "삭제하기" class = "deleteFavorite">
 	<br><br>
 	<hr>
 	 <p class="favorite_title">내 즐겨찾기</p>

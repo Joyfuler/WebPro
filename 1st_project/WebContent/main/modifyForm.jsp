@@ -28,6 +28,14 @@ function displayImg(input){
 	}
 }
 </script>
+<script>
+function withDrawalChk(){
+	var question = confirm ('정말 회원탈퇴 하시겠습니까?');
+	if (question){
+	location.href = '${conPath }/withDrawal.do';
+	}
+}
+</script>
 </head>
 <jsp:include page="header.jsp"/>
 <body>
@@ -103,9 +111,9 @@ function displayImg(input){
 							<input type = "submit" class = "btn" value = "회원정보수정">
 							</td>
 							<td>
-							<input type = "reset" class = "btn" value = " 초기화"> 
+							<input type = "button" class = "btn" onclick = "location = '../index.jsp'" value = "메인"> 
 							<td>					
-							<input type = "button" class = "btn" onclick = "location = '${conPath }/index.jsp'" value = "메인">
+							<input type = "button" class = "btn" onclick = "withDrawalChk()" value = "회원탈퇴">
 							</td>
 							
 					</table>											
