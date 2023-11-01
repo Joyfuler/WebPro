@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href = "${conPath}/c
-ss/style.css" rel = "stylesheet" type = "text/css">
 </head>
 <body>
 	<%response.sendRedirect("main.do"); %>

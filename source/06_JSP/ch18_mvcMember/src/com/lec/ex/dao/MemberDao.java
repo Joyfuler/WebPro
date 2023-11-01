@@ -284,17 +284,18 @@ public class MemberDao {
 		return totCnt;
 	}	
 	
+	// 회원탈퇴. 이후 MLEVEL이 -1인 사람은 로그인하지 못하도록 해야함.
 	public int withdrawalMember(String mid) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;		
-		String sql = "DELETE FROM MVC_MEMBER WHERE MID = ?";
+		String sql = "UPDATE MEMBER SET MLEVEL = -1 WHERE MID =?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);			
 			pstmt.setString(1, mid);			
 			result = pstmt.executeUpdate();
-			System.out.println(mid + "회원탈퇴완료");
+			System.out.println(mid + "아이디 회원레벨 -1로 변경");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + mid);			
 		} finally {
@@ -308,6 +309,5 @@ public class MemberDao {
 			}
 		}		
 		return result;
-	}	
-	
+	}		
 }
