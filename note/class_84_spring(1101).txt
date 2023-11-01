@@ -1,0 +1,24 @@
+spring은 자바 프로젝트 중 dto, dao 템플릿 등을 직접 생성해주고, 각종 라이브러리를 제공하는 Framework
+Defendency injection (의존관계) - controller는 service 의존, service는 dao에 의존하는 관계. 이를 자동설정할 수 있다..
+
+1) sts(Spring tool suite) 설치. spring.io에서 spring tools 4 -> sts 3 wiki를 찾아 다운로드.
+java8에 대응되는 spring인 3.9.13을 설치 필요.
+
+2)  lombok.jar 확보 - project lombok 사이트에서 다운로드. 이후 lombok.jar를 실행하여 ide가 있는 곳에 설치.
+
+3) sts를 실행한 후 프로젝트 생성, 생성된 프로젝트의 pom.xml의 </dependencies> 태그 바로 위에 lombok을 추가.
+<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.18.30</version>
+	    <scope>provided</scope>
+</dependency>
+
+
+레파지토리는 사용자 폴더 -> .m2 -> repositoty에 존재.
+----
+
+java class 위에 다음 3개를 import.
+@Data -> get / set / toString
+@NoArgsConstructor / 매개변수없는 생성자함수
+@AllArgsConstructor / 매개변수 모두 포함 생성자함수
