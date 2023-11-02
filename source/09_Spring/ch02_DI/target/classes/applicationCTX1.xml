@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id = "cal" class = "com.lec.ch02.ex1_cal.Calculator"/>
+	<!-- set할 일이 없으므로 그대로 닫음. Calculator cal = new Calculator() 와 동일. -->
+	<bean id = "myCal" class = "com.lec.ch02.ex1_cal.MyCalculation">
+	<!--  MyCalculation myCal = new MyCalculation(); -->
+	<!--  num1과 num2, calculator 변수를 set해 주어야 함. -->	
+	<!--  이전 자바였다면 myCal.setCalculator(cal); myCal.setNum1(10).... -->
+		<property name="calculator" ref ="cal"></property>
+		<property name="num1" value = "10"/>
+		<property name="num2" value = "15"/>
+	</bean>
+</beans>

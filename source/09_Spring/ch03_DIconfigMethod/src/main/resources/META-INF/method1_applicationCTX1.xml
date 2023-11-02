@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean name = "student1" class = "com.lec.ch03.Student">
+	<!-- name / age / hobby 3개의 매개변수가 필요함. (student 클래스에 3개 들어가는 생성자함수만 만들었으므로 -->
+		<constructor-arg value = "홍길동"/>
+		<constructor-arg value = "30"/>
+		<!-- 세 번째, hobby는 arrayList이므로 list를 사용해야 한다. -->
+		<constructor-arg>
+			<list>
+				<value>마라톤</value>
+				<value>볼링</value>
+				<value>탁구</value>
+			</list>
+		</constructor-arg>
+		<!-- property는 set이 있는 요소들만 자동완성 가능. -->
+		<property name="height" value = "170"/>
+		<property name="weight" value = "60"/>		
+	</bean>
+	<bean name = "studentInfo" class = "com.lec.ch03.StudentInfo">
+		<property name="student" ref = "student1"/>
+	</bean>
+
+</beans>

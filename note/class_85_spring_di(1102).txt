@@ -1,0 +1,126 @@
+DI (의존주입 = 부품조립)
+기존까지는 필요하면 기존 클래스를 new ClassName(); 과 같은 식으로 새로 가져와서 사용하였음.
+Spring 방식에서는 IOC컨테이너라는 외부 공간에 객체를 미리 생성하고, 
+프로젝트를 불러올 때 컨테이너 내부의 객체를 모두 파싱함.
+
+-- 방법
+
+1) resources 폴더에 New Spring Bean Definition File로 xml을 생성함.
+2) 이후 <bean> 태그를 넣고 그 사이에 만들 객체를 넣는다.
+<bean id = "cal" class = "com.lec.ex.Calculation">
+단, 이와 같이 사용하기 위해서는 매개변수가 없는 생성자 함수를 꼭 넣어야 함. 
+@(NoArgsConstructor import)
+만일 매개변수가 있는 생성자 함수만 있다면,
+해당 생성자 함수에 맞춰 constructor-arg를 '순서대로' 세팅해주어야 함.
+ex) <constructor-arg value = "홍길동"/>
+
+
+3) bean태그 사이에 변수명과 그 값을 지정한다.
+<property name="num1" value = "10"/>
+</bean>
+(위 태그는 cal.setNum1(10)과 동일.)
+이후 이 객체를 사용할 클래스에서 해당 xml을 파싱해야 한다.
+
+4) java로 이동
+AbstractApplicationContext ctx = 
+new GenericXmlApplicationContext("classpath:applicationCTX.xml");  // classpath: 뒤에 실제 파일 경로를 입력한다.
+Calculation cal = ctx.getBean("cal", Calculation.class); // Calculation.class를 입력해 xml에 만든 bean 객체를 가져올 수 있다.
+(이것이 DI)
+해당 객체를 제거하기 위해 마무리로 ctx.close(); 를 입력한다.
+
+-- 만일 여러개의 취미 등 배열을 넣고 싶다면?
+<property name = "hobby">
+	<list>
+		<value> 조깅 </value><value>개발</value>....
+	</list>
+</property>
+와 같은 식으로 세팅이 가능함.
+객체인 경우는 value가 아닌 ref을 이용해 넣는다.
+<property name = "bc" ref = "bmiCalculator">
+(bmiCalculator bc = new bmiCalculator();와 동일.)
+
+-- 또한 주입받은 bean을 토대로 메소드를 사용하다가, 마음에 안 드는 경우 java에서 bean을 재정의해 쓸 수도 있음.
+
+<bean name = "student1" class = "com.lec.ch02.ex3_student.Student">
+			....	
+</bean>
+<bean name = "studentPrint" class = "com.lec.ch02.ex3_student.StudentPrint">
+			<constructor-arg ref= "student1"/>			
+</bean>
+
+--
+위의 xml 파일에서는 studentPrint라는 객체에 student1을 넣었음.
+이후 java에서
+sPrint.setStudent(student2); 로 student2의 bean을 대입하고 sPrint.print(); 하여 student2의 정보를 출력할 수 있다.
+
+
+-- DI를 쓰는 핵심이유
+추후 유지보수 시 새로운 기능, 혹은 기능 수정을 할 때,
+기존 클래스를 건드리지 않고 새로이 추가하기 용이하도록 함.
+기존의 interface를 동일하게 implement하는 새로운 java class를 생성.
+이후 bean태그의 클래스 경로만 새로 생성한 클래스로 변경해주면 된다.
+
+-- 업그레이드 ) 
+매번 유지보수를 위해서 새로 class를 만드는 것 역시 번거로울 수 있다.
+바꿔야 할 부분이 있는 곳을 클래스 내부에서 변수로 빼고, 해당 부분만을 xml 내의
+bean태그 및 property에서 변경할 수 있도록 한다.
+
+<bean id = "vh" class = ".....">
+	<property name = "vehicle" value = "로켓"/>
+	<property name = "speed" value = "800"/>
+</bean>
+
+이것이 di를 사용하는 이유. (기존 소스를 최대한 변경하지 않고, 영향을 주지 않도록 xml을 통해서만 고객의 필요사항을 반영하여 수정하는 것)
+
+
+-- Method 사용방법
+파싱하는 방법은 xml만 파싱하기, java만 파싱하기, 둘을 혼합해 파싱하는 방법이 존재함.
+
+///
+
+xml만 파싱한다면 상기의 
+AbstractApplicationContext ctx = 
+new GenericXmlApplicationContext("classpath:applicationCTX.xml");
+등을 사용해 xml을 불러오고, xml안의 bean 객체를 
+Student student = ctx.getBean("student1", Student.class())로 가져와 사용한다. (순서는 bean 이름명 / 데이터타입)
+
+/// 
+
+java의 class를 파싱한다면 @Configuration 어노테이션을 걸고, 
+클래스 내부에 @Bean 입력한 후 일반 함수처럼 입력한다.
+
+@Configuration
+public Student student1 {
+@Bean
+ Student student = new Student("홍길동",30, "마라톤"); // 생성자 함수에 지정된 변수를 입력.
+매개변수 외의 값을 추가하겠다면 student.setHeight(170); 등을 추가.
+return student;
+}
+
+이를 출력해 줄 StudentInfo 타입의 메소드를 추가. 마찬가지로 @Bean을 어노테이션한다.
+@Bean
+public StudentInfo studentInfo(){
+StudentInfo sInfo = new StudentInfo();
+info.setStudent(student1()); // 위에 set했던 student1의 정보를 가져다 넣는다.
+return sInfo;
+}
+이후 출력시에는 student1에서 넣었던 값들을 출력함.
+위와 같은 과정으로 xml의 bean태그와 동일한 역할을 수행한다.
+
+자바로 파싱하는 경우 main 클래스에서는 AnnotationConfigApplicationContext를 사용하여 가져올 수 있다.
+AbstractApplicationContext ctx =
+new AnnotationConfigApplicationContext(클래스명.class); // 이후 xml과 똑같은 과정으로 가져와 사용할 수 있다.
+Student student = ctx.getBean("student1", Student.class); 
+....
+
+///
+만일 xml과 java를 혼합해서 parsing하고 싶다면?
+기존 방법으로는 불가... XML 안에 class에 파싱한 내용물을 넣어야 함 (method3)
+or 자바 클래스에 xml을 import함 (method4).
+///
+
+3의 경우, xml안에 context:annotation-config 태그를 우선 추가한다.
+<context:annotation-config/>
+<bean class = "파싱하고 싶은 클래스">
+결과 class 내의 annotation을 해석해, 해당 클래스 내에 있는 bean을 가진 객체를 생성한다.
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		<bean name = "student1" class = "com.lec.ch02.ex3_student.Student">
+		<!--  만일 class에서 매개변수가 없는 생성자를 넣지 않았다면, 직접 매개변수를 넣어야 함. -->
+		<!--  기존의 경우는 매개변수 없는 생성자가 없었따면 다음과 같이 입력하였음. -->
+		<!--  Student student1 = new Student("홍", 22, "3학년", "computer"); -->
+			<constructor-arg>
+				<value>홍길동</value>
+			</constructor-arg>
+			<constructor-arg>
+				<value>22</value>
+			</constructor-arg>
+			<constructor-arg>
+				<value>6학년</value>
+			</constructor-arg>
+			<constructor-arg>
+				<value>sales</value>
+			</constructor-arg>
+		</bean>
+		<bean name = "student2" class = "com.lec.ch02.ex3_student.Student">
+			<constructor-arg value = "홍길순"/>
+			<constructor-arg value = "24"/>
+			<constructor-arg value = "6학년"/>
+			<constructor-arg value = "피부과"/>		
+		</bean>
+		<bean name = "studentPrint" class = "com.lec.ch02.ex3_student.StudentPrint">
+			<constructor-arg ref= "student1"/>			
+		</bean>
+</beans>

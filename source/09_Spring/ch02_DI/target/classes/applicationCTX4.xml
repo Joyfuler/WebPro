@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!--  객체생성 작업. 인터페이스에서는 하지 말 것 -->
+	<!-- <bean name = "vh" class="com.lec.ch02.ex4_vehicle.Bicycle"/> -->
+	<!--  new Bicycle()과 동일. bean(component)생성 -->
+	<!-- <bean name = "vh" class = "com.lec.ch02.ex4_vehicle.AirPlane"/>-->
+	<bean name = "vh" class = "com.lec.ch02.ex4_vehicle.VehicleImpl">
+		<property name="vehicle" value = "비행기"/>
+		<!-- setVehicle("비행기")와 동일. -->
+		<property name = "speed" value = "500"/>
+		<!-- setSpeed(500)와 동일. -->
+	</bean>	
+</beans>
