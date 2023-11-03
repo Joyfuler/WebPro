@@ -1,4 +1,4 @@
-# Java 개발자 훈련과정 노트 저장소
+# Java 개발자 훈련과정 학습노트 저장소
 
 ![교육이수내역](https://github.com/comlec/webPro/assets/112568472/106d1e12-2910-4813-b103-e604e86e6259)
 
@@ -13,4 +13,4 @@
 
  ### WEB programming <img src="https://img.shields.io/badge/JSP-db46ca?style=for-the-badge&logo=eclipse&logoColor=white">
 
- ### framework <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> <img src="https://img.shields.io/badge/-SPRING_BOOT-36d975?style=for-the-badge&logo=spring&logoColor=white"/> <img 
+ ### framework <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> <img src="https://img.shields.io/badge/-SPRING_BOOT-36d975?style=for-the-badge&logo=spring&logoColor=white"/>

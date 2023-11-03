@@ -1,0 +1,128 @@
+bean 태그 내의 property를 하나하나 직접 세팅한다면 편의성이 매우 떨어짐.
+따라서 이를 자동으로 설정할 수 있는 기능을 사용하는 것이 spring.
+의존관계를 직접 설정하지 않고,프로퍼티와 파라미터 값으로 bean객체를 자동 전달한다.
+--
+빈 객체로 만들고 싶은 객체의 get/set 부분 위에 @Autowired 어노테이션을 추가한다.
+이를 통해 자동으로 setter가 주입되어 bean객체에 달라붙게 됨.
+이후 <property>하지 않아도 자동으로 get하게 된다.
+
+단, java 내의 어노테이션을 다른 곳에서 사용하려면 annotation을 인식할 수 있도록, ctx.xml 아래
+namespaces의 context를 체크하고, 이후
+<context:annotation-config/> 를 추가한다.
+
+만일 생성자 함수를 새로 추가했다면 xml의 bean 구간에서 오류가 발생할 수 있다.
+이 역시 @Autowired를 어노테이션해서 자동으로 가져오게 할 수 있다.
+추가 시 bean에 property 없이도 오류가 발생하지 않으며 해당 객체의 값들을 제대로 가져온다.
+
+(차후엔 Controller를 분산해 협업에 유리한 구조로 변경하고,
+DB 등의 데이터를 자바 내에서 직접 입력하는 것이 아니라 외부 파일을 가져오는 방식으로 사용할 것)
+
+-- Bean 생명주기
+
+기존 class에 EnvirontAware, InitializingBean, DisposableBean 세 인터페이스를 implement하여
+각각 시스템 메시지를 출력하게끔 하여 bean의 생명주기를 확인한다.
+
+또한 차후 스프링을 위해, 기존의
+Abstract ... ctx = new GenericXml...(location) 으로 컨테이너 생성과 파싱, 빈 생성까지 한 번에 하던
+단계를 구분함.
+AbstractApplicationContext 대신 GenericXmlApplicationContext 사용.
+Generic... ctx = new GenericXmlApplicationContext();
+ctx.load(location); -- 파싱까지만.
+ctx.refresh(); -- 빈 객체를 생성. 이후 빈 객체를 주입받아 사용한다.
+Person person = ctx.getBean("person", Person.class);
+ctx.close(); -- 빈 객체를 소멸시킴. 
+
+컨테이너 생성 - 파싱 - 빈 생성 - 빈 주입받아 사용 - 빈 객체 소멸
+총 5단계의 생명주기로 구성.
+
+실제로 사용하지 않는 bean 객체라도, xml안에 bean 태그를 사용하여 객체를 만들었다면,
+해당 객체도 함께 가져온다. 따라서 xml에 필요 없는 객체는 넣지 않는 것을 추천.
+
+* Bean객체는 생성할 때, 기본적으로 싱글톤 패턴으로 만들어진다.
+만일 가져온 class 객체가 동일하다면, friend1을 getBean하고 friend2를 따로 getBean하더라도
+friend2는 friend1의 주소를 그대로 가져온다.
+이후 friend1의 데이터만 바꿔도 (friend1.setName ("다른이름"))
+friend2의 데이터도 함께 변경되게 된다.
+
+이렇게 똑같이 변경되는 것을 막기 위해 싱글톤을 사용하지 않으려면 bean객체의 마지막에 scope = prototype를 추가하자.
+<bean id = "friendProto" class = "com.lec....Friend" scope = "prototype">
+	<property name = "name" value = "신신신">
+	....
+</bean>
+와 같은 식으로 추가하면 된다.
+
+
+
+---- 외부 파일에서 값을 가져와 객체로 만들기
+외부에서 가져올 파일의 확장자는 .properties로 통일해야 함.
+
+admin.properties 파일
+admin.id = admin
+admin.pw = 1111
+
+1) 불편한 방법
+GenericXml... ctx = new GenericXml...(); 로 컨테이너만 생성.
+ctx.getEnvironment를 하여 새 객체에 대입. 
+ConfigurableEnvironment env = ctx.getEnvironment();
+env로 각 property 값을 가져오고 그 값을 다시 한번 대입.
+MutablePropertySources propertySources = env.getPropertySources();
+이후 저장해두었던 properties 파일을 평소처럼 가져온다.
+String loc = "classpath:META-INF/ex1/파일.properties";
+propertySources.addLast(new ResourcePropertySources(loc));
+파일을 가져왔으면 출력은 env를 이용한다.
+env.getProperty("admin.id"))...를 사용.
+
+이후 bean을 담을 수 있도록 새로운 class를 만든다
+private String id;
+private String pw;
+private Environment environment;
+
+public void setEnvironment( Environment environment){
+this.environment = environment;
+adminId = environment.getProperty("admin.id");
+adminPw = environment.getProperty("admin.pw");
+
+이렇게 setEnvironment에 설정해 준 변수들은 xml의 bean태그 내에서 따로 property 태그를 넣어 값을 넣어주지 않아도,
+해당 객체를 getBean하여 그 안 값을 다시 get해 사용 가능.
+
+
+2) 개선된 방법
+xml 파일에서 bean태그를 만들기 전에
+<context:property-placeholder location = "classpath:META-INF/ex2/admin.properties, classpath:META-INF/ex2/sub_admin.properties"> 
+를 넣는다. (Namespaces에서 context 체크, 여러 개인 경우에는 다음과 같이 classpath를 복수 입력하여 들여올 수 있음)
+이후 평소처럼 bean 태그를 만들고, property에서 name까지 입력한 후, value에 "${admin.id}" 와 같이
+properties에 지정했던 속성이름을 그대로 대입한다.
+
+(웹프로젝트에서 하듯 ${admin.id } 로 띄어쓰기를 주면 안 되니 주의하자. 띄어쓰기를 하고 싶다면
+xml에 admin.id = admin 과 같은 식으로 부등호 앞에도 띄어쓰기를 해 주어야 함)
+
+
+------------------
+xml을 상황에 따라 다르게 파싱하는 법
+------------------
+
+웹 개발은 다른 곳에서 하되, 실제 배포할 때는 포트 번호를 80으로 변경해 주어야 함.
+이렇게 환경마다 다른 포트번호, ip번호를 적용시키려면
+xml을 두 가지 만들고 각 상황에 따라 하나만 파싱해야 함.
+xml 안의 첫 bean 태그,  xsi:schemaLocation 뒤에 각각 profile = "dev", profile = "run"을 추가한다.
+이후 개발용 / 배포용 두 개의 값을 bean 객체에 담는다.
+<bean id = "serverInfo" class = " ~ .ServerInfo">
+	<property name = "ipNum" value = "192.168.0.1"/>
+	<property name = "portNum value = "80"/>
+이렇게 bean의 이름은 같지만 프로필은 다른 두 개의 serverInfo Bean 객체가 생긴다.
+이후 config 변수에 dev, run중 하나를 입력하고, 그 값에 따라 활성화할 xml을 지정한다.
+GenericXml.. ctx = new GenericXml...();
+ctx.getEnvironment().setActiveProfiles(config);
+이후 평소처럼 xml 두 개를 파싱한다.
+String loc1 = "classpath: ... CTX_run.xml";
+String loc2 = "classpath: ... CTX_dev.xml";
+ctx.load(loc1,loc2);
+ctx.refresh();
+ServerInfo info = ctx.getBean("serverInfo", ServerInfo.class);
+이렇게 두 개를 가져오더라도, ActiveProfiles된 한 쪽의 xml 객체 정보만 가져오게 된다.
+
+-- 다시 정리.
+평소처럼 ctx.load(location1, location2); 를 입력하면 그대로 두 개의 파일을 다 파싱함.
+ctx.getEnvironment().setActiveProfiles(config); 는,
+profile이 config인 것만 active하게 만들고, 다른 것은 활성화하지 않도록 함.
+따라서 config의 값에 따라 그에 맞는 profile을 가진 xml만 활성화되는 것.

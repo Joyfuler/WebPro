@@ -119,8 +119,13 @@ Student student = ctx.getBean("student1", Student.class);
 or 자바 클래스에 xml을 import함 (method4).
 ///
 
-3의 경우, xml안에 context:annotation-config 태그를 우선 추가한다.
+3( xml 내부 java) 의 경우, xml안에 context:annotation-config 태그를 우선 추가한다.
 <context:annotation-config/>
 <bean class = "파싱하고 싶은 클래스">
 결과 class 내의 annotation을 해석해, 해당 클래스 내에 있는 bean을 가진 객체를 생성한다.
 
+4( java 내 xml) 의 경우는 java에 어노테이션을 건다.
+@ImportResource("classpath:META-INF/경로.xml)
+한 줄만 추가하는 것으로 두 가지를 혼합할 수 있음.
+
+3,4는 거의 쓰이지 않으니, 자바나 xml을 가지고 @Bean 되어 있는 java,  bean태그로 만든 xml을 가져온 후 getBean하자.

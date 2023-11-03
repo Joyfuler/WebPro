@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id = "admin" class = "com.lec.ch05.ex1_env.Admin"/>
+	<!--  객체를 만들자마자 Admin.java의 setEnvironment 메소드에서 adminId, adminPw를 이미 넣어주었으므로,
+	따로 property를 setting할 필요가 없음. -->	
+	
+
+</beans>

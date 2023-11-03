@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id = "student1" class = "com.lec.ch03.Student">
+		<constructor-arg value = "홍길동"/>
+		<constructor-arg value = "20"/>
+		<constructor-arg>
+			<list>
+				<value>운동</value>
+				<value>잠</value>
+				<value>밥</value>
+			</list>
+		</constructor-arg>
+		<!-- 이하는 생성자 함수에 없는 변수 -->
+		<property name="height" value = "170"/>
+		<property name="weight" value = "60"/>		
+	</bean>
+	<!-- java class인 method3applicationconfig을 가져오기 위해선 특수 태그를 사용해야 함. 
+	아래 태그를 통해 java class의 @configuration 부분을 가져올 수 있음.-->
+	<context:annotation-config/>
+	<bean class = "com.lec.ch03.method3.Method3ApplicationConfig"/>
+	<!-- class 내에 annotation을 해석, 해당 클래스에 있는 bean을 가진 객체를 생성한다. -->
+	
+	
+	
+
+</beans>
