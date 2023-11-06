@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<c:set var="conPath" value = "${pageContext.request.contextPath }"/>
+<html>
+<head>
+	<title>Home</title>
+	<link href = "${conPath }/css/style.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+<h1>
+	Hello world!  
+</h1>
+<P> ${greeting }</P>
+<img src = "img/1.png" alt = "이미지">
+<img src = "${conPath }/img/1.png" alt = "이미지">
+</body>
+</html>

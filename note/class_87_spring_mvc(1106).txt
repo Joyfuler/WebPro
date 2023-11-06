@@ -1,0 +1,94 @@
+spring은 라이브러리를 직접 lib 폴더에 넣을 필요가 없이,
+pom.xml의 defendency를 추가해 주면 된다. (lecNote폴더의 pom.xml 추가요소 텍스트파일 참조)
+
+기존 jsp와 달리 spring에서는 jsp 자체를 실행해도 오류 발생. 프로젝트 자체를 우클릭해 실행해야 한다.
+프로젝트 실행시 순서
+1) Web.xml 우선 해석하여 해당 xml 들 파싱. (servlet-context.xml, root-context.xml 등)
+( / ) 요청 경로가 들어오면 DIspatcherServlet을 이용하여 해당 경로를 찾는다.
+
+Controller.java에서는 @Controller 어노테이션이 있음. 이를 넣었을 때 자동으로 controller에 대응하는 bean이 생성됨.
+HomeController 밑에는 Logger가 존재. 기존에 사용하던 System.out.println의 다른 형태로 실무에서 주로 사용함.
+@RequestMapping에는 value가 존재하는데, 요청한 경로에 / 가 있는 경우 해당 메소드를 실행하고 return.
+home 메소드에서는 한국 locale에 맞춘 현재 시간을 만들고, model.addAttribute("serverTime", formattedDate) 로 리턴한다.
+기존 jsp 프로젝트는 request.setAttribute() 를 사용한 후 view단에서 ${ } 로 가져왔으나 Spring에서는 model을 사용함.
+String greeting = "hello";
+model.addAttribute("greeting", greeting); 으로 넘기고, 받을 때엔 마찬가지로 ${greeting } 으로 가져온다.
+예외 등 메시지를 출력할 때는 logger.info를 사용하여 출력하자. (warn, error도 있으나 역할은 대동소이)
+
+웹 프로젝트에서 img src = 할 때의 주소 경로 등은 webapp 기준. 단 resources 폴더 안에 넣어야만 작동함.
+이는 servlet-context.xml에서 /resources가 아닌 경우는 일반 프로젝트의 controller
+servlet 요청으로 넘어가기 때문. (파일로 인식하지 않음)
+따라서 css, 자바스크립트, 이미지 등은 resources 안에 넣거나, servlet-context.xml에서 resources mapping에 경로를 추가해야 한다.
+<resources mapping="/css/**" location = "/css/" />
+
+-- Controller
+기존 jsp의 경우는 list.do 등을 동일하게 사용하지 못했음. (할 경우 에러가 발생)
+따라서 MemberList.do / BoardList.do로 나누었음.
+Spring의 경우, 같은 servlet 경로를 사용할 수 있음. 
+method 방식을 post / get을 구분해 쓰거나 (writeForm, write로 이어지는 경우)
+예전같은 경우 board?list&method=3 등을 사용하였음.
+기존과 달리 controller는 일반 자바 클래스로 만들고, @Controller 어노테이션을 붙인다.
+이후 클래스 내에 return될 jsp의 파일 이름을 넣는다.
+return "main";   --> 이후 main.jsp로 간다.
+
+jsp에서는 이동할 경로를 설정할 때 다음과 같이 적는다.
+<a href = "${conPath }/board/list"> 이동 </a>
+혹은 <button onclick = "location.href='${conPath}/member?method=login'">
+
+이후 Controller에서는 @RequestMapping에서 올 경로를 적고 이후 수행할 메소드를 추가한다.
+public class BoardController {
+	@RequestMapping(value = "/board/write")
+	public String write (){
+	.....
+	return "board/write";
+}
+
+만일 list나 content처럼 페이지에 무언가 데이터를 보내고 싶다면, 메소드의 매개변수에 Model을 추가하여 주고받는다.
+public String content(Model model, HttpServlet Request request){
+model.addAttribute("id", "aaa");
+model.addAttribute("pw", "111");
+이외의 객체도 마찬가지로 사용 가능.
+Member member = new Member () ...
+model.addAttribute("member", member);
+
+}
+
+메소드는 일반적으로 String 타입으로 리턴하나, ModelAndView를 사용할 수도 있다.
+public ModelAndView list (Model model){
+	ModelAndView mav = new ModelAndView(); 
+	ArrayList<Member> list = new ArrayList<Member>();
+	list.add(new Member("장장진", "adad"));
+	list.add(new Member("김장앤","abab"));
+	mav.addObject("list", list); // setAttribute와 동일.
+	mav.setViewName("board/list"); // return할 viewpage 설정
+	return mav; // 이후 mav 자체를 return
+
+-- ReplyView.do / Reply.do로 나누지 않고 하나로 합치는 방법 - 뒤의 method에 GET과 POST 조건을 추가.
+@RequestMapping(value = "reply", method = RequestMethod.GET) -- View페이지 출력
+@RequestMapping(value = "reply", method = RequestMethod.POST) -- view에서 입력받은 데이터 submit -> 전달
+
+이후 댓글페이지에서 실제 댓글 작성할 떄에는 <form action = "board/reply" method = "post" > 등으로 처리하면
+각자 다른 역할을 수행할 수 있게 된다.
+단, 이 경우 2개의 reply라는 동일한 이름 메소드가 생성되므로, 이 때 한 개를 ModelAndView로,
+하나를 String으로 생성해 구분하면 된다. 
+* 아니면 replyView , reply로 서로 다른 이름의 메소드로 만들고, 둘 다 String 타입으로 해도 무방.
+
+
+-- member?method=join 과 같은 식으로 들어왔을 때의 해결방법
+   매개변수를 받아 if로 처리 (XX) --> 가독성 저하, get / post방식의 구분 역시 불가능.
+   이와 같은 경우 RequestMapping에 value 대신 params를 추가한다.
+   @RequestMapping(params = "method=join", method=RequestMethod.GET) //가입페이지출력
+   public String join (Model model)
+	.....
+   @RequestMapping(params = "method=join", method = RequestMethod.POST) // form 이후
+   public ModelAndView join (ModelAndView model){
+	...
+
+   @RequestMapping(params = "method=login", method = ...
+    
+	
+-- 그러나 reply 등을 한 후에 list.do 로 가는 방법이 없음.
+return "list"로 하는 경우, list.jsp로 이동하게 됨. 이에 대한 해법은...?
+
+** 스프링용 라이브러리를 가져온다면 mvnrepository 방문, 필요한 라이브러리의 dependency 태그를 가져와 pom.xml에 추가
+** RequestMapping 어노테이션 바로 아래 있는 메소드만 적용되고, 아무것도 없는 경우 적용되지 않는 점 참고
