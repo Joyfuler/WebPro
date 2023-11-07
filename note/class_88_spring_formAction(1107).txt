@@ -1,0 +1,137 @@
+기존과 달리 request.getParameter를 사용하지 않더라도 간편하게 패러미터를 받을 수 있는 것이 Spring
+(단, 파일 업로드는 제외)
+
+servlet-context.xml 해석
+<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+--> 유저가 갈 뷰페이지 경로를 감지해주는 빈을 생성. 클래스는 InternalResourceViewResolver
+
+<context:component-scan base-package="com.lec.ch08" />
+bean을 만들어야 하는 곳을 지정. (일반적으로 컨트롤러)
+---------------------
+메소드에 들어오는 메소드에 HttpServletRequest request를 넣으면 jsp 페이지에서 보낸 패러미터를 모두 가져올 수 있다.
+
+
+방법 1) jsp와 거의 동일한 방법.
+public String join1(HttpServletRequest request, Model model){
+ (이후 기존과 동일하게 getParameter를 변수에 집어넣고, model로 attribute를 보낸다)
+  String name = request.getParameter("name");
+  model.addAttribute("name", name);
+  return "member/result1";
+}
+
+
+방법 2) 매개변수에 @RequestParam 추가하고 거기에 들어갈 변수를 지정.
+public String join2(@RequestParam("name") String  mname,
+@RequestParam("id") String mId, 
+@RequestParam("pw") String mPw,
+@RequestParam("age") int mAge,
+@RequestParam("email") String mEmail,
+@RequestParam("address") String mAddress,
+Model model){
+ model.addAttribute("id", id); 
+ ..... 이하 동일
+}
+1번의 getParameter와 동일한 역할을 수행함. 매개변수에 바로 추가하는 것의 차이
+
+
+방법 3) 패러미터로 들어올 변수와 똑같은 변수를 매개변수로 넣는 경우, 자동으로 해당 데이터가 들어옴.
+변수 이름이 틀리지 않도록 주의할 것.
+public String join3(String name, String id, String pw, int age, String email, String address, Model model){
+받은 후 model을 하나씩 addAttribute한다.
+model.addAttribute("id", id);
+* 단, date 타입의 패러미터는 오류가 발생하니 주의할 것
+
+
+방법 4) 받는 매개변수를 Dto로 넣으면 자동으로 담기고, 이를 Attribute한다.
+public String join4(MemberDto memberDto, Model model)
+model.addAttribute("member", member);
+
+(get/ set과 생성자 함수가 필수, 실제로는 setName, setId... 등을 모두 수행함)
+MemberDto member = new MemberDto();
+member.setName(name);
+.....
+model.addAttribute("member", member);
+이와 같은 과정을 모두 생략한 것이 방법 4.
+이후 jsp에서는 ${member.id} 등을 통해 출력 가능.
+기초 데이터인 경우는 model을 써야 하고, dto와 같은 객체의 경우 가능
+
+
+방법 5) 받는 매개변수를 Dto로 할 때,  ☆반드시 이름은 클래스명과 같게, 맨 앞 글자만 소문자로 바꿀 것.
+public String join5(MemberDto memberDto){
+return "member/result5";
+
+위만 적어주어도 model.addAttribute("memberDto", memberDto)가 자동으로 적용된다.
+단, 변수 이름이 다를 경우 본 작업이 적용되지 않으니 꼭 맨 앞 소문자만 바꿔서 동일하게 만들 것.
+이후 jsp에서는 ${memberDto.id} 등을 통해 출력 가능.
+
+
+마지막 방법)
+방법5의 경우는 반드시 이름을 memberDto로 설정하므로 jsp에서도 ${memberDto} 로만 출력 가능.
+(클래스명을 MemberDto대신 Member로 써도 ${member.id} 로 출력할 수 있기는 함)
+모든 페이지에서 특정 db값을 출력하는 @ModelAttribute를 이 곳에서도 사용할 수 있음.
+
+public String join6(@ModelAttribute("member") MemberDto memberDto){
+	return "member/result4";
+}
+이후 @ModelAttribute에서 설정한 대로 jsp에서 사용할 수 있다.
+
+---
+
+
+일반적인 파일첨부등인 경우 방법1을, 특정 패러미터를 비교하는 경우는 방법3을,
+게시판 출력 등 많은 패러미터를 전달해야 하는 경우는 방법5 / 방법6을 많이 사용한다.
+
+----
+("/") 슬래시 요청경로는 반드시 GET으로 지정할 것.
+
+여러 페이지에 공통된 데이터를 넣고 싶다면, controller 상단에 @ModelAttribute("cnt") 등을 어노테이션하고,
+return할 메소드를 만든다. (이전 프로젝트의 헤더 상단 메뉴처럼)
+이를 이용해 어떤 곳으로 return하든 ModelAttribute가 함께 들어감.
+
+
+-- 부가 : Django에서는 주로 패러미터 전달을 /를 이용해 수행하며 (nest방식), 스프링에서도 사용 가능
+content?no=10&name=kim  --기존
+content/10/kim -- Django
+
+이후 받는 controller에서, RequestMapping을 다음과 같이 설정한다.
+@RequestMapping(value = "studentId/*")
+*을 이용하여 어떤 패러미터가 들어오든 해당 메소드를 수행하도록 할 수 있다.
+
+-- 만일 패러미터가 한글인 경우 URLEncoder.encode(id,"utf-8") 로 변경할 수도 있지만,
+@RequestMapping(value = "studentId/{id}" 로 적고,
+public String studentId(@PathVariable("id") String id, Model model)
+model.addAttribute("id", id);
+return "studentId";
+하여 한글이 깨지지 않도록 id값을 return해 줄 수 있다.
+
+
+-----------------------------------------------------------
+Spring도 기존 jsp처럼 .do로 처리할 예정이므로,
+web.xml에서 url-pattern을 *.do로 변경한다. 
+index.jsp를 만들어 main.do로 forward시킨 후, 기존처럼 각종 do를 controller로 처리.
+
+controller @RequestMapping (value = "main") 으로 적어도 무방. 
+(web.xml에서 url-pattern을 추가했으므로)
+
+방식에 상관없이 한번에 받을 수도 있고, (value = "student" 이후 method 생략)
+get과 post를 따로 지정해주어도 된다. (method= RequestMethod.POST) 등..
+동일한 매개변수가 들어와 오류가 발생하는 경우 매개변수의 순서를 바꾸는 것만으로도 정상 동작하게 할 수 있음.
+
+패러미터를 검사 후 .do로 보내고 싶다면 return "studentOk.do" 사용 X. (studentOk.do.jsp로 이동 --> 404에러)
+따라서 return시에는 return "redirect:studentOk.do";  , return "forward:studentOk.do" 로 사용 가능.
+단, redirect는 request 객체이므로 페이지 이동 후 model 값이 남지 않음. (패러미터는 남는다)
+forward를 사용시 request 객체를 생성하지 않고 studentOk.do를 요청하므로 model값이 남는다.
+또한 redirect는 get으로, forward는 post로 전달됨. method = requestMethod~ 가 서로 매칭하는 메소드를 모두 만들어 주어야 404에러가 발생하지 않음.
+★ 도착(return)한 viewPage의 메소드가 없는 것이므로 주소창에 보이는 것과 혼동하지 않도록 하자.
+--
+패러미터 전달은 매개변수에 Model을 추가한 뒤 model.addAttribute를 하거나,
+메소드의 타입을 ModelAndView로 변경한 뒤 매개변수에 ModelAndView mav를 넣고,
+mav.setViewName("뷰페이지");
+return mav; 를 할 수 있다.
+
+
+-- Full path 사용하는 법
+일반적인 주소를 return에 입력 시 해당 주소 뒤에 .jsp를 붙인 뷰페이지로 가므로, 앞에 redirect:를 붙여 그대로 이동하게 한다.
