@@ -3,7 +3,7 @@ body 영역 안에는 웹문서에 실제로 출력되는 정보를 입력.
 엔터/ 탭 / 스페이스 여러 개 등은 모두 스페이스 1개로 인식함. 따라서 <br /> 을 사용해 줄을 바꾸고,
 &nbsp; 를 이용해 스페이스를 여러 개 넣을 수 있음.
 변수선언은 let을 사용. let name = prompt("이름은?", "홍길동");
-document.write(name + "님 반갑습니다<br>");
+document.write(name + "님 반갑습니다.<br>");
 
 소스가 길어지는 경우 새로운 파일을 만든 뒤 해당 파일을 가져오도록 함.
 <link href = "2.css" rel = "stylesheet" type ="text/css" />

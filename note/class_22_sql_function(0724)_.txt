@@ -4,9 +4,11 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'RR-MM-DD HH24:MI:SS'; - 출력되는 날짜
 자바에 비해 날짜 계산이 매우 수월한 편. SYSDATE +14 를 통해 14일 후의 날짜를 바로 출력이 가능함.
 MONTH_BETWEEN(A,B) - A와 B 사이가 몇 달인지를 출력. A가 B보다 나중이어야 함. (혹은 ABS 사용)
 ADD_MONTHS (HIREDATE,3) - 입사일에 3개월 후를 더한 값을 출력.
+
 날짜는 숫자 데이터이므로 반올림, 혹은 내림이 가능함.
 ROUND(HIREDATE, 'YEAR') FROM EMP; -- 7월 이후는 내년 1월 1일, 6월 이전은 올해 1월 1일로
 NEXT_DAY (특정시점, '토') : 특정 시점에서 처음 맞이하는 토요일을 출력. (오라클의 언어 버전에 따라 다르며, 한글 버전이므로 일월화수목금토를 사용)
+
 TO_CHAR는 출력형식에 따라 다양하게 출력이 가능.
 SELECT TO_CHAR (1200, 'L9,999') FROM DUAL; -- 해당 국가의 통화를 9,999 형식으로 출력 가능 (쉼표추가)
 EXTRACT (YEAR,MONTH,DAY FROM HIREDATE) -- 날짜를 숫자로 추출함. TO_CHAR(HIREDATE, RR // MM // DD) 등으로도 대체 가능.

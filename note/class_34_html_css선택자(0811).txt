@@ -14,7 +14,7 @@ body에 있는 width를 그대로 가져오므로 정렬되지 않으니 주의�
 #wrap #content .menu1, .menu3{
 font-weight:bold;
 wrap id 안의 content id 안의 menu1, menu3 클래스에 적용시킴
-해당 클래스 안의 이미지나 링크 등에 적용시키고 싶다면 div#wrap #side_banner img{} 등으로 지정 가능.
+해당 클래스 안의 이미지나 링크 등에 적용시키고 싶다면 div#wrap #side_banner img{ } 등으로 지정 가능.
 
 --속성 선택자
 각 태그의 속성을 가져와 해당 부분만 적용해줄 수 있음. 해당하는 속성을 [] 안에 기입.

@@ -7,7 +7,7 @@
 <select ( multiple="multiple") name = "nation"> <option>한국</option></select> ...
 모든 값을 제출하려면 <input type="submit" value="제출> , 초기화는 <input type="reset" value=초기화>
 
-* 유효성검사
+* 유효성 검사
 database에 들어갈 타입에 맞도록 웹화면에서 입력할 수 있는 값에 제약을 줌.
 form action에 name을 주고, submit시 chk() 함수를 통해 조건에 걸리는 경우 경고출력+ false 리턴하여 제출 못하도록 함.
 혹은 태그에서 required="required"를 사용하여 해당 값을 무조건 입력하도록 할 수도 있음. (자세한 글자 제약 등은 자바스크립트 필요)

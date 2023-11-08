@@ -1,7 +1,7 @@
 자바스크립트 복습 (window.onload function + queryselector('form').onsubmit function 밑에
 pattern 변수를 만든 뒤, nameStr = querySelector('조건').value 와 값 비교 - 
 if (!nameStr.match (pattern) {
-alert('다시 입력')
+alert('다시 입력');
 return false; 식으로 유효성 검사 실행.
 
 비밀번호는 받아온 String pw의 길이를 계산 pw.length() 하여 for문만큼
