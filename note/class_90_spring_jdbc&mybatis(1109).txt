@@ -1,0 +1,186 @@
+JDBC Template를 이용하여 dao에 들어가는 드라이버 로드(DriverManager), Connection, PreparedStatement, ResultSet 등을
+간소화할 수 있음. (단, 템플릿의 코드가 다소 김)
+
+회원에게 자동으로 메일을 보내는 api를 사용하기 위해서는 먼저 email을 property에 넣을 필요가 있음.
+마찬가지로 db도 properties 파일로 만들어 데이터를 삽입.
+
+context.xml 중 servlet-context.xml에는 웹과 관련된 bean을 생성하고,
+root-context에는 db와 관련된 bean을 생성한다.
+
+1) root-context에 다음과 같은 bean을 만든다.
+<bean name = "dataSource" 
+	class = "org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+(constructor 없이 bean을 만들 수 있음. 즉 매개변수 없는 생성자도 생성가능, 커넥션 시 사용)
+<property name = "driverClassName" value = "oracle.jdbc.driver.OracleDriver"></property>
+bean 위에는 <context:property-placeholer location = "classpath:META-INF/property/db.properties"/> 를 추가하여,
+db.properties에 있는 속성명과 속성값을 읽어들이도록 한다. (db 관련 정보. id와 password 등)
+bean에 property를 추가하여 name에 그 속성값을 넣어준다.
+<property name = "driverClassName" value = "${db.driverClassName}"/>
+<property name = "url" value = "${db.url}/>
+....
+</bean>
+<bean name = "template" class = "org.springframework.jdbc.core.JdbcTemplate">
+	<property name = "dataSource" ref = "dataSource"/>
+
+template bean을 만들고 dataSource에 의존관계를 만든다.
+이렇게 db 연결시 필요한 정보를 bean에 넣을 수 있음.
+
+root-context.xml에 만들어진 bean을 dao에 주입한다. Autowired를 이용하여 class bean이
+자동으로 달라붙게 됨.
+@Autowired
+private JdbcTemplate jdbcTemplate;
+
+각 메소드의 driver connection 부분을 걷어내고, sql만을 남긴다.
+이후 jdbcTemplate.query 함수를 넣고, sql과 리턴될 결과값의 타입 클래스를 적는다.
+1)  select count(*) sql의 경우,
+int totCnt = jdbcTemplate.queryForObject(sql, Integer.class);
+이것만으로 기존 count 메소드를 대체 가능.
+
+2) select 결과가 ArrayList<dto> 타입이고, sql에 ? 가 있어 세팅해주어야 하는 경우
+jdbcTemplate.query (sql, pss, class) 3개 매개변수를 넣고, 첫 번째는 sql,
+두 번째는 new preParedStatementSetter() 메소드를 불러오고 (new를 입력하여 메소드 자동완성할 것)
+그 안에서 각 물음표에 맞게 ps.setInt / ps.setString 등을 해 준다. ( set시 오류가 나는 매개변수에 final을 넣어 주어야 함)
+세 번째는 new BeanPropertyRowMapper<boardDto>(BoardDto.class); 로 설정한다.
+jdbcTemplate를 ArrayList<boardDto> 로 형변환해 주어야 한다는 점에 주의할 것.
+
+변수 list를 만들고 jdbcTemplate.query를 대입한 후 list를 return해도 되지만,
+jdbcTemplate 앞에 return을 바로 해도 된다. (용량아끼기)
+
+반환되는 db 값이 한 개라면 queryForObject를 사용한다. 여러 개라면 query ()를 쓰고, 마찬가지로 타입을 함께 적어주면 된다.
+단일 -  jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<BoardDto>(BoardDto.class));
+리스트 - jdbcTemplate.query(sql, new BeanPropertyRowMapper<BoardDto>(BoardDto.class));
+
+update나 delete 등이라면 sql을 적고, return jdbcTemplate.update(sql)만 해 주면 간단히 완성 가능.
+sql에 채워야 할 ?가 가장 마지막에 있다면, prepareStatement를 사용하지 않고 뒤에 + bid 등으로 변수를 직접 채워도 된다.
+
+
+---- 파일업로드 게시판
+이전에는 cos.jar를 가져와 처리하였음.
+spring에서는 servlet-context.xml에
+<beans:bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+추가. java class에서 commonsmultipartresolver로 자동완성하면 import받은 해당 클래스 위치를 알 수 있다.
+이후 bean 태그 사이에 최대 업로드 용량 등을 설정하는 property를 넣어주면 완성.
+<beans:property name="maxUploadSize" value = "1048576"/> (1바이트 기준. 1024 * 1024로 1메가)
+
+jsp의 form에서는 기존과 마찬가지로 method = "post" 로 설정하고 enctype = "multipart/form-data" 추가.
+controller에서는 일반 form의 데이터를 받을 때처럼 직접 매개변수로 받아선 실행되지 않고,
+mRequest.getParameter를 사용해서 받아야 함.
+
+매개변수에 request 대신 MultipartHttpServletRequest mRequest를 추가한다.
+이후 파일 복사까지 하면 컨트롤러가 매우 길어지므로, 이를 service로 뺀다.
+
+public boolean fileUp(MultipartHttpServletRequest mRquest, ModelAndView mav){
+	boolean isUpload = false;
+	// 이 사이에 이전과 마찬가지로 파일 업로드 과정을 입력. (mRequest활용)
+	return isUpload;
+(업로드는 톰캣 서버 폴더에, 파일이 옮겨지는 것은 프로젝트 내 폴더)
+파일 첨부가 여러개인 경우 출력 순서는 반대가 된다. 따라서 3개인 경우 jsp에서 배열 순서는 fileNames[2], fileNames[1]... 역순으로 해야 업로드한 순서대로 출력 가능함.
+
+param으로 받아온 파일 객체는 MultipartFile mFile = mRequest.getFile(param); 으로 가져온다.
+파일이름은 String 배열에 넣는다. fileNames[i] = mFile.getOriginalFileName();
+만일 업로드한 파일이 있다면 (!= null && ! .equals(""))
+파일 이름이 중복되지 않도록 밀리세컨을 추가해준다.
+fileNames[i] = System.currentTimeMillis() + fileNames[i];
+이후 파일에 서버를 저장하고, 소스 폴더에서 파일을 복사한다.
+mFile.transferTo(new File(path + fileNames[i])); // 서버에 파일저장
+// 소스 폴더에 파일 복사하는 boolean filecopy 메소드 추가.
+isupLoad = filecopy (Path+fileNames[i], backupPath+fileNames[i]){
+
+private boolean filecopy (serverFile, backupFile){
+에서는 기존 InputStream / OutputStream과 마찬가지로 파일 복사를 수행한다. 
+byte[] bs = new byte[(int)(file.length())];
+....
+os.write(bs,0,readBytes);
+
+---
+model이라면 addAttribute ("fileUpResult", "성공");
+mav라면 addObject("fileUpResult", "성공"); 으로 전달 
+
+
+
+
+---- mybatis ------
+기존의 DAO를 쪼개서 사용, SQL을 자바에서 분리.
+dto의 정보는 mybatis-config.xml에 기록,
+이후 각 dao에 대응하는 xml을 만들고, 각 메소드에 대응하는 SQL을 dao가 아닌 xml에 넣어준다.
+
+프로젝트 때 db.properties에서 oracle의 username은 변경 추천.
+root-context.xml에 db.properties 데이터를 담은 bean을 생성한다.
+<context:property-placeholder location = 파일위치>
+<bean id = "dataSource" class = "DriverManagerDataSource import한 클래스 위치"
+<property name = "driverClassName" value = "${db.driverClassName}"
+....
+
+xml에서 함수 이름은 id로 지정. (ex : id=deptList / empList)
+각 상황에 따라 다른 sql을 실행할 수 있다. (일반 출력 or 검색 출력)
+
+(여러 가지 조건이 있을 때, 첫 번째 조건이 적용되지 않는 경우 삭제하더라도 AND 및 WHERE가 없어져 SQL 오류가 날 수 있다.
+이를 대비하기 위해 SQL WHERE절 가장 앞에 WHERE 1=1 처럼 항상 참이 되는 조건을 가장 앞에 넣어주면,
+각 조건이 없어지거나 추가됐을 때 문제가 발생하지 않음)
+
+sqlmap 폴더 생성 및 하위에 config 폴더 생성, mybatis-config.xml을 만들고 mybatis.org -> products - docs 클릭
+configuration xml -> mapper 파일을 복사하여 xml에 붙여넣는다. (DOCTYPE는 configuration으로 변경)
+
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD config 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-config.dtd">
+    <configuration>
+    	<typeAliases>
+    		<typeAlias type="com.lec.ch13.dto.Dept" alias = "Dept"/>
+    		<typeAlias type="com.lec.ch13.dto.Emp" alias = "Emp"/>
+    	</typeAliases>
+    </configuration>
+1) dto로 되어 있는 클래스를 configuration 밑 typeAlias에 삽입.
+2) 다음 각 dto에 대응하는 xml파일에 테이블의 컬럼에 대응하도록 mapper 태그와 resultmap을 설정.
+<mapper namespace="Dept"> // Dept는 alias에 입력했던 값을 쓴다.
+    <resultMap type="Dept" id="DeptResult">       
+        <result column="deptno" property="deptno"/>
+        <result column="dname" property="dname"/>
+        <result column="loc" property="loc"/>
+    </resultMap>
+3) sql문이 select라면 select 태그 사용. 태그 사이에 sql을 넣는다.
+<select id = "deptList" resultMap="DeptResult"/> // id는 수행할 함수 이름. ResultMap은 받았을 때의 타입
+	SELECT * FROM DEPT
+</select>
+만일 sql에 크기를 비교하는 < 가 포함되어 있다면 태그 괄호로 오해하여 오류가 발생.
+이 경우는   
+ <![CDATA][
+SELECT * FROM DEPT
+}]>을 사용하여 오류가 발생하지 않도록 할 수 있다.
+
+--- 
+? 가 있는 sql이라면?
+select 태그에 parameterType 추가하고, sql의 공통부분을 넣는다. 달라지는 부분은 if test를 사용
+<select id = "empList" parameterType = "Emp" resultMap = "EmpResult"> 
+	SELECT * FROM EMP WHERE 1=1
+		<if test = "ename !=null and ename!=''"> ename이 null이 아니고 빈스트링도 아닐 때
+			AND ENAME LIKE '%'||#{ename}||'%'  // Emp 패러미터에서 받은 ename. java에서는 getEname
+		</if>
+</select>
+
+모든 sql을 각 xml에 입력했다면 mybatis-config.xml의 mapper 태그를 각 xml의 경로를 입력해 채운다.
+<mapper resource = "META-INF/sqlmap/mappers/Dept.xml"/>
+<mapper resource = "META-INF/sqlmap/mappers/Emp.xml"/>
+
+root-context에는 mybatis-config.xml을 configLocation 이란 이름의 property로 담는다.
+<bean id = "sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:META-INF/sqlmap/config/mybatis-config.xml"/>
+	</bean>
+
+이 bean을 자바 클래스로 가져갈 수 있도록 하는 Template 빈을 만들면 sql 설정 완료. (위에 설정한 sqlSessionFactory를 
+리퍼런스함)
+
+<bean id = "sqlSessionTemplate" class = "org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref = "sqlSessionFactory"/>	
+</bean>
+
+sql에 대한 설정을 완료했으면, 각 dto에 대응하는 Dao를 인터페이스로 만들고
+xml에서 설정한 함수를 넣는다.
+public interface DeptDao {
+public List<Dept> deptList();
+
+이를 implement한 클래스를 작성하여 메소드에서 실제 수행하도록 한다.
+Autowired를 통해 SqlSessionTemplate를 불러오고, 이를 return할 때 사용.
+sql의 결과문이 한 줄이면 return sessionTemplate.select를,
+여러 줄이라면 return sessionTemplate.selectList("empList", schEmp) 등으로 값을 보낼 수 있다.
