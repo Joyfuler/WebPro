@@ -1,0 +1,59 @@
+dataSource인 mybatis-config.xml, 
+각 dao에 대응하는 xml과 그 안의 메소드를 설정해 refer를 만듬.
+실제 Dao에서는 sqlSessionTemplate를 이용하여 xml에 액세스.
+
+----
+dao에서는 여러 개의 ?를 여러 개의 매개변수를 이용해 채울 수 있었으나
+xml에서 parameter는 한 개만 들어감. 패러미터를 객체로 넣고 그 객체의 값을 #{ename] 등으로 가져온다.
+
+정리 -
+root-context.xml은 dataSource 객체를 만들고 그 안에 db와 관련된 bean과 mapper 설정을 가져옴
+(설정은 mybatis-config.xml에 하였음)
+sessionTemplate을 bean으로 만들고 이후 DaoImpl 클래스에서 Autowired로 가져옴. 
+
+Impl에는 꼭 @Repository, @Autowired (~Dao = Dao.getInstance()와 동일) 필수
+받은 패러미터를 그대로 넘기면 int의 경우 자동으로 Integer.parseInt를 거친다. 
+Integer.parseInt(null)인 경우 에러가 발생할 수 있으므로, 패러미터를 객체에 담는다.
+객체에 담은 경우 int값이 null이면 자동으로 0으로 반환하므로 오류가 발생하지 않는다.
+
+--
+Mybatis2
+
+--
+DAO 인터페이스와 이를 implement하는 daoimpl중 daoimpl을 날리고, interface에 @Mapper 어노테이션을 건다.
+이를 통해 해당 xml과 자동으로 연동이 가능하게 된다.
+단, 인터페이스에서 불러올 때의 함수명은 id와 동일해야 하며,
+mapper의 namespace에 해당 인터페이스의 주소를 넣는다.
+이후 servlet-content.xml로 이동하여 아래 코드를 추가한다.
+<mybatis-spring:scan base-package="dao 패키지명"/>
+이렇게 함으로써 daoimpl을 새로 만들 필요가 없어진다.
+
+(앞으로는 servlet-context에 폴더경로 이외에 mybatis 태그 추가가 필수)
+---
+
+
+
+
+
+순서.. 
+1) dto들 타입 alias 정해주기 (mybatis-config.xml)
+2) 쿼리 들어있는 mappers 정해주기
+3) mapper 설정된 xml에 mapper namespace = dao주소 설정하고,
+alias 정해진 것의 resultMap type를 설정한다.
+4) 쿼리 작성. id는 함수, parameterType는 매개변수로 들어갈 타입,
+resultMap은 위의 EmpResult이거나, resultType를 써서 int, Emp등 타입을 지정.
+5) 인터페이스로 된 Dao에 @Mapper 지정. 각 함수를 추상메소드화하여 모두 인터페이스로 옮긴다.
+6) 불러올 Dao는 Controller에서 @Autowired하여 넣는다.
+7) 들어온 do 요청에 따라 service.메소드(); 를 수행하고,
+전달할 패러미터가 있는 경우 (객체, alert 메시지 등) 매개변수에 model을 넣어 전달할 수 있다.
+
+
+
+
+---
+
+mybatis에서는 dto에 startRow와 endRow를 생성자함수 변수로 넣어주어야 함.
+페이징 처리와 같은 클래스는 util 패키지에 따로 빼준다.
+controller에서 paging에 paging 관련 변수들이 담겨있는 메소드를 통째로 넣어 attribute.
+model.addAttribute("paging", new Paging(~Service.totCnt(), pageNum, 원하는 페이지당수, 블록수);
+입력해준다. 이후 jsp에서는 ${paging.startPage} 등으로 페이징 처리에 사용할 수 있다.

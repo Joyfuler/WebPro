@@ -14,7 +14,7 @@
 		<result property="comm" column="comm"/>
 		<result property="deptno" column="deptno"/>	
 	</resultMap>
-	<select id="empList" parameterType="Emp" resultMap = "EmpResult">
+	<select id="empList" parameterType="Emp" resultMap = "EmpResult"><!-- 반환해주는 타입은 바로 위의 EmpResult 로 반환. (empno, ename .... ) -->
 		SELECT * FROM EMP WHERE 1=1
 		<if test = "ename!=null and ename!=''">
 			AND ENAME LIKE '%'||#{ename}||'%'
