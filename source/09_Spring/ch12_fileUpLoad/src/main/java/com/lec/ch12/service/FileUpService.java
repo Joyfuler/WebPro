@@ -79,6 +79,7 @@ public class FileUpService {
 					break; // 모두 읽으면 -1이 되므로 멈춘다.
 				}
 				os.write(bs, 0, readBytes);
+				isCopy = true;
 			}
 		} catch (FileNotFoundException e) {
 			logger.error(e.getMessage());

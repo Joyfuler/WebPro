@@ -1,0 +1,20 @@
+스프링 프레임워크 버전은 4.1.1 (pom.xml) -> mailsender 사용이 가능해짐.
+servlet-context.xml에 추가해야 하는 <mybatis-spring:scan base-package=""/> 안에는 소스 내 dao가 들어가 있는 패키지를 넣는다.
+xml중 #{empno} 등 변수에 null이 들어갈 수 있다면, jdbcType=VARCHAR을 추가하여 null이 들어가더라도 오류가 없도록 할 수 있다.
+
+컨트롤러에서 호출할 함수는 BoardService에,
+각 sql에 대응하는 함수는 BoardDao(BoardRepository) 에 저장.
+
+---
+
+숫자를 더해야한다면 #{bindent} + 1 과 같은 방식으로, 괄호 바깥에 적어줄 것.
+괄호 안에 적으면 bindent+1이라는 이름의 getter를 검색하므로 오류가 발생한다.
+
+파일 첨부 게시판의 경우 multipartResolver 빈을 생성해야 한다.
+servlet-context.xml에서 최대 업로드 사이즈를 설정하여 생성.
+<beans:bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:property name="maxUploadSize" value = "1048576"/>
+	</beans:bean>
+
+스프링에서 자동으로 패러미터를 가져올 때는 기본적으로 String으로 가져온다. 파일 첨부는 String타입이 아니므로
+오류가 발생할 수 있으므로 매개변수에 dto를 빼거나, 파일 첨부시 input name을 dto에 있는 변수이름이 아닌 다른 것을 사용하는 방법으로 회피할 수 있다.

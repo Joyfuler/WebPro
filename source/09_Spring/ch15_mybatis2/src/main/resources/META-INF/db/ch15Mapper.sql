@@ -33,8 +33,13 @@ COMM = 0,
 DEPTNO = 30
 WHERE EMPNO = 9001;
 
+-- EMP.XML의 id = delete
+DELETE FROM EMP WHERE EMPNO = 9000;
+
+
 -- DEPT.XML의 ID= deptList
 SELECT * FROM DEPT;
+select * from emp;
 
 
 
