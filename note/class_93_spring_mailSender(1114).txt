@@ -1,0 +1,60 @@
+메일 발송시 gmail 이용, 단 git에 메일정보를 올리지 않도록 주의  (스팸메일에 사용됨)
+2차비밀번호 후 앱비밀번호 설정
+앱- ch18_BookUpMember
+oyre aszm cxzp bqef
+
+메일 설정 (모든설정)- 전달 및 POP/IMAP 메뉴
+POP 다운로드에 - 이미 다운로드 된 메일을 포함하여 모든 메일에 POP 활성
+
+pom.xml에 mail sender 의존성 추가 후, 
+mail.properties를 만들어 이메일 호스트 / 포트/ 이메일을 작성
+mail.host=stmp.gmail.com
+mail.port=587
+mail.username=자기메일주소
+mail.password=생성시 설정한 자신의 앱 비밀번호
+
+1) servlet-context.xml에서 mailSender bean을 생성하고 그 안에 beans property를
+properties 파일과 맞추어 세팅.
+
+2) context:property-placeholder location에 properties 파일 링크
+
+3) mailsender bean에 javaMailProperties 추가.
+<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
+				<beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
+			</beans:props>
+		</beans:property>
+
+4) 이후 컨트롤러에서 mailsender를 사용할 수 있도록 가져온다.
+@Autowired
+private JavaMailSender mailSender;
+
+textMail 메소드에는 SimpleMailMessage 타입 객체를 만들고, 받는 사람과 제목 / 본문을 적는다.
+SimpleMailMessage message = new SimpleMailMessage();
+message.setTo(email);
+message.setSubject();
+message.setText(content);
+...
+mailSender.send(message);
+
+
+-----
+정리복습내용들
+
+자식 컨테이너가 문제 발생시 - project - clean 해주자.
+컨트롤러에서 Autowired할 것은 Dao가 아닌 Service. 혼동하지 않도록 할 것.
+*** dao는 xml query와 관련, service 메소드는 웹페이지 실제 출력과 관련 있음.
+파일첨부시 input type = "file" name = "file" 과 같은 식으로 실제 dto에 있는 패러미터를 그대로 사용하지 말 것 (에러발생)
+또한 Timestamp도 에러가 발생할 수 있으니, dto autowired를 사용하는 경우 date를 사용하자.
+(게시글 등 현재 시간을 등록해야 한다면 sql에서 sysdate를 활용할 것\
+
+-----
+
+스마트에디터 사용하고 싶다면 아래 주소 참고
+https://tyrannocoding.tistory.com/13
+
