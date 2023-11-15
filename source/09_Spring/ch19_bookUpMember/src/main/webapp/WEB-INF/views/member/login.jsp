@@ -28,11 +28,20 @@
 			location.href='${conPath}/main.do';
 		</script>
 	</c:if>
+	<c:if test = "${empty param.after }">		
+		<c:set var = "after" value = "main.do"/>		
+	</c:if>
+	<c:if test = "${not empty param.after and not empty param.pageNum }">		
+		<c:set var = "after" value = "${param.after }&pageNum=${param.pageNum }"/>
+	</c:if>
+	<c:if test = "${not empty param.after and empty param.pageNum }">
+		<c:set var = "after" value = "${param.after }"/>
+	</c:if>	
 	<jsp:include page="../main/header.jsp"/>
 	<div id="content">
 	<form action="${conPath }/member/login.do" method="post">
-		<input type="hidden" name="method" value="login">
-		<input type="hidden" name="after" value="${empty param.after ?  'main.do':param.after}">
+		<input type="hidden" name="method" value="login">		
+		<input type="text" name="after" value="${after}">
 		<table>
 			<caption>로그인 화면</caption>
 			<tr><th>아이디</th><td><input type="text" name="mid" required="required" value="${mid }"></td></tr>

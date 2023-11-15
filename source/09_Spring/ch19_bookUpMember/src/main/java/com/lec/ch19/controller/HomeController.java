@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.ch19.service.BookService;
 import com.lec.ch19.service.MemberService;
+import com.lec.ch19.vo.Book;
 
 /**
  * Handles requests for the application home page.
@@ -27,9 +28,9 @@ public class HomeController {
 	public MemberService memberService;
 	
 	@RequestMapping(value = "main", method = {RequestMethod.GET,RequestMethod.POST})
-	public String home(Model model, String pageNum) {
+	public String home(Model model, Book book, String pageNum) {
 		model.addAttribute("mainList", bookService.mainList());
-		model.addAttribute("book", bookService.bookList(pageNum));
+		model.addAttribute("book", bookService.bookList(book, pageNum));
 		return "main/main";		
 	}	
 }

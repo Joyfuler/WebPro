@@ -15,13 +15,44 @@
 		SELECT * FROM BOOK ORDER BY BRDATE DESC
 	</select>
 	<select id = "bookList" parameterType = "Book" resultMap="BookResult">
+	<if test="schItem=='btitle' and schWord!=null">
 		SELECT * FROM 
 		(SELECT ROWNUM RN, A.* FROM 
-		(SELECT * FROM BOOK ORDER BY BTITLE) A) 
-		WHERE RN BETWEEN #{startRow} AND #{endRow}		
+		(SELECT * FROM BOOK WHERE BTITLE LIKE '%'||#{schWord,jdbcType=VARCHAR}||'%' ORDER BY BRDATE DESC) A) 
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+	<if test="schItem=='bwriter' and schWord!=null">
+		SELECT * FROM 
+		(SELECT ROWNUM RN, A.* FROM 
+		(SELECT * FROM BOOK WHERE BWRITER LIKE '%'||#{schWord,jdbcType=VARCHAR}||'%' ORDER BY BRDATE DESC) A) 
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+	<if test="schItem=='all' and schWord!=null">
+		SELECT * FROM 
+		(SELECT ROWNUM RN, A.* FROM 
+		(SELECT * FROM BOOK WHERE BWRITER LIKE '%'||#{schWord,jdbcType=VARCHAR}||'%' OR BTITLE LIKE '%'||#{schWord,jdbcType=VARCHAR}||'%' ORDER BY BRDATE DESC) A) 
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</if>
+	<if test = "schItem==null">
+		SELECT * FROM 
+		(SELECT ROWNUM RN, A.* FROM 
+		(SELECT * FROM BOOK ORDER BY BRDATE DESC) A) 
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</if>
 	</select>		
-	<select id = "totCntBook" resultType="int">
+	<select id = "totCntBook" parameterType = "Book" resultType="int">
+		<if test = "schItem=='btitle' and schWord!=null">
+		SELECT COUNT(*) FROM BOOK WHERE BTITLE LIKE '%'||#{schWord, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test = "schItem=='bwriter' and schWord!=null">
+		SELECT COUNT(*) FROM BOOK WHERE BWRITER LIKE '%'||#{schWord, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test = "schItem=='all' and schWord!=null">
+		SELECT COUNT(*) FROM BOOK WHERE BWRITER LIKE '%'||#{schWord, jdbcType=VARCHAR}||'%' OR BTITLE LIKE '%'||#{schWord, jdbcType=VARCHAR}||'%'
+		</if>		
+		<if test = "schItem == null">
 		SELECT COUNT(*) FROM BOOK
+		</if>
 	</select>
 	<select id = "getDetailBook" parameterType="int" resultMap="BookResult">
 		SELECT * FROM BOOK WHERE BNUM = #{bnum}		   		
@@ -60,7 +91,9 @@
 		<if test = "bimg2!=null and bimg2!=''"> 
 			BIMG2=#{bimg2}, 
 		</if>
-			BINFO = #{binfo} WHERE BNUM=#{bnum}
-		
+			BINFO = #{binfo} WHERE BNUM=#{bnum}		
 	</update>
+	<delete id = "deleteBook" parameterType="int">
+			DELETE FROM BOOK WHERE BNUM=#{bnum}
+	</delete>
 </mapper>

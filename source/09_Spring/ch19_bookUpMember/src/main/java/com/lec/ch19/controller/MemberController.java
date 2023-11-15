@@ -46,8 +46,9 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public String logout(HttpSession httpSession) {
+	public String logout(HttpSession httpSession, Model model) {		
 		httpSession.invalidate();
+		model.addAttribute("logoutResult", "로그아웃 되었습니다.");		
 		return "forward:../main.do";
 	}
 	@RequestMapping(value = "modify", method = RequestMethod.GET)

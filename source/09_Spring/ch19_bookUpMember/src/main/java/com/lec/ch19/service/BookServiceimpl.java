@@ -34,17 +34,16 @@ public class BookServiceimpl implements BookService {
 	}
 
 	@Override
-	public List<Book> bookList(String pageNum) {
-		Book book = new Book();
-		Paging paging = new Paging(bookDao.totCntBook(), pageNum, 5, 5);
+	public List<Book> bookList(Book book, String pageNum) {		
+		Paging paging = new Paging(bookDao.totCntBook(book), pageNum, 5, 5);
 		book.setStartRow(paging.getStartRow());
 		book.setEndRow(paging.getEndRow());
 		return bookDao.bookList(book);
-	}
+	}	
 
 	@Override
-	public int totCntBook() {
-		return bookDao.totCntBook();
+	public int totCntBook(Book book) {
+		return bookDao.totCntBook(book);
 	}
 
 	@Override
@@ -152,5 +151,10 @@ public class BookServiceimpl implements BookService {
 		book.setBimg1(fileNames[0]);
 		book.setBimg2(fileNames[1]);
 		return bookDao.modifyBook(book);		
+	}
+
+	@Override
+	public int deleteBook(int bnum) {
+		return bookDao.deleteBook(bnum);
 	}
 }

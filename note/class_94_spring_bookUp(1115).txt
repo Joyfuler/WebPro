@@ -1,0 +1,21 @@
+로그인시 model에 Member member라는 객체가 아닌, @ModelAttribute를 통해 다른 이름으로 바꾸어 넣는 이유 
+로그인 시 sessionAttribute member를 해야 하는데, model로 보내는 경우 session보다 model이 우선순위를 갖게 됨.
+결과 로그인을 하지 않아도 로그인 된 것처럼 문제가 발생하므로 Member 객체를 member 그대로 사용하는 것이 아닌 mDto 등으로 이름을 바꾸어 사용하는 것.
+
+로그인 메소드에서 after를 설정하고, login.jsp에서 hidden으로 보낸다.
+기본값은
+<c:if test = "${empty param.after }">		
+		<c:set var = "after" value = "main.do"/>		
+	</c:if>
+
+개인정보 수정 등에서 로그인으로 넘어온다면 location.href를 하면서 뒤에 .do?after=modify.do 와 같은 식으로 지정하고,
+login.jsp에서는 이를 받아서 after에 hidden으로 담는다.
+<c:if test = "${not empty param.after and not empty param.pageNum }">		
+		<c:set var = "after" value = "${param.after }&pageNum=${param.pageNum }"/>
+	</c:if>
+	<c:if test = "${not empty param.after and empty param.pageNum }">
+		<c:set var = "after" value = "${param.after }"/>
+	</c:if>	
+
+리스트 등이라 페이지 넘버가 필요하다면 after에 이 역시 함께 담는다.
+<input type="hidden" name="after" value="${after}">

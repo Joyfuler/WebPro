@@ -19,13 +19,20 @@
 </head>
 <body>
 	<c:if test="${not empty modifyResult }">
-		<script> alert("정보 수정이 완료 되었습니다");</script>
+		<script> 
+			alert("정보 수정이 완료 되었습니다");
+		</script>
 	</c:if>
-	<c:if test = "${not empty loginResult }">
+	<c:if test = "${not empty param.loginResult }">
 		<script>
-		alert('${loginResult}');
+		alert('${param.loginResult}');
 		</script>
 	</c:if>	
+	<c:if test = "${not empty logoutResult }">
+		<script>
+		alert('${logoutResult}');
+		</script>
+	</c:if>
 	<jsp:include page="header.jsp"/>
 	<div id="content">
 		<table>
@@ -35,7 +42,7 @@
 			<c:forEach var="book" items="${mainList }" begin="0" end="4">
 				<td>
 				   ${book.btitle }<br>
-				   <a href="${conPath }/book.do?method=detail&bnum=${book.bnum}&pageNum=1">
+				   <a href="${conPath }/book/bookDetail.do?bnum=${book.bnum}&pageNum=1">
 				   <img src="${conPath }/bookImgFileUpload/${book.bimg1}"></a><br>
 				   ${book.bwriter } 著 <br>
 				   출판일 : ${book.brdate }

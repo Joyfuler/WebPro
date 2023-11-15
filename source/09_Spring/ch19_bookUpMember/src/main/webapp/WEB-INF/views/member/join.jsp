@@ -80,8 +80,7 @@
 			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"></td></tr>
 			<tr><td>주소</td><td>
 			<input type="text" id="sample4_roadAddress" name="maddr"  placeholder="도로명주소">
-			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
-			<span id="guide"></span>
+			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">			
 			</td></tr>
 			<tr><td colspan="2">
 				<input type="submit" value="가입">
