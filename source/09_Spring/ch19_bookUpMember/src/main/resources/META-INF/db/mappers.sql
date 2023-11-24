@@ -1,7 +1,7 @@
 -- Mapper에 들어갈 query
 -- Book.xml id= mainList (신작 순서대로 book 리스트 출력)
 SELECT * FROM BOOK ORDER BY BRDATE DESC;
-
+select * from book_member;
 -- BOOK.XML ID = BOOKLIST (책이름 가나다순, BOOK리스트 탑앤구문)
 SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM BOOK ORDER BY BTITLE) A) WHERE RN BETWEEN 2 AND 4;
 
@@ -35,3 +35,11 @@ SELECT * FROM BOOK_MEMBER WHERE MID='ccc';
 UPDATE BOOK_MEMBER
 SET MPW='bbb', MNAME='최길동', MMAIL= 'cc@aaa.com', MPOST=23532, MADDR = '대전'
 WHERE MID = 'ccc';
+SELECT * FROM BOOK;
+
+ROLLBACK;
+select * from book;
+		SELECT * FROM 
+		(SELECT ROWNUM RN, A.* FROM 
+		(SELECT * FROM BOOK WHERE BWRITER = '김주환' ORDER BY BRDATE DESC) A) 
+		WHERE RN BETWEEN 1 AND 5;
