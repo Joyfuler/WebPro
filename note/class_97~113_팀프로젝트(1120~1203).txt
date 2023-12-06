@@ -1,3 +1,0 @@
-main 및 order, review - 장진욱
-cart 및 qna / lostitem - 이정진
-관리자모드, notice - 박제연

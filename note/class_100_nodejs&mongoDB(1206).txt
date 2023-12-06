@@ -1,0 +1,83 @@
+node.js
+기존 jsp에서의 ${ } 와 비슷한 시스템으로 사용하기가 용이한 자바스크립트 Framework
+(cmd창에서 node -v를 입력하여 버전 확인 가능)
+
+데이터 전달 방식은 메이저인 get/post이외에도 put과 delete방식이 존재. (nodejs / django)
+put / delete는 node.js를 이용할 때 사용 가능하며 ajax 사용이 필요 (form태그로는 쓸 수 없다)
+
+스프링처럼 node.js 역시 자체적으로 서버를 라이브러리로 가져와 스크립트 구동이 가능.
+
+1)
+필요한 라이브러리는 index.js를 가지고 불러온다.
+const express = require('express'); 
+const app = express(); // express 라이브러리 첨부. new () 하지 않아도 객체 생성 가능
+
+get으로 요청을 보내는 경우 매개변수에 request, response를 넣어주자.
+app.get('/pet', (request, response) =>{
+	res.sendFile(__dirname+'/list.html'); // 해당 주소로 이동
+});
+
+
+* html에서 for문, 즉 반복하는 방법은?
+jsp에서는 <c:forEach> 등을 이용해 출력하였음.
+node에서는 ejs를 통해 database에서 반복해여 읽어들인뒤 출력한다.
+db.collection('post').find().toArray(function(error,result){
+	// 여기에서 result를 list.ejs 페이지에 출력.
+	res.render('list.ejs', {posts:result});
+	jsp의 model.addAttribute("posts", result); 와 동일. (단, ejs 확장자 파일은 views 폴더 안으로)
+});
+
+ejs는 jsp에서 하던 include, forward, 반복문 등을 모두 사용할 수 있다.
+
+----------------------------------------
+
+프로젝트가 같은 폴더인지를 확인하고 npm init.
+이후 npm install express를 하여 express를 의존성으로 가져온다.
+서버 구동 후, 컨트롤 +C를 눌러 서버를 종료 가능. (실행 중에는 터미널 입력 불가)
+만일 보안 오류 등으로 실행되지 않는다면 windows powershell을 관리자 모드로 실행.
+html 안의 css는 반드시 public 폴더를 만든 후, 그 아래에 css 폴더를 만들어 넣을 것.
+(link href등을 넣는 것이 아니라, 지정된 폴더 안에 넣어야 구동됨)
+
+post 방식에서 패러미터를 보내기 위해서는 app.use(express.urlencoded({extended:true}));
+를 입력하여 패러미터를 접근할 수 있도록 허용해준다.
+app.post('/write', (req,res) => {
+req.body.title (body 내부의 title 패러미터)
+...
+
+
+mongoDB..
+기존 데이터베이스와 달리 join없이 3차원 데이터를 출력 가능. json스타일의 데이터로 들어감
+각 데이터 안의 필드(컬럼)이 서로 다른 경우에 활용.
+
+회원가입 후 project 생성 -> database 메뉴에서 add my own data 버튼 선택.
+데이터베이스 내 테이블은 몽고db에서는 collection(콜렉션)이라 한다.
+npm install mongodb@3.6 을 입력하여 mongodb 설치
+이후 소스에
+mongodb+srv://<username>:<password>@cluster1.txh2hey.mongodb.net/?retryWrites=true&w=majority
+코드를 가져온다.
+아래와 같이 주소를 가져와 url 변수에 담고, install한 뒤 required('mongodb').MongoDbClient; 사용.
+const url = "mongodb+srv://jpju98:tLqtZBSdnKTwO2RR@cluster1.txh2hey.mongodb.net/?retryWrites=true&w=majority"
+const MongoDbClient = requre('mongodb').MongoDbClient;
+
+db 변수를 따로 만들어 두고, 몽고 DB 연결 후 실행할 콜백함수를 적는다.
+var db;
+MongoDbClient.connect(url, function(error, client){
+       db = client.db ('toDoApp');
+       db.collection('post').insertOnt({id: 1,}, function(error, result){
+	if (error){  }
+      }); // 데이터 삽입은 json 처럼 넣을 것.
+});
+
+들어온 패러미터를 그대로 삽입하겠다면
+db.collection('post').insertOne({req.body.title, req.body,date}), function(){ };... 과 같이 입력하면 된다.
+혹은 패러미터를 제외하고 .insertOne(req.body)만으로 입력하면 패러미터들이 알아서 json형식으로 달라붙음.
+insert가 완료되었다면 그 후 이동할 페이지를 res.redirect(); 함수를 통해 설정한다.
+res.redirect('/list');
+
+시퀀스를 삽입하고 싶다면 새로운 콜렉션 (counter)을 만든다.
+oracle처럼 sequence가 따로 있는 것이 아니므로 {name:"시퀀스", sq:1} 등으로 만든 뒤,
+post 콜렉션의 _id에 post_sq를 대입한 후 post 콜렉션에 데이터를 넣고, 데이터가 들어갔다면 post_sq를 1씩 더해주는
+총 3개의 작업이 필요하다.
+$inc(increment) 혹은 $set을 통해 사용 가능.
+db.collection('counter').updateOne({name: "현재시퀀스"}, {$inc : {post_sq: 1}}, function(err,r result){
+res.redirect('list'); 와 같은 방법으로 1씩 증가하는 시퀀스를 업데이트할 수 있다.
