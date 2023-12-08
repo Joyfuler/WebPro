@@ -1,0 +1,47 @@
+get과 post 외에 delete 요청방식이 존재. 사용을 위해서는 ajax 사용 필요.
+<button> 태그에 data-id를 넣어 지워야 할 아이디를 넣고, 이를 jquery에서 불러와 ajax에 넣는다.
+직접 $(this).attr('id'), 혹은 $(this).data('id') 를 써서 가져올 수도 있고, 클릭한 이벤트 자체를 매개변수로 걸고
+e.target.dataset.id (이벤트를 건 타겟의 데이터의 아이디) 로 가져올 수도 있다.
+
+$('button.delete').click(function(e){
+	var _id = e.target.dataset.id;
+	$.ajax({
+		method : 'DELETE',
+		url : '/delete',
+		data: {_id : _id},
+		success : function(result){
+			
+		},
+	});
+});
+
+이와 같이 하는 경우 db에서 즉시 삭제되나, 페이지의 해당 div나 table, ul 등이 즉시 눈에서 사라져주진 않음.
+따라서 data 삭제가 success라면 해당하는 ul도 안 보이도록 해야함.
+
+
+----
+
+url을 통한 패러미터 전달은 /detail?id=3 등으로 전달할 수도 있지만,
+/detail/3 처럼 전달할 수도 있다. (REST API 방식)
+전달받을 때에는
+app.get('/detail/:id', (req,res) => {
+	와 같이 전달받을 수 있음. (슬래시 뒤에 받을 패러미터가 무엇인지를 지정)
+)};
+
+패러미터가 여러 개라면?
+기존 : detail?id=3&pageNum=2
+api방식 : app.get('/detail/:id/:pageNum), (req,res) =>{
+         var id = req.params.id;
+         var pageNum = req.params.pageNum;	
+});...
+
+물론 get방식일 경우에만. post에서는 주소 뒤에 패러미터를 붙여도 바로 통하지 않음.
+app.post일 때는 패러미터로 넘어온 것을 변수로 빼고, (var id = req.body.id);
+이를 redirect할 때에 주소 뒤로 붙여준다.
+res.redirect('/detail/'+id);
+
+update는 put을 사용. 마찬가지로 넘어온 패러미터를 updateOne으로 세팅한다.
+db.collection('post').updateOne({id: id, {$set: {title: req.body.title, date: req.body.date}},
+(err,result) => {
+res.status(200).send({msg: id+'번째 데이터가 수정됨'});
+받은 패러미터는 node에서는 req.body를 통해 받고, 숫자는 꼭 parseInt해주자.

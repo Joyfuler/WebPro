@@ -1,0 +1,54 @@
+스프링부트 3 이용을 위해서는 maven 라이브러리 / gradle 라이브러리를 사용.
+(maven은 sts4, gradle은 IntelliJ사용, gradle의 경우 자바 17 필수)
+--
+스프링부트는 의존성(라이브러리) 추가시 해당 라이브러리에 필요한 추가 라이브러리를 알아서 가져옴. (pom.xml)
+또한 한글 인코딩 등의 모든 프로젝트에 공통으로 적용되는 설정을 이미 내장하고 있다는 점이 편리.
+서버 설정을 하지 않아도 프로젝트 안으로 서버가 들어온다.
+bean 역시 자동으로 생성되나 기존 Spring처럼 @Autowired를 사용하지 못하므로 DI 설정방법을 따로 준비해야 함.
+--
+
+sts3 설정할 때와 마찬가지로 lombok.jar를 java -jar lombok.jar로 실행한 후 ide 위치를 찾아 설치해준다.
+new Spring Starter project -> maven으로 타입 설정 (gradle 라이브러리는 Intellij로)
+lombok / spring web / Spring Boot DevTools / thymeleaf 4가지 라이브러리를 의존성 추가한다.
+톰캣 dependency만큼은 pom.xml에 따로 추가해야 이후 설정이 필요하지 않게 됨.
+마켓플레이스에서 
+스프링부트 버전은 2.7.11로, 자바버전은 1.8로 변경하자.
+
+프로젝트 내부의 Application.java에서는 main함수 존재 (이것을 수행해야 프로젝트가 실행됨)
+static 폴더 내에는 css / 자바스크립트, Welcome Page(index.html) 등을 넣는다.
+application.properties(자동생성)는 기존 Spring의 properties들이 들어감. (포트번호 등)
+
+---
+
+Controller는 기존의 @RequestMapping 대신 @GetMapping, @PostMapping 사용 (get일때 / post일때)
+@GetMapping("/")...
+
+html에서 <a href = "ex.html"> 로 적는 경우 기존에는 같은 폴더에 있는 ex.html로 갔으나,
+스프링부트에서는 contoller를 기준으로 하므로 static 폴더 밑의 ex.html로 이동한다.
+
+
+-- 
+DB와 연결 방법
+기존 spring에서는 bean id = "dateSource , sqlSessionFactory, sqlSessionTemplate등을 만들어야 했음.
+spring부터에서는 해당 bean이 생략되며, db.properties에 있던 db의 아이디/비밀번호 등의 정보만 넣으면 된다.
+의존성 라이브러리 추가 (JDBC api / Oracle Driver / Mybatis framework)하여 db를 쓸수 있도록 함.
+만일 jsp를 사용하겠다면 jsp파일과 tomcat의 의존성도 추가 필요
+	<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!-- 톰캣 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+(프로젝트 별로 서로 다른 톰캣이 자동으로 들어오므로 비교적 가볍게 사용 가능)
+dto는 typeAlias를 하는 것이 아니라 model 패키지 안에 dto를 만들면 해당 dto대로 alias가 지정된다.
+
+Service interface는 동일, ServiceImpl에는 사용할 곳에 @Autowired 생성자 주입 or 필드주입을 사용.
+필드주입은 해당 클래스를 그대로 가져오고 (private DeptRepository deptRepository;)
+생성자 주입은 public EmpServiceImpl(DeptRepository deptRepository){
+	this.deptRepository = deptRepository;
+}	와 같이 생성자 함수에 매개변수로 해당 Repository를 넣어주면 이후 service단에서 dao를 끌어와 쓸 수 있다.
+

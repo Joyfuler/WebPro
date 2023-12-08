@@ -81,3 +81,53 @@ app.get('/list', (req,res) => {
     // findOne은 한개, find()는 전체. 배열로 가져오기
     //res.sendFile(__dirname+'/list.html');
 });
+
+app.delete('/delete', (req,res) => {
+    // _id 패러미터 값에 해당하는 post 데이터를 삭제
+    var _id = parseInt(req.body._id); // 패러미터는 기본적으로 string이므로 형변환필요
+    console.log(_id, typeof(_id));
+    db.collection('post').deleteOne({_id : _id}, function(err, result){
+        if (err) {return console.log(err); }
+        console.log(_id, '번 post 삭제 완료');
+        res.status(200).send({msg : 'post 데이터가 성공적으로 삭제되었습니다.'});
+    }); // 앞은 조건(where), 뒤는 이후 수행할 함수
+});
+
+app.get('/detail/:id', (req,res) => {
+    var id = parseInt(req.params.id);
+    db.collection('post').findOne({_id : id}, (err, result) =>{
+        if (err) {return console.log(err); }
+        //console.log(result);
+        // result의 값을 addAttribute하듯이 보냄.
+        res.render('detail.ejs', {post: result});
+    });
+});
+
+app.get('/update/:id', (req,res) => {
+    var id = parseInt(req.params.id);
+    db.collection('post').findOne({_id : id}, (err, result) => {
+        if (err) { return console.log(err);}
+        res.render('update.ejs', {post: result}); // model.addAttribute...
+    });
+});
+
+app.post('/update', (req,res) =>{
+    console.log(req.body);
+    var id = parseInt(req.body._id);
+    db.collection('post').updateOne({_id : id}, 
+        {$set : {title: req.body.title, date: req.body.date}}, (err, result) => {
+            // 조건 {_id: id} 와 바꿔야 할 내용 {$set : {title:req.body.title, date:req.body.date}}
+        if (err) { return console.log (err); }
+        res.redirect('/detail/'+id); // 리다이렉트 뒤에 패러미터를 넣어 해당 상세보기로 돌아가도록 함.
+    });
+});
+
+app.put('/update', (req,res) => {
+    let _id = parseInt(req.body._id); // 패러미터 받은 것은 string. 꼭 수정할것 !
+    db.collection('post').updateOne({_id : _id}, {$set: {title : req.body.title, date: req.body.date}},
+        (err,result) => {
+            if (err) {return console.log(err); }
+            res.status(200).send({msg: _id + '번째 post 수정 완료했습니다.'});
+            // 200은 정상적으로 처리되었다는 메시지
+        });
+});

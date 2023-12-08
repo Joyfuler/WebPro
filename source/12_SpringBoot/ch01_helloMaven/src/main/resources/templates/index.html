@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<link href = "/css/style.css" rel = "stylesheet">
+</head>
+<body>
+	<h1> template/index.html 페이지입니다. (model.addAttribute로 greeting 받은 페이지) </h1>
+	<h2 th:text="'컨트롤러에서 넘어온 인사말' + ${greeting}">넘어온 인사말 없음</h2>
+	<!-- thymeleaf를 이용해서 표시하기 위해서는 h2 태그 뒤에 붙여주어야 함. 없는 경우에는 후자가 출력됨 -->
+	<h2><a href = "/hello">Hello 요청 경로 가기</a></h2>
+</body>
+</html>
