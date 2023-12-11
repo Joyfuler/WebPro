@@ -7,7 +7,11 @@ public class Account {
 
 	private String accountNo; // 통장번호는 - 도 있고, 맨 앞이 0으로 시작하는 경우 날아가므로 String으로 써줄것.
 	private String ownerName; // 통장주명
+<<<<<<< HEAD
 	private int balance= 0; // 잔액
+=======
+	private int balance; // 잔액
+>>>>>>> febfb5a (9th)
 
 	public Account(String accountNo, String ownerName) { // 잔액없이 개설하는 경우의 Account 메소드
 		this.accountNo = accountNo;
@@ -26,7 +30,11 @@ public class Account {
 
 	public void deposite(int money) { // 입금시
 		balance += money; // balance = balance + money; 돈 예금하면 잔액이 늘어난다는 것.
+<<<<<<< HEAD
 		System.out.println(accountNo + " : " + money + "원 예금하여, 잔액은 :" + balance);
+=======
+		System.out.println(accountNo + ":" + money + "원 예금하여, 잔액은 :" + balance);
+>>>>>>> febfb5a (9th)
 		System.out.printf("%s : %d 원 예금하여, 잔액은 %d\n", accountNo, money, balance);
 
 	}
