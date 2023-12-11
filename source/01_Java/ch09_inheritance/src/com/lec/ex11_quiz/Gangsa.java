@@ -18,7 +18,11 @@ public class Gangsa extends Person {
 	
 	@Override
 	public String infoString() {
+<<<<<<< HEAD
 	return String.format("(번호)%s\t(ID)%s\t (이름)%s\t (과목)%s\n", getNo(), getId(), getName(), subject); 
+=======
+	return String.format("(번호)lecturer%d\t(ID)%s\t (이름)%s\t (과목)%s\n", cntGangsa, getId(), getName(), subject); 
+>>>>>>> febfb5a (9th)
 	}
 
 }
