@@ -1,14 +1,14 @@
-package com.lec.ch04_friend.domain;
+package com.lec.ch05_friend.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Friend {
-    private Long id;
+    private long id;
     private String name;
     private String tel;
     public Friend(String name, String tel) {
