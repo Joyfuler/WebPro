@@ -1,0 +1,15 @@
+html 환경에서는 <a href = "/delete?id=${friend.id}">삭제</a> 등으로 그대로 입력이 불가능.
+이를 입력하기 위해선 a 태그에 th를 붙여주어야 한다.
+<a th:href = "@{/friend/deleteOne(id=${friend.id})}">삭제</a>
+@마크를 추가, 전체 중괄호하고 소괄호 안에 패러미터를 넣는다. (id=${friend.id})
+
+REST API 방식 - 패러미터를 직접 입력하지 않고 "deleteOne/3" 을 하려면
+@GetMapping ("deleteOne/${id}") 와 같이 어떤 패러미터인지 정의해주면 된다.
+
+model.addAttribute해서 받은 값은
+let deleteResult = [[${deleteResult}]]; 으로 가져올 수 있다. (기존 jsp와는 달리 대괄호 두개가 있어야 가능)
+이후 alert([[${param.id}]] + '번 친구 삭제'); 입력. (jsp와는 달리 작은따옴표를 넣으면 그대로 출력됨! 작은따옴표 빼주자)
+
+---
+수료 후 추가 학습을 원한다면 jpa를 학습.. 간단한 query의 경우 sql 대신 메소드로 가져와 사용 가능
+단, 무겁거나 복잡한 쿼리는 튜닝이 필요하므로 결국 sql을 써야할 수도 있는 것이 단점.

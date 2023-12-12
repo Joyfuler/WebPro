@@ -1,0 +1,24 @@
+새 프로젝트는 start.spring.io를 이용해 생성
+Gradle - Groovy , java 17 선택
+
+기존 Spring 프로젝트에서는 각종 properties를 여러 용도로 나눴지만 스프링부트에서는 Application.properties에 DB / repository mapper 지정,
+mybatis type alias 등을 전부 입력한다.
+
+xml에 sql 쿼리문을 입력한 후, repository에 해당 id만을 가져와 그대로 실행하게 하는 방법을 쓸 수도 있지만,
+springboot 3부터는 @Insert, @Select 등의 어노테이션을 걸고 그 안에 sql 쿼리문을 직접 넣어 실행하게 할 수도 있음.
+
+@Mapper
+public interface FriendRepository {
+  @Insert("INSERT INTO FRIEND VALUES (FRIEND_ID_SQ.NEXTVAL, #{name}, #{tel})")
+  public int save(Friend friend);
+  @Select("SELECT * FROM FRIEND WHERE TEL=#{tel}")
+  public Optional<Friend> findByTel(@Param("tel")String tel);
+
+들어오는 매개변수가 한 개고 동일한 변수라면 @Param을 꼭 쓰지 않아도 됨. 매개변수가 여럿인 경우 사용
+@MybatisTest를 이용해 실제로 DB에 데이터가 입력되진 않는 상태로 DB의 CRUD를 테스트 가능.
+이 경우 테스트하는 클래스에 
+@MybatisTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+
+를 꼭 먼저 입력해주자.
+테스트 클래스를 만드는 단축키는 컨트롤 + 쉬프트 + t
