@@ -1,8 +1,5 @@
 # Java 개발자 훈련과정 학습노트 저장소
 
-![교육이수내역](https://github.com/comlec/webPro/assets/112568472/106d1e12-2910-4813-b103-e604e86e6259)
-
-
 # 📚 SKILL
 
  ### Programming <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=eclipse&logoColor=white">
